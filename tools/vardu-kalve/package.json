@@ -9,5 +9,9 @@
     "build": "tsc -p tsconfig.json --noEmit && vite build",
     "check": "tsc -p tsconfig.json --noEmit"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "vite": "8.3.1"
+  }
 }
