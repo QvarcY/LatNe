@@ -47,3 +47,12 @@ Pirms pirmās publicēšanas tika atrastas arī pirmās toolchain problēmas.
 Corepack pieprasīja precīzu pnpm versiju un TypeScript sākotnēji nepazina Vite CSS importu.
 
 Abas problēmas tika saglabātas projekta vēsturē nevis izdzēstas no tās.
+---
+
+## 2026-09-30 — Pirmais LatNe vārds tiek apstiprināts
+
+Vārdu kalve pirmo reizi tika izmantota nevis testa datiem bet reālam LatNe terminoloģijas lēmumam.
+
+JavaScript/TypeScript kandidāts `class` tika apstiprināts ar LatNe variantu `klase`.
+
+Tas kļuva par pirmo kanoniskajā terminoloģijas reģistrā apstiprināto LatNe terminu.

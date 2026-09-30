@@ -1,4 +1,9 @@
-import { readFile } from "node:fs/promises"
+import {
+  readFile,
+  rename,
+  rm,
+  writeFile
+} from "node:fs/promises"
 import { fileURLToPath } from "node:url"
 import { defineConfig, type Plugin } from "vite"
 
@@ -19,15 +24,6 @@ const allowedFields = new Set([
   "notes"
 ])
 
-type ChangePayload = {
-  id?: unknown
-  changes?: unknown
-}
-
-type Registry = {
-  terms?: unknown
-}
-
 type Term = {
   id: string
   source: string
@@ -35,6 +31,16 @@ type Term = {
   latvian: string | null
   notes: string
   [key: string]: unknown
+}
+
+type Registry = {
+  terms: Term[]
+  [key: string]: unknown
+}
+
+type ChangePayload = {
+  id?: unknown
+  changes?: unknown
 }
 
 function sendJson(
@@ -86,8 +92,56 @@ function isTerm(value: unknown): value is Term {
   return (
     typeof term.id === "string" &&
     typeof term.source === "string" &&
-    typeof term.status === "string"
+    typeof term.status === "string" &&
+    (
+      term.latvian === null ||
+      typeof term.latvian === "string"
+    ) &&
+    typeof term.notes === "string"
   )
+}
+
+function validateRegistry(
+  value: unknown
+): asserts value is Registry {
+  if (!value || typeof value !== "object") {
+    throw new Error("Terminoloģijas reģistrs nav derīgs")
+  }
+
+  const registry = value as Record<string, unknown>
+
+  if (!Array.isArray(registry.terms)) {
+    throw new Error("Terminoloģijas reģistrs nav derīgs")
+  }
+
+  if (!registry.terms.every(isTerm)) {
+    throw new Error("Reģistrā ir nederīgs termins")
+  }
+
+  const ids = new Set<string>()
+
+  for (const term of registry.terms) {
+    if (ids.has(term.id)) {
+      throw new Error(`Dublēts termina id: ${term.id}`)
+    }
+
+    ids.add(term.id)
+
+    if (!statuses.has(term.status)) {
+      throw new Error(
+        `Nederīgs statuss terminam: ${term.id}`
+      )
+    }
+
+    if (
+      term.status === "approved" &&
+      !term.latvian?.trim()
+    ) {
+      throw new Error(
+        `Apstiprinātam terminam trūkst latviskā varianta: ${term.id}`
+      )
+    }
+  }
 }
 
 function validateChanges(
@@ -114,39 +168,29 @@ function validateChanges(
     }
   }
 
-  if ("status" in changes) {
-    if (
+  if (
+    "status" in changes &&
+    (
       typeof changes.status !== "string" ||
       !statuses.has(changes.status)
-    ) {
-      throw new Error("Nederīgs termina statuss")
-    }
+    )
+  ) {
+    throw new Error("Nederīgs termina statuss")
   }
 
-  if ("latvian" in changes) {
-    if (
-      changes.latvian !== null &&
-      typeof changes.latvian !== "string"
-    ) {
-      throw new Error("Nederīgs latviskais variants")
-    }
-
-    if (
-      typeof changes.latvian === "string" &&
-      changes.latvian.trim().length > 80
-    ) {
-      throw new Error("Latviskais variants ir pārāk garš")
-    }
+  if (
+    "latvian" in changes &&
+    changes.latvian !== null &&
+    typeof changes.latvian !== "string"
+  ) {
+    throw new Error("Nederīgs latviskais variants")
   }
 
-  if ("notes" in changes) {
-    if (typeof changes.notes !== "string") {
-      throw new Error("Nederīgas piezīmes")
-    }
-
-    if (changes.notes.length > 2000) {
-      throw new Error("Piezīmes ir pārāk garas")
-    }
+  if (
+    "notes" in changes &&
+    typeof changes.notes !== "string"
+  ) {
+    throw new Error("Nederīgas piezīmes")
   }
 
   return changes
@@ -158,8 +202,8 @@ function normalizeChanges(
   const normalized = { ...changes }
 
   if (typeof normalized.latvian === "string") {
-    const value = normalized.latvian.trim()
-    normalized.latvian = value || null
+    normalized.latvian =
+      normalized.latvian.trim() || null
   }
 
   if (typeof normalized.notes === "string") {
@@ -169,21 +213,52 @@ function normalizeChanges(
   return normalized
 }
 
-async function loadTerms(): Promise<Term[]> {
+async function loadRegistry(): Promise<Registry> {
   const text = await readFile(registryPath, "utf8")
-  const registry = JSON.parse(text) as Registry
+  const registry = JSON.parse(text) as unknown
 
-  if (!Array.isArray(registry.terms)) {
-    throw new Error("Terminoloģijas reģistrs nav derīgs")
+  validateRegistry(registry)
+
+  return registry
+}
+
+async function saveRegistry(
+  registry: Registry
+): Promise<void> {
+  validateRegistry(registry)
+
+  const text = JSON.stringify(registry, null, 2) + "\n"
+  const temporaryPath = `${registryPath}.tmp`
+
+  await rm(temporaryPath, { force: true })
+
+  try {
+    await writeFile(
+      temporaryPath,
+      text,
+      "utf8"
+    )
+
+    const checkText = await readFile(
+      temporaryPath,
+      "utf8"
+    )
+
+    const checkRegistry = JSON.parse(
+      checkText
+    ) as unknown
+
+    validateRegistry(checkRegistry)
+
+    await rename(
+      temporaryPath,
+      registryPath
+    )
   }
-
-  const terms = registry.terms.filter(isTerm)
-
-  if (terms.length !== registry.terms.length) {
-    throw new Error("Reģistrā ir nederīgs termins")
+  catch (error) {
+    await rm(temporaryPath, { force: true })
+    throw error
   }
-
-  return terms
 }
 
 function terminologyApi(): Plugin {
@@ -197,9 +272,15 @@ function terminologyApi(): Plugin {
           "http://localhost"
         )
 
-        if (
-          url.pathname !==
+        const validatePath =
           "/api/termini/validate-change"
+
+        const savePath =
+          "/api/termini/save-change"
+
+        if (
+          url.pathname !== validatePath &&
+          url.pathname !== savePath
         ) {
           next()
           return
@@ -214,14 +295,16 @@ function terminologyApi(): Plugin {
         }
 
         try {
-          const payload = await readJson(req) as ChangePayload
+          const payload =
+            await readJson(req) as ChangePayload
 
           if (typeof payload.id !== "string") {
             throw new Error("Trūkst termina id")
           }
 
-          const terms = await loadTerms()
-          const term = terms.find(
+          const registry = await loadRegistry()
+
+          const term = registry.terms.find(
             item => item.id === payload.id
           )
 
@@ -233,21 +316,39 @@ function terminologyApi(): Plugin {
             validateChanges(payload.changes)
           )
 
-          const candidate = {
+          const candidate: Term = {
             ...term,
             ...changes
           }
 
           if (
             candidate.status === "approved" &&
-            (
-              typeof candidate.latvian !== "string" ||
-              !candidate.latvian.trim()
-            )
+            !candidate.latvian?.trim()
           ) {
             throw new Error(
               "Apstiprinātam terminam vajag latvisko variantu"
             )
+          }
+
+          if (url.pathname === savePath) {
+            const nextRegistry: Registry = {
+              ...registry,
+              terms: registry.terms.map(item =>
+                item.id === candidate.id
+                  ? candidate
+                  : item
+              )
+            }
+
+            await saveRegistry(nextRegistry)
+
+            sendJson(res, 200, {
+              ok: true,
+              persisted: true,
+              candidate
+            })
+
+            return
           }
 
           sendJson(res, 200, {

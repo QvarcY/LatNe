@@ -370,3 +370,45 @@ Rakstīšana reģistrā vēl nav iespējota.
 ### Nākamais solis
 
 Pievienot drošu saglabāšanas plūsmu ar atomisku faila rakstīšanu un validāciju pirms un pēc saglabāšanas.
+---
+
+## 2026-09-30 — J0009 — Pirmais apstiprinātais LatNe termins
+
+**Tips:** terminoloģija / tooling
+**Statuss:** pabeigts
+
+### Vārdu kalve
+
+Pievienota praktiska terminu rediģēšanas un saglabāšanas plūsma.
+
+No UI iespējams mainīt:
+
+- latvisko variantu
+- statusu
+- piezīmes
+
+Saglabāšana notiek kanoniskajā `termini.json`.
+
+### Pirmais lēmums
+
+Pirmais ar Vārdu kalvi reāli apstiprinātais termins:
+
+`class` → `klase`
+
+Statuss:
+
+`approved`
+
+Piezīme:
+
+`apstiprinu tiešu tulkojumu`
+
+### Rezultāts
+
+Terminoloģijas reģistrā:
+
+- 84 termini
+- 1 `approved`
+- 83 `pending`
+
+Vārdu kalve no pārlūkošanas rīka kļuva par praktisku terminoloģijas darba vidi.

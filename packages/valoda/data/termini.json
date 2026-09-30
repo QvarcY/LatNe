@@ -5,7 +5,7 @@
   "status": "draft",
   "updated": "2026-09-30",
   "scope": "javascript-typescript-syntax",
-  "note": "Kandidātu inventārs. Neviens latviskais variants vēl nav apstiprināts.",
+  "note": "Kandidātu inventārs. Katra termina statuss un latviskais variants tiek pārvaldīts individuāli.",
   "sources": [
     {
       "id": "mdn-js-lexical",
@@ -106,11 +106,11 @@
       ],
       "kind": "keyword",
       "category": "declaration",
-      "status": "pending",
-      "latvian": null,
+      "status": "approved",
+      "latvian": "klase",
       "suggestions": [],
       "rejectedVariants": [],
-      "notes": "",
+      "notes": "apstiprinu tiešu tulkojumu",
       "sourceRefs": [
         "mdn-js-lexical",
         "typescript-scanner-main"

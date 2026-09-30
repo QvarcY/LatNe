@@ -9,33 +9,32 @@
 - publisks GitHub repozitorijs
 - 84 terminu kandidātu inventārs
 - terminoloģijas validators
-- Vārdu kalves karkass
-- Vite un TypeScript toolchain
-- Vārdu kalves production build
-- kanoniskā reģistra read-only pieslēgums
-- 84 kandidātu pārlūkošana un meklēšana
+- Vārdu kalves pārlūkošana un meklēšana
 - termina izmaiņu validācijas API
-- API integritātes pārbaude pret `termini.json`
+- Vārdu kalves rediģēšanas UI
+- termina saglabāšana kanoniskajā reģistrā
+- pirmais apstiprinātais termins: `class` → `klase`
 
 ## Pašlaik
 
-Vārdu kalve prot lasīt kanonisko reģistru.
+Vārdu kalve ir izmantojama reālam terminoloģijas darbam.
 
-Lokālais API prot validēt viena termina piedāvātās izmaiņas bet vēl neko nesaglabā.
+Terminoloģijas reģistrā:
 
-Visi 84 kandidāti joprojām ir `pending`.
+- 84 termini
+- 1 `approved`
+- 83 `pending`
 
 ## Tuvākais mērķis
 
-Pievienot drošu termina saglabāšanu kanoniskajā reģistrā.
+Izskatīt atlikušos terminoloģijas kandidātus un izveidot pirmo minimālo apstiprinātās sintakses kopu.
 
 ## Vēl nav
 
-- terminu saglabāšanas no UI
-- atomiskas reģistra rakstīšanas
-- noraidīto variantu plūsmas
+- pilnas apstiprinātās terminoloģijas
+- noraidīto variantu pilnas plūsmas
 - AI ieteikumu
-- minimālās apstiprinātās sintakses kopas
+- minimālās sintakses kopas
 - tokenizera
 - parsera
 - AST

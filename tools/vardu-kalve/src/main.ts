@@ -3,6 +3,20 @@ import registry from "../../../packages/valoda/data/termini.json"
 
 type Term = typeof registry.terms[number]
 
+type SaveResponse = {
+  ok: boolean
+  persisted?: boolean
+  candidate?: Term
+  error?: string
+}
+
+const statusLabels: Record<string, string> = {
+  pending: "gaida",
+  approved: "apstiprināts",
+  rejected: "noraidīts",
+  reserved: "rezervēts"
+}
+
 function getApp(): HTMLDivElement {
   const app = document.querySelector<HTMLDivElement>("#app")
 
@@ -15,7 +29,11 @@ function getApp(): HTMLDivElement {
 
 const app = getApp()
 
-let selectedId = registry.terms[0]?.id ?? ""
+let terms: Term[] = registry.terms.map(term => ({
+  ...term
+}))
+
+let selectedId = terms[0]?.id ?? ""
 let search = ""
 
 function escapeHtml(value: unknown): string {
@@ -31,41 +49,24 @@ function visibleTerms(): Term[] {
   const needle = search.trim().toLocaleLowerCase("lv")
 
   if (!needle) {
-    return registry.terms
+    return terms
   }
 
-  return registry.terms.filter(term =>
+  return terms.filter(term =>
     term.source.toLocaleLowerCase("lv").includes(needle) ||
     term.kind.toLocaleLowerCase("lv").includes(needle) ||
-    term.category.toLocaleLowerCase("lv").includes(needle)
+    term.category.toLocaleLowerCase("lv").includes(needle) ||
+    (term.latvian ?? "")
+      .toLocaleLowerCase("lv")
+      .includes(needle)
   )
 }
 
 function selectedTerm(): Term | undefined {
-  return registry.terms.find(term => term.id === selectedId)
+  return terms.find(term => term.id === selectedId)
 }
 
-function render(): void {
-  const terms = visibleTerms()
-
-  if (!terms.some(term => term.id === selectedId)) {
-    selectedId = terms[0]?.id ?? ""
-  }
-
-  const selected = selectedTerm()
-
-  const list = terms
-    .map(term => `
-      <button
-        class="term ${term.id === selectedId ? "active" : ""}"
-        data-id="${escapeHtml(term.id)}"
-      >
-        <span>${escapeHtml(term.source)}</span>
-        <small>${escapeHtml(term.status)}</small>
-      </button>
-    `)
-    .join("")
-
+function renderShell(): void {
   app.innerHTML = `
     <main class="shell">
       <header class="header">
@@ -76,7 +77,7 @@ function render(): void {
         </div>
 
         <div class="summary">
-          <strong>${registry.terms.length}</strong>
+          <strong>${terms.length}</strong>
           <span>kandidāti</span>
         </div>
       </header>
@@ -87,85 +88,244 @@ function render(): void {
             id="search"
             type="search"
             placeholder="Meklēt"
-            value="${escapeHtml(search)}"
           >
 
-          <div class="count">
-            ${terms.length} no ${registry.terms.length}
-          </div>
-
-          <div class="terms">
-            ${list || '<div class="empty">Nekas nav atrasts</div>'}
-          </div>
+          <div id="count" class="count"></div>
+          <div id="terms" class="terms"></div>
         </aside>
 
-        <section class="detail">
-          ${
-            selected
-              ? `
-                <div class="position">
-                  ${selected.order} / ${registry.terms.length}
-                </div>
-
-                <h2>${escapeHtml(selected.source)}</h2>
-
-                <div class="badges">
-                  <span>${escapeHtml(selected.kind)}</span>
-                  <span>${escapeHtml(selected.category)}</span>
-                  ${selected.layers
-                    .map(layer => `<span>${escapeHtml(layer)}</span>`)
-                    .join("")}
-                </div>
-
-                <dl>
-                  <div>
-                    <dt>Statuss</dt>
-                    <dd>${escapeHtml(selected.status)}</dd>
-                  </div>
-
-                  <div>
-                    <dt>Latviskais variants</dt>
-                    <dd>${escapeHtml(selected.latvian || "nav izvēlēts")}</dd>
-                  </div>
-
-                  <div>
-                    <dt>Piezīmes</dt>
-                    <dd>${escapeHtml(selected.notes || "nav")}</dd>
-                  </div>
-                </dl>
-
-                <div class="readonly">
-                  Tikai lasīšanas režīms
-                </div>
-              `
-              : `
-                <div class="empty">
-                  Nav termina ko rādīt
-                </div>
-              `
-          }
-        </section>
+        <section id="detail" class="detail"></section>
       </section>
     </main>
   `
 
-  bindEvents()
-}
-
-function bindEvents(): void {
-  document.querySelector<HTMLInputElement>("#search")
+  document
+    .querySelector<HTMLInputElement>("#search")
     ?.addEventListener("input", event => {
       search = (event.target as HTMLInputElement).value
-      render()
+      renderTermList()
+      renderDetail()
     })
+}
 
-  document.querySelectorAll<HTMLButtonElement>("[data-id]")
+function renderTermList(): void {
+  const visible = visibleTerms()
+  const container =
+    document.querySelector<HTMLDivElement>("#terms")
+  const count =
+    document.querySelector<HTMLDivElement>("#count")
+
+  if (!container || !count) {
+    return
+  }
+
+  if (!visible.some(term => term.id === selectedId)) {
+    selectedId = visible[0]?.id ?? ""
+  }
+
+  count.textContent = `${visible.length} no ${terms.length}`
+
+  container.innerHTML = visible
+    .map(term => `
+      <button
+        class="term ${term.id === selectedId ? "active" : ""}"
+        data-id="${escapeHtml(term.id)}"
+      >
+        <span>${escapeHtml(term.source)}</span>
+        <small>
+          ${escapeHtml(statusLabels[term.status] ?? term.status)}
+        </small>
+      </button>
+    `)
+    .join("")
+
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-id]")
     .forEach(button => {
       button.addEventListener("click", () => {
         selectedId = button.dataset.id ?? ""
-        render()
+        renderTermList()
+        renderDetail()
       })
     })
 }
 
-render()
+function renderDetail(message = ""): void {
+  const container =
+    document.querySelector<HTMLDivElement>("#detail")
+
+  if (!container) {
+    return
+  }
+
+  const term = selectedTerm()
+
+  if (!term) {
+    container.innerHTML =
+      '<div class="empty">Nav termina ko rādīt</div>'
+    return
+  }
+
+  container.innerHTML = `
+    <div class="position">
+      ${term.order} / ${terms.length}
+    </div>
+
+    <h2>${escapeHtml(term.source)}</h2>
+
+    <div class="badges">
+      <span>${escapeHtml(term.kind)}</span>
+      <span>${escapeHtml(term.category)}</span>
+      ${term.layers
+        .map(layer => `<span>${escapeHtml(layer)}</span>`)
+        .join("")}
+    </div>
+
+    <form id="term-form" class="editor-form">
+      <label class="field">
+        <span>Latviskais variants</span>
+        <input
+          id="latvian"
+          type="text"
+          maxlength="80"
+          value="${escapeHtml(term.latvian ?? "")}"
+          placeholder="Ievadi variantu"
+        >
+      </label>
+
+      <label class="field">
+        <span>Statuss</span>
+        <select id="status">
+          ${Object.entries(statusLabels)
+            .map(([value, label]) => `
+              <option
+                value="${value}"
+                ${term.status === value ? "selected" : ""}
+              >
+                ${label}
+              </option>
+            `)
+            .join("")}
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Piezīmes</span>
+        <textarea
+          id="notes"
+          rows="5"
+          maxlength="2000"
+          placeholder="Pamatojums vai piezīmes"
+        >${escapeHtml(term.notes ?? "")}</textarea>
+      </label>
+
+      <div class="actions">
+        <button
+          id="save"
+          class="save-button"
+          type="submit"
+        >
+          Saglabāt
+        </button>
+
+        <span
+          id="feedback"
+          class="feedback"
+        >${escapeHtml(message)}</span>
+      </div>
+    </form>
+  `
+
+  document
+    .querySelector<HTMLFormElement>("#term-form")
+    ?.addEventListener("submit", saveSelectedTerm)
+}
+
+async function saveSelectedTerm(
+  event: SubmitEvent
+): Promise<void> {
+  event.preventDefault()
+
+  const term = selectedTerm()
+
+  if (!term) {
+    return
+  }
+
+  const latvian =
+    document.querySelector<HTMLInputElement>("#latvian")
+
+  const status =
+    document.querySelector<HTMLSelectElement>("#status")
+
+  const notes =
+    document.querySelector<HTMLTextAreaElement>("#notes")
+
+  const button =
+    document.querySelector<HTMLButtonElement>("#save")
+
+  const feedback =
+    document.querySelector<HTMLSpanElement>("#feedback")
+
+  if (!latvian || !status || !notes || !button) {
+    return
+  }
+
+  button.disabled = true
+
+  if (feedback) {
+    feedback.textContent = "Saglabā..."
+  }
+
+  try {
+    const response = await fetch(
+      "/api/termini/save-change",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: term.id,
+          changes: {
+            latvian: latvian.value,
+            status: status.value,
+            notes: notes.value
+          }
+        })
+      }
+    )
+
+    const result =
+      await response.json() as SaveResponse
+
+    if (!response.ok || !result.ok || !result.candidate) {
+      throw new Error(
+        result.error ?? "Saglabāšana neizdevās"
+      )
+    }
+
+    terms = terms.map(item =>
+      item.id === result.candidate?.id
+        ? result.candidate
+        : item
+    )
+
+    renderTermList()
+    renderDetail("Saglabāts")
+  }
+  catch (error) {
+    if (feedback) {
+      feedback.textContent =
+        error instanceof Error
+          ? error.message
+          : "Saglabāšana neizdevās"
+    }
+
+    button.disabled = false
+  }
+}
+
+renderShell()
+renderTermList()
+renderDetail()
