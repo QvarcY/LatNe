@@ -1,0 +1,8 @@
+{
+  "name": "@latne/kompilators",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LatNe compilera kodols.",
+  "license": "MIT"
+}

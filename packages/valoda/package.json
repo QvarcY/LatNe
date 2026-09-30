@@ -1,0 +1,8 @@
+{
+  "name": "@latne/valoda",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LatNe valodas definīcijas un terminoloģijas avots.",
+  "license": "MIT"
+}

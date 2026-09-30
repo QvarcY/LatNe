@@ -1,0 +1,8 @@
+{
+  "name": "@latne/komandrinda",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LatNe komandrindas interfeiss.",
+  "license": "MIT"
+}

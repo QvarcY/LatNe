@@ -1,0 +1,12 @@
+{
+  "name": "latne",
+  "version": "0.0.0",
+  "private": true,
+  "description": "LatNe — latviska programmēšanas valoda un izstrādes vide.",
+  "license": "MIT",
+  "packageManager": "pnpm@10",
+  "scripts": {
+    "test": "echo \"Testi vēl nav ieviesti.\"",
+    "statuss": "git status --short"
+  }
+}

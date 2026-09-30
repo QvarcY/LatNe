@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LatNe terminoloģijas reģistrs",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "project",
+    "status",
+    "terms"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "project": {
+      "const": "LatNe"
+    },
+    "status": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "status"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "latvian": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "approved",
+              "rejected",
+              "reserved"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          },
+          "rejectedVariants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "value"
+              ],
+              "properties": {
+                "value": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
