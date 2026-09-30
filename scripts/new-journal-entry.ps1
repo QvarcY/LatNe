@@ -25,8 +25,8 @@ $Entry = @"
 
 ## $Date — $Id — $Title
 
-**Tips:** $Type  
-**Sākts:** $Time  
+**Tips:** $Type
+**Sākts:** $Time
 **Statuss:** sākts
 
 ### Mērķis

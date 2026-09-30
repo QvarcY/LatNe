@@ -1,6 +1,6 @@
 # ADR-0002 — Dokumentācija kā pamata sistēma
 
-**Datums:** 2026-09-30  
+**Datums:** 2026-09-30
 **Statuss:** Pieņemts
 
 ## Konteksts

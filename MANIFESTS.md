@@ -1,6 +1,6 @@
 # LatNe manifests v0.1
 
-**Datums:** 2026-09-30  
+**Datums:** 2026-09-30
 **Statuss:** sākotnējā versija
 
 1. **Latviski pēc noklusējuma.** Sintakse, CLI, diagnostika, dokumentācija un publiskais API pēc iespējas ir latviešu valodā.

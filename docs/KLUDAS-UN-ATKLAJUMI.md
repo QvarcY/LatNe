@@ -13,3 +13,19 @@
 **Lēmums:** hero/logo darbs tiek atlikts. Valodas kodols un dokumentācija ir prioritāte.
 
 **Mācība:** zīmola vizuālā forma var nobriest kopā ar pašu projektu.
+
+---
+
+## 2026-09-30 — K0002 — Git procesa exit code nav PowerShell kļūda
+
+**Novērojums:** Windows PowerShell 5.1 turpināja `START-LATNE.ps1` pēc tam,
+kad `git diff --cached --check` atrada whitespace kļūdas.
+
+**Iemesls:** ārējas programmas nenulles exit code nav automātiski
+PowerShell terminating error.
+
+**Lēmums:** LatNe PowerShell automatizācijā kritiskiem ārējo procesu
+izsaukumiem eksplicīti jāpārbauda `$LASTEXITCODE`.
+
+**Mācība:** `$ErrorActionPreference = "Stop"` viena pati nav pietiekama
+Git/Node/pnpm un citu native procesu drošības garantija.

@@ -1,6 +1,6 @@
 # LatNe ieņemšana
 
-**Datums:** 30.09.2026  
+**Datums:** 30.09.2026
 **Statuss:** vēsturisks sākuma ieraksts
 
 2026. gada 30. septembrī tika pieņemts lēmums sākt LatNe kā reālu projektu.

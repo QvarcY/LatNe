@@ -1,6 +1,6 @@
 # ADR-0003 — Terminoloģija nav hardkodēta compilerī
 
-**Datums:** 2026-09-30  
+**Datums:** 2026-09-30
 **Statuss:** Pieņemts
 
 ## Konteksts

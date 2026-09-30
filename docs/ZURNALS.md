@@ -20,7 +20,7 @@ Katram būtiskam darba blokam saglabā:
 
 ## 2026-09-30 — J0001 — Repozitorija sēkla un dokumentācijas sistēma
 
-**Tips:** pamata infrastruktūra  
+**Tips:** pamata infrastruktūra
 **Statuss:** sākts
 
 ### Mērķis
@@ -58,3 +58,73 @@ LatNe projektam ir reproducējams sākuma punkts, kura centrā ir dokumentācija
 ### Nākamais solis
 
 Inicializēt Git repozitoriju un izveidot vēsturisko pirmo commit.
+
+---
+
+## 2026-09-30 — J0002 — Pirmās repozitorija inicializācijas audits
+
+**Tips:** bootstrap / kvalitāte
+**Statuss:** pabeigts
+
+### Konteksts
+
+LatNe pirmā repozitorija inicializācija tika veikta ar `START-LATNE.ps1`.
+
+Pirmais vēsturiskais commit:
+
+`9fd9c18 chore: conceive LatNe project`
+
+### Kas izdevās
+
+- Git repozitorijs tika inicializēts.
+- Noklusējuma zars tika nosaukts `main`.
+- Visi sākotnējie projekta faili tika pievienoti Git.
+- Tika izveidots LatNe pirmais vēsturiskais commit.
+- Pēc inicializācijas darba koks bija tīrs.
+
+### Atklātās problēmas
+
+1. `START-LATNE.ps1` sākumā bija nejaušs `\` simbols.
+
+   Windows PowerShell to mēģināja izpildīt kā komandu un izvadīja
+   `CommandNotFoundException`.
+
+   Tā kā kļūda radās pirms `$ErrorActionPreference = "Stop"`,
+   pārējais skripts turpināja darbu.
+
+2. `git diff --cached --check` atrada trailing whitespace vairākos failos.
+
+   Windows PowerShell 5.1 automātiski nepārvērta Git nenulles exit code
+   par PowerShell terminating error, tāpēc bootstrap turpinājās.
+
+3. Git izvadīja LF → CRLF brīdinājumus.
+
+   Projekta sākotnējie faili bija LF formātā, bet Windows Git konfigurācija
+   paredzēja darba kopijas līniju beigu pārveidošanu.
+
+4. `LatNe_Seed_2026-09-30.zip` nejauši tika iekļauts pirmajā commit.
+
+   Arhīvs ir transporta artefakts, nevis repozitorija avota sastāvdaļa.
+
+### Lēmumi
+
+- Pirmo commit `9fd9c18` nepārrakstīt.
+- Saglabāt kļūdas kā daļu no LatNe faktiskās vēstures.
+- Bootstrap skriptā turpmāk eksplicīti pārbaudīt `$LASTEXITCODE`.
+- Repozitorijā ieviest `.gitattributes`.
+- Teksta failiem izmantot LF kā kanonisko līniju beigu formātu.
+- Izņemt sākuma ZIP arhīvu no repozitorija.
+- `git diff --check` kļūdas uzskatīt par bloķējošām.
+
+### Mācība
+
+LatNe dokumentācijas princips tika pārbaudīts jau pirmajā tehniskajā darbībā:
+pat šķietami vienkārša repozitorija inicializācija radīja vairākus reproducējamus
+secinājumus par Windows PowerShell, Git exit kodiem un failu normalizāciju.
+
+Šie notikumi netiek slēpti vai pārrakstīti. Tie kļūst par projekta zināšanu bāzi.
+
+### Nākamais solis
+
+Pēc bootstrap sakārtošanas sākt LatNe terminoloģijas inventāru un
+Vārdu kalves datu modeļa izveidi.

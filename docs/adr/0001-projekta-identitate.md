@@ -1,6 +1,6 @@
 # ADR-0001 — Projekta identitāte
 
-**Datums:** 2026-09-30  
+**Datums:** 2026-09-30
 **Statuss:** Pieņemts
 
 ## Konteksts

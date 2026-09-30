@@ -1,7 +1,7 @@
 ## YYYY-MM-DD — JXXXX — Nosaukums
 
-**Tips:**  
-**Statuss:**  
+**Tips:**
+**Statuss:**
 
 ### Mērķis
 

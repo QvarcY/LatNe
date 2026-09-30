@@ -1,8 +1,20 @@
-\
 $ErrorActionPreference = "Stop"
 
 $Repo = $PSScriptRoot
 Set-Location $Repo
+
+function Invoke-Git {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string[]]$Arguments
+    )
+
+    & git @Arguments
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "STOP: git $($Arguments -join ' ') failed with exit code $LASTEXITCODE."
+    }
+}
 
 Write-Host ""
 Write-Host "=== LATNE — FIRST REPOSITORY INITIALIZATION ===" -ForegroundColor Cyan
@@ -34,26 +46,40 @@ foreach ($File in $Required) {
 }
 
 Write-Host "Initializing Git..." -ForegroundColor Cyan
-git init
-git branch -M main
+
+Invoke-Git @("init")
+Invoke-Git @("branch", "-M", "main")
 
 Write-Host ""
 Write-Host "Staging seed..." -ForegroundColor Cyan
-git add .
 
-git diff --cached --check
+Invoke-Git @("add", ".")
+
+Write-Host ""
+Write-Host "Checking staged diff..." -ForegroundColor Cyan
+
+& git diff --cached --check
+
+if ($LASTEXITCODE -ne 0) {
+    throw "STOP: git diff --cached --check found whitespace errors."
+}
 
 Write-Host ""
 Write-Host "Creating historical first commit..." -ForegroundColor Cyan
-git commit `
-  -m "chore: conceive LatNe project" `
-  -m "LatNe conception date: 2026-09-30.`nInitialize the project with documentation-first structure, manifesto, terminology registry, architecture records, and package skeleton."
+
+Invoke-Git @(
+    "commit",
+    "-m",
+    "chore: conceive LatNe project",
+    "-m",
+    "LatNe conception date: 2026-09-30.`nInitialize the project with documentation-first structure, manifesto, terminology registry, architecture records, and package skeleton."
+)
 
 Write-Host ""
 Write-Host "=== RESULT ===" -ForegroundColor Cyan
+
 git status --short
 git log -1 --decorate --oneline
 
 Write-Host ""
 Write-Host "LatNe repository initialized." -ForegroundColor Green
-Write-Host "The Git commit timestamp records the exact local moment of the first commit."

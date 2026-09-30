@@ -1,6 +1,6 @@
 # LatNe statuss
 
-**Atjaunots:** 2026-09-30  
+**Atjaunots:** 2026-09-30
 **Fāze:** 0 → 1 pāreja
 
 ## Fiksēts
@@ -12,18 +12,24 @@
 - Manifests: v0.1
 - Dokumentēšanas sistēma: izveidota
 - Primārais paredzētais domēns: `latne.lv`
+- Git repozitorijs: inicializēts
+- Pirmais vēsturiskais commit: `9fd9c18`
 
 ## Pašlaik
 
-Tiek veidots repozitorija pamats un terminoloģijas sistēma.
+Pirmais bootstrap audits ir pabeigts.
+
+Repo tiek nostiprināta line-ending politika, Git procesa kļūdu kontrole
+un dokumentētas pirmās inicializācijas mācības.
 
 ## Tuvākais mērķis
 
-Izveidot vienu patiesības avotu valodas terminiem un sākt Vārdu kalves MVP.
+Izveidot pilnu programmēšanas valodas terminoloģijas inventāru un
+Vārdu kalves datu modeli.
 
 ## Vēl nav
 
-- neviena apstiprināta valodas atslēgvārdu minimālā kopa;
+- apstiprinātas minimālās atslēgvārdu kopas;
 - tokenizera;
 - parsera;
 - AST;
