@@ -251,3 +251,47 @@ Projekta vēsture tagad ir saglabāta arī publiskajā Git repozitorijā.
 ### Nākamais solis
 
 Pieslēgt kanonisko terminoloģijas reģistru Vārdu kalvei tikai lasīšanas režīmā.
+---
+
+## 2026-09-30 — J0007 — Vārdu kalve lasa kanonisko reģistru
+
+**Tips:** tooling / terminoloģija
+**Statuss:** pabeigts
+
+### Mērķis
+
+Pieslēgt Vārdu kalvei īsto LatNe terminoloģijas reģistru tikai lasīšanas režīmā.
+
+### Izveidots
+
+- tiešs `termini.json` imports
+- 84 kandidātu saraksts
+- termina detaļu skats
+- meklēšana
+- metadatu attēlošana
+- read-only režīms
+
+### Pārbaude
+
+Production build veiksmīgs.
+
+Terminoloģijas validators:
+
+- 84 termini
+- 84 `pending`
+
+UI pārbaudīts pārlūkā ar reāliem reģistra datiem.
+
+### Atklājums
+
+TypeScript sākotnēji neuzskatīja DOM saknes elementu par garantēti pieejamu `render` funkcijā.
+
+Saknes iegūšana pārvietota uz funkciju kas garantē `HTMLDivElement`.
+
+### Rezultāts
+
+Vārdu kalve pirmo reizi reāli izmanto LatNe kanonisko terminoloģijas reģistru.
+
+### Nākamais solis
+
+Pievienot kontrolētu terminu rediģēšanas un saglabāšanas plūsmu.

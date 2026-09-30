@@ -6,29 +6,29 @@
 ## Pabeigts
 
 - projekta bootstrap
-- bootstrap audits
 - publisks GitHub repozitorijs
-- `main` pieslēgts `origin/main`
 - 84 terminu kandidātu inventārs
 - terminoloģijas validators
 - Vārdu kalves karkass
 - Vite un TypeScript toolchain
-- production build pārbaude
+- Vārdu kalves production build
+- kanoniskā reģistra read-only pieslēgums
+- 84 kandidātu pārlūkošana un meklēšana
 
 ## Pašlaik
 
-Vārdu kalves karkass veiksmīgi buildojas.
+Vārdu kalve lasa īsto `termini.json`.
 
-Terminoloģijas reģistrs satur 84 kandidātus un visi joprojām ir `pending`.
+Visi 84 kandidāti joprojām ir `pending`.
 
 ## Tuvākais mērķis
 
-Pieslēgt kanonisko `termini.json` Vārdu kalvei tikai lasīšanas režīmā.
+Pievienot kontrolētu termina rediģēšanu un saglabāšanu kanoniskajā reģistrā.
 
 ## Vēl nav
 
-- terminu rediģēšanas
-- saglabāšanas
+- terminu saglabāšanas no UI
+- noraidīto variantu plūsmas
 - AI ieteikumu
 - minimālās apstiprinātās sintakses kopas
 - tokenizera
