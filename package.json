@@ -4,7 +4,7 @@
   "private": true,
   "description": "LatNe — latviska programmēšanas valoda un izstrādes vide.",
   "license": "MIT",
-  "packageManager": "pnpm@10",
+  "packageManager": "pnpm@12.6.0",
   "scripts": {
     "test": "echo \"Testi vēl nav ieviesti.\"",
     "statuss": "git status --short"

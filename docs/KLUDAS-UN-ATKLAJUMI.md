@@ -29,3 +29,16 @@ izsaukumiem eksplicīti jāpārbauda `$LASTEXITCODE`.
 
 **Mācība:** `$ErrorActionPreference = "Stop"` viena pati nav pietiekama
 Git/Node/pnpm un citu native procesu drošības garantija.
+---
+
+## 2026-09-30 — K0003 — Corepack nepieņem nepilnu pnpm versiju
+
+**Novērojums:** Vārdu kalves dependency instalācija apstājās pirms darba sākšanas.
+
+**Kļūda:** `packageManager` bija norādīts kā `pnpm@10`.
+
+**Iemesls:** Corepack sagaida pilnu semver versiju.
+
+**Lēmums:** repozitorijā tiek fiksēta precīza pnpm versija.
+
+**Mācība:** toolchain versijām jābūt reproducējamām un precīzi fiksētām.
