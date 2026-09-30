@@ -1,0 +1,13 @@
+{
+  "name": "@latne/vardu-kalve",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LatNe terminoloģijas pārskatīšanas rīks",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "license": "MIT"
+}

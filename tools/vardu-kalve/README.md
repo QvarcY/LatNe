@@ -1,15 +1,19 @@
 # Vārdu kalve
 
-Plānotais LatNe terminoloģijas pārskatīšanas rīks.
+LatNe terminoloģijas pārskatīšanas rīks.
 
-MVP funkcijas:
-- parādīt avota terminu;
-- parādīt ierosināto latvisko variantu;
-- apstiprināt;
-- noraidīt;
-- rediģēt;
-- saglabāt noraidījuma iemeslu;
-- pieprasīt citu ierosinājumu;
-- importēt/eksportēt terminoloģijas reģistru.
+## Mērķis
 
-Rīks izmanto `packages/valoda/data/termini.json` kā vienu patiesības avotu.
+Katru valodas kandidātu izskatīt atsevišķi.
+
+Rīks vēl neuztur savu datubāzi un vēl neraksta terminoloģijas reģistrā.
+
+## Pašlaik
+
+Ir izveidots pirmais UI un projekta karkass.
+
+## Nākamais solis
+
+Pieslēgt kanonisko terminoloģijas reģistru:
+
+`packages/valoda/data/termini.json`

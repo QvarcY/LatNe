@@ -177,3 +177,38 @@ Visi 84 kandidāti paliek `pending`.
 ### Nākamais solis
 
 Izveidot Vārdu kalves MVP un sākt cilvēka vadītu terminu izvēli.
+---
+
+## 2026-09-30 — J0004 — Vārdu kalves karkass
+
+**Tips:** tooling / terminoloģija
+**Statuss:** pabeigts
+
+### Mērķis
+
+Izveidot pirmo Vārdu kalves projekta struktūru.
+
+### Izveidots
+
+- atsevišķa workspace pakotne
+- TypeScript konfigurācija
+- HTML ieejas punkts
+- sākotnējais UI
+- sākotnējais stils
+- rīka dokumentācija
+
+### Apzināti vēl nav
+
+- terminoloģijas reģistra lasīšanas
+- saglabāšanas
+- filtru
+- terminu rediģēšanas
+- AI ieteikumu
+
+### Rezultāts
+
+LatNe ir pirmais sava izstrādes rīka karkass.
+
+### Nākamais solis
+
+Pieslēgt kanonisko terminoloģijas reģistru tikai lasīšanas režīmā.
