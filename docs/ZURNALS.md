@@ -212,3 +212,42 @@ LatNe ir pirmais sava izstrādes rīka karkass.
 ### Nākamais solis
 
 Pieslēgt kanonisko terminoloģijas reģistru tikai lasīšanas režīmā.
+---
+
+## 2026-09-30 — J0006 — Pirmais GitHub push
+
+**Tips:** GitHub / tooling
+**Statuss:** pabeigts
+
+### Notikumi
+
+Vārdu kalves toolchain tika uzstādīts ar TypeScript un Vite.
+
+Pirmais build atklāja CSS tipu deklarācijas problēmu.
+
+Pēc `vite-env.d.ts` pievienošanas build veiksmīgi pabeidzās.
+
+Terminoloģijas validators pēc toolchain izmaiņām palika zaļš:
+
+- 84 termini
+- 84 `pending`
+
+### GitHub
+
+Izveidots publisks repozitorijs:
+
+`QvarcY/LatNe`
+
+`main` pirmo reizi pushots uz GitHub.
+
+Pirmajā push tika saglabāta visa LatNe vēsture no ieņemšanas commit līdz darbojošam Vārdu kalves karkasam.
+
+### Rezultāts
+
+LatNe vairs neeksistē tikai lokālajā datorā.
+
+Projekta vēsture tagad ir saglabāta arī publiskajā Git repozitorijā.
+
+### Nākamais solis
+
+Pieslēgt kanonisko terminoloģijas reģistru Vārdu kalvei tikai lasīšanas režīmā.

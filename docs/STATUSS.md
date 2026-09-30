@@ -7,17 +7,23 @@
 
 - projekta bootstrap
 - bootstrap audits
+- publisks GitHub repozitorijs
+- `main` pieslēgts `origin/main`
 - 84 terminu kandidātu inventārs
 - terminoloģijas validators
 - Vārdu kalves karkass
+- Vite un TypeScript toolchain
+- production build pārbaude
 
 ## Pašlaik
 
-Tiek būvēts Vārdu kalves MVP.
+Vārdu kalves karkass veiksmīgi buildojas.
+
+Terminoloģijas reģistrs satur 84 kandidātus un visi joprojām ir `pending`.
 
 ## Tuvākais mērķis
 
-Pieslēgt `termini.json` Vārdu kalvei tikai lasīšanas režīmā.
+Pieslēgt kanonisko `termini.json` Vārdu kalvei tikai lasīšanas režīmā.
 
 ## Vēl nav
 

@@ -42,3 +42,27 @@ Git/Node/pnpm un citu native procesu drošības garantija.
 **Lēmums:** repozitorijā tiek fiksēta precīza pnpm versija.
 
 **Mācība:** toolchain versijām jābūt reproducējamām un precīzi fiksētām.
+---
+
+## 2026-09-30 — K0004 — pnpm var izveidot lockfile arī bez dependency instalācijas
+
+**Novērojums:** `pnpm-lock.yaml` parādījās pēc pnpm versijas pārbaudes.
+
+**Sekas:** drošības pārbaude pareizi bloķēja nākamo build soli.
+
+**Lēmums:** pēc toolchain komandām pārbaudīt ne tikai exit code bet arī Git darba koku.
+
+**Mācība:** pat šķietami nekaitīga toolchain komanda var mainīt repozitoriju.
+---
+
+## 2026-09-30 — K0005 — TypeScript nepazina Vite CSS importu
+
+**Novērojums:** pirmais Vārdu kalves build apstājās ar `TS2882`.
+
+**Iemesls:** TypeScript nebija pieslēgti Vite klienta tipi.
+
+**Labojums:** pievienots `src/vite-env.d.ts`.
+
+**Rezultāts:** TypeScript pārbaude un Vite production build izdevās.
+
+**Mācība:** frontend toolchain tipiem jābūt deklarētiem eksplicīti.
