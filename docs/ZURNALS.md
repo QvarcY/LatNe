@@ -295,3 +295,78 @@ Vārdu kalve pirmo reizi reāli izmanto LatNe kanonisko terminoloģijas reģistr
 ### Nākamais solis
 
 Pievienot kontrolētu terminu rediģēšanas un saglabāšanas plūsmu.
+---
+
+## 2026-09-30 — J0008 — Termina izmaiņu validācijas API
+
+**Tips:** tooling / terminoloģija
+**Statuss:** pabeigts
+
+### Mērķis
+
+Pirms Vārdu kalvei dot rakstīšanas tiesības izveidot drošu viena termina izmaiņu validācijas slāni.
+
+### Izveidots
+
+Lokāls Vite API galapunkts:
+
+`POST /api/termini/validate-change`
+
+API lasa kanonisko `termini.json` un pieņem tikai kontrolētus laukus:
+
+- `latvian`
+- `status`
+- `notes`
+
+Atļautie statusi:
+
+- `pending`
+- `approved`
+- `rejected`
+- `reserved`
+
+### Drošības noteikumi
+
+- termina `id` jāeksistē
+- sistēmas laukus nevar mainīt
+- statusam jābūt atļautam
+- apstiprinātam terminam jābūt latviskajam variantam
+- ievades izmērs ir ierobežots
+- API šajā posmā neko nesaglabā
+
+Atbildē tiek atgriezts:
+
+`persisted: false`
+
+### Pārbaude
+
+Veikti pieci kontrolēti testi:
+
+- derīga `pending` izmaiņa
+- derīgs `approved` kandidāts
+- nederīgs statuss
+- aizliegta `source` lauka maiņa
+- `approved` bez latviskā varianta
+
+Visi testi izturēti.
+
+### Reģistra integritāte
+
+Pirms un pēc API testiem salīdzināts `termini.json` SHA-256.
+
+Hash nemainījās.
+
+Terminoloģijas validators pēc testiem:
+
+- 84 termini
+- 84 `pending`
+
+### Rezultāts
+
+Vārdu kalvei tagad ir validācijas robeža starp UI un kanonisko terminoloģijas reģistru.
+
+Rakstīšana reģistrā vēl nav iespējota.
+
+### Nākamais solis
+
+Pievienot drošu saglabāšanas plūsmu ar atomisku faila rakstīšanu un validāciju pirms un pēc saglabāšanas.

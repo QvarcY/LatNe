@@ -14,20 +14,25 @@
 - Vārdu kalves production build
 - kanoniskā reģistra read-only pieslēgums
 - 84 kandidātu pārlūkošana un meklēšana
+- termina izmaiņu validācijas API
+- API integritātes pārbaude pret `termini.json`
 
 ## Pašlaik
 
-Vārdu kalve lasa īsto `termini.json`.
+Vārdu kalve prot lasīt kanonisko reģistru.
+
+Lokālais API prot validēt viena termina piedāvātās izmaiņas bet vēl neko nesaglabā.
 
 Visi 84 kandidāti joprojām ir `pending`.
 
 ## Tuvākais mērķis
 
-Pievienot kontrolētu termina rediģēšanu un saglabāšanu kanoniskajā reģistrā.
+Pievienot drošu termina saglabāšanu kanoniskajā reģistrā.
 
 ## Vēl nav
 
 - terminu saglabāšanas no UI
+- atomiskas reģistra rakstīšanas
 - noraidīto variantu plūsmas
 - AI ieteikumu
 - minimālās apstiprinātās sintakses kopas

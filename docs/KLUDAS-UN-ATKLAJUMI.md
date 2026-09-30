@@ -66,3 +66,16 @@ Git/Node/pnpm un citu native procesu drošības garantija.
 **Rezultāts:** TypeScript pārbaude un Vite production build izdevās.
 
 **Mācība:** frontend toolchain tipiem jābūt deklarētiem eksplicīti.
+---
+
+## 2026-09-30 — K0006 — PowerShell vienas rindas izvadi var pārvērst par scalar string
+
+**Novērojums:** drošības pārbaude apstājās lai gan `git status --porcelain` rādīja tieši vienu paredzēto failu.
+
+**Iemesls:** Windows PowerShell vienas rindas komandas izvadi piešķīra kā `String` nevis masīvu.
+
+Tāpēc `$Status[0]` nozīmēja pirmo simbolu nevis pirmo statusa rindu.
+
+**Labojums:** ārējo komandu izvadi kas paredzēta kā saraksts ietīt `@(...)`.
+
+**Mācība:** PowerShell skriptos nevar pieņemt ka vienas un vairāku rindu native command izvadei vienmēr būs vienāda kolekcijas semantika.
