@@ -2,13 +2,54 @@
 
 LatNe valodas vārdi netiek izvēlēti ar automātisku tulkošanu.
 
-Katram terminam ir stāvoklis:
+## Statusi
 
-- `pending` — vēl nav izskatīts;
-- `approved` — apstiprināts kā oficiāls;
-- `rejected` — konkrētais variants noraidīts;
-- `reserved` — rezervēts turpmākai izpētei.
+`pending`
 
-Compileris nākotnē drīkst izmantot tikai `approved` terminus.
+Termins vēl nav izskatīts.
 
-Sākotnējais terminoloģijas reģistrs apzināti ir tukšs. Pilns JS/TS konstrukciju inventārs tiks izveidots kā atsevišķs dokumentēts darbs.
+`approved`
+
+Latviskais variants ir apstiprināts un drīkst kļūt par LatNe sintakses daļu.
+
+`rejected`
+
+Konkrētais variants vai konstrukcija ir noraidīta.
+
+`reserved`
+
+Lēmums atlikts un kandidāts saglabāts turpmākai izpētei.
+
+## Viens avots
+
+Oficiālais reģistrs:
+
+`packages/valoda/data/termini.json`
+
+Compileris dokumentācija editoru tooling un testi nākotnē izmanto šo pašu datu avotu.
+
+## Vārdu kalve
+
+Vārdu kalve nedrīkst uzturēt savu atsevišķu terminu kopiju.
+
+Tā lasa un raksta kanonisko reģistru.
+
+## Tulkošanas princips
+
+LatNe neveido mehānisku JavaScript vai TypeScript tulkojumu.
+
+Katram kandidātam atsevišķi jāizlemj:
+
+- vai konstrukcija LatNe ir vajadzīga
+- vai vārds ir tulkojams
+- vai latviešu valodā dabiskāka ir cita konstrukcija
+- vai kandidāts jāsadala vairākās LatNe konstrukcijās
+- vai vairākus avota vārdus var apvienot vienā LatNe jēdzienā
+
+## Pašreizējais stāvoklis
+
+Inventāra versijā 1 ir 84 kandidāti.
+
+Visi sāk ar statusu `pending`.
+
+Nevienam vēl nav fiksēts oficiāls latviskais variants.

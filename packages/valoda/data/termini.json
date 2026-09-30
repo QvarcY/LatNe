@@ -1,8 +1,1937 @@
 {
-  "schemaVersion": 1,
-  "project": "LatNe",
-  "status": "draft",
-  "updated": "2026-09-30",
-  "note": "Sākotnēji tukšs. Neviens latviskais valodas termins nav oficiāls, kamēr nav manuāli apstiprināts.",
-  "terms": []
+    "schemaVersion":  2,
+    "project":  "LatNe",
+    "inventoryVersion":  1,
+    "status":  "draft",
+    "updated":  "2026-09-30",
+    "scope":  "javascript-typescript-syntax",
+    "note":  "Kandidātu inventārs. Neviens latviskais variants vēl nav apstiprināts.",
+    "sources":  [
+                    {
+                        "id":  "mdn-js-lexical",
+                        "title":  "MDN JavaScript Lexical grammar",
+                        "url":  "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar",
+                        "checked":  "2026-09-30"
+                    },
+                    {
+                        "id":  "typescript-scanner-main",
+                        "title":  "TypeScript compiler scanner",
+                        "url":  "https://github.com/microsoft/TypeScript/blob/main/src/compiler/scanner.ts",
+                        "checked":  "2026-09-30"
+                    }
+                ],
+    "terms":  [
+                  {
+                      "order":  1,
+                      "id":  "term-await",
+                      "source":  "await",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "async",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  2,
+                      "id":  "term-break",
+                      "source":  "break",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  3,
+                      "id":  "term-case",
+                      "source":  "case",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  4,
+                      "id":  "term-catch",
+                      "source":  "catch",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "error",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  5,
+                      "id":  "term-class",
+                      "source":  "class",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  6,
+                      "id":  "term-const",
+                      "source":  "const",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  7,
+                      "id":  "term-continue",
+                      "source":  "continue",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  8,
+                      "id":  "term-debugger",
+                      "source":  "debugger",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "debug",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  9,
+                      "id":  "term-default",
+                      "source":  "default",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  10,
+                      "id":  "term-delete",
+                      "source":  "delete",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "operator-word",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  11,
+                      "id":  "term-do",
+                      "source":  "do",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  12,
+                      "id":  "term-else",
+                      "source":  "else",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  13,
+                      "id":  "term-export",
+                      "source":  "export",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  14,
+                      "id":  "term-extends",
+                      "source":  "extends",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "class",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  15,
+                      "id":  "term-false",
+                      "source":  "false",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "literal",
+                      "category":  "literal",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  16,
+                      "id":  "term-finally",
+                      "source":  "finally",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "error",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  17,
+                      "id":  "term-for",
+                      "source":  "for",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  18,
+                      "id":  "term-function",
+                      "source":  "function",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  19,
+                      "id":  "term-if",
+                      "source":  "if",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  20,
+                      "id":  "term-import",
+                      "source":  "import",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  21,
+                      "id":  "term-in",
+                      "source":  "in",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "operator-word",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  22,
+                      "id":  "term-instanceof",
+                      "source":  "instanceof",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "operator-word",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  23,
+                      "id":  "term-let",
+                      "source":  "let",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  24,
+                      "id":  "term-new",
+                      "source":  "new",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "operator-word",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  25,
+                      "id":  "term-null",
+                      "source":  "null",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "literal",
+                      "category":  "literal",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  26,
+                      "id":  "term-return",
+                      "source":  "return",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  27,
+                      "id":  "term-static",
+                      "source":  "static",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "class",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  28,
+                      "id":  "term-super",
+                      "source":  "super",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "class",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  29,
+                      "id":  "term-switch",
+                      "source":  "switch",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  30,
+                      "id":  "term-this",
+                      "source":  "this",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "context",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  31,
+                      "id":  "term-throw",
+                      "source":  "throw",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "error",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  32,
+                      "id":  "term-true",
+                      "source":  "true",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "literal",
+                      "category":  "literal",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  33,
+                      "id":  "term-try",
+                      "source":  "try",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "error",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  34,
+                      "id":  "term-typeof",
+                      "source":  "typeof",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "operator-word",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  35,
+                      "id":  "term-var",
+                      "source":  "var",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  36,
+                      "id":  "term-void",
+                      "source":  "void",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "operator-word",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  37,
+                      "id":  "term-while",
+                      "source":  "while",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  38,
+                      "id":  "term-with",
+                      "source":  "with",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  39,
+                      "id":  "term-yield",
+                      "source":  "yield",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "async",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  40,
+                      "id":  "term-enum",
+                      "source":  "enum",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "reserved",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  41,
+                      "id":  "term-implements",
+                      "source":  "implements",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "reserved",
+                      "category":  "class",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  42,
+                      "id":  "term-interface",
+                      "source":  "interface",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "reserved",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  43,
+                      "id":  "term-package",
+                      "source":  "package",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "reserved",
+                      "category":  "future",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  44,
+                      "id":  "term-private",
+                      "source":  "private",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "reserved",
+                      "category":  "modifier",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  45,
+                      "id":  "term-protected",
+                      "source":  "protected",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "reserved",
+                      "category":  "modifier",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  46,
+                      "id":  "term-public",
+                      "source":  "public",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "reserved",
+                      "category":  "modifier",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  47,
+                      "id":  "term-as",
+                      "source":  "as",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  48,
+                      "id":  "term-async",
+                      "source":  "async",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "async",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  49,
+                      "id":  "term-from",
+                      "source":  "from",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  50,
+                      "id":  "term-get",
+                      "source":  "get",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "accessor",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  51,
+                      "id":  "term-of",
+                      "source":  "of",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "control",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  52,
+                      "id":  "term-set",
+                      "source":  "set",
+                      "layers":  [
+                                     "javascript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "accessor",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  53,
+                      "id":  "term-using",
+                      "source":  "using",
+                      "layers":  [
+                                     "javascript",
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "resource",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "mdn-js-lexical",
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  54,
+                      "id":  "term-abstract",
+                      "source":  "abstract",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "modifier",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  55,
+                      "id":  "term-accessor",
+                      "source":  "accessor",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "accessor",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  56,
+                      "id":  "term-any",
+                      "source":  "any",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  57,
+                      "id":  "term-asserts",
+                      "source":  "asserts",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  58,
+                      "id":  "term-bigint",
+                      "source":  "bigint",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  59,
+                      "id":  "term-boolean",
+                      "source":  "boolean",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  60,
+                      "id":  "term-constructor",
+                      "source":  "constructor",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "class",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  61,
+                      "id":  "term-declare",
+                      "source":  "declare",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  62,
+                      "id":  "term-infer",
+                      "source":  "infer",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  63,
+                      "id":  "term-intrinsic",
+                      "source":  "intrinsic",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  64,
+                      "id":  "term-is",
+                      "source":  "is",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  65,
+                      "id":  "term-keyof",
+                      "source":  "keyof",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "operator-word",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  66,
+                      "id":  "term-module",
+                      "source":  "module",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  67,
+                      "id":  "term-namespace",
+                      "source":  "namespace",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  68,
+                      "id":  "term-never",
+                      "source":  "never",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  69,
+                      "id":  "term-number",
+                      "source":  "number",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  70,
+                      "id":  "term-object",
+                      "source":  "object",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  71,
+                      "id":  "term-out",
+                      "source":  "out",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "modifier",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  72,
+                      "id":  "term-override",
+                      "source":  "override",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "modifier",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  73,
+                      "id":  "term-readonly",
+                      "source":  "readonly",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "modifier",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  74,
+                      "id":  "term-require",
+                      "source":  "require",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  75,
+                      "id":  "term-satisfies",
+                      "source":  "satisfies",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  76,
+                      "id":  "term-string",
+                      "source":  "string",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  77,
+                      "id":  "term-symbol",
+                      "source":  "symbol",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  78,
+                      "id":  "term-type",
+                      "source":  "type",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "keyword",
+                      "category":  "declaration",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  79,
+                      "id":  "term-undefined",
+                      "source":  "undefined",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "builtin-value",
+                      "category":  "literal",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  80,
+                      "id":  "term-unique",
+                      "source":  "unique",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "modifier",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  81,
+                      "id":  "term-unknown",
+                      "source":  "unknown",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "type-keyword",
+                      "category":  "type",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  82,
+                      "id":  "term-assert",
+                      "source":  "assert",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  83,
+                      "id":  "term-defer",
+                      "source":  "defer",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  },
+                  {
+                      "order":  84,
+                      "id":  "term-global",
+                      "source":  "global",
+                      "layers":  [
+                                     "typescript"
+                                 ],
+                      "kind":  "contextual",
+                      "category":  "module",
+                      "status":  "pending",
+                      "latvian":  null,
+                      "suggestions":  [
+
+                                      ],
+                      "rejectedVariants":  [
+
+                                           ],
+                      "notes":  "",
+                      "sourceRefs":  [
+                                         "typescript-scanner-main"
+                                     ]
+                  }
+              ]
 }

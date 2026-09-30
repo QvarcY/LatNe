@@ -13,7 +13,8 @@
 
 ## Fāze 1 — valodas pamats
 
-- [ ] Izveidot pilnu terminoloģijas inventāru
+- [x] Izveidot JS/TS sintakses terminu kandidātu inventāru
+- [ ] Inventarizēt iebūvētos globālos objektus un API
 - [ ] Izveidot Vārdu kalves MVP
 - [ ] Apstiprināt pirmo minimālo atslēgvārdu kopu
 - [ ] Izveidot tokenizera pamatu

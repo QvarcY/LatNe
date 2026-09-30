@@ -128,3 +128,52 @@ secinājumus par Windows PowerShell, Git exit kodiem un failu normalizāciju.
 
 Pēc bootstrap sakārtošanas sākt LatNe terminoloģijas inventāru un
 Vārdu kalves datu modeļa izveidi.
+---
+
+## 2026-09-30 — J0003 — Pirmais valodas terminoloģijas inventārs
+
+**Tips:** valoda / terminoloģija
+**Statuss:** pabeigts
+
+### Mērķis
+
+Izveidot pirmo dokumentēto kandidātu kopu LatNe sintakses terminoloģijas pārskatīšanai.
+
+### Sākuma stāvoklis
+
+Terminoloģijas reģistrs bija tukšs.
+
+Nebija apstiprināts neviens latviskais atslēgvārds.
+
+### Avoti
+
+JavaScript kandidāti pārbaudīti pret MDN lexical grammar.
+
+TypeScript kandidāti pārbaudīti pret TypeScript compiler `scanner.ts` keyword karti.
+
+### Darbības
+
+- reģistrēti 84 sintakses kandidāti
+- pievienoti JavaScript un TypeScript slāņi
+- kandidāti sadalīti pēc veida un jēgas
+- katram terminam pievienota avotu izsekojamība
+- reģistra shēma pacelta uz versiju 2
+- izveidots validācijas skripts
+- dokumentētas inventāra robežas
+- roadmap sadalīts sintakses un API inventāros
+
+### Svarīgs ierobežojums
+
+Inventārs nav LatNe sintakses specifikācija.
+
+Termina atrašanās reģistrā nenozīmē ka LatNe to pārņems vai tulkos.
+
+### Rezultāts
+
+LatNe pirmo reizi ir strukturēts izejmateriāls valodas dizainam.
+
+Visi 84 kandidāti paliek `pending`.
+
+### Nākamais solis
+
+Izveidot Vārdu kalves MVP un sākt cilvēka vadītu terminu izvēli.

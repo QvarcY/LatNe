@@ -19,3 +19,16 @@ Tāpēc LatNe sākas nevis ar compileri, bet ar atmiņu.
 Mēs gribam, lai pēc gadiem ir iespējams izlasīt ne tikai gala dokumentāciju, bet visu cīņu — kas nestrādāja, ko pārpratām, ko izmetām, ko atklājām un kāpēc katrs svarīgais lēmums tika pieņemts.
 
 Nākamais posms: repozitorija pamats, terminoloģijas sistēma un pirmais valodas kodols.
+---
+
+## 2026-09-30 — Pirmais valodas materiāls
+
+Pēc repozitorija sakārtošanas LatNe pirmo reizi pieskārās pašai valodai.
+
+Netika uzrakstīts neviens atslēgvārda tulkojums.
+
+Tā vietā tika savākti 84 JavaScript un TypeScript sintakses kandidāti un katrs no tiem apzināti atstāts gaidīšanas stāvoklī.
+
+Tas nostiprināja vienu no projekta pamatprincipiem: LatNe sintakse netiks radīta ar masveida vārdu aizvietošanu.
+
+Katram vārdam un katrai konstrukcijai būs jāiztur atsevišķs lēmums.
