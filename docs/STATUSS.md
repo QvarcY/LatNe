@@ -18,14 +18,24 @@
 - Unicode identifikatoru atbalsts
 - LatNe terminu sasaite ar kanonisko termina identitāti
 - tokenizācijas pārbaude: 196 tokeni, 0 nezināmu simbolu
+- pirmais LatNe parseris
+- pirmais LatNe AST
+- augšējā līmeņa importa, saskarsmes, uzskaitījuma, klases un darbības atpazīšana
+- darbības `eksportēta` un `asinhrona` pazīmju atpazīšana
 
 ## Pašlaik
 
-LatNe spēj nolasīt pirmo `.lat` avota failu un pārvērst to strukturētā tokenu plūsmā.
+LatNe spēj nolasīt `.lat` avota failu, tokenizēt to un izveidot pirmo strukturēto AST.
 
-Apstrādes ķēde:
+Darbojošā apstrādes ķēde:
 
-`.lat → tokeni`
+`.lat → tokeni → AST`
+
+Pirmais paraugs:
+
+- 196 tokeni
+- 0 nezināmu simbolu
+- 5 augšējā līmeņa AST mezgli
 
 Terminoloģijas reģistrā:
 
@@ -33,18 +43,29 @@ Terminoloģijas reģistrā:
 - 84 `approved`
 - 0 `pending`
 
+Parseris pašlaik saprot programmas augšējā līmeņa struktūru.
+
+Klases un darbību ķermeņi vēl tiek saglabāti kā tokenu kopas un netiek sadalīti dziļākos AST mezglos.
+
 ## Tuvākais mērķis
 
-Izveidot pirmo minimālo parseri un AST.
+Paplašināt parseri ar pirmo iekšējo konstrukciju kopu:
 
-Mērķa ķēde:
+- mainīgo deklarācijas
+- `ja`
+- `kam`
+- `atgriez`
+- `mēģini`
+- `ķer`
+- `beigās`
 
-`.lat → tokeni → AST`
+Pēc tam sākt izteiksmju parseri.
 
 ## Vēl nav
 
 - pilna valodas gramatika
-- pilns parseris
+- pilns statement parseris
+- izteiksmju parseris
 - stabila AST specifikācija
 - koda ģenerators
 - source maps

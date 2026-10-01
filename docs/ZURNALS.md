@@ -476,3 +476,104 @@ Izveidot minimālo parseri un pirmo LatNe AST.
 Mērķa ķēde:
 
 `.lat → tokeni → AST`
+
+---
+
+## 2026-10-01 — J0011 — Pirmais LatNe parseris
+
+**Tips:** valoda / parseris / AST
+**Statuss:** pabeigts
+
+### Mērķis
+
+Izveidot pirmo parsera posmu, kas no LatNe tokenu plūsmas izveido strukturētu programmas AST.
+
+### Sākuma stāvoklis
+
+Darbojās pirmā apstrādes ķēde:
+
+`.lat → tokeni`
+
+Pirmais sintakses paraugs deva:
+
+- 196 tokenus
+- 0 nezināmu simbolu
+
+### Izveidots
+
+- `packages/valoda/src/parser.mjs`
+- `packages/valoda/scripts/parse-example.mjs`
+
+Parseris pirmajā versijā atpazīst:
+
+- importu
+- saskarsmi
+- uzskaitījumu
+- klasi
+- darbību
+- `export` modifikatoru
+- `async` modifikatoru
+- darbības atgriezes tipu
+
+### Arhitektūras lēmums
+
+Parseris nebalstās uz konkrēto latvisko termina tekstu.
+
+Tokenizators katram LatNe terminam saglabā kanonisko `source` identitāti.
+
+Piemēram:
+
+- `importē` → `import`
+- `saskarsme` → `interface`
+- `uzskaitījums` → `enum`
+- `klase` → `class`
+- `darbība` → `function`
+
+Parseris strādā ar šo kanonisko identitāti.
+
+Tas ļauj mainīt LatNe termina rakstību, nepārrakstot parsera gramatikas loģiku.
+
+### Pārbaude
+
+Pirmais `.lat` fails:
+
+- tokeni: 196
+- AST mezgli: 5
+
+AST augšējais līmenis:
+
+- `Imports`
+- `Saskarsme`
+- `Uzskaitījums`
+- `Klase`
+- `Darbība`
+
+Darbība `ielādēLietotājus` korekti atpazīta kā:
+
+- eksportēta
+- asinhrona
+- atgriezes tips `objekts[]`
+
+### Ierobežojums
+
+Klases un darbību ķermeņi šajā posmā vēl netiek pilnībā parsēti.
+
+Tie tiek saglabāti kā tokenu kopas.
+
+Tas ir apzināts pirmā parsera posma ierobežojums.
+
+### Rezultāts
+
+LatNe pirmo reizi darbojas ķēde:
+
+`.lat → tokeni → AST`
+
+### Nākamais solis
+
+Paplašināt parseri ar pirmajām iekšējām konstrukcijām:
+
+- mainīgo deklarācijām
+- nosacījumiem
+- cikliem
+- atgriešanu
+- kļūdu apstrādi
