@@ -86,7 +86,7 @@ Ja izmaiņa risina GitHub issue, norādi to PR aprakstā.
 
 Ja šobrīd negribi rakstīt kodu, vari palīdzēt arī ļoti vienkārši:
 
-- iedod LatNe repozitorijam GitHub zvaigzni;
+- ja LatNe šķiet interesants, atzīmē projektu ar GitHub zvaigzni;
 - padalies ar projektu;
 - atver labi formulētu ideju;
 - atbalsti projekta darbu ar Buy Me a Coffee.
