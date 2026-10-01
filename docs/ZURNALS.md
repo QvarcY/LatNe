@@ -690,3 +690,106 @@ Pirmajā versijā tam jāatpazīst:
 - `jauns`
 - binārie operatori
 - masīvu literāļi
+
+---
+
+## 2026-10-01 — J0013 — Pirmais izteiksmju parseris
+
+**Tips:** valoda / parseris / AST
+**Statuss:** pabeigts
+
+### Mērķis
+
+Pārvērst līdzšinējās izteiksmju tokenu virknes strukturētos AST mezglos.
+
+### Izveidots
+
+Jauns modulis:
+
+`packages/valoda/src/expression-parser.mjs`
+
+Tas atpazīst:
+
+- identifikatorus
+- skaitļus
+- tekstu
+- veidņu literāļus
+- `nekas`
+- `patiess`
+- `nepatiess`
+- `nenoteikts`
+- `šis`
+- masīvu literāļus
+- grupētas izteiksmes
+- īpašību piekļuvi
+- funkciju izsaukumus
+- `gaidi`
+- `jauns`
+- unāros operatorus
+- bināros operatorus
+
+### Operatoru prioritātes
+
+Pirmajā versijā ieviestas prioritātes:
+
+- `||`
+- `??`
+- `&&`
+- `==`, `!=`, `===`, `!==`
+- `<`, `<=`, `>`, `>=`
+- `+`, `-`
+- `*`, `/`, `%`
+
+### Rezultāti
+
+`gaidi lasiDatus("lietotaji.json")`
+
+tiek parsēts kā:
+
+`Gaidīšana`
+→ `Izsaukums`
+→ `Identifikators`
+→ `Teksts`
+
+`ieraksts.vārds == nekas`
+
+tiek parsēts kā:
+
+`BināraIzteiksme`
+→ kreisā puse `Īpašība`
+→ operators `==`
+→ labā puse `Nekas`
+
+`jauns Lietotājs(...)`
+
+tiek parsēts kā `Jauns` ar strukturētiem argumentiem.
+
+`lietotāji.push(lietotājs)`
+
+tiek parsēts kā funkcijas izsaukums uz īpašības piekļuves mezgla.
+
+`[]`
+
+tiek parsēts kā tukšs `Masīvs`.
+
+### Arhitektūra
+
+Izteiksmju parseris ir atdalīts no galvenā statement un deklarāciju parsera.
+
+Tas novērš viena monolīta parsera faila veidošanos un ļauj izteiksmju gramatiku attīstīt neatkarīgi.
+
+### Pašreizējais ierobežojums
+
+Veidņu literāļi pašlaik tiek saglabāti kā viens `Veidne` mezgls.
+
+Interpolācijas vēl netiek parsētas atsevišķos AST mezglos.
+
+Nav vēl ieviestas visas iespējamās piešķiršanas, loģikas un valodas konstrukcijas.
+
+### Rezultāta ķēde
+
+`.lat → tokeni → deklarāciju AST → statement AST → izteiksmju AST`
+
+### Nākamais solis
+
+Paplašināt parseri ar nākamo sintakses kopu un pēc tam sagatavot pirmo koda ģenerēšanas posmu.

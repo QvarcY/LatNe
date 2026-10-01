@@ -19,70 +19,80 @@
 - LatNe terminu sasaite ar kanonisko termina identitāti
 - pirmais LatNe parseris un AST
 - augšējā līmeņa deklarāciju parsēšana
-- pirmais darbības ķermeņa statement parseris
-- mainīgo deklarāciju parsēšana
-- `ja` nosacījumu parsēšana
-- `kam` ciklu parsēšana
-- `atgriez`, `turpini`, `beidz` un `met` parsēšana
-- `mēģini`, `ķer` un `beigās` kļūdu plūsmas parsēšana
-- `atkļūdo` parsēšana
+- darbības ķermeņa statement AST
+- mainīgo deklarācijas
+- `ja` nosacījumi
+- `kam` cikli
+- `atgriez`, `turpini`, `beidz` un `met`
+- `mēģini`, `ķer` un `beigās`
+- pirmais izteiksmju parseris
+- identifikatoru AST
+- teksta un skaitļu literāļu AST
+- masīvu literāļu AST
+- īpašību piekļuves AST
+- funkciju izsaukumu AST
+- `gaidi` izteiksmju AST
+- `jauns` izteiksmju AST
+- bināro operatoru AST ar prioritātēm
+- `nekas`, loģisko un nenoteikto vērtību AST
 
 ## Pašlaik
 
-LatNe spēj nolasīt `.lat` avota failu, tokenizēt to un izveidot strukturētu AST gan programmas augšējam līmenim, gan pirmajai darbības ķermeņa konstrukciju kopai.
+LatNe spēj nolasīt `.lat` avota failu un izveidot strukturētu AST līdz izteiksmju līmenim.
 
-Darbojošā apstrādes ķēde:
+Darbojošā ķēde:
 
-`.lat → tokeni → AST`
+`.lat → tokeni → deklarāciju AST → statement AST → izteiksmju AST`
 
 Pirmais paraugs:
 
 - 196 tokeni
-- 0 nezināmu simbolu
 - 5 augšējā līmeņa AST mezgli
-- darbības ķermenī atpazīts `mēģini` bloks
-- `mēģini` blokā strukturēti mainīgie, cikls, nosacījumi un atgriešana
-- strukturēti `ķer` un `beigās` bloki
-
-Terminoloģijas reģistrā:
-
-- 84 termini
-- 84 `approved`
-- 0 `pending`
-
-Izteiksmes pašlaik tiek saglabātas kā tokenu teksts.
+- strukturēts darbības ķermenis
+- strukturēti nosacījumi un cikli
+- strukturēti funkciju izsaukumi
+- strukturēti `gaidi` un `jauns`
+- strukturēta īpašību piekļuve
+- strukturētas binārās izteiksmes
 
 Piemēram:
 
-`ieraksts . vārds == nekas`
+`ieraksts.vārds == nekas`
+
+tagad kļūst par:
+
+`BināraIzteiksme → Īpašība + Nekas`
 
 un:
 
-`jauns Lietotājs ( ieraksts . vārds , ieraksts . vecums )`
+`gaidi lasiDatus("lietotaji.json")`
+
+kļūst par:
+
+`Gaidīšana → Izsaukums → Identifikators + Teksts`
 
 ## Tuvākais mērķis
 
-Izveidot pirmo izteiksmju parseri.
+Paplašināt AST ārpus pašreizējā parauga.
 
-Tam jāsāk strukturēti atpazīt:
+Nākamie kandidāti:
 
-- identifikatorus
-- literāļus
-- īpašību piekļuvi
-- funkciju izsaukumus
-- `jauns`
-- salīdzināšanas operatorus
-- masīvu literāļus
+- piešķiršanas izteiksmes
+- `while`
+- `switch`
+- pilnāka tipu struktūra
+- klases ķermeņa parsēšana
+- funkciju parametru parsēšana
+- veidņu literāļu interpolācijas
 
-Mērķis:
-
-izteiksmes vairs netiek glabātas tikai kā teksts, bet kļūst par AST mezgliem.
+Pēc tam sākt pirmo koda ģenerēšanas slāni.
 
 ## Vēl nav
 
 - pilna valodas gramatika
 - pilns statement parseris
 - pilns izteiksmju parseris
+- pilns klases parseris
 - stabila AST specifikācija
 - koda ģenerators
 - source maps

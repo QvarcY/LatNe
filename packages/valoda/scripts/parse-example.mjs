@@ -61,7 +61,7 @@ const darbiba = ast.elementi.find(
 )
 
 console.log("")
-console.log("LatNe statement parser")
+console.log("LatNe expression parser")
 console.log(`Tokeni: ${tokeni.length}`)
 console.log(
   `AST augšējie mezgli: ${ast.elementi.length}`
@@ -135,7 +135,7 @@ for (
 }
 
 console.log("")
-console.log("Darbības ķermeņa AST")
+console.log("Darbības un izteiksmju AST")
 
 if (darbiba) {
   console.log(

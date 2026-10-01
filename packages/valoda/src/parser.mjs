@@ -1,3 +1,7 @@
+import {
+  parseIzteiksmi as parseIzteiksmesAst
+} from "./expression-parser.mjs"
+
 function parseraKluda(zina, tokens) {
   if (!tokens) {
     throw new SyntaxError(`${zina} faila beigās`)
@@ -6,12 +10,6 @@ function parseraKluda(zina, tokens) {
   throw new SyntaxError(
     `${zina} rindā ${tokens.rinda}, kolonnā ${tokens.kolonna}: ${tokens.vertiba}`
   )
-}
-
-function izteiksmesTeksts(tokeni) {
-  return tokeni
-    .map(tokens => tokens.vertiba)
-    .join(" ")
 }
 
 function parseKamGalveni(tokeni) {
@@ -31,15 +29,17 @@ function parseKamGalveni(tokeni) {
       variants: "of",
       deklaracija: tokeni[0].avots,
       mainigais: tokeni[1].vertiba,
-      kolekcija: izteiksmesTeksts(
-        tokeni.slice(3)
-      )
+      kolekcija:
+        parseIzteiksmesAst(
+          tokeni.slice(3)
+        )
     }
   }
 
   return {
     variants: "vispārīgs",
-    izteiksme: izteiksmesTeksts(tokeni)
+    izteiksme:
+      parseIzteiksmesAst(tokeni)
   }
 }
 
@@ -248,7 +248,7 @@ export function parsePazinojumus(tokeni) {
           : null,
       vertiba:
         izteiksme.length > 0
-          ? izteiksmesTeksts(izteiksme)
+          ? parseIzteiksmesAst(izteiksme)
           : null,
       rinda: sakums.rinda
     }
@@ -265,7 +265,7 @@ export function parsePazinojumus(tokeni) {
     const mezgls = {
       veids: "Nosacījums",
       nosacijums:
-        izteiksmesTeksts(nosacijums),
+        parseIzteiksmesAst(nosacijums),
       kermenis:
         parsePazinojumus(kermenis),
       citadi: null,
@@ -319,7 +319,7 @@ export function parsePazinojumus(tokeni) {
       veids: "Atgriešana",
       vertiba:
         izteiksme.length > 0
-          ? izteiksmesTeksts(izteiksme)
+          ? parseIzteiksmesAst(izteiksme)
           : null,
       rinda: sakums.rinda
     }
@@ -334,7 +334,7 @@ export function parsePazinojumus(tokeni) {
     return {
       veids: "Metiens",
       vertiba:
-        izteiksmesTeksts(izteiksme),
+        parseIzteiksmesAst(izteiksme),
       rinda: sakums.rinda
     }
   }
@@ -402,7 +402,7 @@ export function parsePazinojumus(tokeni) {
     }
   }
 
-  const parseIzteiksmi = () => {
+  const parseIzteiksmesPazinojumu = () => {
     const sakums = esosais()
 
     const izteiksme =
@@ -417,8 +417,8 @@ export function parsePazinojumus(tokeni) {
 
     return {
       veids: "Izteiksme",
-      vertiba:
-        izteiksmesTeksts(izteiksme),
+      izteiksme:
+        parseIzteiksmesAst(izteiksme),
       rinda: sakums.rinda
     }
   }
@@ -512,7 +512,7 @@ export function parsePazinojumus(tokeni) {
     }
 
     pazinojumi.push(
-      parseIzteiksmi()
+      parseIzteiksmesPazinojumu()
     )
   }
 
