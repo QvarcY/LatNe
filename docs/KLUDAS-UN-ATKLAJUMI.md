@@ -79,3 +79,27 @@ Tāpēc `$Status[0]` nozīmēja pirmo simbolu nevis pirmo statusa rindu.
 **Labojums:** ārējo komandu izvadi kas paredzēta kā saraksts ietīt `@(...)`.
 
 **Mācība:** PowerShell skriptos nevar pieņemt ka vienas un vairāku rindu native command izvadei vienmēr būs vienāda kolekcijas semantika.
+
+---
+
+## 2026-10-01 — K0007 — System.IO relatīvie ceļi var neatbilst PowerShell atrašanās vietai
+
+**Novērojums:** pēc `Set-Location` uz LatNe repozitoriju `System.IO.File.WriteAllText` ar relatīvu ceļu mēģināja rakstīt zem `C:\Users\qvarc`, nevis repozitorijā.
+
+**Labojums:** failu operācijām, kas izmanto `System.IO.File`, veidot absolūtos ceļus ar `Join-Path $Repo ...`.
+
+**Mācība:** PowerShell atrašanās vieta un .NET failu API procesa darba direktorija nav droši uzskatāmas par vienu un to pašu.
+
+---
+
+## 2026-10-01 — K0008 — String.replace ar teksta meklējumu aizstāj tikai pirmo sakritību
+
+**Novērojums:** expression parsera pieslēgšanas patch skripts nomainīja tikai pirmo identisko `izteiksmesTeksts(...)` fragmentu.
+
+Drošības pārbaude apturēja patch pirms bojāta `parser.mjs` saglabāšanas.
+
+**Iemesls:** JavaScript `String.prototype.replace` ar string meklējuma argumentu aizstāj tikai pirmo sakritību.
+
+**Labojums:** vietās, kur paredzamas vairākas identiskas sakritības, izmantot kontrolētu visu sakritību aizstāšanu un pēc patch pārbaudīt, ka vecā konstrukcija vairs nepastāv.
+
+**Mācība:** teksta patch skriptiem jāvalidē ne tikai paredzētā jaunā konstrukcija, bet arī vecās konstrukcijas pilnīga pazušana.

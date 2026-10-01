@@ -2,7 +2,7 @@
 
 **Programmē latviski.**
 
-LatNe ir neatkarīgs, atvērtā pirmkoda projekts ar mērķi izveidot latvisku programmēšanas valodu un pilna cikla tīmekļa izstrādes vidi.
+LatNe ir neatkarīgs, atvērtā pirmkoda projekts ar mērķi izveidot latvisku programmēšanas valodu un vēlāk pilna cikla tīmekļa izstrādes vidi.
 
 - Projekta nosaukums: **LatNe**
 - Avota failu paplašinājums: **`.lat`**
@@ -10,30 +10,40 @@ LatNe ir neatkarīgs, atvērtā pirmkoda projekts ar mērķi izveidot latvisku p
 - Ieņemšanas datums: **2026-09-30**
 - Licence: **MIT**
 
-> Šis repozitorijs sākas ar dokumentāciju. Katrs būtisks lēmums, eksperiments, kļūda, atklājums un panākums tiek saglabāts projekta vēsturē.
+> LatNe dokumentācija ir daļa no projekta arhitektūras. Būtiski lēmumi, eksperimenti, kļūdas, atklājumi un panākumi tiek saglabāti kopā ar kodu.
 
-## Pirmais tehniskais mērķis
+## Pašreizējais mērķis
 
-Panākt, ka komanda:
+Panākt, ka pirmā `.lat` programma iziet pilnu LatNe apstrādes ķēdi un tiek palaista ar LatNe CLI.
+
+Mērķa komanda:
 
 ```text
 latne palaist sveika.lat
 ```
 
-izpilda vienkāršu `.lat` programmu caur īstu LatNe valodas apstrādes ķēdi.
+## Atsākt darbu
+
+Ja pie projekta atgriezies pēc pārtraukuma vai sāc jaunu darba sesiju, vispirms izlasi:
+
+[`docs/ATSAKSANA.md`](docs/ATSAKSANA.md)
+
+Tur ir aktuālais stāvoklis, pārbaudes komandas, zināmie ierobežojumi un viens konkrēts nākamais uzdevums.
 
 ## Dokumentācija
 
-Sāc ar:
-
-- [`docs/00-IENEMSANA.md`](docs/00-IENEMSANA.md) — projekta sākuma ieraksts.
+- [`docs/ATSAKSANA.md`](docs/ATSAKSANA.md) — darba atsākšanas punkts.
+- [`docs/STATUSS.md`](docs/STATUSS.md) — aktuālais tehniskais stāvoklis.
+- [`ROADMAP.md`](ROADMAP.md) — projekta ceļa karte.
+- [`docs/ARHITEKTURA.md`](docs/ARHITEKTURA.md) — pašreizējā valodas arhitektūra.
 - [`docs/HRONIKA.md`](docs/HRONIKA.md) — cilvēkam lasāms projekta stāsts.
 - [`docs/ZURNALS.md`](docs/ZURNALS.md) — detalizēts tehniskais žurnāls.
-- [`docs/DOKUMENTESANAS-NOTEIKUMI.md`](docs/DOKUMENTESANAS-NOTEIKUMI.md) — kā mēs saglabājam projekta vēsturi.
 - [`docs/LEMUMI.md`](docs/LEMUMI.md) — arhitektūras lēmumu indekss.
-- [`docs/KLUDAS-UN-ATKLAJUMI.md`](docs/KLUDAS-UN-ATKLAJUMI.md) — kļūdas, pārsteigumi un mācības.
-- [`docs/STATUSS.md`](docs/STATUSS.md) — aktuālais projekta stāvoklis.
+- [`docs/KLUDAS-UN-ATKLAJUMI.md`](docs/KLUDAS-UN-ATKLAJUMI.md) — kļūdas un mācības.
+- [`docs/00-IENEMSANA.md`](docs/00-IENEMSANA.md) — vēsturiskais projekta sākuma ieraksts.
 
 ## Galvenais princips
 
-LatNe ir neatkarīgs projekts. Ārējās tehnoloģijas drīkst izmantot kā nomaināmus tehniskus būvblokus, bet tās nenosaka LatNe identitāti, sintaksi vai arhitektūru.
+LatNe tiek projektēta kā neatkarīga sistēma.
+
+Ārējas bibliotēkas un runtime komponentes tiek izmantotas kā tehniski būvbloki, nevis kā projekta arhitektūras vai identitātes pamats.

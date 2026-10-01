@@ -1,11 +1,29 @@
 # Izmaiņu žurnāls
 
-Šis fails seko produkta versijām. Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
+Šis fails seko produkta izmaiņu robežām.
+
+Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ## [Unreleased]
 
 ### Added
-- 2026-09-30 — izveidots pirmais 84 JS/TS sintakses kandidātu terminoloģijas inventārs.
-- 2026-09-30 — pievienota terminoloģijas reģistra validācija.
-- 2026-09-30 — izveidota LatNe projekta sākotnējā struktūra.
-- 2026-09-30 — ieviesta dokumentācijas un lēmumu reģistrēšanas sistēma.
+
+#### 2026-10-01
+
+- visi 84 LatNe terminoloģijas kandidāti izskatīti un apstiprināti
+- pievienots pirmais `.lat` sintakses paraugs
+- izveidots pirmais LatNe tokenizeris
+- izveidots deklarāciju parseris un pirmais AST
+- izveidots darbības ķermeņa statement parseris
+- izveidots atsevišķs izteiksmju parseris
+- ieviesti pirmie literāļu, izsaukumu, īpašību, `gaidi`, `jauns`, masīvu un bināro operatoru AST mezgli
+- dokumentēts atsevišķs LatNe iebūvētā API terminoloģijas slānis
+- pievienots darba atsākšanas dokuments
+
+#### 2026-09-30
+
+- izveidots pirmais 84 JS/TS sintakses kandidātu terminoloģijas inventārs
+- pievienota terminoloģijas reģistra validācija
+- izveidota Vārdu kalve
+- izveidota LatNe projekta sākotnējā struktūra
+- ieviesta dokumentācijas un lēmumu reģistrēšanas sistēma

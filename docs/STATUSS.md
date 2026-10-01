@@ -3,99 +3,132 @@
 **Atjaunots:** 2026-10-01
 **Fāze:** 1 — valodas pamats
 
-## Pabeigts
+## Pašreizējā robeža
 
-- projekta bootstrap
-- publisks GitHub repozitorijs
-- 84 terminu kandidātu inventārs
-- terminoloģijas validators
-- Vārdu kalves pārlūkošana un meklēšana
-- termina izmaiņu validācijas API
-- Vārdu kalves rediģēšanas un saglabāšanas plūsma
-- visi 84 terminoloģijas kandidāti izskatīti un apstiprināti
-- pirmais `.lat` sintakses paraugs
-- pirmais LatNe tokenizators
-- Unicode identifikatoru atbalsts
-- LatNe terminu sasaite ar kanonisko termina identitāti
-- pirmais LatNe parseris un AST
-- augšējā līmeņa deklarāciju parsēšana
-- darbības ķermeņa statement AST
-- mainīgo deklarācijas
-- `ja` nosacījumi
-- `kam` cikli
-- `atgriez`, `turpini`, `beidz` un `met`
-- `mēģini`, `ķer` un `beigās`
-- pirmais izteiksmju parseris
-- identifikatoru AST
-- teksta un skaitļu literāļu AST
-- masīvu literāļu AST
-- īpašību piekļuves AST
-- funkciju izsaukumu AST
-- `gaidi` izteiksmju AST
-- `jauns` izteiksmju AST
-- bināro operatoru AST ar prioritātēm
-- `nekas`, loģisko un nenoteikto vērtību AST
-
-## Pašlaik
-
-LatNe spēj nolasīt `.lat` avota failu un izveidot strukturētu AST līdz izteiksmju līmenim.
+LatNe jau spēj nolasīt `.lat` avota failu un izveidot strukturētu AST līdz izteiksmju līmenim.
 
 Darbojošā ķēde:
 
-`.lat → tokeni → deklarāciju AST → statement AST → izteiksmju AST`
+```text
+.lat
+→ tokeni
+→ deklarāciju AST
+→ statement AST
+→ izteiksmju AST
+```
 
-Pirmais paraugs:
+Koda ģenerēšana un programmas izpilde vēl nav ieviesta.
+
+## Pabeigts
+
+Terminoloģija:
+
+- 84 kandidāti izskatīti
+- 84 termini `approved`
+- terminoloģijas validators
+- Vārdu kalves pārlūkošana, rediģēšana un saglabāšana
+
+Valodas kodols:
+
+- pirmais `.lat` sintakses paraugs
+- Unicode tokenizeris
+- kanoniskās termina identitātes saglabāšana tokenos
+- augšējā līmeņa deklarāciju parseris
+- darbības ķermeņa statement parseris
+- atsevišķs izteiksmju parseris
+
+Pašreizējais AST saprot:
+
+- importu
+- saskarsmi
+- uzskaitījumu
+- klasi augšējā līmenī
+- darbību
+- mainīgo deklarācijas
+- `ja`
+- `kam`
+- `atgriez`
+- `turpini`
+- `beidz`
+- `met`
+- `mēģini`
+- `ķer`
+- `beigās`
+- `atkļūdo`
+- identifikatorus
+- tekstu un skaitļus
+- masīvus
+- īpašību piekļuvi
+- izsaukumus
+- `gaidi`
+- `jauns`
+- loģiskās un nulles vērtības
+- unārās izteiksmes
+- pirmās bināro operatoru prioritātes
+
+## Pārbaudītais pirmais paraugs
+
+`examples/pamata-paraugs.lat`
+
+Rezultāts:
 
 - 196 tokeni
+- 0 nezināmu simbolu
 - 5 augšējā līmeņa AST mezgli
 - strukturēts darbības ķermenis
-- strukturēti nosacījumi un cikli
-- strukturēti funkciju izsaukumi
-- strukturēti `gaidi` un `jauns`
-- strukturēta īpašību piekļuve
-- strukturētas binārās izteiksmes
+- strukturētas izteiksmes
 
-Piemēram:
+## Aktuālie ierobežojumi
 
-`ieraksts.vārds == nekas`
+Klases ķermenis vēl nav strukturēts AST.
 
-tagad kļūst par:
+Nav vēl:
 
-`BināraIzteiksme → Īpašība + Nekas`
-
-un:
-
-`gaidi lasiDatus("lietotaji.json")`
-
-kļūst par:
-
-`Gaidīšana → Izsaukums → Identifikators + Teksts`
-
-## Tuvākais mērķis
-
-Paplašināt AST ārpus pašreizējā parauga.
-
-Nākamie kandidāti:
-
-- piešķiršanas izteiksmes
-- `while`
-- `switch`
-- pilnāka tipu struktūra
-- klases ķermeņa parsēšana
-- funkciju parametru parsēšana
-- veidņu literāļu interpolācijas
-
-Pēc tam sākt pirmo koda ģenerēšanas slāni.
-
-## Vēl nav
-
-- pilna valodas gramatika
-- pilns statement parseris
-- pilns izteiksmju parseris
-- pilns klases parseris
-- stabila AST specifikācija
-- koda ģenerators
+- pilna piešķiršanas AST
+- pilnas funkciju parametru struktūras
+- veidņu interpolāciju AST
+- stabilas AST v1 specifikācijas
+- LatNe API semantiskās translācijas
+- koda ģeneratora
 - source maps
-- compilera gala ķēde
-- CLI kompilēšana
-- darbojošās `.lat` programmas izpilde
+- CLI kompilēšanas
+- `.lat` programmas izpildes
+
+Pirmajā paraugā vēl ir zināmi ārējā API nosaukumi:
+
+- `push`
+- `length`
+
+Tie ir reģistrēti kā nākotnes LatNe API slāņa darbs, nevis uzskatīti par gala LatNe sintaksi.
+
+## Nākamais uzdevums
+
+**Klases ķermeņa AST v1.**
+
+Jāstrukturē:
+
+- lauki
+- pieejamības modifikatori
+- `nemaināms`
+- lauku tipi
+- konstruktora deklarācija un parametri
+- getter deklarācija un atgriezes tips
+
+Konstruktora un gettera ķermeņus šajā pirmajā solī vēl drīkst saglabāt kā tokenu kopas.
+
+Precīza darba robeža aprakstīta `docs/ATSAKSANA.md`.
+
+## Ceļš līdz pirmajai palaišanai
+
+Pēc klases AST:
+
+```text
+piešķiršanas AST
+→ klases ķermeņu AST
+→ API terminoloģijas minimums
+→ AST v1
+→ koda ģenerators
+→ JS starprezultāts
+→ CLI
+→ pirmā palaistā .lat programma
+```

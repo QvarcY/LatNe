@@ -56,3 +56,37 @@ Vārdu kalve pirmo reizi tika izmantota nevis testa datiem bet reālam LatNe ter
 JavaScript/TypeScript kandidāts `class` tika apstiprināts ar LatNe variantu `klase`.
 
 Tas kļuva par pirmo kanoniskajā terminoloģijas reģistrā apstiprināto LatNe terminu.
+
+---
+
+## 2026-10-01 — No vārdiem līdz strukturētam AST
+
+Vienas dienas laikā LatNe pārgāja no terminoloģijas projekta uz pirmo reāli strādājošo valodas apstrādes ķēdi.
+
+Visi 84 sintakses kandidāti tika cilvēka vadīti izskatīti un apstiprināti. Pēc tam pirmais `.lat` paraugs tika izlaists caur LatNe tokenizatoru, kas izveidoja 196 tokenus bez neviena nezināma simbola.
+
+Tam sekoja pirmais parseris. Sākumā tas saprata tikai programmas augšējo struktūru — importu, saskarsmi, uzskaitījumu, klasi un darbību. Pēc tam darbības ķermenis tika sadalīts mainīgajos, nosacījumos, ciklos, atgriešanā un kļūdu apstrādē.
+
+Nākamajā solī izteiksmes pārstāja būt tikai tokenu teksts.
+
+`ieraksts.vārds == nekas` kļuva par bināru AST izteiksmi. `gaidi lasiDatus(...)` kļuva par gaidīšanas un izsaukuma mezgliem. `jauns Lietotājs(...)` ieguva konstruktora un argumentu struktūru.
+
+LatNe vēl nevar palaist programmu, bet pirmo reizi tā jau spēj strukturēti saprast ievērojamu daļu sava pirmā avota faila.
+
+---
+
+## 2026-10-01 — Parādās otrais valodas slānis
+
+Pārskatot pirmo strukturēto AST, kļuva redzams, ka latviska sintakse viena pati vēl neveido pilnīgi latvisku programmēšanas pieredzi.
+
+Paraugā palika `push` un `length`.
+
+Tie nav LatNe atslēgvārdi. Tie ir ārējā runtime standarta API nosaukumi.
+
+Tas noveda pie atsevišķa LatNe API terminoloģijas slāņa idejas.
+
+`push` pirmais kandidāts ir `pievieno`, bet `length` — `garums`.
+
+Svarīgākais lēmums bija tos netulkot ar aklu teksta aizvietošanu. LatNe būs jāzina, ar kāda tipa objektu operācija tiek veikta.
+
+Tādējādi projekts ieguva jaunu robežu starp valodas sintaksi un latvisku standarta API.

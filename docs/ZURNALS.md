@@ -793,3 +793,88 @@ Nav vēl ieviestas visas iespējamās piešķiršanas, loģikas un valodas konst
 ### Nākamais solis
 
 Paplašināt parseri ar nākamo sintakses kopu un pēc tam sagatavot pirmo koda ģenerēšanas posmu.
+
+---
+
+## 2026-10-01 — J0014 — Darba atsākšanas checkpoint
+
+**Tips:** dokumentācija / arhitektūra / handoff
+**Statuss:** pabeigts
+
+### Mērķis
+
+Noslēgt pirmo lielo valodas kodola darba sesiju tā, lai nākamo sesiju varētu sākt tikai no repozitorija un dokumentācijas.
+
+### Stāvoklis pirms checkpoint
+
+Aktīvais zars:
+
+`feature/terminology-core-set`
+
+Pirms dokumentācijas checkpoint pēdējais milestones:
+
+`2cf5ff7 docs: pievienots LatNe API terminoloģijas plāns / add API terminology plan`
+
+GitHub `main` tajā brīdī bija sešus commitus aiz aktīvā zara un nebija novirzījies savā virzienā.
+
+### Valodas stāvoklis
+
+- 84 apstiprināti termini
+- 196 tokeni pirmajā `.lat` paraugā
+- 0 nezināmu simbolu
+- augšējā līmeņa AST
+- statement AST
+- izteiksmju AST
+- atsevišķs expression parser modulis
+
+### Dokumentācijas sakārtošana
+
+Pievienots:
+
+`docs/ATSAKSANA.md`
+
+Aktualizēti:
+
+- `README.md`
+- `docs/STATUSS.md`
+- `docs/ARHITEKTURA.md`
+- `docs/HRONIKA.md`
+- `docs/LEMUMI.md`
+- `docs/KLUDAS-UN-ATKLAJUMI.md`
+- `CHANGELOG.md`
+
+Pievienoti ADR:
+
+- 0004 — parseris izmanto kanonisko termina identitāti
+- 0005 — izteiksmju parseris ir atsevišķs modulis
+- 0006 — API terminoloģija ir atsevišķs semantisks slānis
+
+### Nākamais konkrētais uzdevums
+
+Klases ķermeņa AST v1.
+
+Pirmajā iterācijā strukturēt:
+
+- laukus
+- pieejamības modifikatorus
+- `nemaināms`
+- tipus
+- konstruktoru un tā parametrus
+- getteri un atgriezes tipu
+
+Konstruktora un gettera ķermeņus vēl drīkst saglabāt kā tokenu kopas.
+
+### Apzināti atlikts
+
+- pilna assignment AST
+- pilni klases metožu ķermeņi
+- koda ģenerators
+- CLI
+- pilna standarta API translācija
+- plašāks `while` / `switch` pārklājums
+
+### Atsākšana
+
+Jaunā darba sesijā sākt ar:
+
+`docs/ATSAKSANA.md`
