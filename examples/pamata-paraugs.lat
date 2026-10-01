@@ -1,0 +1,62 @@
+importē { lasiDatus, saglabāDatus } no "./dati"
+
+saskarsme LietotājaDati {
+  vārds: teksts
+  vecums: skaitlis
+  aktīvs: loģisks
+}
+
+uzskaitījums Loma {
+  lietotājs,
+  administrators
+}
+
+klase Lietotājs {
+  atvērts nemaināms vārds: teksts
+  atvērts vecums: skaitlis
+  aizsargāts aktīvs: loģisks
+  privāts loma: Loma
+
+  konstruktors(vārds: teksts, vecums: skaitlis) {
+    šis.vārds = vārds
+    šis.vecums = vecums
+    šis.aktīvs = patiess
+    šis.loma = Loma.lietotājs
+  }
+
+  ņem apraksts(): teksts {
+    atgriez `${šis.vārds} (${šis.vecums})`
+  }
+}
+
+eksportē asinhroni darbība ielādēLietotājus(): objekts[] {
+  mēģini {
+    nemainīgs dati = gaidi lasiDatus("lietotaji.json")
+    lai lietotāji: objekts[] = []
+
+    kam (nemainīgs ieraksts ar dati) {
+      ja (ieraksts.vārds == nekas) {
+        turpini
+      }
+
+      lai lietotājs = jauns Lietotājs(
+        ieraksts.vārds,
+        ieraksts.vecums
+      )
+
+      lietotāji.push(lietotājs)
+    }
+
+    ja (lietotāji.length == 0) {
+      atgriez []
+    }
+
+    atgriez lietotāji
+  }
+  ķer (kļūda) {
+    met jauns Kļūda(`Neizdevās ielādēt lietotājus: ${kļūda}`)
+  }
+  beigās {
+    atkļūdo
+  }
+}
