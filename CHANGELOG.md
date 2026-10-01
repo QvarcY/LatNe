@@ -19,6 +19,9 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - ieviesti pirmie literāļu, izsaukumu, īpašību, `gaidi`, `jauns`, masīvu un bināro operatoru AST mezgli
 - dokumentēts atsevišķs LatNe iebūvētā API terminoloģijas slānis
 - pievienots darba atsākšanas dokuments
+- izveidota LatNe GitHub Pages v1 projekta prezentācijas lapa
+- projekta progress lapā tiek ģenerēts no `ROADMAP.md`
+- pievienoti līdzdarbības, GitHub un Buy Me a Coffee atbalsta ceļi
 
 #### 2026-09-30
 

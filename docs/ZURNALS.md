@@ -878,3 +878,86 @@ Konstruktora un gettera ķermeņus vēl drīkst saglabāt kā tokenu kopas.
 Jaunā darba sesijā sākt ar:
 
 `docs/ATSAKSANA.md`
+
+---
+
+## 2026-10-01 — J0015 — LatNe GitHub Pages v1
+
+**Tips:** mājaslapa / publiskā identitāte / dokumentācija
+**Statuss:** pabeigts
+
+### Mērķis
+
+Izveidot publisku LatNe projekta lapu, kas godīgi parāda gan jau strādājošās valodas daļas, gan ieplānoto turpinājumu.
+
+### Izveidots
+
+GitHub Pages v1:
+
+- tumša LatNe projekta prezentācijas lapa
+- reāls `.lat` koda piemērs
+- aktīvas kartītes jau strādājošajām iespējām
+- pelēkas un neaktīvas kartītes nākotnes iespējām
+- valodas apstrādes ķēdes vizualizācija
+- LatNe API nākotnes piemērs
+- projekta principi
+- progress pa ceļa kartes fāzēm
+- līdzdarbības sadaļa
+- GitHub atbalsta ceļš
+- Buy Me a Coffee atbalsta ceļš
+
+### Projekta progress
+
+Lapas progress netiek uzturēts kā manuāli izdomāts procents.
+
+`scripts/generate-site-status.mjs` lasa `ROADMAP.md` un ģenerē:
+
+`site/project-status.json`
+
+Checkpoint brīdī:
+
+- pabeigti uzdevumi: 13
+- definēti uzdevumi: 44
+- attīstības rādītājs: 30%
+
+Šis procents nozīmē pabeigto daļu no pašreiz definētās ceļa kartes, nevis gala produkta absolūtu gatavību.
+
+### Aktīvais un plānotais
+
+Gatavās projekta daļas lapā ir aktīvas un vizuāli izceltas.
+
+Ieplānotās iespējas ir redzamas, bet apzināti pelēkas un neaktīvas.
+
+Tās tiks aktivizētas tikai tad, kad attiecīgā funkcionalitāte reāli eksistēs projektā.
+
+### Kopiena
+
+Pievienots:
+
+`CONTRIBUTING.md`
+
+Lapa aicina:
+
+- apskatīt repozitoriju
+- līdzdarboties
+- iesniegt idejas un kļūdas
+- sekot projektam GitHub
+- finansiāli atbalstīt projekta darbu
+
+GitHub zvaigznes formulējums apzināti veidots neuzbāzīgs un bez pavēles formas.
+
+### Publicēšana
+
+GitHub Pages tiek publicēts no `site/` ar GitHub Actions workflow:
+
+`.github/workflows/pages.yml`
+
+Plānotā publiskā adrese:
+
+`https://qvarcy.github.io/LatNe/`
+
+### Turpmāk
+
+Lapai jāaug kopā ar projektu.
+
+Kad roadmap funkcionalitāte kļūst reāli pieejama, attiecīgā pelēkā sadaļa tiek aktivizēta un saturs atjaunināts.

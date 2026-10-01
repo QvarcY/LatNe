@@ -9,6 +9,7 @@ LatNe ir neatkarīgs, atvērtā pirmkoda projekts ar mērķi izveidot latvisku p
 - CLI nosaukums: **`latne`**
 - Ieņemšanas datums: **2026-09-30**
 - Licence: **MIT**
+- Projekta lapa: **https://qvarcy.github.io/LatNe/**
 
 > LatNe dokumentācija ir daļa no projekta arhitektūras. Būtiski lēmumi, eksperimenti, kļūdas, atklājumi un panākumi tiek saglabāti kopā ar kodu.
 
