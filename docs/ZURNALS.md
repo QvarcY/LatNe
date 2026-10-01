@@ -577,3 +577,116 @@ Paplašināt parseri ar pirmajām iekšējām konstrukcijām:
 - cikliem
 - atgriešanu
 - kļūdu apstrādi
+
+---
+
+## 2026-10-01 — J0012 — Darbības ķermeņa parseris
+
+**Tips:** valoda / parseris / AST
+**Statuss:** pabeigts
+
+### Mērķis
+
+Paplašināt pirmo LatNe parseri tā, lai darbības ķermenis vairs nebūtu tikai tokenu kopa.
+
+### Izveidots
+
+Parseris strukturēti atpazīst:
+
+- `const`, `let` un `var` deklarācijas
+- `if`
+- `for`
+- `return`
+- `continue`
+- `break`
+- `throw`
+- `try`
+- `catch`
+- `finally`
+- `debugger`
+
+LatNe sintaksē tas nozīmē:
+
+- `nemainīgs`
+- `lai`
+- `mainīgs`
+- `ja`
+- `kam`
+- `atgriez`
+- `turpini`
+- `beidz`
+- `met`
+- `mēģini`
+- `ķer`
+- `beigās`
+- `atkļūdo`
+
+### Kam cikls
+
+LatNe konstrukcija:
+
+`kam (nemainīgs ieraksts ar dati)`
+
+tiek atpazīta kā strukturēts cikls:
+
+- deklarācija: `const`
+- mainīgais: `ieraksts`
+- operators: `of`
+- kolekcija: `dati`
+
+### Rezultāts
+
+Darbības `ielādēLietotājus` augšējā līmenī ir viens `Mēģinājums` mezgls.
+
+Tā `mēģini` daļā parseris atpazīst:
+
+- `nemainīgs dati`
+- `lai lietotāji`
+- `KamCikls`
+- nosacījumu cikla iekšpusē
+- `Turpināšana`
+- `lai lietotājs`
+- izteiksmi `lietotāji.push(...)`
+- nosacījumu tukšam rezultātam
+- divus atgriešanas ceļus
+
+`ķer` daļā:
+
+- parametrs `kļūda`
+- `Metiens`
+
+`beigās` daļā:
+
+- `Atkļūdošana`
+
+### Pašreizējais ierobežojums
+
+Izteiksmes vēl netiek parsētas savā AST.
+
+Tās tiek saglabātas kā tokenu secības teksts.
+
+Piemēri:
+
+`ieraksts . vārds == nekas`
+
+`jauns Lietotājs ( ieraksts . vārds , ieraksts . vecums )`
+
+`lietotāji . push ( lietotājs )`
+
+### Rezultāta ķēde
+
+`.lat → tokeni → deklarāciju AST → statement AST`
+
+### Nākamais solis
+
+Izveidot minimālo izteiksmju parseri.
+
+Pirmajā versijā tam jāatpazīst:
+
+- identifikatori
+- literāļi
+- īpašību piekļuve
+- funkciju izsaukumi
+- `jauns`
+- binārie operatori
+- masīvu literāļi

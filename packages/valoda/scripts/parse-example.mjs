@@ -55,14 +55,25 @@ if (nezinamie.length > 0) {
 
 const ast = parse(tokeni)
 
+const darbiba = ast.elementi.find(
+  mezgls =>
+    mezgls.veids === "Darbība"
+)
+
 console.log("")
-console.log("LatNe parser")
+console.log("LatNe statement parser")
 console.log(`Tokeni: ${tokeni.length}`)
 console.log(
-  `AST mezgli: ${ast.elementi.length}`
+  `AST augšējie mezgli: ${ast.elementi.length}`
 )
-console.log("")
 
+if (darbiba) {
+  console.log(
+    `Darbības paziņojumi: ${darbiba.kermenis.length}`
+  )
+}
+
+console.log("")
 console.log("Programma")
 
 for (
@@ -90,8 +101,7 @@ for (
 
   if (mezgls.veids === "Saskarsme") {
     console.log(
-      `${zars} Saskarsme: ` +
-      mezgls.nosaukums
+      `${zars} Saskarsme: ${mezgls.nosaukums}`
     )
 
     continue
@@ -109,43 +119,30 @@ for (
 
   if (mezgls.veids === "Klase") {
     console.log(
-      `${zars} Klase: ` +
-      mezgls.nosaukums
+      `${zars} Klase: ${mezgls.nosaukums}`
     )
 
     continue
   }
 
   if (mezgls.veids === "Darbība") {
-    const pazimes = []
-
-    if (mezgls.eksporteta) {
-      pazimes.push("eksportēta")
-    }
-
-    if (mezgls.asinhrona) {
-      pazimes.push("asinhrona")
-    }
-
-    const pazimjuTeksts =
-      pazimes.length > 0
-        ? ` [${pazimes.join(", ")}]`
-        : ""
-
     console.log(
       `${zars} Darbība: ` +
-      `${mezgls.nosaukums}` +
-      pazimjuTeksts
+      `${mezgls.nosaukums} ` +
+      `[${mezgls.kermenis.length} paziņojumi]`
     )
   }
 }
 
 console.log("")
-console.log("AST")
-console.log(
-  JSON.stringify(
-    ast,
-    null,
-    2
+console.log("Darbības ķermeņa AST")
+
+if (darbiba) {
+  console.log(
+    JSON.stringify(
+      darbiba.kermenis,
+      null,
+      2
+    )
   )
-)
+}

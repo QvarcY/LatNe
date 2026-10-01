@@ -17,15 +17,19 @@
 - pirmais LatNe tokenizators
 - Unicode identifikatoru atbalsts
 - LatNe terminu sasaite ar kanonisko termina identitāti
-- tokenizācijas pārbaude: 196 tokeni, 0 nezināmu simbolu
-- pirmais LatNe parseris
-- pirmais LatNe AST
-- augšējā līmeņa importa, saskarsmes, uzskaitījuma, klases un darbības atpazīšana
-- darbības `eksportēta` un `asinhrona` pazīmju atpazīšana
+- pirmais LatNe parseris un AST
+- augšējā līmeņa deklarāciju parsēšana
+- pirmais darbības ķermeņa statement parseris
+- mainīgo deklarāciju parsēšana
+- `ja` nosacījumu parsēšana
+- `kam` ciklu parsēšana
+- `atgriez`, `turpini`, `beidz` un `met` parsēšana
+- `mēģini`, `ķer` un `beigās` kļūdu plūsmas parsēšana
+- `atkļūdo` parsēšana
 
 ## Pašlaik
 
-LatNe spēj nolasīt `.lat` avota failu, tokenizēt to un izveidot pirmo strukturēto AST.
+LatNe spēj nolasīt `.lat` avota failu, tokenizēt to un izveidot strukturētu AST gan programmas augšējam līmenim, gan pirmajai darbības ķermeņa konstrukciju kopai.
 
 Darbojošā apstrādes ķēde:
 
@@ -36,6 +40,9 @@ Pirmais paraugs:
 - 196 tokeni
 - 0 nezināmu simbolu
 - 5 augšējā līmeņa AST mezgli
+- darbības ķermenī atpazīts `mēģini` bloks
+- `mēģini` blokā strukturēti mainīgie, cikls, nosacījumi un atgriešana
+- strukturēti `ķer` un `beigās` bloki
 
 Terminoloģijas reģistrā:
 
@@ -43,29 +50,39 @@ Terminoloģijas reģistrā:
 - 84 `approved`
 - 0 `pending`
 
-Parseris pašlaik saprot programmas augšējā līmeņa struktūru.
+Izteiksmes pašlaik tiek saglabātas kā tokenu teksts.
 
-Klases un darbību ķermeņi vēl tiek saglabāti kā tokenu kopas un netiek sadalīti dziļākos AST mezglos.
+Piemēram:
+
+`ieraksts . vārds == nekas`
+
+un:
+
+`jauns Lietotājs ( ieraksts . vārds , ieraksts . vecums )`
 
 ## Tuvākais mērķis
 
-Paplašināt parseri ar pirmo iekšējo konstrukciju kopu:
+Izveidot pirmo izteiksmju parseri.
 
-- mainīgo deklarācijas
-- `ja`
-- `kam`
-- `atgriez`
-- `mēģini`
-- `ķer`
-- `beigās`
+Tam jāsāk strukturēti atpazīt:
 
-Pēc tam sākt izteiksmju parseri.
+- identifikatorus
+- literāļus
+- īpašību piekļuvi
+- funkciju izsaukumus
+- `jauns`
+- salīdzināšanas operatorus
+- masīvu literāļus
+
+Mērķis:
+
+izteiksmes vairs netiek glabātas tikai kā teksts, bet kļūst par AST mezgliem.
 
 ## Vēl nav
 
 - pilna valodas gramatika
 - pilns statement parseris
-- izteiksmju parseris
+- pilns izteiksmju parseris
 - stabila AST specifikācija
 - koda ģenerators
 - source maps
