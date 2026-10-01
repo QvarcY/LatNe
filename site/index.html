@@ -39,13 +39,17 @@
       <nav class="nav" aria-label="Galvenā navigācija">
         <a href="#darbojas">Kas darbojas</a>
         <a href="#attistiba">Attīstība</a>
+        <a href="#lidzdarboties">Līdzdarboties</a>
         <a href="#nakotne">Nākotne</a>
+        <a href="#atbalsti">Atbalsti</a>
         <a
           class="nav-github"
           href="https://github.com/QvarcY/LatNe"
           target="_blank"
           rel="noreferrer"
+          aria-label="Atbalsti LatNe ar GitHub zvaigzni"
         >
+          <span aria-hidden="true">★</span>
           GitHub
         </a>
       </nav>
@@ -72,30 +76,74 @@
             programmēšanas pieredzes pamats.
           </p>
 
-          <div class="hero-actions">
+          <div class="hero-actions hero-actions-primary">
             <a
               class="button button-primary"
               href="https://github.com/QvarcY/LatNe"
               target="_blank"
               rel="noreferrer"
             >
-              Skatīt GitHub
-              <span aria-hidden="true">→</span>
+              <span aria-hidden="true">★</span>
+              Iedod GitHub zvaigzni
             </a>
 
             <a
               class="button button-secondary"
+              href="#lidzdarboties"
+            >
+              Līdzdarboties
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a
+              class="button button-coffee"
+              href="https://buymeacoffee.com/craftin"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span aria-hidden="true">☕</span>
+              Buy Me a Coffee
+            </a>
+          </div>
+
+          <div class="hero-quick-links">
+            <a
+              href="https://github.com/QvarcY/LatNe"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Skatīt kodu
+            </a>
+
+            <span>·</span>
+
+            <a
               href="https://github.com/QvarcY/LatNe/blob/main/docs/ATSAKSANA.md"
               target="_blank"
               rel="noreferrer"
             >
-              Projekta dokumentācija
+              Dokumentācija
+            </a>
+
+            <span>·</span>
+
+            <a
+              href="https://github.com/QvarcY/LatNe/blob/main/ROADMAP.md"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ceļa karte
             </a>
           </div>
 
           <div class="hero-note">
             <span class="status-dot status-dot-live"></span>
             Šobrīd tiek būvēts valodas kodols
+            <span class="hero-star-count" data-star-wrapper hidden>
+              ·
+              <strong data-star-count></strong>
+              GitHub ★
+            </span>
           </div>
         </div>
 
@@ -141,6 +189,56 @@
             <span class="code-status code-status-future">
               <b>○</b> Izpilde top
             </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="action-strip-section">
+      <div class="shell">
+        <div class="action-strip reveal">
+          <div class="action-strip-intro">
+            <span class="section-kicker">Palīdzi LatNe augt</span>
+            <strong>Projektam vari palīdzēt arī bez nevienas koda rindas.</strong>
+          </div>
+
+          <div class="action-strip-links">
+            <a
+              class="action-chip"
+              href="https://github.com/QvarcY/LatNe"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="action-chip-icon" aria-hidden="true">★</span>
+              <span>
+                <b>Iedod zvaigzni</b>
+                <small>10 sekundes</small>
+              </span>
+            </a>
+
+            <a
+              class="action-chip"
+              href="#lidzdarboties"
+            >
+              <span class="action-chip-icon" aria-hidden="true">↗</span>
+              <span>
+                <b>Līdzdarbojies</b>
+                <small>Kods, idejas, valoda</small>
+              </span>
+            </a>
+
+            <a
+              class="action-chip"
+              href="https://buymeacoffee.com/craftin"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="action-chip-icon" aria-hidden="true">☕</span>
+              <span>
+                <b>Atbalsti projektu</b>
+                <small>Buy Me a Coffee</small>
+              </span>
+            </a>
           </div>
         </div>
       </div>
@@ -383,6 +481,93 @@
               Lasīt dokumentāciju →
             </a>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contribute-section" id="lidzdarboties">
+      <div class="shell">
+        <div class="contribute-panel reveal">
+          <div class="contribute-copy">
+            <span class="section-kicker">Atvērts projekts</span>
+
+            <h2>
+              LatNe vari palīdzēt
+              būvēt arī tu.
+            </h2>
+
+            <p>
+              Te nav jāgaida, līdz valoda būs gatava. Noder kods,
+              testēšana, dokumentācija, terminoloģijas argumenti,
+              piemēri un labi formulētas idejas.
+            </p>
+
+            <p class="contribute-note">
+              Īpaši vērtīgi ir priekšlikumi, kas saglabā LatNe
+              latvisku, dabisku un tehniski konsekventu.
+            </p>
+          </div>
+
+          <div class="contribute-actions">
+            <a
+              class="contribute-card"
+              href="https://github.com/QvarcY/LatNe/blob/main/CONTRIBUTING.md"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="contribute-icon" aria-hidden="true">⌘</span>
+              <span>
+                <b>Sāc līdzdarboties</b>
+                <small>Darba plūsma un principi</small>
+              </span>
+              <span class="contribute-arrow" aria-hidden="true">→</span>
+            </a>
+
+            <a
+              class="contribute-card"
+              href="https://github.com/QvarcY/LatNe/issues"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="contribute-icon" aria-hidden="true">?</span>
+              <span>
+                <b>Piedāvā ideju</b>
+                <small>Issue, kļūda vai priekšlikums</small>
+              </span>
+              <span class="contribute-arrow" aria-hidden="true">→</span>
+            </a>
+
+            <a
+              class="contribute-card"
+              href="https://github.com/QvarcY/LatNe/blob/main/ROADMAP.md"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="contribute-icon" aria-hidden="true">◎</span>
+              <span>
+                <b>Atrodi nākamo darbu</b>
+                <small>Skaties aktuālo ceļa karti</small>
+              </span>
+              <span class="contribute-arrow" aria-hidden="true">→</span>
+            </a>
+
+            <a
+              class="contribute-card contribute-card-star"
+              href="https://github.com/QvarcY/LatNe"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="contribute-icon" aria-hidden="true">★</span>
+              <span>
+                <b>Atbalsti ar zvaigzni</b>
+                <small>
+                  GitHub
+                  <span data-star-inline></span>
+                </small>
+              </span>
+              <span class="contribute-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -774,41 +959,66 @@ ja (lietotāji.<b>garums</b> == 0) {
       </div>
     </section>
 
-    <section class="section final-cta">
+    <section class="section final-cta" id="atbalsti">
       <div class="shell">
         <div class="cta-panel reveal">
           <div>
             <span class="section-kicker">LatNe aug publiski</span>
 
             <h2>
-              Redzi, kā valoda
-              top no pirmās dienas.
+              Pievienojies,
+              kamēr viss vēl top.
             </h2>
 
             <p>
-              Avota kods, ceļa karte, lēmumi un projekta vēsture ir
-              pieejami GitHub.
+              Seko attīstībai, piedalies lēmumos, iedod GitHub zvaigzni
+              vai palīdz projektam turpināt augt ar finansiālu atbalstu.
             </p>
+
+            <div class="cta-star-note">
+              <span aria-hidden="true">★</span>
+              Viena GitHub zvaigzne maksā neko, bet palīdz projektam
+              kļūt pamanāmākam.
+            </div>
           </div>
 
-          <div class="cta-actions">
+          <div class="cta-actions cta-actions-expanded">
             <a
               class="button button-primary"
               href="https://github.com/QvarcY/LatNe"
               target="_blank"
               rel="noreferrer"
             >
-              Atvērt repozitoriju
-              <span aria-hidden="true">→</span>
+              <span aria-hidden="true">★</span>
+              Iedod zvaigzni
             </a>
 
             <a
               class="button button-secondary"
-              href="https://github.com/QvarcY/LatNe/blob/main/ROADMAP.md"
+              href="https://github.com/QvarcY/LatNe/blob/main/CONTRIBUTING.md"
               target="_blank"
               rel="noreferrer"
             >
-              Skatīt ceļa karti
+              Līdzdarboties
+            </a>
+
+            <a
+              class="button button-coffee"
+              href="https://buymeacoffee.com/craftin"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span aria-hidden="true">☕</span>
+              Buy Me a Coffee
+            </a>
+
+            <a
+              class="button button-quiet"
+              href="https://github.com/QvarcY/LatNe/issues"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Piedāvāt ideju
             </a>
           </div>
         </div>
@@ -824,8 +1034,33 @@ ja (lietotāji.<b>garums</b> == 0) {
       </div>
 
       <div class="footer-meta">
+        <a
+          href="https://github.com/QvarcY/LatNe"
+          target="_blank"
+          rel="noreferrer"
+        >
+          ★ GitHub
+        </a>
+
+        <a
+          href="https://github.com/QvarcY/LatNe/blob/main/CONTRIBUTING.md"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Līdzdarboties
+        </a>
+
+        <a
+          href="https://buymeacoffee.com/craftin"
+          target="_blank"
+          rel="noreferrer"
+        >
+          ☕ Atbalstīt
+        </a>
+
         <span>MIT</span>
         <span>Ieņemta 30.09.2026</span>
+
         <a
           href="https://github.com/QvarcY"
           target="_blank"

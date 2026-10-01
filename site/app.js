@@ -122,3 +122,41 @@ fetch("./project-status.json", { cache: "no-store" })
   .catch(() => {
     applyFallbackProgress();
   });
+const formatCompactNumber = (value) => {
+  return new Intl.NumberFormat("lv-LV", {
+    notation: "compact",
+    maximumFractionDigits: 1
+  }).format(value);
+};
+
+fetch("https://api.github.com/repos/QvarcY/LatNe", {
+  headers: {
+    Accept: "application/vnd.github+json"
+  }
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`GitHub request failed: ${response.status}`);
+    }
+
+    return response.json();
+  })
+  .then((repository) => {
+    const stars = Number(repository.stargazers_count ?? 0);
+    const formatted = formatCompactNumber(stars);
+
+    for (const element of document.querySelectorAll("[data-star-count]")) {
+      element.textContent = formatted;
+    }
+
+    for (const element of document.querySelectorAll("[data-star-inline]")) {
+      element.textContent = `· ${formatted} ★`;
+    }
+
+    for (const element of document.querySelectorAll("[data-star-wrapper]")) {
+      element.hidden = false;
+    }
+  })
+  .catch(() => {
+    // zvaigžņu skaits nav kritisks lapas darbībai
+  });
