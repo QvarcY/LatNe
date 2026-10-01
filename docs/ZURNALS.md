@@ -412,3 +412,67 @@ Terminoloģijas reģistrā:
 - 83 `pending`
 
 Vārdu kalve no pārlūkošanas rīka kļuva par praktisku terminoloģijas darba vidi.
+
+---
+
+## 2026-10-01 — J0010 — Pirmais LatNe tokenizators
+
+**Tips:** valoda / tokenizeris
+**Statuss:** pabeigts
+
+### Mērķis
+
+Izveidot pirmo LatNe avota koda apstrādes posmu.
+
+### Sākuma stāvoklis
+
+Terminoloģijas reģistrā bija 84 sintakses kandidāti.
+
+Pēc cilvēka vadītas pārskatīšanas visi 84 termini tika apstiprināti.
+
+### Izveidots
+
+- `examples/pamata-paraugs.lat`
+- `packages/valoda/src/tokenizer.mjs`
+- `packages/valoda/scripts/tokenize-example.mjs`
+- Unicode identifikatoru atbalsts
+- teksta, skaitļu, operatoru un pieturzīmju tokeni
+- komentāru izlaišana
+- LatNe terminu atpazīšana no kanoniskā terminoloģijas reģistra
+- tokenā saglabāta termina kanoniskā identitāte
+
+### Pārbaude
+
+Pirmais `.lat` paraugs:
+
+- apstiprināti termini: 84
+- tokeni: 196
+- nezināmi simboli: 0
+
+Piemēri:
+
+- `importē` → `import`
+- `no` → `from`
+- `saskarsme` → `interface`
+- `uzskaitījums` → `enum`
+- `klase` → `class`
+
+### Rezultāts
+
+LatNe pirmo reizi spēj apstrādāt savu `.lat` avota failu.
+
+Darbojošā ķēde:
+
+`.lat → tokeni`
+
+Commit:
+
+`ba53d29 feat(valoda): pirmais LatNe tokenizators / first LatNe tokenizer`
+
+### Nākamais solis
+
+Izveidot minimālo parseri un pirmo LatNe AST.
+
+Mērķa ķēde:
+
+`.lat → tokeni → AST`

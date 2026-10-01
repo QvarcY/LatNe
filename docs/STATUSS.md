@@ -1,6 +1,6 @@
 # LatNe statuss
 
-**Atjaunots:** 2026-09-30
+**Atjaunots:** 2026-10-01
 **Fāze:** 1 — valodas pamats
 
 ## Pabeigts
@@ -11,32 +11,43 @@
 - terminoloģijas validators
 - Vārdu kalves pārlūkošana un meklēšana
 - termina izmaiņu validācijas API
-- Vārdu kalves rediģēšanas UI
-- termina saglabāšana kanoniskajā reģistrā
-- pirmais apstiprinātais termins: `class` → `klase`
+- Vārdu kalves rediģēšanas un saglabāšanas plūsma
+- visi 84 terminoloģijas kandidāti izskatīti un apstiprināti
+- pirmais `.lat` sintakses paraugs
+- pirmais LatNe tokenizators
+- Unicode identifikatoru atbalsts
+- LatNe terminu sasaite ar kanonisko termina identitāti
+- tokenizācijas pārbaude: 196 tokeni, 0 nezināmu simbolu
 
 ## Pašlaik
 
-Vārdu kalve ir izmantojama reālam terminoloģijas darbam.
+LatNe spēj nolasīt pirmo `.lat` avota failu un pārvērst to strukturētā tokenu plūsmā.
+
+Apstrādes ķēde:
+
+`.lat → tokeni`
 
 Terminoloģijas reģistrā:
 
 - 84 termini
-- 1 `approved`
-- 83 `pending`
+- 84 `approved`
+- 0 `pending`
 
 ## Tuvākais mērķis
 
-Izskatīt atlikušos terminoloģijas kandidātus un izveidot pirmo minimālo apstiprinātās sintakses kopu.
+Izveidot pirmo minimālo parseri un AST.
+
+Mērķa ķēde:
+
+`.lat → tokeni → AST`
 
 ## Vēl nav
 
-- pilnas apstiprinātās terminoloģijas
-- noraidīto variantu pilnas plūsmas
-- AI ieteikumu
-- minimālās sintakses kopas
-- tokenizera
-- parsera
-- AST
-- compilera
-- darbojošās `.lat` programmas
+- pilna valodas gramatika
+- pilns parseris
+- stabila AST specifikācija
+- koda ģenerators
+- source maps
+- compilera gala ķēde
+- CLI kompilēšana
+- darbojošās `.lat` programmas izpilde
