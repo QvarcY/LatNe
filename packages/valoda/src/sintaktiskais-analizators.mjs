@@ -2,6 +2,10 @@ import {
   analizeIzteiksmi as analizeIzteiksmesAst
 } from "./izteiksmju-sintaktiskais-analizators.mjs"
 
+import {
+  analizeKlasesKermeni
+} from "./klases-sintaktiskais-analizators.mjs"
+
 function sintaksesKluda(zina, leksiskaisElements) {
   if (!leksiskaisElements) {
     throw new SyntaxError(`${zina} faila beigās`)
@@ -722,12 +726,24 @@ export function analizeSintaksi(leksiskieElementi) {
     const saturs =
       nolasitGrupu("{", "}")
 
+    const klasesKermenis =
+      analizeKlasesKermeni(saturs)
+
     return {
       veids: "Klase",
       nosaukums: nosaukums.vertiba,
       eksporteta:
         modifikatori.includes("export"),
-      kermenaLeksiskieElementi: saturs.length,
+      kermenaLeksiskoElementuSkaits:
+        saturs.length,
+      kermenis:
+        klasesKermenis.kermenis,
+      lauki:
+        klasesKermenis.lauki,
+      konstruktors:
+        klasesKermenis.konstruktors,
+      getteri:
+        klasesKermenis.getteri,
       rinda: sakums.rinda
     }
   }
