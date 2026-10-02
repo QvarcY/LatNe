@@ -1659,7 +1659,9 @@ code {
 
 .audience-card {
   position: relative;
+  display: flex;
   min-height: 330px;
+  flex-direction: column;
   padding: 30px;
   border: 1px solid var(--line);
   border-radius: var(--radius-medium);
@@ -1720,19 +1722,17 @@ code {
 }
 
 .audience-card small {
-  position: absolute;
-  right: 30px;
-  bottom: 28px;
-  left: 30px;
+  display: block;
+  margin-top: auto;
+  padding-top: 28px;
   color: var(--text-muted);
   font-size: 0.72rem;
 }
 
 .audience-link {
-  position: absolute;
-  right: 30px;
-  bottom: 28px;
-  left: 30px;
+  display: block;
+  margin-top: auto;
+  padding-top: 28px;
   color: var(--accent-bright);
   font-size: 0.76rem;
   font-weight: 700;
@@ -1776,8 +1776,6 @@ code {
 
   .audience-card small,
   .audience-link {
-    right: 24px;
-    bottom: 23px;
-    left: 24px;
+    padding-top: 24px;
   }
 }

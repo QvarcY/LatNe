@@ -1,4 +1,4 @@
-# LatNe ieņemšana
+# LatNe projekta sākums
 
 **Datums:** 30.09.2026
 **Statuss:** vēsturisks sākuma ieraksts
@@ -7,7 +7,7 @@
 
 LatNe ideja: izveidot neatkarīgu latvisku programmēšanas valodu un vēlāk pilna cikla tīmekļa izstrādes vidi, kur latviešu valoda nav dekorācija vai dokumentācijas tulkojums, bet gan pašas programmēšanas pieredzes pamats.
 
-Šī diena projektā tiek saukta par **LatNe ieņemšanas datumu**.
+Šī diena projektā tiek uzskatīta par **LatNe projekta sākuma datumu**.
 
 Par **LatNe dzimšanas dienu** tiks uzskatīts datums, kad pirmā `.lat` programma pirmo reizi veiksmīgi izies caur LatNe paša valodas apstrādes ķēdi un tiks palaista ar LatNe CLI.
 

@@ -33,7 +33,7 @@ $Required = @(
     "README.md",
     "MANIFESTS.md",
     "ROADMAP.md",
-    "docs\00-IENEMSANA.md",
+    "docs\00-PROJEKTA-SAKUMS.md",
     "docs\HRONIKA.md",
     "docs\ZURNALS.md",
     "packages\valoda\data\termini.json"

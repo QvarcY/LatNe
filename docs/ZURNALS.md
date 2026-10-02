@@ -240,7 +240,7 @@ Izveidots publisks repozitorijs:
 
 `main` pirmo reizi pushots uz GitHub.
 
-Pirmajā push tika saglabāta visa LatNe vēsture no ieņemšanas commit līdz darbojošam Vārdu kalves karkasam.
+Pirmajā push tika saglabāta visa LatNe vēsture no projekta sākuma commit līdz darbojošam Vārdu kalves karkasam.
 
 ### Rezultāts
 

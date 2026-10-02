@@ -340,7 +340,7 @@ Ja LatNe šķiet interesants, projektu vari atzīmēt GitHub un sekot tā attīs
 
 Finansiāli projekta izstrādes laiku iespējams atbalstīt arī šeit:
 
-[Buy Me a Coffee](https://buymeacoffee.com/craftin)
+[Atbalstīt projektu](https://buymeacoffee.com/craftin)
 
 ---
 
@@ -352,7 +352,7 @@ Finansiāli projekta izstrādes laiku iespējams atbalstīt arī šeit:
 | Avota faili | **`.lat`** |
 | CLI | **`latne`** |
 | Licence | **MIT** |
-| Ieņemšanas datums | **2026-09-30** |
+| Projekts uzsākts | **2026-09-30** |
 | Projekta lapa | **https://qvarcy.github.io/LatNe/** |
 | GitHub | **QvarcY/LatNe** |
 

@@ -6,7 +6,7 @@ Te nekrājam katru komandrindas izvadi. Te saglabājam projekta nozīmīgos pagr
 
 ---
 
-## 2026-09-30 — Ieņemšana
+## 2026-09-30 — Projekta sākums
 
 LatNe pārstāja būt tikai sarunas ideja un kļuva par projektu.
 
@@ -36,7 +36,7 @@ Katram vārdam un katrai konstrukcijai būs jāiztur atsevišķs lēmums.
 
 ## 2026-09-30 — LatNe nonāk GitHub
 
-LatNe ieņemšanas dienas vakarā projekts pirmo reizi tika publicēts GitHub.
+LatNe projekta sākuma dienas vakarā projekts pirmo reizi tika publicēts GitHub.
 
 Repozitorijs netika publicēts tukšs.
 
