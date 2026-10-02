@@ -1,7 +1,8 @@
 # LatNe statuss
 
-**Atjaunots:** 2026-10-01
-**Fāze:** 1 — valodas pamats
+**Atjaunots:** 2026-10-02
+**Pašreizējais valodas stāvoklis:** strukturēts AST līdz izteiksmju līmenim
+**Nākamā engineering fāze:** 0A — reproducējama vide un kvalitātes sliedes
 
 ## Pašreizējā robeža
 
@@ -36,6 +37,15 @@ Valodas kodols:
 - augšējā līmeņa deklarāciju parseris
 - darbības ķermeņa statement parseris
 - atsevišķs izteiksmju parseris
+
+Publiskā infrastruktūra:
+
+- GitHub repozitorijs
+- GitHub Pages v1
+- publiskais ROADMAP
+- dokumentācijas sistēma
+- ADR sistēma
+- contributor ceļš
 
 Pašreizējais AST saprot:
 
@@ -87,6 +97,7 @@ Nav vēl:
 - pilna piešķiršanas AST
 - pilnas funkciju parametru struktūras
 - veidņu interpolāciju AST
+- source span kontrakta AST līmenī
 - stabilas AST v1 specifikācijas
 - LatNe API semantiskās translācijas
 - koda ģeneratora
@@ -99,9 +110,22 @@ Pirmajā paraugā vēl ir zināmi ārējā API nosaukumi:
 - `push`
 - `length`
 
-Tie ir reģistrēti kā nākotnes LatNe API slāņa darbs, nevis uzskatīti par gala LatNe sintaksi.
+Tie ir reģistrēti kā nākotnes LatNe API slāņa darbs, nevis gala LatNe API.
 
-## Nākamais uzdevums
+## Kvalitātes robeža
+
+Pirms nākamās lielākās parsera paplašināšanas jāizveido reproducējamas vides un CI minimums.
+
+Tas ietver:
+
+- fiksētu Node.js runtime prasību
+- clean install pārbaudi
+- GitHub Actions CI
+- esošo terminoloģijas, tokenizera un parsera pārbaudi CI
+- Vārdu kalves check/build CI
+- pirmo regresijas fixture sistēmu
+
+## Nākamais valodas uzdevums pēc kvalitātes sliedēm
 
 **Klases ķermeņa AST v1.**
 
@@ -114,21 +138,30 @@ Jāstrukturē:
 - konstruktora deklarācija un parametri
 - getter deklarācija un atgriezes tips
 
-Konstruktora un gettera ķermeņus šajā pirmajā solī vēl drīkst saglabāt kā tokenu kopas.
-
-Precīza darba robeža aprakstīta `docs/ATSAKSANA.md`.
+Konstruktora un gettera ķermeņus pirmajā iterācijā vēl drīkst saglabāt kā tokenu kopas.
 
 ## Ceļš līdz pirmajai palaišanai
 
-Pēc klases AST:
-
 ```text
-piešķiršanas AST
-→ klases ķermeņu AST
-→ API terminoloģijas minimums
+kvalitātes sliedes
+→ klases AST
+→ piešķiršanas AST
+→ pilnāki ķermeņi
+→ source spans
 → AST v1
+→ API minimums
+→ semantiskās transformācijas
 → koda ģenerators
 → JS starprezultāts
+→ pirmā .lat izpilde
 → CLI
-→ pirmā palaistā .lat programma
+→ latne palaist
 ```
+
+## Publiskais progress
+
+Paplašinot ROADMAP no sākotnējā prototipa plāna līdz pilnam produkta ceļam, publiskā progresa procents samazinās.
+
+Tas nenozīmē zaudētu progresu.
+
+Tas nozīmē, ka projekta pabeigšanas robeža tagad ir aprakstīta precīzāk.

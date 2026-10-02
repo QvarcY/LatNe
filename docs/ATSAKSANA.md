@@ -1,8 +1,9 @@
 # LatNe darba atsākšana
 
-**Atjaunots:** 2026-10-01
+**Atjaunots:** 2026-10-02
 **Stabilais zars:** `main`
-**Fāze:** 1 — valodas pamats
+**Aktīvais plānošanas zars:** `docs/roadmap-v2`
+**Nākamā engineering fāze:** 0A — reproducējama vide un kvalitātes sliedes
 
 Šis fails ir pirmais lasāmais dokuments, sākot jaunu LatNe darba sesiju.
 
@@ -42,11 +43,15 @@ strukturēts AST
 Pašlaik vēl nav:
 
 ```text
-AST
+stabils AST v1
+ ↓
+semantiskās transformācijas
  ↓
 koda ģenerators
  ↓
-izpildāms starprezultāts
+JavaScript starprezultāts
+ ↓
+izpilde
  ↓
 CLI
 ```
@@ -78,6 +83,10 @@ Pārbaudes skripti:
 `packages/valoda/scripts/tokenize-example.mjs`
 
 `packages/valoda/scripts/parse-example.mjs`
+
+Publiskā ceļa karte:
+
+`ROADMAP.md`
 
 ## Pašreizējais pārbaudītais stāvoklis
 
@@ -114,19 +123,39 @@ Parseris strukturēti saprot:
 - unārās izteiksmes
 - binārās izteiksmes ar pirmajām operatoru prioritātēm
 
-## Zināmais lielais caurums
+## Kāpēc nākamais darbs vairs nav uzreiz Class AST
 
-Klases `Lietotājs` ķermenis vēl netiek strukturēti parsēts.
+Valodas kodols ir izaudzis pietiekami tālu, lai turpmākas parsera un codegen izmaiņas bez automatizētām kvalitātes sliedēm palielinātu regresiju risku.
 
-Šobrīd klase tiek atpazīta, bet tās iekšējais saturs joprojām tiek saglabāts galvenokārt kā tokenu kopa.
+Tāpēc pirms nākamās būtiskās parsera paplašināšanas tiek izpildīta `ROADMAP.md` fāze:
 
-Tas ir nākamais darbs.
+**0A — reproducējama vide un kvalitātes sliedes.**
 
-## Nākamais konkrētais uzdevums
+Tas nav valodas attīstības apturēšana.
+
+Tas ir īss infrastruktūras posms, lai nākamos valodas soļus varētu veikt droši.
+
+## Nākamais engineering bloks
+
+Secība:
+
+1. fiksēt atbalstīto Node.js runtime
+2. pārbaudīt clean install ar lockfile
+3. izveidot `ci.yml`
+4. CI pieslēgt esošās terminoloģijas, tokenizera un parsera pārbaudes
+5. CI pieslēgt Vārdu kalves check/build
+6. izveidot pirmo regresijas fixture sistēmu
+7. pievienot pirmos valid, invalid, edge-case un Unicode paraugus
+
+Pēc šī bloka atgriezties pie:
 
 **Klases ķermeņa AST v1.**
 
-Šajā vienā solī jāatpazīst:
+## Nākamā valodas robeža
+
+Klases `Lietotājs` ķermenis vēl netiek strukturēti parsēts.
+
+Pirmajā klases AST iterācijā jāatpazīst:
 
 - klases lauki
 - `atvērts`, `aizsargāts`, `privāts`
@@ -137,15 +166,7 @@ Tas ir nākamais darbs.
 - getter deklarācija `ņem`
 - getter atgriezes tips
 
-Pirmajā klases parsera versijā konstruktora un gettera ķermeņus vēl drīkst saglabāt kā tokenu kopas.
-
-Šajā solī vēl nevajag:
-
-- pilnu piešķiršanas izteiksmju parseri
-- pilnībā parsēt konstruktora ķermeni
-- sākt koda ģeneratoru
-- sākt CLI
-- risināt visu JavaScript standarta API
+Konstruktora un gettera ķermeņus pirmajā iterācijā vēl drīkst saglabāt kā tokenu kopas.
 
 ### Gatavības kritērijs
 
@@ -155,21 +176,35 @@ Tam jāatspoguļo četri lauki, konstruktors un getteris.
 
 Esošajam `pamata-paraugs.lat` pēc izmaiņas joprojām jāparsējas veiksmīgi.
 
-## Pēc klases AST v1
+## Ceļš līdz pirmajai izpildei
 
-Plānotā aktīvā secība līdz pirmajai programmas palaišanai:
-
-1. piešķiršanas AST un klases metožu ķermeņu parsēšana
-2. pilnāka funkciju parametru struktūra
-3. nepieciešamās veidņu interpolācijas
-4. LatNe iebūvētā API terminoloģijas pirmais slānis
-5. `push` / `length` svešķermeņu aizstāšana ar semantiski korektu LatNe API
-6. pirmās AST specifikācijas stabilizēšana
-7. pirmais JS starprezultāts
-8. pirmā `.lat` programmas palaišana
-9. CLI ceļš līdz `latne palaist`
-
-`while`, `switch` un plašāks valodas konstrukciju pārklājums paliek ceļa kartē, bet tiem nav jābloķē pirmā pilnā LatNe programmas ķēde.
+```text
+kvalitātes sliedes
+↓
+klases AST
+↓
+piešķiršanas AST
+↓
+pilnāki ķermeņi un parametri
+↓
+template interpolation
+↓
+source spans
+↓
+AST v1 kontrakts
+↓
+LatNe API minimums
+↓
+semantiskās transformācijas
+↓
+codegen
+↓
+JavaScript starprezultāts
+↓
+pirmā .lat izpilde
+↓
+latne palaist
+```
 
 ## API terminoloģijas piezīme
 
@@ -189,11 +224,11 @@ Array.push   → pievieno
 Array.length → garums
 ```
 
-Tos nedrīkst realizēt ar globālu teksta aizvietošanu.
+Tie vēl nav jāuzskata par kanoniski apstiprinātu publisko API.
 
-API tulkojumam jābūt sasaistītam ar tipu vai semantisko operāciju.
+API translāciju nedrīkst realizēt ar globālu teksta aizvietošanu.
 
-Skatīt `ROADMAP.md` fāzi **1A — LatNe iebūvētais API slānis**.
+Tai jābūt sasaistītai ar tipu un semantisko operāciju.
 
 ## Ātrā pārbaude pirms darba
 
@@ -203,13 +238,13 @@ No repozitorija saknes:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-terminology.ps1
 node .\packages\valoda\scripts\tokenize-example.mjs
 node .\packages\valoda\scripts\parse-example.mjs
+pnpm --filter @latne/vardu-kalve check
+pnpm --filter @latne/vardu-kalve build
 git status --short
 ```
-
-Ja šīs pārbaudes ir veiksmīgas un darba koks ir tīrs, var sākt nākamo uzdevumu.
 
 ## Jaunas sarunas sākuma frāze
 
 Pietiek ar:
 
-> Apskati QvarcY/LatNe repozitorija `main` zaru. Izlasi README un `docs/ATSAKSANA.md`, pēc tam aktuālo statusu, ceļa karti un arhitektūru. Turpini ar dokumentācijā norādīto nākamo uzdevumu.
+> Apskati QvarcY/LatNe repozitorija `main` zaru. Izlasi README un `docs/ATSAKSANA.md`, pēc tam aktuālo statusu, ceļa karti un arhitektūru. Turpini ar dokumentācijā norādīto nākamo engineering uzdevumu.

@@ -1,6 +1,6 @@
 # LatNe arhitektūra
 
-**Atjaunots:** 2026-10-01
+**Atjaunots:** 2026-10-02
 
 LatNe tiek projektēta kā neatkarīga sistēma.
 
@@ -26,19 +26,27 @@ izteiksmju parseris
 AST
 ```
 
-Plānotā turpinājuma ķēde:
+Plānotā pilnā ķēde:
 
 ```text
-AST
- ↓
-transformācijas
- ↓
-koda ģenerēšana
- ↓
-source maps
- ↓
+.lat avots
+   ↓
+terminoloģijas reģistrs
+   ↓
+tokenizeris
+   ↓
+parseri
+   ↓
+AST v1
+   ↓
+semantiskās transformācijas
+   ↓
+koda ģenerators
+   ↓
+JavaScript starprezultāts
+   ↓
 runtime / izpilde
- ↓
+   ↓
 CLI
 ```
 
@@ -119,13 +127,55 @@ Atbild par:
 
 Tas ir apzināti atdalīts no statement parsera, lai parseris nekļūtu par vienu monolītu failu.
 
+## AST kā publisks iekšējais kontrakts
+
+AST nav tikai parsera pagaidu rezultāts.
+
+Pirms nopietnas koda ģenerēšanas tiek stabilizēts AST v1 kontrakts.
+
+AST v1 definē:
+
+- stabilus mezglu tipus
+- obligātos laukus
+- izvēles laukus
+- source span informāciju
+- kanonisko termina identitāti, kur tā nepieciešama
+- robežu starp strukturētu AST un pagaidu raw tokeniem
+
+Koda ģeneratoram jāstrādā ar dokumentētu AST kontraktu, nevis parsera nejaušām iekšējām detaļām.
+
+Skatīt ADR 0007.
+
+## Source spans un diagnostika
+
+Avota pozīcija tiek uzskatīta par arhitektūras sastāvdaļu.
+
+Tā nepieciešama:
+
+- latviskai diagnostikai
+- faila, rindas un kolonnas norādei
+- source maps
+- editor tooling
+- kļūdas sasaistīšanai ar oriģinālo `.lat` failu
+
+Diagnostikas sistēma tiks veidota virs strukturētas source span informācijas, nevis tikai teksta kļūdu ziņojumiem.
+
 ## Klases slānis
 
 Klase pašlaik tiek atpazīta augšējā līmenī, bet tās ķermenis vēl nav pilnībā strukturēts.
 
-Nākamā arhitektūras robeža ir klases ķermeņa AST.
+Nākamā valodas arhitektūras robeža pēc kvalitātes sliežu ieviešanas ir klases ķermeņa AST.
 
-Pirmajā iterācijā jāstrukturē lauki, modifikatori, konstruktors un getteris, vēl neuzņemoties pilnu metožu ķermeņu parsēšanu.
+Pirmajā iterācijā jāstrukturē:
+
+- lauki
+- modifikatori
+- konstruktors
+- konstruktora parametri
+- getteris
+- getter atgriezes tips
+
+Pilna metožu ķermeņu parsēšana nav pirmās iterācijas prasība.
 
 ## LatNe iebūvētais API
 
@@ -140,7 +190,7 @@ Array.length
 
 nav valodas atslēgvārdi.
 
-Plānotie LatNe kandidāti:
+Pirmie izskatāmie LatNe kandidāti:
 
 ```text
 pievieno
@@ -149,12 +199,87 @@ garums
 
 Šādu API nedrīkst realizēt ar globālu teksta aizvietošanu.
 
-Tulkojumam jābūt sasaistītam ar konkrētu tipu vai semantisko operāciju.
+Tulkojumam jābūt sasaistītam ar:
+
+- konkrētu tipu
+- semantisku operāciju
+- koda ģeneratora mapping
 
 API slānis ir dokumentēts `ROADMAP.md` fāzē 1A.
 
+## Semantisko transformāciju robeža
+
+Starp AST un codegen paredzēta skaidra transformāciju robeža.
+
+Tā nepieciešama, lai:
+
+- API semantiku neieceptu parserī
+- parseris nekļūtu atkarīgs no JavaScript izvada
+- codegen nebūtu spiests interpretēt raw LatNe sintaksi
+- nākotnē varētu mainīt vai papildināt izvada slāni
+
+Pirmajā versijā transformāciju slānim jāpaliek mazam un izskaidrojamam.
+
+## Koda ģenerēšana
+
+Pirmais mērķa starprezultāts ir JavaScript.
+
+Tas ir tehnisks būvbloks, ne LatNe identitātes pamats.
+
+Pirmajam codegen prioritāte ir:
+
+1. pareizība
+2. caurspīdīgums
+3. testējamība
+
+Nevis optimizācija vai sarežģīta bundling sistēma.
+
+Ģenerētajam starprezultātam jābūt apskatāmam.
+
+## Reproducējamība un CI
+
+LatNe turpmākā arhitektūras attīstība balstās uz reproducējamu vidi.
+
+Pirms straujas parsera un codegen paplašināšanas jābūt:
+
+- fiksētai runtime prasībai
+- lockfile
+- clean install pārbaudei
+- CI
+- regresijas fixtures
+
+Sākotnējais obligātais CI mērķis ir Linux.
+
+Windows pārbaude tiek pievienota pirms CLI izplatīšanas posma.
+
+## Ārējo atkarību robeža
+
+Ārēja atkarība drīkst palīdzēt LatNe, bet nedrīkst noteikt tās identitāti.
+
+Kritiskai ārējai atkarībai jāatrodas aiz skaidras LatNe iekšējās robežas, lai tās aizstāšana neizjauktu publisko valodas modeli.
+
+## Dokumentācijas slānis
+
+Dokumentācija ir daļa no LatNe sistēmas.
+
+Publiskie arhitektūras lēmumi tiek saglabāti ADR.
+
+`ROADMAP.md` nosaka publisko izpildes secību.
+
+`docs/STATUSS.md` apraksta faktiski sasniegto stāvokli.
+
+`docs/ATSAKSANA.md` nosaka vienu aktuālo darba sākuma punktu.
+
 ## Web slānis
 
-LatNe web slānis tiks sākts tikai pēc tam, kad valodas kodols ir reāli lietojams un pārbaudāms.
+LatNe web slānis tiks sākts tikai pēc tam, kad valodas kodols ir reāli lietojams ārpus projekta autora darba vides.
 
-Web slānis nedrīkst noteikt valodas identitāti vai piespiest valodas kodolu konkrētai framework arhitektūrai.
+Pirms web slāņa jābūt:
+
+- darbojošam CLI
+- diagnostikas minimumam
+- publiskam Quickstart
+- vairākiem pilniem `.lat` piemēriem
+- vismaz pirmajai ārējai lietošanas pieredzei
+
+Web slānis nedrīkst noteikt valodas identitāti vai piespiest valodas kodolu konkrētai web arhitektūrai.

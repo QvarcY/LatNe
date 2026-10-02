@@ -8,3 +8,4 @@
 | [0004](adr/0004-parseris-izmanto-kanonisko-identitati.md) | 2026-10-01 | Parseris izmanto kanonisko termina identitāti | Pieņemts |
 | [0005](adr/0005-izteiksmju-parseris-atsevisks.md) | 2026-10-01 | Izteiksmju parseris tiek uzturēts atsevišķā modulī | Pieņemts |
 | [0006](adr/0006-api-terminologija-atsevisks-semantisks-slanis.md) | 2026-10-01 | LatNe API terminoloģija ir atsevišķs semantisks slānis | Pieņemts |
+| [0007](adr/0007-ast-v1-ir-codegen-kontrakts.md) | 2026-10-02 | AST v1 ir stabilā robeža starp parseri un koda ģeneratoru | Pieņemts |

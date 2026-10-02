@@ -90,3 +90,25 @@ Tas noveda pie atsevišķa LatNe API terminoloģijas slāņa idejas.
 Svarīgākais lēmums bija tos netulkot ar aklu teksta aizvietošanu. LatNe būs jāzina, ar kāda tipa objektu operācija tiek veikta.
 
 Tādējādi projekts ieguva jaunu robežu starp valodas sintaksi un latvisku standarta API.
+
+---
+
+## 2026-10-02 — Ceļa karte kļūst par produkta plānu
+
+Pēc pirmā valodas kodola un publiskās projekta lapas izveides LatNe sasniedza punktu, kur ar vienkāršu funkciju sarakstu vairs nepietika.
+
+Sākotnējā ceļa karte bija veidota, lai pēc iespējas ātrāk pierādītu galveno ideju: vai `.lat` avotu iespējams tokenizēt un pārvērst strukturētā AST. Šis mērķis tika sasniegts.
+
+Nākamajā pārskatā kļuva skaidrs, ka ceļš no darbojoša prototipa līdz kvalitatīvai programmēšanas valodai ietver daudz vairāk nekā parsera funkcijas vien.
+
+Ceļa kartē tika pievienotas reproducējamas vides prasības, CI, regresijas fixtures, AST v1 kontrakts, diagnostikas arhitektūra, pirmais pilnais codegen ceļš, bilingvāla dokumentācija un Education MVP.
+
+Tāpēc publiskais progresa rādītājs samazinājās no iepriekšējā prototipa plāna procenta.
+
+LatNe nezaudēja jau paveikto.
+
+Vienkārši kļuva precīzāka pati finiša līnija.
+
+Tika pieņemts arī svarīgs arhitektūras lēmums: pirms nopietnas koda ģenerēšanas AST v1 kļūs par dokumentētu kontraktu starp parseri un turpmākajiem kompilācijas posmiem.
+
+Nākamais tehniskais darbs ir īss kvalitātes infrastruktūras posms, pēc kura turpināsies klases ķermeņa AST.

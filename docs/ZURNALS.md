@@ -961,3 +961,94 @@ Plānotā publiskā adrese:
 Lapai jāaug kopā ar projektu.
 
 Kad roadmap funkcionalitāte kļūst reāli pieejama, attiecīgā pelēkā sadaļa tiek aktivizēta un saturs atjaunināts.
+
+---
+
+## 2026-10-02 — J0016 — Publiskās ceļa kartes un arhitektūras audits
+
+**Tips:** plānošana / arhitektūra / kvalitāte
+**Statuss:** pabeigts
+
+### Mērķis
+
+Pārveidot sākotnējo prototipa ceļa karti par secīgu plānu līdz kvalitatīvam LatNe produktam un sinhronizēt tehnisko dokumentāciju ar šo plānu.
+
+### Sākuma stāvoklis
+
+Pirms audita publiskajā `ROADMAP.md` bija 44 definēti checkbox uzdevumi.
+
+Pabeigti bija 13.
+
+GitHub Pages to rādīja kā 30% no toreiz definētās ceļa kartes.
+
+Valodas kodols jau spēja:
+
+- tokenizēt `.lat`
+- veidot deklarāciju AST
+- veidot statement AST
+- veidot izteiksmju AST
+
+### Ceļa kartes audits
+
+Jaunajā ceļa kartē izveidotas fāzes:
+
+- Fāze 0 — identitāte un projekta pamats
+- Fāze 0A — reproducējama vide un kvalitātes sliedes
+- Fāze 1 — valodas kodols līdz AST v1
+- Fāze 1A — LatNe iebūvētā API minimums
+- Fāze 1B — pirmā izpildāmā LatNe
+- Fāze 2 — diagnostika un izstrādātāja pieredze
+- Fāze 3 — dokumentācija un mācīšanās ceļš
+- Fāze 4 — Education MVP
+- Fāze 5 — web un plašāka izstrādes vide
+
+Pēc audita:
+
+- definēti uzdevumi: 130
+- pabeigti uzdevumi: 15
+- publiskais progress: 12%
+
+Procents rāda pabeigto daļu no pašreiz definētās ceļa kartes, nevis absolūtu produkta gatavību.
+
+### Kvalitātes sliedes
+
+Pirms nākamās lielās parsera paplašināšanas ieplānots:
+
+- Node.js runtime kontrakts
+- clean install pārbaude
+- GitHub Actions CI
+- terminoloģijas pārbaude CI
+- tokenizera pārbaude CI
+- parsera pārbaude CI
+- Vārdu kalves check/build CI
+- regresijas fixture sistēma
+
+### Arhitektūras lēmums
+
+Pievienots ADR 0007:
+
+`AST v1 ir koda ģeneratora kontrakts`
+
+Tas nosaka, ka codegen nedrīkst balstīties uz parsera nejaušām pagaidu struktūrām.
+
+### Dokumentācijas sinhronizācija
+
+Aktualizēti:
+
+- `docs/ATSAKSANA.md`
+- `docs/STATUSS.md`
+- `docs/ARHITEKTURA.md`
+- `docs/LEMUMI.md`
+- `docs/HRONIKA.md`
+- `docs/ZURNALS.md`
+- `CHANGELOG.md`
+
+### Nākamais engineering posms
+
+Fāze 0A:
+
+**reproducējama vide un kvalitātes sliedes.**
+
+Pēc tās:
+
+**Klases ķermeņa AST v1.**

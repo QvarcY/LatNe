@@ -7,6 +7,16 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 ## [Unreleased]
 
 ### Added
+#### 2026-10-02
+
+- publiskā ceļa karte pārkārtota faktiskā izpildes secībā
+- pievienota reproducējamas vides un CI kvalitātes fāze
+- pievienots AST v1 stabilizācijas posms
+- pievienota atsevišķa pirmās pilnās `.lat` izpildes fāze
+- pievienots diagnostikas un developer experience plāns
+- pievienots bilingvālas dokumentācijas un Education MVP plāns
+- pieņemts ADR 0007 par AST v1 kā codegen kontraktu
+- sinhronizēta atsākšanas, statusa un arhitektūras dokumentācija
 
 #### 2026-10-01
 
