@@ -17,6 +17,9 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - pievienots bilingvālas dokumentācijas un Education MVP plāns
 - pieņemts ADR 0007 par AST v1 kā codegen kontraktu
 - sinhronizēta atsākšanas, statusa un arhitektūras dokumentācija
+- GitHub Pages sinhronizēta ar 130 uzdevumu ROADMAP v2
+- publiskajā lapā pievienoti "Mācies ar LatNe" un "Būvē ar LatNe" virzieni
+- Pages progress pārslēgts uz 15/130 jeb 12% no pašreiz definētās ceļa kartes
 
 #### 2026-10-01
 

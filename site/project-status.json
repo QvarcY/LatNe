@@ -1,45 +1,73 @@
 {
   "source": "ROADMAP.md",
   "overall": {
-    "done": 13,
-    "total": 44,
-    "percent": 30
+    "done": 15,
+    "total": 130,
+    "percent": 12
   },
   "phases": [
     {
       "id": "0",
-      "name": "identitāte un pamati",
-      "done": 5,
-      "total": 8,
-      "percent": 63
+      "name": "identitāte un projekta pamats",
+      "done": 7,
+      "total": 10,
+      "percent": 70
+    },
+    {
+      "id": "0A",
+      "name": "reproducējama vide un kvalitātes sliedes",
+      "done": 0,
+      "total": 10,
+      "percent": 0
     },
     {
       "id": "1",
-      "name": "valodas pamats",
+      "name": "valodas kodols līdz AST v1",
       "done": 8,
-      "total": 16,
-      "percent": 50
+      "total": 22,
+      "percent": 36
     },
     {
       "id": "1A",
-      "name": "LatNe iebūvētais API slānis",
+      "name": "LatNe iebūvētā API minimums",
       "done": 0,
-      "total": 14,
+      "total": 17,
+      "percent": 0
+    },
+    {
+      "id": "1B",
+      "name": "pirmā izpildāmā LatNe",
+      "done": 0,
+      "total": 23,
       "percent": 0
     },
     {
       "id": "2",
-      "name": "izstrādātāja pieredze",
+      "name": "diagnostika un izstrādātāja pieredze",
       "done": 0,
-      "total": 6,
+      "total": 17,
       "percent": 0
     },
     {
       "id": "3",
-      "name": "web slānis",
+      "name": "dokumentācija un mācīšanās ceļš",
       "done": 0,
-      "total": 0,
-      "percent": null
+      "total": 11,
+      "percent": 0
+    },
+    {
+      "id": "4",
+      "name": "Education MVP",
+      "done": 0,
+      "total": 10,
+      "percent": 0
+    },
+    {
+      "id": "5",
+      "name": "web un plašāka izstrādes vide",
+      "done": 0,
+      "total": 10,
+      "percent": 0
     }
   ]
 }

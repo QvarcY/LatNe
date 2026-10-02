@@ -38,6 +38,7 @@
 
       <nav class="nav" aria-label="Galvenā navigācija">
         <a href="#darbojas">Kas darbojas</a>
+        <a href="#virzieni">Virzieni</a>
         <a href="#attistiba">Attīstība</a>
         <a href="#lidzdarboties">Līdzdarboties</a>
         <a href="#nakotne">Nākotne</a>
@@ -138,7 +139,7 @@
 
           <div class="hero-note">
             <span class="status-dot status-dot-live"></span>
-            Šobrīd tiek būvēts valodas kodols
+            Nākamais: reproducējama vide un kvalitātes sliedes
             <span class="hero-star-count" data-star-wrapper hidden>
               ·
               <strong data-star-count></strong>
@@ -251,15 +252,15 @@
             <div>
               <span class="section-kicker">Projekta attīstība</span>
               <h2>
-                <span data-overall-percent>30</span>%
+                <span data-overall-percent>12</span>%
                 no pašreizējās ceļa kartes
               </h2>
             </div>
 
             <div class="progress-count">
-              <strong data-overall-done>13</strong>
+              <strong data-overall-done>15</strong>
               <span>/</span>
-              <strong data-overall-total>44</strong>
+              <strong data-overall-total>130</strong>
               <small>definēti uzdevumi</small>
             </div>
           </div>
@@ -270,14 +271,14 @@
             aria-label="LatNe ceļa kartes progress"
             aria-valuemin="0"
             aria-valuemax="100"
-            aria-valuenow="30"
+            aria-valuenow="12"
             data-progress-root
           >
             <div class="progress-fill" data-progress-fill></div>
           </div>
 
           <div class="progress-meta">
-            <span>Fāze 1 — valodas pamats</span>
+            <span>Fāze 0A — reproducējama vide un kvalitātes sliedes</span>
 
             <a
               href="https://github.com/QvarcY/LatNe/blob/main/ROADMAP.md"
@@ -485,6 +486,69 @@
       </div>
     </section>
 
+    <section class="section audience-section" id="virzieni">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div>
+            <span class="section-kicker">Divi LatNe virzieni</span>
+            <h2>Mācies. Būvē. Saprot latviski.</h2>
+          </div>
+
+          <p>
+            LatNe tiek veidota gan cilvēkiem, kuri programmēšanu vēl tikai
+            apgūst, gan izstrādātājiem, kurus interesē pati valodas
+            arhitektūra un tās rīki.
+          </p>
+        </div>
+
+        <div class="audience-grid">
+          <article class="audience-card audience-card-learning reveal">
+            <div class="audience-card-top">
+              <span class="audience-index">01</span>
+              <span class="badge badge-future">PLĀNOTS</span>
+            </div>
+
+            <span class="section-kicker">Mācies ar LatNe</span>
+
+            <h3>Programmēšanas jēdzieni dzimtajā valodā.</h3>
+
+            <p>
+              Pēc valodas kodola un CLI minimuma taps pirmais mācību ceļš,
+              skolēnu uzdevumi, skolotāja materiāli un vienkāršs playground.
+            </p>
+
+            <small>
+              Education MVP sāksies tikai tad, kad LatNe būs reāli palaižama.
+            </small>
+          </article>
+
+          <article class="audience-card audience-card-build reveal reveal-delay-1">
+            <div class="audience-card-top">
+              <span class="audience-index">02</span>
+              <span class="badge badge-live">ATVĒRTS</span>
+            </div>
+
+            <span class="section-kicker">Būvē ar LatNe</span>
+
+            <h3>Valodas kodols top publiski.</h3>
+
+            <p>
+              Parseri, AST, Unicode, terminoloģija, diagnostika, codegen un
+              developer tooling tiek veidoti kā atvērts tehnisks projekts.
+            </p>
+
+            <a
+              class="audience-link"
+              href="https://github.com/QvarcY/LatNe/blob/main/docs/ARHITEKTURA.md"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Skatīt arhitektūru →
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
     <section class="section contribute-section" id="lidzdarboties">
       <div class="shell">
         <div class="contribute-panel reveal">
@@ -576,13 +640,13 @@
       <div class="shell">
         <div class="section-heading reveal">
           <div>
-            <span class="section-kicker">Valodas ķēde</span>
+            <span class="section-kicker">Ceļš līdz pirmajai izpildei</span>
             <h2>No `.lat` faila līdz programmai.</h2>
           </div>
 
           <p>
-            Gatavie posmi ir dzīvi. Pelēkie posmi rāda, kas jau ir
-            ieplānots, bet vēl netiek pasniegts kā gatava LatNe iespēja.
+            Gatavie posmi ir dzīvi. Dzintara posms rāda pašreizējo
+            engineering darbu, bet pelēkie posmi vēl ir priekšā.
           </p>
         </div>
 
@@ -605,15 +669,15 @@
 
           <div class="pipeline-step pipeline-step-live">
             <span class="pipeline-index">03</span>
-            <strong>AST</strong>
-            <small>parseri</small>
+            <strong>AST pamats</strong>
+            <small>parseri darbojas</small>
           </div>
 
           <span class="pipeline-arrow pipeline-arrow-next">→</span>
 
           <div class="pipeline-step pipeline-step-next">
             <span class="pipeline-index">04</span>
-            <strong>Klases AST</strong>
+            <strong>Kvalitāte</strong>
             <small>NĀKAMAIS</small>
           </div>
 
@@ -621,16 +685,16 @@
 
           <div class="pipeline-step pipeline-step-future">
             <span class="pipeline-index">05</span>
-            <strong>API</strong>
-            <small>plānots</small>
+            <strong>AST v1</strong>
+            <small>stabils kontrakts</small>
           </div>
 
           <span class="pipeline-arrow">→</span>
 
           <div class="pipeline-step pipeline-step-future">
             <span class="pipeline-index">06</span>
-            <strong>Kods</strong>
-            <small>ģenerators</small>
+            <strong>Codegen</strong>
+            <small>JavaScript</small>
           </div>
 
           <span class="pipeline-arrow">→</span>
@@ -649,15 +713,15 @@
         <div class="section-heading reveal">
           <div>
             <span class="section-kicker section-kicker-muted">
-              Redzams jau tagad
+              Izpildes secība
             </span>
 
-            <h2>Kas vēl tikai top.</h2>
+            <h2>Kas ir nākamais.</h2>
           </div>
 
           <p>
-            Šīs sadaļas ir apzināti neaktīvas. Tās “atdzīvosies” līdz ar
-            reālo funkcionalitāti projektā.
+            Pelēkie posmi ir publiski ieplānoti, bet netiek pasniegti kā
+            gatavas LatNe iespējas. Aktīvs kļūst tikai tas, kas reāli darbojas.
           </p>
         </div>
 
@@ -668,6 +732,22 @@
               <span class="badge badge-next">NĀKAMAIS</span>
             </div>
 
+            <h3>Kvalitātes sliedes</h3>
+
+            <p>
+              Node.js runtime kontrakts, clean install, GitHub Actions CI
+              un pirmā regresijas fixture sistēma.
+            </p>
+
+            <span class="future-label">Fāze 0A</span>
+          </article>
+
+          <article class="feature-card future-card reveal reveal-delay-1" aria-disabled="true">
+            <div class="card-head">
+              <span class="card-number">N2</span>
+              <span class="badge badge-future">PĒC TAM</span>
+            </div>
+
             <h3>Klases ķermeņa AST</h3>
 
             <p>
@@ -675,23 +755,7 @@
               un getter struktūra.
             </p>
 
-            <span class="future-label">Izstrādes rindā</span>
-          </article>
-
-          <article class="feature-card future-card reveal reveal-delay-1" aria-disabled="true">
-            <div class="card-head">
-              <span class="card-number">N2</span>
-              <span class="badge badge-future">PLĀNOTS</span>
-            </div>
-
-            <h3>LatNe standarta API</h3>
-
-            <p>
-              Latviska pamatobjektu un operāciju valoda ar semantisku,
-              tipam piesaistītu translāciju.
-            </p>
-
-            <span class="future-label">Nav vēl aktīvs</span>
+            <span class="future-label">Valodas nākamā robeža</span>
           </article>
 
           <article class="feature-card future-card reveal reveal-delay-2" aria-disabled="true">
@@ -700,14 +764,14 @@
               <span class="badge badge-future">PLĀNOTS</span>
             </div>
 
-            <h3>Koda ģenerators</h3>
+            <h3>AST v1</h3>
 
             <p>
-              Strukturēts LatNe AST tiks pārvērsts pirmajā izpildāmajā
-              starprezultātā.
+              Stabils mezglu, source span un parsera/codegen robežas
+              kontrakts pirms nopietnas koda ģenerēšanas.
             </p>
 
-            <span class="future-label">Nav vēl aktīvs</span>
+            <span class="future-label">ADR 0007</span>
           </article>
 
           <article class="feature-card future-card reveal" aria-disabled="true">
@@ -716,46 +780,46 @@
               <span class="badge badge-future">PLĀNOTS</span>
             </div>
 
-            <h3>`latne palaist`</h3>
+            <h3>LatNe API minimums</h3>
 
             <p>
-              CLI ceļš līdz brīdim, kad `.lat` programma pirmo reizi tiks
-              palaista caur LatNe paša ķēdi.
+              Pirmais semantiskais API slānis, kur operācijas tiek
+              sasaistītas ar tipu un nozīmi, nevis pārsauktas tekstā.
             </p>
 
-            <span class="future-label">Nav vēl aktīvs</span>
+            <span class="future-label">Fāze 1A</span>
           </article>
 
           <article class="feature-card future-card reveal reveal-delay-1" aria-disabled="true">
             <div class="card-head">
               <span class="card-number">N5</span>
-              <span class="badge badge-future">PLĀNOTS</span>
+              <span class="badge badge-future">MILESTONE</span>
             </div>
 
-            <h3>Izstrādātāja pieredze</h3>
+            <h3>Pirmā `.lat` izpilde</h3>
 
             <p>
-              Source maps, latviska diagnostika, formatteris un VS Code
-              sintakses izcelšana.
+              Semantiskās transformācijas, JavaScript codegen un pirmā
+              programma, kas iziet visu LatNe apstrādes ķēdi.
             </p>
 
-            <span class="future-label">Nav vēl aktīvs</span>
+            <span class="future-label">Fāze 1B</span>
           </article>
 
           <article class="feature-card future-card reveal reveal-delay-2" aria-disabled="true">
             <div class="card-head">
               <span class="card-number">N6</span>
-              <span class="badge badge-future">NĀKOTNĒ</span>
+              <span class="badge badge-future">VĒLĀK</span>
             </div>
 
-            <h3>LatNe web vide</h3>
+            <h3>Pilnāka izstrādes vide</h3>
 
             <p>
-              Pilna cikla tīmekļa izstrādes slānis pēc tam, kad valodas
-              kodols būs reāli lietojams.
+              Diagnostika, source maps, editoru rīki, mācību pieredze un
+              tikai pēc tam plašāks LatNe web slānis.
             </p>
 
-            <span class="future-label">Vēlāka fāze</span>
+            <span class="future-label">Fāzes 2–5</span>
           </article>
         </div>
       </div>
@@ -865,7 +929,8 @@ ja (lietotāji.<b>garums</b> == 0) {
           </div>
 
           <p>
-            Skaitļi tiek ģenerēti no `ROADMAP.md`, publicējot lapu.
+            Skaitļi tiek ģenerēti tieši no `ROADMAP.md`. Procents ir
+            pašreiz definētā plāna progress, nevis absolūta produkta gatavība.
           </p>
         </div>
 
@@ -873,7 +938,7 @@ ja (lietotāji.<b>garums</b> == 0) {
           <div class="phase-row">
             <div class="phase-name">
               <strong>Fāze 0</strong>
-              <span>Identitāte un pamati</span>
+              <span>Identitāte un projekta pamats</span>
             </div>
 
             <div class="phase-bar">
@@ -881,9 +946,27 @@ ja (lietotāji.<b>garums</b> == 0) {
             </div>
 
             <div class="phase-value">
-              <b data-phase-percent="0">63%</b>
+              <b data-phase-percent="0">70%</b>
               <small>
-                <span data-phase-done="0">5</span>/<span data-phase-total="0">8</span>
+                <span data-phase-done="0">7</span>/<span data-phase-total="0">10</span>
+              </small>
+            </div>
+          </div>
+
+          <div class="phase-row phase-row-next">
+            <div class="phase-name">
+              <strong>Fāze 0A</strong>
+              <span>Reproducējama vide un kvalitātes sliedes</span>
+            </div>
+
+            <div class="phase-bar">
+              <span data-phase-fill="0A"></span>
+            </div>
+
+            <div class="phase-value">
+              <b data-phase-percent="0A">0%</b>
+              <small>
+                <span data-phase-done="0A">0</span>/<span data-phase-total="0A">10</span>
               </small>
             </div>
           </div>
@@ -891,7 +974,7 @@ ja (lietotāji.<b>garums</b> == 0) {
           <div class="phase-row">
             <div class="phase-name">
               <strong>Fāze 1</strong>
-              <span>Valodas pamats</span>
+              <span>Valodas kodols līdz AST v1</span>
             </div>
 
             <div class="phase-bar">
@@ -899,9 +982,9 @@ ja (lietotāji.<b>garums</b> == 0) {
             </div>
 
             <div class="phase-value">
-              <b data-phase-percent="1">50%</b>
+              <b data-phase-percent="1">36%</b>
               <small>
-                <span data-phase-done="1">8</span>/<span data-phase-total="1">16</span>
+                <span data-phase-done="1">8</span>/<span data-phase-total="1">22</span>
               </small>
             </div>
           </div>
@@ -909,7 +992,7 @@ ja (lietotāji.<b>garums</b> == 0) {
           <div class="phase-row phase-row-muted">
             <div class="phase-name">
               <strong>Fāze 1A</strong>
-              <span>LatNe API slānis</span>
+              <span>LatNe iebūvētā API minimums</span>
             </div>
 
             <div class="phase-bar">
@@ -919,7 +1002,25 @@ ja (lietotāji.<b>garums</b> == 0) {
             <div class="phase-value">
               <b data-phase-percent="1A">0%</b>
               <small>
-                <span data-phase-done="1A">0</span>/<span data-phase-total="1A">14</span>
+                <span data-phase-done="1A">0</span>/<span data-phase-total="1A">17</span>
+              </small>
+            </div>
+          </div>
+
+          <div class="phase-row phase-row-muted">
+            <div class="phase-name">
+              <strong>Fāze 1B</strong>
+              <span>Pirmā izpildāmā LatNe</span>
+            </div>
+
+            <div class="phase-bar">
+              <span data-phase-fill="1B"></span>
+            </div>
+
+            <div class="phase-value">
+              <b data-phase-percent="1B">0%</b>
+              <small>
+                <span data-phase-done="1B">0</span>/<span data-phase-total="1B">23</span>
               </small>
             </div>
           </div>
@@ -927,7 +1028,7 @@ ja (lietotāji.<b>garums</b> == 0) {
           <div class="phase-row phase-row-muted">
             <div class="phase-name">
               <strong>Fāze 2</strong>
-              <span>Izstrādātāja pieredze</span>
+              <span>Diagnostika un izstrādātāja pieredze</span>
             </div>
 
             <div class="phase-bar">
@@ -937,7 +1038,7 @@ ja (lietotāji.<b>garums</b> == 0) {
             <div class="phase-value">
               <b data-phase-percent="2">0%</b>
               <small>
-                <span data-phase-done="2">0</span>/<span data-phase-total="2">6</span>
+                <span data-phase-done="2">0</span>/<span data-phase-total="2">17</span>
               </small>
             </div>
           </div>
@@ -945,14 +1046,54 @@ ja (lietotāji.<b>garums</b> == 0) {
           <div class="phase-row phase-row-muted">
             <div class="phase-name">
               <strong>Fāze 3</strong>
-              <span>Web slānis</span>
+              <span>Dokumentācija un mācīšanās ceļš</span>
             </div>
 
-            <div class="phase-bar phase-bar-future"></div>
+            <div class="phase-bar">
+              <span data-phase-fill="3"></span>
+            </div>
 
             <div class="phase-value">
-              <b>PLĀNOTS</b>
-              <small>vēlāk</small>
+              <b data-phase-percent="3">0%</b>
+              <small>
+                <span data-phase-done="3">0</span>/<span data-phase-total="3">11</span>
+              </small>
+            </div>
+          </div>
+
+          <div class="phase-row phase-row-muted">
+            <div class="phase-name">
+              <strong>Fāze 4</strong>
+              <span>Education MVP</span>
+            </div>
+
+            <div class="phase-bar">
+              <span data-phase-fill="4"></span>
+            </div>
+
+            <div class="phase-value">
+              <b data-phase-percent="4">0%</b>
+              <small>
+                <span data-phase-done="4">0</span>/<span data-phase-total="4">10</span>
+              </small>
+            </div>
+          </div>
+
+          <div class="phase-row phase-row-muted">
+            <div class="phase-name">
+              <strong>Fāze 5</strong>
+              <span>Web un plašāka izstrādes vide</span>
+            </div>
+
+            <div class="phase-bar">
+              <span data-phase-fill="5"></span>
+            </div>
+
+            <div class="phase-value">
+              <b data-phase-percent="5">0%</b>
+              <small>
+                <span data-phase-done="5">0</span>/<span data-phase-total="5">10</span>
+              </small>
             </div>
           </div>
         </div>

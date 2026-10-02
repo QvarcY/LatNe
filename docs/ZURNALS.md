@@ -1052,3 +1052,50 @@ Fāze 0A:
 Pēc tās:
 
 **Klases ķermeņa AST v1.**
+
+---
+
+## 2026-10-02 — J0017 — GitHub Pages v2 sinhronizācija
+
+**Tips:** mājaslapa / publiskā komunikācija / roadmap
+**Statuss:** pabeigts
+
+### Mērķis
+
+Sinhronizēt LatNe publisko projekta lapu ar pārkārtoto ceļa karti un dokumentācijas arhitektūru.
+
+### Izmaiņas
+
+GitHub Pages v2:
+
+- rāda 15 no 130 pašreiz definētajiem ROADMAP uzdevumiem
+- rāda 12% pašreizējās ceļa kartes progresu
+- atspoguļo visas deviņas publiskās izpildes fāzes
+- kā nākamo engineering darbu rāda reproducējamu vidi un kvalitātes sliedes
+- klases AST saglabā kā nākamo valodas darbu pēc kvalitātes posma
+- atspoguļo AST v1 pirms codegen
+- pievieno "Mācies ar LatNe" virzienu
+- pievieno "Būvē ar LatNe" virzienu
+- saglabā vizuālu atšķirību starp jau strādājošu un tikai plānotu funkcionalitāti
+
+### Progress
+
+Iepriekšējais Pages v1 attīstības rādītājs bija balstīts uz sākotnējo 44 uzdevumu ceļa karti.
+
+Pages v2 izmanto paplašināto `ROADMAP.md`:
+
+- pabeigti: 15
+- definēti: 130
+- progress: 12%
+
+Tas nav absolūts produkta gatavības procents.
+
+### Privātās stratēģijas robeža
+
+Publiskajā lapā netiek atklātas neapstiprinātas biznesa, finansējuma, partneru vai tehnoloģiju komercializācijas hipotēzes.
+
+### Nākamais solis
+
+Vizuāli pārbaudīt Pages v2 lokāli.
+
+Pēc apstiprināšanas mergot dokumentācijas zaru uz `main` un publicēt GitHub Pages.

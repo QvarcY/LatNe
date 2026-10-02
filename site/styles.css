@@ -1639,3 +1639,145 @@ code {
     width: 100%;
   }
 }
+/* LATNE PAGES V2 — AUDIENCE */
+
+.audience-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.035);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.008),
+      transparent
+    );
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.audience-card {
+  position: relative;
+  min-height: 330px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-medium);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.028),
+      transparent 48%
+    ),
+    var(--panel);
+}
+
+.audience-card-build {
+  border-color: rgba(197, 44, 74, 0.18);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(197, 44, 74, 0.065),
+      transparent 46%
+    ),
+    var(--panel);
+}
+
+.audience-card-learning {
+  border-color: rgba(211, 170, 104, 0.12);
+}
+
+.audience-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.audience-index {
+  color: var(--text-muted);
+  font-family:
+    "Cascadia Code",
+    Consolas,
+    monospace;
+  font-size: 0.7rem;
+}
+
+.audience-card h3 {
+  max-width: 520px;
+  margin: 13px 0 17px;
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+}
+
+.audience-card p {
+  max-width: 580px;
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+.audience-card small {
+  position: absolute;
+  right: 30px;
+  bottom: 28px;
+  left: 30px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.audience-link {
+  position: absolute;
+  right: 30px;
+  bottom: 28px;
+  left: 30px;
+  color: var(--accent-bright);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.audience-link:hover {
+  color: var(--text);
+}
+
+.phase-row-next {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(211, 170, 104, 0.055),
+      transparent 42%
+    );
+}
+
+.phase-row-next .phase-name strong {
+  color: #c7a674;
+}
+
+.phase-row-next .phase-bar span {
+  background:
+    linear-gradient(
+      90deg,
+      #806743,
+      #c7a674
+    );
+}
+
+@media (max-width: 760px) {
+  .audience-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .audience-card {
+    min-height: 310px;
+    padding: 24px;
+  }
+
+  .audience-card small,
+  .audience-link {
+    right: 24px;
+    bottom: 23px;
+    left: 24px;
+  }
+}

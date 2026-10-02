@@ -66,8 +66,9 @@ const applyProgress = (data) => {
 
   for (const phase of data.phases ?? []) {
     const id = CSS.escape(String(phase.id));
+    const phasePercent = phase.percent ?? 0;
 
-    setText(`[data-phase-percent="${id}"]`, `${phase.percent}%`);
+    setText(`[data-phase-percent="${id}"]`, `${phasePercent}%`);
     setText(`[data-phase-done="${id}"]`, phase.done);
     setText(`[data-phase-total="${id}"]`, phase.total);
 
@@ -77,7 +78,7 @@ const applyProgress = (data) => {
 
     if (phaseFill) {
       requestAnimationFrame(() => {
-        phaseFill.style.width = `${phase.percent}%`;
+        phaseFill.style.width = `${phasePercent}%`;
       });
     }
   }
@@ -88,14 +89,19 @@ const applyFallbackProgress = () => {
     const overallFill = document.querySelector("[data-progress-fill]");
 
     if (overallFill) {
-      overallFill.style.width = "30%";
+      overallFill.style.width = "12%";
     }
 
     const fallbacks = {
-      "0": 63,
-      "1": 50,
+      "0": 70,
+      "0A": 0,
+      "1": 36,
       "1A": 0,
-      "2": 0
+      "1B": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
     };
 
     for (const [id, percent] of Object.entries(fallbacks)) {
@@ -122,6 +128,7 @@ fetch("./project-status.json", { cache: "no-store" })
   .catch(() => {
     applyFallbackProgress();
   });
+
 const formatCompactNumber = (value) => {
   return new Intl.NumberFormat("lv-LV", {
     notation: "compact",
