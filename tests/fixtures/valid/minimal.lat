@@ -1,0 +1,3 @@
+darbība sveika() {
+  atgriez "Sveika"
+}

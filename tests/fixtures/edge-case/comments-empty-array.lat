@@ -1,0 +1,6 @@
+/* komentārs */
+
+darbība tukšs() {
+  // tukšs masīvs
+  atgriez []
+}

@@ -1,0 +1,4 @@
+darbība pārbaudiĀbolu() {
+  nemainīgs ziņa = "Ābols, ķirbis, žūrija"
+  atgriez ziņa
+}

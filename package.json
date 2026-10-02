@@ -12,7 +12,8 @@
                     "check:tokenizer":  "node ./packages/valoda/scripts/tokenize-example.mjs",
                     "check:parser":  "node ./packages/valoda/scripts/parse-example.mjs",
                     "check:kalve":  "corepack pnpm --filter @latne/vardu-kalve check \u0026\u0026 corepack pnpm --filter @latne/vardu-kalve build",
-                    "check":  "corepack pnpm run check:terminology \u0026\u0026 corepack pnpm run check:tokenizer \u0026\u0026 corepack pnpm run check:parser \u0026\u0026 corepack pnpm run check:kalve"
+                    "check":  "corepack pnpm run check:terminology \u0026\u0026 corepack pnpm run check:tokenizer \u0026\u0026 corepack pnpm run check:parser \u0026\u0026 corepack pnpm run check:fixtures \u0026\u0026 corepack pnpm run check:kalve",
+                    "check:fixtures":  "node ./tests/run-fixtures.mjs"
                 },
     "engines":  {
                     "node":  "\u003e=24 \u003c25",

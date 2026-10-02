@@ -1,10 +1,16 @@
 # Testu fixtures
 
-Plānotās grupas:
+LatNe regresijas paraugi ir sadalīti četrās pamatgrupās:
 
-- `valid/`
-- `invalid/`
-- `expected-output/`
-- `diagnostics/`
+- `valid/` — sintaksei jātokenizējas un jāparsējas
+- `invalid/` — tokenizācija ir derīga, bet parserim paraugs jānoraida
+- `edge-case/` — robežgadījumi
+- `unicode/` — latviešu Unicode identifikatori un saturs
 
-Tiks izveidotas kopā ar pirmo tokenizer/parser implementāciju.
+Pārbaude:
+
+`corepack pnpm run check:fixtures`
+
+Fixture runneris atrodas:
+
+`tests/run-fixtures.mjs`
