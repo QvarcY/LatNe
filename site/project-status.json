@@ -1,9 +1,9 @@
 {
   "source": "ROADMAP.md",
   "overall": {
-    "done": 18,
+    "done": 23,
     "total": 130,
-    "percent": 14
+    "percent": 18
   },
   "phases": [
     {
@@ -16,9 +16,9 @@
     {
       "id": "0A",
       "name": "reproducējama vide un kvalitātes sliedes",
-      "done": 3,
+      "done": 8,
       "total": 10,
-      "percent": 30
+      "percent": 80
     },
     {
       "id": "1",

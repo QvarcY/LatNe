@@ -30,11 +30,11 @@ Ceļa karte ir dzīvs dokuments. Ja projekta robežas kļūst precīzākas, kop�
 - [x] Fiksēt oficiāli atbalstīto Node.js versiju vai versiju diapazonu
 - [x] Fiksēt runtime prasības projekta konfigurācijā
 - [x] Pārbaudīt clean install ar fiksēto pnpm un lockfile
-- [ ] Izveidot GitHub Actions `ci.yml`
-- [ ] CI palaist terminoloģijas validāciju
-- [ ] CI palaist tokenizera pārbaudi
-- [ ] CI palaist parsera pārbaudi
-- [ ] CI palaist Vārdu kalves TypeScript pārbaudi un build
+- [x] Izveidot GitHub Actions `ci.yml`
+- [x] CI palaist terminoloģijas validāciju
+- [x] CI palaist tokenizera pārbaudi
+- [x] CI palaist parsera pārbaudi
+- [x] CI palaist Vārdu kalves TypeScript pārbaudi un build
 - [ ] Izveidot pirmo regresijas fixture sistēmu
 - [ ] Pievienot valid, invalid, edge-case un Unicode paraugus
 

@@ -1195,3 +1195,27 @@ Phase 0A pirmie trīs reproducējamās vides uzdevumi ir izpildīti.
 ### Nākamais solis
 
 Izveidot GitHub Actions `ci.yml` un pieslēgt esošās projekta pārbaudes.
+
+---
+
+## 2026-10-02 — J0020 — Phase 0A Linux CI
+
+**Tips:** kvalitāte / CI
+**Statuss:** pabeigts
+
+GitHub Actions Linux CI ir izveidots un veiksmīgi pārbaudīts.
+
+CI pārbauda:
+
+- clean install ar frozen lockfile
+- terminoloģijas reģistru
+- tokenizeri
+- parseri
+- Vārdu kalves TypeScript check
+- Vārdu kalves production build
+
+GitHub Actions run: `37009681073`
+
+Phase 0A progress: `8/10`.
+
+Nākamais solis: regresijas fixture sistēma ar valid, invalid, edge-case un Unicode paraugiem.

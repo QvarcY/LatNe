@@ -121,9 +121,11 @@ Tas ietver:
 - Node.js 24 LTS kā oficiāli atbalstīto runtime līniju (`>=24 <25`)
 - clean install pārbaudīts ar pnpm 12.6.0 un frozen lockfile
 - clean install pārbaudi
-- GitHub Actions CI
-- esošo terminoloģijas, tokenizera un parsera pārbaudi CI
-- Vārdu kalves check/build CI
+- GitHub Actions CI darbojas uz Linux
+- terminoloģijas validācija darbojas CI
+- tokenizera pārbaude darbojas CI
+- parsera pārbaude darbojas CI
+- Vārdu kalves check/build darbojas CI
 - pirmo regresijas fixture sistēmu
 
 ## Nākamais valodas uzdevums pēc kvalitātes sliedēm
