@@ -22,11 +22,11 @@ Lēmums atlikts un kandidāts saglabāts turpmākai izpētei.
 
 ## Viens avots
 
-Oficiālais reģistrs:
+Oficiālais valodas terminoloģijas reģistrs:
 
 `packages/valoda/data/termini.json`
 
-Compileris dokumentācija editoru tooling un testi nākotnē izmanto šo pašu datu avotu.
+Kompilators, dokumentācija, redaktoru rīki un testi izmanto šo pašu datu avotu.
 
 ## Vārdu kalve
 
@@ -50,6 +50,13 @@ Katram kandidātam atsevišķi jāizlemj:
 
 Inventāra versijā 1 ir 84 kandidāti.
 
-Visi sāk ar statusu `pending`.
+Pašlaik:
 
-Nevienam vēl nav fiksēts oficiāls latviskais variants.
+- 84 termini ir `approved`
+- 0 termini ir `pending`
+
+Visiem 84 kandidātiem ir apstiprināts LatNe variants.
+
+LatNe projekta iekšējā tehniskā terminoloģija tiek uzturēta atsevišķi:
+
+`docs/PROJEKTA-TERMINOLOGIJA.md`
