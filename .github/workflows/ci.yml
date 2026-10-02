@@ -1,0 +1,35 @@
+name: LatNe CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+
+      - name: Runtime
+        run: |
+          node --version
+          corepack pnpm --version
+
+      - name: Install
+        run: corepack pnpm install --frozen-lockfile
+
+      - name: Quality checks
+        run: corepack pnpm run check

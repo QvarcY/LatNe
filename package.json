@@ -1,16 +1,21 @@
 {
-  "name": "latne",
-  "version": "0.0.0",
-  "private": true,
-  "description": "LatNe — latviska programmēšanas valoda un izstrādes vide.",
-  "license": "MIT",
-  "packageManager": "pnpm@12.6.0",
-  "scripts": {
-    "test": "echo \"Testi vēl nav ieviesti.\"",
-    "statuss": "git status --short"
-  },
-  "engines": {
-    "node": ">=24 <25",
-    "pnpm": "12.6.0"
-  }
+    "name":  "latne",
+    "version":  "0.0.0",
+    "private":  true,
+    "description":  "LatNe — latviska programmēšanas valoda un izstrādes vide.",
+    "license":  "MIT",
+    "packageManager":  "pnpm@12.6.0",
+    "scripts":  {
+                    "test":  "echo \"Testi vēl nav ieviesti.\"",
+                    "statuss":  "git status --short",
+                    "check:terminology":  "node ./scripts/verify-terminology.mjs",
+                    "check:tokenizer":  "node ./packages/valoda/scripts/tokenize-example.mjs",
+                    "check:parser":  "node ./packages/valoda/scripts/parse-example.mjs",
+                    "check:kalve":  "corepack pnpm --filter @latne/vardu-kalve check \u0026\u0026 corepack pnpm --filter @latne/vardu-kalve build",
+                    "check":  "corepack pnpm run check:terminology \u0026\u0026 corepack pnpm run check:tokenizer \u0026\u0026 corepack pnpm run check:parser \u0026\u0026 corepack pnpm run check:kalve"
+                },
+    "engines":  {
+                    "node":  "\u003e=24 \u003c25",
+                    "pnpm":  "12.6.0"
+                }
 }
