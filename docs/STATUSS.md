@@ -41,7 +41,7 @@ Valodas kodols:
 Publiskā infrastruktūra:
 
 - GitHub repozitorijs
-- GitHub Pages projekta lapa
+- GitHub Pages projekta lapa ar LV/EN versijām
 - publiskais ROADMAP
 - dokumentācijas sistēma
 - ADR sistēma

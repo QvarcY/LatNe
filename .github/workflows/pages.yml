@@ -27,6 +27,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Generate English site
+        run: node scripts/generate-site-en.mjs
+
       - name: Generate roadmap status
         run: node scripts/generate-site-status.mjs
 

@@ -116,7 +116,12 @@ const applyFallbackProgress = () => {
   });
 };
 
-fetch("./project-status.json", { cache: "no-store" })
+const siteRoot =
+  document.documentElement.lang === "en"
+    ? "../"
+    : "./";
+
+fetch(`${siteRoot}project-status.json`, { cache: "no-store" })
   .then((response) => {
     if (!response.ok) {
       throw new Error(`Status request failed: ${response.status}`);

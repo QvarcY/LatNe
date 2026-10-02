@@ -1099,3 +1099,62 @@ Publiskajā lapā netiek atklātas neapstiprinātas biznesa, finansējuma, partn
 Vizuāli pārbaudīt Pages v2 lokāli.
 
 Pēc apstiprināšanas mergot dokumentācijas zaru uz `main` un publicēt GitHub Pages.
+
+---
+
+## 2026-10-02 — J0018 — Divvalodu Pages un SEO pamats
+
+**Tips:** mājaslapa / SEO / internacionalizācija
+**Statuss:** pabeigts
+
+### Mērķis
+
+Padarīt LatNe publisko projekta lapu saprotamu arī angļu valodas auditorijai un izveidot korektu tehniskā SEO pamatu.
+
+### Valodu struktūra
+
+Publiskās adreses:
+
+- latviešu: `https://qvarcy.github.io/LatNe/`
+- angļu: `https://qvarcy.github.io/LatNe/en/`
+
+Abām versijām pievienots:
+
+- savs `lang`
+- savs canonical URL
+- `hreflang="lv"`
+- `hreflang="en"`
+- `hreflang="x-default"`
+- valodu pārslēdzējs
+
+### SEO
+
+Pievienots:
+
+- precizēts `<title>`
+- precizēts meta description
+- robots meta
+- Open Graph metadata
+- Twitter metadata
+- `SoftwareSourceCode` JSON-LD
+- `sitemap.xml`
+
+`robots.txt` netiek pievienots GitHub Pages projekta apakšceļam, jo šādam failam jāatrodas hosta saknē.
+
+### Angļu versija
+
+Angļu lapa tiek ģenerēta no latviešu lapas ar kontrolētu tulkojumu karti:
+
+`scripts/generate-site-en.mjs`
+
+Ģenerators pārbauda tulkojumu avotus, nepieļauj konfliktējošus dublikātus un apstājas, ja angļu lapā paliek acīmredzams netulkots latviešu saturs.
+
+### Publicēšana
+
+Pages workflow pirms publicēšanas ģenerē angļu versiju no aktuālā latviešu avota.
+
+### Nākamais solis
+
+Lokāli vizuāli pārbaudīt abas valodu versijas.
+
+Pēc apstiprināšanas mergot `docs/roadmap-v2` uz `main`.

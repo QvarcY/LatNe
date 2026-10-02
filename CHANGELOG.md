@@ -20,6 +20,10 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - GitHub Pages sinhronizēta ar 130 uzdevumu ROADMAP v2
 - publiskajā lapā pievienoti "Mācies ar LatNe" un "Būvē ar LatNe" virzieni
 - Pages progress pārslēgts uz 15/130 jeb 12% no pašreiz definētās ceļa kartes
+- pievienota pilna angļu GitHub Pages versija zem `/en/`
+- pievienots LV/EN valodu pārslēdzējs
+- pievienoti canonical, hreflang, Open Graph un JSON-LD metadati
+- pievienots `sitemap.xml`
 
 #### 2026-10-01
 
