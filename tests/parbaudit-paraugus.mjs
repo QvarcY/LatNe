@@ -4,15 +4,15 @@ import { fileURLToPath } from "node:url"
 
 import {
   izveidoVardnicu,
-  tokenize
-} from "../packages/valoda/src/tokenizer.mjs"
+  analizeLeksiski
+} from "../packages/valoda/src/leksiskais-analizators.mjs"
 
 import {
-  parse
-} from "../packages/valoda/src/parser.mjs"
+  analizeSintaksi
+} from "../packages/valoda/src/sintaktiskais-analizators.mjs"
 
-const fixturesRoot = fileURLToPath(
-  new URL("./fixtures/", import.meta.url)
+const parauguSakne = fileURLToPath(
+  new URL("./paraugi/", import.meta.url)
 )
 
 const registryPath = fileURLToPath(
@@ -22,23 +22,23 @@ const registryPath = fileURLToPath(
   )
 )
 
-const registry = JSON.parse(
+const registrs = JSON.parse(
   await readFile(registryPath, "utf8")
 )
 
-const vardnica = izveidoVardnicu(registry)
+const vardnica = izveidoVardnicu(registrs)
 
 const grupas = [
   {
-    nosaukums: "valid",
+    nosaukums: "derigi",
     parsējas: true
   },
   {
-    nosaukums: "invalid",
+    nosaukums: "nederigi",
     parsējas: false
   },
   {
-    nosaukums: "edge-case",
+    nosaukums: "robezgadijumi",
     parsējas: true
   },
   {
@@ -51,7 +51,7 @@ let paraugi = 0
 
 for (const grupa of grupas) {
   const mape = join(
-    fixturesRoot,
+    parauguSakne,
     grupa.nosaukums
   )
 
@@ -65,7 +65,7 @@ for (const grupa of grupas) {
 
   if (faili.length === 0) {
     throw new Error(
-      `Fixture grupa ir tukša: ${grupa.nosaukums}`
+      `Paraugu grupa ir tukša: ${grupa.nosaukums}`
     )
   }
 
@@ -79,27 +79,27 @@ for (const grupa of grupas) {
       "utf8"
     )
 
-    const tokeni = tokenize(
+    const leksiskieElementi = analizeLeksiski(
       teksts,
       vardnica
     )
 
-    const nezinamie = tokeni.filter(
-      tokens =>
-        tokens.veids === "nezināms"
+    const nezinamie = leksiskieElementi.filter(
+      leksiskaisElements =>
+        leksiskaisElements.veids === "nezināms"
     )
 
     if (nezinamie.length > 0) {
       throw new Error(
         `${grupa.nosaukums}/${fails}: ` +
-        `${nezinamie.length} nezināmi tokeni`
+        `${nezinamie.length} nezināmi leksiskieElementi`
       )
     }
 
     let kluda = null
 
     try {
-      parse(tokeni)
+      analizeSintaksi(leksiskieElementi)
     }
     catch (error) {
       kluda = error
@@ -111,7 +111,7 @@ for (const grupa of grupas) {
     ) {
       throw new Error(
         `${grupa.nosaukums}/${fails}: ` +
-        `negaidīta parsera kļūda: ${kluda.message}`
+        `negaidīta sintaktiskās analīzes kļūda: ${kluda.message}`
       )
     }
 
@@ -138,5 +138,5 @@ for (const grupa of grupas) {
 
 console.log("")
 console.log(
-  `LatNe regression fixtures OK: ${paraugi}`
+  `LatNe regresijas paraugi OK: ${paraugi}`
 )

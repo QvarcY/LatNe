@@ -260,10 +260,10 @@
 
           <div class="code-statuses">
             <span class="code-status code-status-live">
-              <b>✓</b> Tokenizeris
+              <b>✓</b> Leksiskais analizators
             </span>
             <span class="code-status code-status-live">
-              <b>✓</b> Parseris
+              <b>✓</b> Sintaktiskais analizators
             </span>
             <span class="code-status code-status-live">
               <b>✓</b> AST
@@ -429,7 +429,7 @@
               <span class="badge badge-live">DARBOJAS</span>
             </div>
 
-            <h3>Tokenizeris</h3>
+            <h3>Leksiskais analizators</h3>
 
             <p>
               `.lat` avots tiek sadalīts strukturētos tokenos ar Unicode
@@ -438,16 +438,16 @@
 
             <div class="metric-row">
               <strong>196</strong>
-              <span>tokeni pirmajā paraugā</span>
+              <span>leksiskie elementi pirmajā paraugā</span>
             </div>
 
             <a
               class="card-link"
-              href="https://github.com/QvarcY/LatNe/blob/main/packages/valoda/src/tokenizer.mjs"
+              href="https://github.com/QvarcY/LatNe/blob/main/packages/valoda/src/leksiskais-analizators.mjs"
               target="_blank"
               rel="noreferrer"
             >
-              Skatīt tokenizeri →
+              Skatīt leksisko analizatoru →
             </a>
           </article>
 
@@ -457,7 +457,7 @@
               <span class="badge badge-live">DARBOJAS</span>
             </div>
 
-            <h3>Parseris</h3>
+            <h3>Sintaktiskais analizators</h3>
 
             <p>
               Importi, deklarācijas, vadības plūsma, kļūdu apstrāde un
@@ -471,11 +471,11 @@
 
             <a
               class="card-link"
-              href="https://github.com/QvarcY/LatNe/blob/main/packages/valoda/src/parser.mjs"
+              href="https://github.com/QvarcY/LatNe/blob/main/packages/valoda/src/sintaktiskais-analizators.mjs"
               target="_blank"
               rel="noreferrer"
             >
-              Skatīt parseri →
+              Skatīt sintaktisko analizatoru →
             </a>
           </article>
 
@@ -500,11 +500,11 @@
 
             <a
               class="card-link"
-              href="https://github.com/QvarcY/LatNe/blob/main/packages/valoda/src/expression-parser.mjs"
+              href="https://github.com/QvarcY/LatNe/blob/main/packages/valoda/src/izteiksmju-sintaktiskais-analizators.mjs"
               target="_blank"
               rel="noreferrer"
             >
-              Skatīt izteiksmju parseri →
+              Skatīt izteiksmju sintaktisko analizatoru →
             </a>
           </article>
 
@@ -614,8 +614,8 @@
             <h3>Valodas kodols top publiski.</h3>
 
             <p>
-              Parseri, AST, Unicode, terminoloģija, diagnostika, codegen un
-              developer tooling tiek veidoti kā atvērts tehnisks projekts.
+              Sintaktiskie analizatori, AST, Unicode, terminoloģija, diagnostika, koda ģenerēšana un
+              izstrādes rīki tiek veidoti kā atvērts tehnisks projekts.
             </p>
 
             <a
@@ -727,7 +727,7 @@
 
           <p>
             Gatavie posmi ir dzīvi. Dzintara posms rāda pašreizējo
-            engineering darbu, bet pelēkie posmi vēl ir priekšā.
+            izstrādes darbu, bet pelēkie posmi vēl ir priekšā.
           </p>
         </div>
 
@@ -742,8 +742,8 @@
 
           <div class="pipeline-step pipeline-step-live">
             <span class="pipeline-index">02</span>
-            <strong>Tokeni</strong>
-            <small>tokenizeris</small>
+            <strong>Leksiskie elementi</strong>
+            <small>leksiskais analizators</small>
           </div>
 
           <span class="pipeline-arrow pipeline-arrow-live">→</span>
@@ -751,7 +751,7 @@
           <div class="pipeline-step pipeline-step-live">
             <span class="pipeline-index">03</span>
             <strong>AST pamats</strong>
-            <small>parseri darbojas</small>
+            <small>sintaktiskie analizatori darbojas</small>
           </div>
 
           <span class="pipeline-arrow pipeline-arrow-next">→</span>
@@ -774,7 +774,7 @@
 
           <div class="pipeline-step pipeline-step-future">
             <span class="pipeline-index">06</span>
-            <strong>Codegen</strong>
+            <strong>Koda ģenerēšana</strong>
             <small>JavaScript</small>
           </div>
 
@@ -816,8 +816,8 @@
             <h3>Kvalitātes sliedes</h3>
 
             <p>
-              Node.js runtime kontrakts, clean install, GitHub Actions CI
-              un pirmā regresijas fixture sistēma.
+              Node.js izpildvides kontrakts, tīra atkarību instalācija, GitHub Actions CI
+              un pirmā regresijas paraugu sistēma.
             </p>
 
             <span class="future-label">Fāze 0A</span>
@@ -848,7 +848,7 @@
             <h3>AST v1</h3>
 
             <p>
-              Stabils mezglu, source span un parsera/codegen robežas
+              Stabils mezglu, pirmkoda diapazona un sintaktiskā analizatora/koda ģenerēšanas robežas
               kontrakts pirms nopietnas koda ģenerēšanas.
             </p>
 
@@ -874,13 +874,13 @@
           <article class="feature-card future-card reveal reveal-delay-1" aria-disabled="true">
             <div class="card-head">
               <span class="card-number">N5</span>
-              <span class="badge badge-future">MILESTONE</span>
+              <span class="badge badge-future">ATSKAITES PUNKTS</span>
             </div>
 
             <h3>Pirmā `.lat` izpilde</h3>
 
             <p>
-              Semantiskās transformācijas, JavaScript codegen un pirmā
+              Semantiskās transformācijas, JavaScript koda ģenerēšana un pirmā
               programma, kas iziet visu LatNe apstrādes ķēdi.
             </p>
 
@@ -896,7 +896,7 @@
             <h3>Pilnāka izstrādes vide</h3>
 
             <p>
-              Diagnostika, source maps, editoru rīki, mācību pieredze un
+              Diagnostika, pirmkoda kartes, redaktoru rīki, mācību pieredze un
               tikai pēc tam plašāks LatNe web slānis.
             </p>
 

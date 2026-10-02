@@ -7,7 +7,7 @@
 2. **Neatkarīga identitāte.** LatNe nav cita frameworka pārtulkojums vai vizuāla tēma.
 3. **Dabiska valoda, ne burtisks tulkojums.** Latviešu gramatika un saprotamība ir svarīgāka par 1:1 tulkojumu.
 4. **Terminoloģijai ir viens avots.** Apstiprinātie termini glabājas vienotā reģistrā.
-5. **Tooling ir daļa no valodas.** Compileris, CLI, source maps, diagnostika un editoru atbalsts ir pamatfunkcionalitāte.
+5. **Izstrādes rīki ir daļa no valodas.** Kompilators, CLI, pirmkoda kartes, diagnostika un redaktoru atbalsts ir pamatfunkcionalitāte.
 6. **Kļūdas runā lietotāja valodā.** Diagnostika norāda uz oriģinālo `.lat` avotu.
 7. **Ārējie rīki ir nomaināmi.** Nobriedušus būvblokus drīkst izmantot aiz skaidrām iekšējām robežām.
 8. **Mazs un saprotams kodols.** Vispirms būvējam minimālo stabilo valodas kodolu.

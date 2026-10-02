@@ -1,12 +1,12 @@
 import "./styles.css"
-import registry from "../../../packages/valoda/data/termini.json"
+import registrs from "../../../packages/valoda/data/termini.json"
 
-type Term = typeof registry.terms[number]
+type Termins = typeof registrs.terms[number]
 
 type SaveResponse = {
   ok: boolean
   persisted?: boolean
-  candidate?: Term
+  candidate?: Termins
   error?: string
 }
 
@@ -29,11 +29,11 @@ function getApp(): HTMLDivElement {
 
 const app = getApp()
 
-let terms: Term[] = registry.terms.map(term => ({
-  ...term
+let termini: Termins[] = registrs.terms.map(termins => ({
+  ...termins
 }))
 
-let selectedId = terms[0]?.id ?? ""
+let selectedId = termini[0]?.id ?? ""
 let search = ""
 
 function escapeHtml(value: unknown): string {
@@ -45,25 +45,25 @@ function escapeHtml(value: unknown): string {
     .replaceAll("'", "&#039;")
 }
 
-function visibleTerms(): Term[] {
+function redzamieTermini(): Termins[] {
   const needle = search.trim().toLocaleLowerCase("lv")
 
   if (!needle) {
-    return terms
+    return termini
   }
 
-  return terms.filter(term =>
-    term.source.toLocaleLowerCase("lv").includes(needle) ||
-    term.kind.toLocaleLowerCase("lv").includes(needle) ||
-    term.category.toLocaleLowerCase("lv").includes(needle) ||
-    (term.latvian ?? "")
+  return termini.filter(termins =>
+    termins.source.toLocaleLowerCase("lv").includes(needle) ||
+    termins.kind.toLocaleLowerCase("lv").includes(needle) ||
+    termins.category.toLocaleLowerCase("lv").includes(needle) ||
+    (termins.latvian ?? "")
       .toLocaleLowerCase("lv")
       .includes(needle)
   )
 }
 
-function selectedTerm(): Term | undefined {
-  return terms.find(term => term.id === selectedId)
+function izveletaisTermins(): Termins | undefined {
+  return termini.find(termins => termins.id === selectedId)
 }
 
 function renderShell(): void {
@@ -77,7 +77,7 @@ function renderShell(): void {
         </div>
 
         <div class="summary">
-          <strong>${terms.length}</strong>
+          <strong>${termini.length}</strong>
           <span>kandidāti</span>
         </div>
       </header>
@@ -91,7 +91,7 @@ function renderShell(): void {
           >
 
           <div id="count" class="count"></div>
-          <div id="terms" class="terms"></div>
+          <div id="termini" class="termini"></div>
         </aside>
 
         <section id="detail" class="detail"></section>
@@ -103,15 +103,15 @@ function renderShell(): void {
     .querySelector<HTMLInputElement>("#search")
     ?.addEventListener("input", event => {
       search = (event.target as HTMLInputElement).value
-      renderTermList()
+      atteloTerminuSarakstu()
       renderDetail()
     })
 }
 
-function renderTermList(): void {
-  const visible = visibleTerms()
+function atteloTerminuSarakstu(): void {
+  const visible = redzamieTermini()
   const container =
-    document.querySelector<HTMLDivElement>("#terms")
+    document.querySelector<HTMLDivElement>("#termini")
   const count =
     document.querySelector<HTMLDivElement>("#count")
 
@@ -119,21 +119,21 @@ function renderTermList(): void {
     return
   }
 
-  if (!visible.some(term => term.id === selectedId)) {
+  if (!visible.some(termins => termins.id === selectedId)) {
     selectedId = visible[0]?.id ?? ""
   }
 
-  count.textContent = `${visible.length} no ${terms.length}`
+  count.textContent = `${visible.length} no ${termini.length}`
 
   container.innerHTML = visible
-    .map(term => `
+    .map(termins => `
       <button
-        class="term ${term.id === selectedId ? "active" : ""}"
-        data-id="${escapeHtml(term.id)}"
+        class="termins ${termins.id === selectedId ? "active" : ""}"
+        data-id="${escapeHtml(termins.id)}"
       >
-        <span>${escapeHtml(term.source)}</span>
+        <span>${escapeHtml(termins.source)}</span>
         <small>
-          ${escapeHtml(statusLabels[term.status] ?? term.status)}
+          ${escapeHtml(statusLabels[termins.status] ?? termins.status)}
         </small>
       </button>
     `)
@@ -144,7 +144,7 @@ function renderTermList(): void {
     .forEach(button => {
       button.addEventListener("click", () => {
         selectedId = button.dataset.id ?? ""
-        renderTermList()
+        atteloTerminuSarakstu()
         renderDetail()
       })
     })
@@ -158,9 +158,9 @@ function renderDetail(message = ""): void {
     return
   }
 
-  const term = selectedTerm()
+  const termins = izveletaisTermins()
 
-  if (!term) {
+  if (!termins) {
     container.innerHTML =
       '<div class="empty">Nav termina ko rādīt</div>'
     return
@@ -168,27 +168,27 @@ function renderDetail(message = ""): void {
 
   container.innerHTML = `
     <div class="position">
-      ${term.order} / ${terms.length}
+      ${termins.order} / ${termini.length}
     </div>
 
-    <h2>${escapeHtml(term.source)}</h2>
+    <h2>${escapeHtml(termins.source)}</h2>
 
     <div class="badges">
-      <span>${escapeHtml(term.kind)}</span>
-      <span>${escapeHtml(term.category)}</span>
-      ${term.layers
+      <span>${escapeHtml(termins.kind)}</span>
+      <span>${escapeHtml(termins.category)}</span>
+      ${termins.layers
         .map(layer => `<span>${escapeHtml(layer)}</span>`)
         .join("")}
     </div>
 
-    <form id="term-form" class="editor-form">
+    <form id="termins-form" class="editor-form">
       <label class="field">
         <span>Latviskais variants</span>
         <input
           id="latvian"
           type="text"
           maxlength="80"
-          value="${escapeHtml(term.latvian ?? "")}"
+          value="${escapeHtml(termins.latvian ?? "")}"
           placeholder="Ievadi variantu"
         >
       </label>
@@ -200,7 +200,7 @@ function renderDetail(message = ""): void {
             .map(([value, label]) => `
               <option
                 value="${value}"
-                ${term.status === value ? "selected" : ""}
+                ${termins.status === value ? "selected" : ""}
               >
                 ${label}
               </option>
@@ -216,7 +216,7 @@ function renderDetail(message = ""): void {
           rows="5"
           maxlength="2000"
           placeholder="Pamatojums vai piezīmes"
-        >${escapeHtml(term.notes ?? "")}</textarea>
+        >${escapeHtml(termins.notes ?? "")}</textarea>
       </label>
 
       <div class="actions">
@@ -237,18 +237,18 @@ function renderDetail(message = ""): void {
   `
 
   document
-    .querySelector<HTMLFormElement>("#term-form")
-    ?.addEventListener("submit", saveSelectedTerm)
+    .querySelector<HTMLFormElement>("#termins-form")
+    ?.addEventListener("submit", saglabaIzveletoTerminu)
 }
 
-async function saveSelectedTerm(
+async function saglabaIzveletoTerminu(
   event: SubmitEvent
 ): Promise<void> {
   event.preventDefault()
 
-  const term = selectedTerm()
+  const termins = izveletaisTermins()
 
-  if (!term) {
+  if (!termins) {
     return
   }
 
@@ -286,7 +286,7 @@ async function saveSelectedTerm(
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          id: term.id,
+          id: termins.id,
           changes: {
             latvian: latvian.value,
             status: status.value,
@@ -305,13 +305,13 @@ async function saveSelectedTerm(
       )
     }
 
-    terms = terms.map(item =>
+    termini = termini.map(item =>
       item.id === result.candidate?.id
         ? result.candidate
         : item
     )
 
-    renderTermList()
+    atteloTerminuSarakstu()
     renderDetail("Saglabāts")
   }
   catch (error) {
@@ -327,5 +327,5 @@ async function saveSelectedTerm(
 }
 
 renderShell()
-renderTermList()
+atteloTerminuSarakstu()
 renderDetail()

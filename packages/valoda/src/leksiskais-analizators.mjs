@@ -40,8 +40,8 @@ export function izveidoVardnicu(registrs) {
   return vardnica
 }
 
-export function tokenize(teksts, vardnica) {
-  const tokeni = []
+export function analizeLeksiski(teksts, vardnica) {
+  const leksiskieElementi = []
 
   let i = 0
   let rinda = 1
@@ -72,7 +72,7 @@ export function tokenize(teksts, vardnica) {
     sakums,
     papildus = {}
   ) => {
-    tokeni.push({
+    leksiskieElementi.push({
       veids,
       vertiba,
       ...sakums,
@@ -269,5 +269,5 @@ export function tokenize(teksts, vardnica) {
     )
   }
 
-  return tokeni
+  return leksiskieElementi
 }

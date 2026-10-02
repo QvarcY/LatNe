@@ -4,7 +4,7 @@
 
 LatNe tiek projektēta kā neatkarīga sistēma.
 
-Ārējas bibliotēkas un runtime komponentes tiek izmantotas kā tehniski būvbloki, nevis kā projekta arhitektūras vai identitātes pamats.
+Ārējas bibliotēkas un izpildvides komponentes tiek izmantotas kā tehniski būvbloki, nevis kā projekta arhitektūras vai identitātes pamats.
 
 ## Valodas kodola ķēde
 
@@ -15,13 +15,13 @@ Pašreizējā realizētā ķēde:
    ↓
 terminoloģijas reģistrs
    ↓
-tokenizeris
+leksiskais analizators
    ↓
-deklarāciju parseris
+deklarāciju sintaktiskais analizators
    ↓
-statement parseris
+priekšrakstu sintaktiskais analizators
    ↓
-izteiksmju parseris
+izteiksmju sintaktiskais analizators
    ↓
 AST
 ```
@@ -33,9 +33,9 @@ Plānotā pilnā ķēde:
    ↓
 terminoloģijas reģistrs
    ↓
-tokenizeris
+leksiskais analizators
    ↓
-parseri
+sintaktiskie analizatori
    ↓
 AST v1
    ↓
@@ -45,7 +45,7 @@ koda ģenerators
    ↓
 JavaScript starprezultāts
    ↓
-runtime / izpilde
+izpildvide / izpilde
    ↓
 CLI
 ```
@@ -56,9 +56,9 @@ Kanoniskais terminoloģijas avots:
 
 `packages/valoda/data/termini.json`
 
-Compileris nebalstās uz nejauši hardkodētiem latviskajiem atslēgvārdiem.
+Kompilators nebalstās uz nejauši iekodētiem latviskajiem atslēgvārdiem.
 
-Tokenizeris atpazītam terminam saglabā arī kanonisko avota identitāti.
+Leksiskais analizators atpazītam terminam saglabā arī kanonisko avota identitāti.
 
 Piemēram:
 
@@ -69,15 +69,15 @@ kam     → for
 gaidi   → await
 ```
 
-Parseris gramatikas lēmumus pieņem pēc šīs kanoniskās identitātes.
+Sintaktiskais analizators gramatikas lēmumus pieņem pēc šīs kanoniskās identitātes.
 
-Tas ļauj terminoloģiju attīstīt, nepārrakstot visu parsera loģiku.
+Tas ļauj terminoloģiju attīstīt, nepārrakstot visu sintaktiskā analizatora loģiku.
 
-## Tokenizeris
+## Leksiskais analizators
 
 Fails:
 
-`packages/valoda/src/tokenizer.mjs`
+`packages/valoda/src/leksiskais-analizators.mjs`
 
 Atbild par:
 
@@ -91,11 +91,11 @@ Atbild par:
 - komentāru izlaišanu
 - rindas un kolonnas saglabāšanu
 
-## Deklarāciju un statement parseris
+## Deklarāciju un priekšrakstu sintaktiskais analizators
 
 Fails:
 
-`packages/valoda/src/parser.mjs`
+`packages/valoda/src/sintaktiskais-analizators.mjs`
 
 Atbild par:
 
@@ -106,11 +106,11 @@ Atbild par:
 
 Izteiksmju gramatika netiek turēta šajā pašā modulī.
 
-## Izteiksmju parseris
+## Izteiksmju sintaktiskais analizators
 
 Fails:
 
-`packages/valoda/src/expression-parser.mjs`
+`packages/valoda/src/izteiksmju-sintaktiskais-analizators.mjs`
 
 Atbild par:
 
@@ -125,11 +125,11 @@ Atbild par:
 - bināriem operatoriem
 - operatoru prioritātēm
 
-Tas ir apzināti atdalīts no statement parsera, lai parseris nekļūtu par vienu monolītu failu.
+Tas ir apzināti atdalīts no priekšrakstu sintaktiskā analizatora, lai sintaktiskais analizators nekļūtu par vienu monolītu failu.
 
 ## AST kā publisks iekšējais kontrakts
 
-AST nav tikai parsera pagaidu rezultāts.
+AST nav tikai sintaktiskā analizatora pagaidu rezultāts.
 
 Pirms nopietnas koda ģenerēšanas tiek stabilizēts AST v1 kontrakts.
 
@@ -138,15 +138,15 @@ AST v1 definē:
 - stabilus mezglu tipus
 - obligātos laukus
 - izvēles laukus
-- source span informāciju
+- pirmkoda diapazona informāciju
 - kanonisko termina identitāti, kur tā nepieciešama
 - robežu starp strukturētu AST un pagaidu raw tokeniem
 
-Koda ģeneratoram jāstrādā ar dokumentētu AST kontraktu, nevis parsera nejaušām iekšējām detaļām.
+Koda ģeneratoram jāstrādā ar dokumentētu AST kontraktu, nevis sintaktiskā analizatora nejaušām iekšējām detaļām.
 
 Skatīt ADR 0007.
 
-## Source spans un diagnostika
+## Pirmkoda diapazoni un diagnostika
 
 Avota pozīcija tiek uzskatīta par arhitektūras sastāvdaļu.
 
@@ -154,11 +154,11 @@ Tā nepieciešama:
 
 - latviskai diagnostikai
 - faila, rindas un kolonnas norādei
-- source maps
-- editor tooling
+- pirmkoda kartes
+- redaktoru rīki
 - kļūdas sasaistīšanai ar oriģinālo `.lat` failu
 
-Diagnostikas sistēma tiks veidota virs strukturētas source span informācijas, nevis tikai teksta kļūdu ziņojumiem.
+Diagnostikas sistēma tiks veidota virs strukturētas pirmkoda diapazona informācijas, nevis tikai teksta kļūdu ziņojumiem.
 
 ## Klases slānis
 
@@ -179,7 +179,7 @@ Pilna metožu ķermeņu parsēšana nav pirmās iterācijas prasība.
 
 ## LatNe iebūvētais API
 
-Valodas sintakses terminoloģija un runtime / standarta API terminoloģija ir divas atšķirīgas problēmas.
+Valodas sintakses terminoloģija un izpildvides / standarta API terminoloģija ir divas atšķirīgas problēmas.
 
 Piemēram:
 
@@ -209,13 +209,13 @@ API slānis ir dokumentēts `ROADMAP.md` fāzē 1A.
 
 ## Semantisko transformāciju robeža
 
-Starp AST un codegen paredzēta skaidra transformāciju robeža.
+Starp AST un koda ģenerēšanu paredzēta skaidra transformāciju robeža.
 
 Tā nepieciešama, lai:
 
-- API semantiku neieceptu parserī
-- parseris nekļūtu atkarīgs no JavaScript izvada
-- codegen nebūtu spiests interpretēt raw LatNe sintaksi
+- API semantiku neieceptu sintaktiskajā analizatorā
+- sintaktiskais analizators nekļūtu atkarīgs no JavaScript izvada
+- koda ģenerēšana nebūtu spiesta interpretēt neapstrādātu LatNe sintaksi
 - nākotnē varētu mainīt vai papildināt izvada slāni
 
 Pirmajā versijā transformāciju slānim jāpaliek mazam un izskaidrojamam.
@@ -226,7 +226,7 @@ Pirmais mērķa starprezultāts ir JavaScript.
 
 Tas ir tehnisks būvbloks, ne LatNe identitātes pamats.
 
-Pirmajam codegen prioritāte ir:
+Pirmajā koda ģenerēšanas posmā prioritāte ir:
 
 1. pareizība
 2. caurspīdīgums
@@ -240,13 +240,13 @@ Nevis optimizācija vai sarežģīta bundling sistēma.
 
 LatNe turpmākā arhitektūras attīstība balstās uz reproducējamu vidi.
 
-Pirms straujas parsera un codegen paplašināšanas jābūt:
+Pirms straujas sintaktiskā analizatora un koda ģenerēšanas paplašināšanas jābūt:
 
-- fiksētai runtime prasībai
+- fiksētai izpildvides prasībai
 - lockfile
-- clean install pārbaudei
+- tīras atkarību instalācijas pārbaudei
 - CI
-- regresijas fixtures
+- regresijas paraugi
 
 Sākotnējais obligātais CI mērķis ir Linux.
 

@@ -4,7 +4,7 @@
 
 LatNe ir neatkarīga atvērtā pirmkoda programmēšanas valoda un topošā izstrādes vide, kur latviešu valoda nav tikai dokumentācijas slānis — tā ir pašas programmēšanas pieredzes daļa.
 
-LatNe tiek veidota kā patstāvīga sistēma ar savu terminoloģiju, parseri, AST, diagnostiku un izstrādes rīkiem.
+LatNe tiek veidota kā patstāvīga sistēma ar savu terminoloģiju, sintaktisko analīzi, AST, diagnostiku un izstrādes rīkiem.
 
 > Projekts ir aktīvā izstrādē. LatNe vēl nav gatava gala lietošanai, bet valodas kodols jau reāli apstrādā `.lat` avota kodu.
 
@@ -24,13 +24,13 @@ Pašreizējā LatNe ķēde:
 ↓
 terminoloģijas reģistrs
 ↓
-Unicode tokenizeris
+Unicode leksiskais analizators
 ↓
-deklarāciju parseris
+deklarāciju sintaktiskais analizators
 ↓
-statement parseris
+priekšrakstu sintaktiskais analizators
 ↓
-izteiksmju parseris
+izteiksmju sintaktiskais analizators
 ↓
 strukturēts AST
 ```
@@ -40,18 +40,18 @@ strukturēts AST
 - 84 cilvēka vadīti un apstiprināti LatNe termini;
 - kanonisks terminoloģijas reģistrs;
 - Vārdu kalve terminoloģijas pārvaldībai;
-- Unicode tokenizeris;
-- augšējā līmeņa deklarāciju parseris;
-- darbību ķermeņu statement parseris;
-- atsevišķs izteiksmju parseris;
+- Unicode leksiskais analizators;
+- augšējā līmeņa deklarāciju sintaktiskais analizators;
+- darbību ķermeņu priekšrakstu sintaktiskais analizators;
+- atsevišķs izteiksmju sintaktiskais analizators;
 - pirmie strukturētie AST mezgli;
 - publiska arhitektūras un ADR sistēma;
 - reproducējams projekta attīstības žurnāls un hronika.
 
-Pirmais pilnais `.lat` paraugs pašlaik tiek tokenizēts kā:
+Pirmais pilnais `.lat` paraugs pašlaik tiek leksiski analizēts kā:
 
 ```text
-196 tokeni
+196 leksiskie elementi
 0 nezināmu simbolu
 5 augšējā līmeņa AST mezgli
 ```
@@ -87,7 +87,7 @@ eksportē asinhroni darbība ielādēLietotājus(): objekts[] {
 }
 ```
 
-`push` un citi ārējā runtime API nosaukumi šobrīd vēl ir zināmi pārejas elementi.
+`push` un citi ārējās izpildvides API nosaukumi šobrīd vēl ir zināmi pārejas elementi.
 
 LatNe standarta API slānis tiks veidots semantiski — nevis ar aklu teksta aizvietošanu.
 
@@ -95,7 +95,7 @@ LatNe standarta API slānis tiks veidots semantiski — nevis ar aklu teksta aiz
 
 ## Pašreizējais darbs
 
-Pirms nākamās lielās parsera paplašināšanas LatNe nostiprina projekta kvalitātes pamatu.
+Pirms nākamās lielās sintaktiskā analizatora paplašināšanas LatNe nostiprina projekta kvalitātes pamatu.
 
 Aktīvā nākamā fāze:
 
@@ -103,12 +103,12 @@ Aktīvā nākamā fāze:
 
 Tajā ietilpst:
 
-- oficiāla Node.js runtime prasība;
-- clean install pārbaude;
+- oficiāla Node.js izpildvides prasība;
+- tīras atkarību instalācijas pārbaude;
 - GitHub Actions CI;
-- terminoloģijas, tokenizera un parsera pārbaudes CI;
-- Vārdu kalves check/build;
-- pirmā regresijas fixture sistēma.
+- terminoloģijas, leksiskās analīzes un sintaktiskās analīzes pārbaudes CI;
+- Vārdu kalves pārbaude un būvēšana;
+- pirmā regresijas paraugu sistēma.
 
 Pēc šī īsā infrastruktūras posma nākamais valodas darbs ir:
 
@@ -123,9 +123,9 @@ Panākt pirmo pilno LatNe programmas izpildes ķēdi:
 ```text
 .lat
 ↓
-tokenizeris
+leksiskais analizators
 ↓
-parseris
+sintaktiskais analizators
 ↓
 AST v1
 ↓
@@ -146,19 +146,19 @@ Mērķa komanda:
 latne palaist sveika.lat
 ```
 
-Brīdis, kad pirmā `.lat` programma tiks palaista caur šo ķēdi, būs viens no galvenajiem LatNe projekta milestone.
+Brīdis, kad pirmā `.lat` programma tiks palaista caur šo ķēdi, būs viens no galvenajiem LatNe projekta atskaites punktiem.
 
 ---
 
 ## AST nav tikai starprezultāts
 
-LatNe AST tiek veidots kā dokumentēts kontrakts starp parseri un nākamajiem kompilācijas posmiem.
+LatNe AST tiek veidots kā dokumentēts kontrakts starp sintaktisko analizatoru un nākamajiem kompilācijas posmiem.
 
 Pirms nopietnas koda ģenerēšanas tiks stabilizēts **AST v1**, kas definēs:
 
 - mezglu tipus;
 - obligātos un izvēles laukus;
-- source spans;
+- pirmkoda diapazonus;
 - kanoniskās identitātes robežas;
 - strukturēta AST un pagaidu raw tokenu robežu.
 
@@ -215,15 +215,15 @@ Education MVP tiks sākts pēc tam, kad valodas kodols, CLI un dokumentācijas m
 LatNe ir arī atvērts tehnisks projekts cilvēkiem, kurus interesē:
 
 - programmēšanas valodu izstrāde;
-- parseri un AST;
-- compiler arhitektūra;
+- sintaktiskie analizatori un AST;
+- kompilatora arhitektūra;
 - Unicode;
 - programmēšanas terminoloģija;
-- developer tooling;
+- izstrādes rīki;
 - diagnostika;
 - valodu tehnoloģijas.
 
-Projekta arhitektūras mērķis ir saglabāt skaidras robežas starp terminoloģiju, parseri, semantiku, codegen un izstrādes rīkiem.
+Projekta arhitektūras mērķis ir saglabāt skaidras robežas starp terminoloģiju, sintaktisko analīzi, semantiku, koda ģenerēšanu un izstrādes rīkiem.
 
 Skatīt:
 
@@ -252,7 +252,7 @@ pirmā .lat izpilde
 ↓
 CLI un diagnostika
 ↓
-developer experience
+izstrādātāja pieredze
 ↓
 bilingvāla dokumentācija
 ↓
@@ -277,13 +277,13 @@ Latviešu valoda ir projekta sākumpunkts, nevis vēlāk pievienots tulkojums.
 
 ### Neatkarīga sistēma
 
-Ārējas bibliotēkas un runtime komponentes drīkst būt tehniski būvbloki, bet tās nenosaka LatNe identitāti vai publisko arhitektūru.
+Ārējas bibliotēkas un izpildvides komponentes drīkst būt tehniski būvbloki, bet tās nenosaka LatNe identitāti vai publisko arhitektūru.
 
 ### Semantika pirms teksta aizvietošanas
 
 LatNe nav veidota kā masveida JavaScript atslēgvārdu pārtulkošana.
 
-Terminoloģija, parseris un nākotnes API tiek modelēti strukturēti.
+Terminoloģija, sintaktiskā analīze un nākotnes API tiek modelēti strukturēti.
 
 ### Dokumentēta evolūcija
 
@@ -316,8 +316,8 @@ LatNe vēl ir agrīnā stadijā, tāpēc vērtīgs ir ne tikai kods.
 
 Noder:
 
-- parsera un compiler ieguldījumi;
-- testi un fixtures;
+- ieguldījumi sintaktiskajā analizatorā un kompilatorā;
+- testi un paraugi;
 - dokumentācija;
 - terminoloģijas argumenti;
 - piemēri;

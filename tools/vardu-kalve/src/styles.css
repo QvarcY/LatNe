@@ -116,7 +116,7 @@ h1 {
   font-size: 12px;
 }
 
-.terms {
+.termini {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -124,7 +124,7 @@ h1 {
   overflow-y: auto;
 }
 
-.term {
+.termins {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,16 +138,16 @@ h1 {
   cursor: pointer;
 }
 
-.term:hover {
+.termins:hover {
   background: #171b20;
 }
 
-.term.active {
+.termins.active {
   background: #211417;
   border-color: #62303a;
 }
 
-.term span {
+.termins span {
   font-family:
     "Cascadia Code",
     "JetBrains Mono",
@@ -155,7 +155,7 @@ h1 {
     monospace;
 }
 
-.term small {
+.termins small {
   color: #7d858f;
 }
 
@@ -246,7 +246,7 @@ dd {
     border-bottom: 1px solid #242930;
   }
 
-  .terms {
+  .termini {
     max-height: 260px;
   }
 

@@ -3,12 +3,12 @@ import { fileURLToPath } from "node:url"
 
 import {
   izveidoVardnicu,
-  tokenize
-} from "../src/tokenizer.mjs"
+  analizeLeksiski
+} from "../src/leksiskais-analizators.mjs"
 
 import {
-  parse
-} from "../src/parser.mjs"
+  analizeSintaksi
+} from "../src/sintaktiskais-analizators.mjs"
 
 const registrsPath = fileURLToPath(
   new URL(
@@ -39,21 +39,21 @@ const teksts = await readFile(
 const vardnica =
   izveidoVardnicu(registrs)
 
-const tokeni =
-  tokenize(teksts, vardnica)
+const leksiskieElementi =
+  analizeLeksiski(teksts, vardnica)
 
-const nezinamie = tokeni.filter(
-  tokens =>
-    tokens.veids === "nezināms"
+const nezinamie = leksiskieElementi.filter(
+  leksiskaisElements =>
+    leksiskaisElements.veids === "nezināms"
 )
 
 if (nezinamie.length > 0) {
   throw new Error(
-    `Parseri nevar palaist: ${nezinamie.length} nezināmi tokeni`
+    `Sintaktisko analīzi nevar palaist: ${nezinamie.length} nezināmi leksiskieElementi`
   )
 }
 
-const ast = parse(tokeni)
+const ast = analizeSintaksi(leksiskieElementi)
 
 const darbiba = ast.elementi.find(
   mezgls =>
@@ -61,15 +61,15 @@ const darbiba = ast.elementi.find(
 )
 
 console.log("")
-console.log("LatNe expression parser")
-console.log(`Tokeni: ${tokeni.length}`)
+console.log("LatNe sintaktiskā analīze")
+console.log(`Leksiskie elementi: ${leksiskieElementi.length}`)
 console.log(
   `AST augšējie mezgli: ${ast.elementi.length}`
 )
 
 if (darbiba) {
   console.log(
-    `Darbības paziņojumi: ${darbiba.kermenis.length}`
+    `Darbības priekšraksti: ${darbiba.kermenis.length}`
   )
 }
 
@@ -129,7 +129,7 @@ for (
     console.log(
       `${zars} Darbība: ` +
       `${mezgls.nosaukums} ` +
-      `[${mezgls.kermenis.length} paziņojumi]`
+      `[priekšraksti: ${mezgls.kermenis.length}]`
     )
   }
 }

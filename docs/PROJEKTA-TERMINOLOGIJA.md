@@ -82,7 +82,7 @@ Piemēri:
 
 `parser.mjs` → `sintaktiskais-analizators.mjs`
 
-`expression-parser.mjs` → `izteiksmju-analizators.mjs`
+`expression-parser.mjs` → `izteiksmju-sintaktiskais-analizators.mjs`
 
 `tokeni` → `leksiskieElementi`
 
