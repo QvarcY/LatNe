@@ -17,66 +17,66 @@ const PRIORITATES = new Map([
   ["%", 7]
 ])
 
-function izteiksmesKluda(zina, tokens) {
-  if (!tokens) {
+function izteiksmesKluda(zina, leksiskaisElements) {
+  if (!leksiskaisElements) {
     throw new SyntaxError(
       `${zina} izteiksmes beigās`
     )
   }
 
   throw new SyntaxError(
-    `${zina} rindā ${tokens.rinda}, kolonnā ${tokens.kolonna}: ${tokens.vertiba}`
+    `${zina} rindā ${leksiskaisElements.rinda}, kolonnā ${leksiskaisElements.kolonna}: ${leksiskaisElements.vertiba}`
   )
 }
 
-export function parseIzteiksmi(tokeni) {
-  if (!tokeni || tokeni.length === 0) {
+export function analizeIzteiksmi(leksiskieElementi) {
+  if (!leksiskieElementi || leksiskieElementi.length === 0) {
     return null
   }
 
   let indekss = 0
 
   const esosais = () =>
-    tokeni[indekss] ?? null
+    leksiskieElementi[indekss] ?? null
 
   const panem = () => {
-    const tokens = esosais()
+    const leksiskaisElements = esosais()
 
-    if (tokens) {
+    if (leksiskaisElements) {
       indekss++
     }
 
-    return tokens
+    return leksiskaisElements
   }
 
   const irVertiba = vertiba =>
     esosais()?.vertiba === vertiba
 
   const irAvots = avots => {
-    const tokens = esosais()
+    const leksiskaisElements = esosais()
 
     return Boolean(
-      tokens &&
-      tokens.veids === "termins" &&
-      tokens.avots === avots
+      leksiskaisElements &&
+      leksiskaisElements.veids === "termins" &&
+      leksiskaisElements.avots === avots
     )
   }
 
   const gaidiVertibu = vertiba => {
-    const tokens = esosais()
+    const leksiskaisElements = esosais()
 
-    if (!tokens || tokens.vertiba !== vertiba) {
+    if (!leksiskaisElements || leksiskaisElements.vertiba !== vertiba) {
       izteiksmesKluda(
         `Gaidīts "${vertiba}"`,
-        tokens
+        leksiskaisElements
       )
     }
 
     indekss++
-    return tokens
+    return leksiskaisElements
   }
 
-  const parseArgumentus = () => {
+  const analizeArgumentus = () => {
     gaidiVertibu("(")
 
     const argumenti = []
@@ -86,9 +86,9 @@ export function parseIzteiksmi(tokeni) {
       return argumenti
     }
 
-    while (indekss < tokeni.length) {
+    while (indekss < leksiskieElementi.length) {
       argumenti.push(
-        parseBinaro(0)
+        analizeBinaro(0)
       )
 
       if (irVertiba(",")) {
@@ -106,7 +106,7 @@ export function parseIzteiksmi(tokeni) {
     )
   }
 
-  const parseMasivu = () => {
+  const analizeMasivu = () => {
     const sakums = gaidiVertibu("[")
     const elementi = []
 
@@ -120,9 +120,9 @@ export function parseIzteiksmi(tokeni) {
       }
     }
 
-    while (indekss < tokeni.length) {
+    while (indekss < leksiskieElementi.length) {
       elementi.push(
-        parseBinaro(0)
+        analizeBinaro(0)
       )
 
       if (irVertiba(",")) {
@@ -145,58 +145,58 @@ export function parseIzteiksmi(tokeni) {
     )
   }
 
-  const parsePamatu = () => {
-    const tokens = esosais()
+  const analizePamatu = () => {
+    const leksiskaisElements = esosais()
 
-    if (!tokens) {
+    if (!leksiskaisElements) {
       izteiksmesKluda(
         "Gaidīta izteiksme",
         null
       )
     }
 
-    if (tokens.veids === "identifikators") {
+    if (leksiskaisElements.veids === "identifikators") {
       panem()
 
       return {
         veids: "Identifikators",
-        nosaukums: tokens.vertiba,
-        rinda: tokens.rinda
+        nosaukums: leksiskaisElements.vertiba,
+        rinda: leksiskaisElements.rinda
       }
     }
 
-    if (tokens.veids === "skaitlis") {
+    if (leksiskaisElements.veids === "skaitlis") {
       panem()
 
       return {
         veids: "Skaitlis",
         vertiba: Number(
-          tokens.vertiba.replaceAll("_", "")
+          leksiskaisElements.vertiba.replaceAll("_", "")
         ),
-        raw: tokens.vertiba,
-        rinda: tokens.rinda
+        raw: leksiskaisElements.vertiba,
+        rinda: leksiskaisElements.rinda
       }
     }
 
-    if (tokens.veids === "teksts") {
+    if (leksiskaisElements.veids === "teksts") {
       panem()
 
       return {
         veids: "Teksts",
         vertiba:
-          tokens.vertiba.slice(1, -1),
-        raw: tokens.vertiba,
-        rinda: tokens.rinda
+          leksiskaisElements.vertiba.slice(1, -1),
+        raw: leksiskaisElements.vertiba,
+        rinda: leksiskaisElements.rinda
       }
     }
 
-    if (tokens.veids === "veidne") {
+    if (leksiskaisElements.veids === "veidne") {
       panem()
 
       return {
         veids: "Veidne",
-        raw: tokens.vertiba,
-        rinda: tokens.rinda
+        raw: leksiskaisElements.vertiba,
+        rinda: leksiskaisElements.rinda
       }
     }
 
@@ -205,7 +205,7 @@ export function parseIzteiksmi(tokeni) {
 
       return {
         veids: "Nekas",
-        rinda: tokens.rinda
+        rinda: leksiskaisElements.rinda
       }
     }
 
@@ -218,8 +218,8 @@ export function parseIzteiksmi(tokeni) {
       return {
         veids: "Loģisks",
         vertiba:
-          tokens.avots === "true",
-        rinda: tokens.rinda
+          leksiskaisElements.avots === "true",
+        rinda: leksiskaisElements.rinda
       }
     }
 
@@ -228,7 +228,7 @@ export function parseIzteiksmi(tokeni) {
 
       return {
         veids: "Nenoteikts",
-        rinda: tokens.rinda
+        rinda: leksiskaisElements.rinda
       }
     }
 
@@ -237,39 +237,39 @@ export function parseIzteiksmi(tokeni) {
 
       return {
         veids: "Šis",
-        rinda: tokens.rinda
+        rinda: leksiskaisElements.rinda
       }
     }
 
     if (irVertiba("[")) {
-      return parseMasivu()
+      return analizeMasivu()
     }
 
     if (irVertiba("(")) {
       panem()
 
       const izteiksme =
-        parseBinaro(0)
+        analizeBinaro(0)
 
       gaidiVertibu(")")
 
       return {
         veids: "Grupa",
         izteiksme,
-        rinda: tokens.rinda
+        rinda: leksiskaisElements.rinda
       }
     }
 
     izteiksmesKluda(
       "Neatpazīta izteiksmes sākuma daļa",
-      tokens
+      leksiskaisElements
     )
   }
 
-  const parsePostfiksu = sakne => {
+  const analizePostfiksu = sakne => {
     let mezgls = sakne
 
-    while (indekss < tokeni.length) {
+    while (indekss < leksiskieElementi.length) {
       if (irVertiba(".")) {
         panem()
 
@@ -302,7 +302,7 @@ export function parseIzteiksmi(tokeni) {
         mezgls = {
           veids: "Izsaukums",
           izsaucamais: mezgls,
-          argumenti: parseArgumentus(),
+          argumenti: analizeArgumentus(),
           rinda: mezgls.rinda
         }
 
@@ -315,10 +315,10 @@ export function parseIzteiksmi(tokeni) {
     return mezgls
   }
 
-  const parseVienibu = () => {
-    const tokens = esosais()
+  const analizeVienibu = () => {
+    const leksiskaisElements = esosais()
 
-    if (!tokens) {
+    if (!leksiskaisElements) {
       izteiksmesKluda(
         "Gaidīta izteiksme",
         null
@@ -330,8 +330,8 @@ export function parseIzteiksmi(tokeni) {
 
       return {
         veids: "Gaidīšana",
-        izteiksme: parseVienibu(),
-        rinda: tokens.rinda
+        izteiksme: analizeVienibu(),
+        rinda: leksiskaisElements.rinda
       }
     }
 
@@ -339,8 +339,8 @@ export function parseIzteiksmi(tokeni) {
       panem()
 
       const sakne =
-        parsePostfiksu(
-          parsePamatu()
+        analizePostfiksu(
+          analizePamatu()
         )
 
       if (sakne.veids === "Izsaukums") {
@@ -350,7 +350,7 @@ export function parseIzteiksmi(tokeni) {
             sakne.izsaucamais,
           argumenti:
             sakne.argumenti,
-          rinda: tokens.rinda
+          rinda: leksiskaisElements.rinda
         }
       }
 
@@ -358,26 +358,26 @@ export function parseIzteiksmi(tokeni) {
         veids: "Jauns",
         konstruktors: sakne,
         argumenti: [],
-        rinda: tokens.rinda
+        rinda: leksiskaisElements.rinda
       }
     }
 
     if (
-      tokens.veids === "operators" &&
+      leksiskaisElements.veids === "operators" &&
       (
-        tokens.vertiba === "!" ||
-        tokens.vertiba === "+" ||
-        tokens.vertiba === "-" ||
-        tokens.vertiba === "~"
+        leksiskaisElements.vertiba === "!" ||
+        leksiskaisElements.vertiba === "+" ||
+        leksiskaisElements.vertiba === "-" ||
+        leksiskaisElements.vertiba === "~"
       )
     ) {
       panem()
 
       return {
         veids: "UnāraIzteiksme",
-        operators: tokens.vertiba,
-        izteiksme: parseVienibu(),
-        rinda: tokens.rinda
+        operators: leksiskaisElements.vertiba,
+        izteiksme: analizeVienibu(),
+        rinda: leksiskaisElements.rinda
       }
     }
 
@@ -387,20 +387,20 @@ export function parseIzteiksmi(tokeni) {
       return {
         veids: "UnāraIzteiksme",
         operators: "typeof",
-        izteiksme: parseVienibu(),
-        rinda: tokens.rinda
+        izteiksme: analizeVienibu(),
+        rinda: leksiskaisElements.rinda
       }
     }
 
-    return parsePostfiksu(
-      parsePamatu()
+    return analizePostfiksu(
+      analizePamatu()
     )
   }
 
-  function parseBinaro(minPrioritate) {
-    let kreisa = parseVienibu()
+  function analizeBinaro(minPrioritate) {
+    let kreisa = analizeVienibu()
 
-    while (indekss < tokeni.length) {
+    while (indekss < leksiskieElementi.length) {
       const operators = esosais()
 
       if (
@@ -425,7 +425,7 @@ export function parseIzteiksmi(tokeni) {
       panem()
 
       const laba =
-        parseBinaro(
+        analizeBinaro(
           prioritate + 1
         )
 
@@ -443,9 +443,9 @@ export function parseIzteiksmi(tokeni) {
   }
 
   const rezultats =
-    parseBinaro(0)
+    analizeBinaro(0)
 
-  if (indekss < tokeni.length) {
+  if (indekss < leksiskieElementi.length) {
     izteiksmesKluda(
       "Neatpazīta izteiksmes turpinājuma daļa",
       esosais()

@@ -2,7 +2,7 @@
 
 **Atjaunots:** 2026-10-02
 **Pašreizējais valodas stāvoklis:** strukturēts AST līdz izteiksmju līmenim
-**Nākamā engineering fāze:** 1 — klases ķermeņa AST v1
+**Nākamā izstrādes fāze:** 1 — klases ķermeņa AST v1
 
 ## Pašreizējā robeža
 
@@ -12,9 +12,9 @@ Darbojošā ķēde:
 
 ```text
 .lat
-→ tokeni
+→ leksiskie elementi
 → deklarāciju AST
-→ statement AST
+→ priekšrakstu AST
 → izteiksmju AST
 ```
 
@@ -32,11 +32,11 @@ Terminoloģija:
 Valodas kodols:
 
 - pirmais `.lat` sintakses paraugs
-- Unicode tokenizeris
-- kanoniskās termina identitātes saglabāšana tokenos
-- augšējā līmeņa deklarāciju parseris
-- darbības ķermeņa statement parseris
-- atsevišķs izteiksmju parseris
+- Unicode leksiskais analizators
+- kanoniskās termina identitātes saglabāšana leksiskajos elementos
+- augšējā līmeņa deklarāciju sintaktiskais analizators
+- darbības ķermeņa priekšrakstu sintaktiskais analizators
+- atsevišķs izteiksmju sintaktiskais analizators
 
 Publiskā infrastruktūra:
 
@@ -82,7 +82,7 @@ Pašreizējais AST saprot:
 
 Rezultāts:
 
-- 196 tokeni
+- 196 leksiskie elementi
 - 0 nezināmu simbolu
 - 5 augšējā līmeņa AST mezgli
 - strukturēts darbības ķermenis
@@ -97,11 +97,11 @@ Nav vēl:
 - pilna piešķiršanas AST
 - pilnas funkciju parametru struktūras
 - veidņu interpolāciju AST
-- source span kontrakta AST līmenī
+- pirmkoda diapazona kontrakta AST līmenī
 - stabilas AST v1 specifikācijas
 - LatNe API semantiskās translācijas
 - koda ģeneratora
-- source maps
+- pirmkoda kartes
 - CLI kompilēšanas
 - `.lat` programmas izpildes
 
@@ -114,19 +114,19 @@ Tie ir reģistrēti kā nākotnes LatNe API slāņa darbs, nevis gala LatNe API.
 
 ## Kvalitātes robeža
 
-Fāze 0A ir pabeigta. Pirms nākamās lielākās parsera paplašināšanas ir nostiprināts reproducējamas vides un CI minimums.
+Fāze 0A ir pabeigta. Pirms nākamās lielākās sintaktiskā analizatora paplašināšanas ir nostiprināts reproducējamas vides un CI minimums.
 
 Tas ietver:
 
-- Node.js 24 LTS kā oficiāli atbalstīto runtime līniju (`>=24 <25`)
-- clean install pārbaudīts ar pnpm 12.6.0 un frozen lockfile
+- Node.js 24 LTS kā oficiāli atbalstīto izpildvides līniju (`>=24 <25`)
+- tīra atkarību instalācija pārbaudīta ar pnpm 12.6.0 un frozen lockfile
 - GitHub Actions CI darbojas uz Linux
 - terminoloģijas validācija darbojas CI
-- tokenizera pārbaude darbojas CI
-- parsera pārbaude darbojas CI
-- Vārdu kalves check/build darbojas CI
-- regresijas fixture sistēma
-- valid, invalid, edge-case un Unicode fixture paraugi
+- leksiskās analīzes pārbaude darbojas CI
+- sintaktiskās analīzes pārbaude darbojas CI
+- Vārdu kalves pārbaude un būvēšana darbojas CI
+- regresijas paraugu sistēma
+- derīgi, nederīgi, robežgadījumu un Unicode paraugi
 
 ## Nākamais valodas uzdevums pēc kvalitātes sliedēm
 
@@ -150,7 +150,7 @@ kvalitātes sliedes
 → klases AST
 → piešķiršanas AST
 → pilnāki ķermeņi
-→ source spans
+→ pirmkoda diapazoni
 → AST v1
 → API minimums
 → semantiskās transformācijas

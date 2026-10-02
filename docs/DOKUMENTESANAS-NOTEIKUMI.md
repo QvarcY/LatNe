@@ -46,7 +46,7 @@ ADR netiek pārrakstīts, lai izliktos, ka pagātne nebija citāda. Ja lēmums m
 `KLUDAS-UN-ATKLAJUMI.md`
 
 Ieraksta:
-- negaidītas compiler kļūdas;
+- negaidītas kompilatora kļūdas;
 - nepareizus pieņēmumus;
 - rīku ierobežojumus;
 - grūti atrodamus defektus;

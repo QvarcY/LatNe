@@ -190,7 +190,7 @@ const translations = [
     "Once the language core and CLI minimum are ready, the first learning path, student exercises, teacher materials and a simple playground will follow."
   ],
   [
-    "Parseri, AST, Unicode, terminoloģija, diagnostika, codegen un developer tooling tiek veidoti kā atvērts tehnisks projekts.",
+    "Sintaktiskie analizatori, AST, Unicode, terminoloģija, diagnostika, koda ģenerēšana un izstrādes rīki tiek veidoti kā atvērts tehnisks projekts.",
     "Parsers, AST, Unicode, terminology, diagnostics, code generation and developer tooling are being built as an open technical project."
   ],
   [
@@ -202,7 +202,7 @@ const translations = [
     "Proposals that keep LatNe natural in Latvian and technically consistent are especially valuable."
   ],
   [
-    "Gatavie posmi ir dzīvi. Dzintara posms rāda pašreizējo engineering darbu, bet pelēkie posmi vēl ir priekšā.",
+    "Gatavie posmi ir dzīvi. Dzintara posms rāda pašreizējo izstrādes darbu, bet pelēkie posmi vēl ir priekšā.",
     "Working stages are shown as active. The amber stage marks the current engineering work, while the grey stages are still ahead."
   ],
   [
@@ -210,7 +210,7 @@ const translations = [
     "Grey stages are publicly planned, but they are not presented as finished LatNe features. A stage becomes active only when it actually works."
   ],
   [
-    "Node.js runtime kontrakts, clean install, GitHub Actions CI un pirmā regresijas fixture sistēma.",
+    "Node.js izpildvides kontrakts, tīra atkarību instalācija, GitHub Actions CI un pirmā regresijas paraugu sistēma.",
     "Node.js runtime contract, clean install, GitHub Actions CI and the first regression fixture suite."
   ],
   [
@@ -218,7 +218,7 @@ const translations = [
     "Fields, access modifiers, constructor, parameters and getter structure."
   ],
   [
-    "Stabils mezglu, source span un parsera/codegen robežas kontrakts pirms nopietnas koda ģenerēšanas.",
+    "Stabils mezglu, pirmkoda diapazona un sintaktiskā analizatora/koda ģenerēšanas robežas kontrakts pirms nopietnas koda ģenerēšanas.",
     "A stable contract for nodes, source spans and the parser/codegen boundary before substantial code generation."
   ],
   [
@@ -226,11 +226,11 @@ const translations = [
     "The first semantic API layer, where operations are bound to types and meaning instead of being renamed as text."
   ],
   [
-    "Semantiskās transformācijas, JavaScript codegen un pirmā programma, kas iziet visu LatNe apstrādes ķēdi.",
+    "Semantiskās transformācijas, JavaScript koda ģenerēšana un pirmā programma, kas iziet visu LatNe apstrādes ķēdi.",
     "Semantic transforms, JavaScript code generation and the first program to pass through the complete LatNe processing pipeline."
   ],
   [
-    "Diagnostika, source maps, editoru rīki, mācību pieredze un tikai pēc tam plašāks LatNe web slānis.",
+    "Diagnostika, pirmkoda kartes, redaktoru rīki, mācību pieredze un tikai pēc tam plašāks LatNe web slānis.",
     "Diagnostics, source maps, editor tooling, learning experience and only then a broader LatNe web layer."
   ],
   [
@@ -406,7 +406,7 @@ const translations = [
     "terms approved"
   ],
   [
-    "tokeni pirmajā paraugā",
+    "leksiskie elementi pirmajā paraugā",
     "tokens in the first sample"
   ],
   [
@@ -454,7 +454,7 @@ const translations = [
     "source code"
   ],
   [
-    "parseri darbojas",
+    "sintaktiskie analizatori darbojas",
     "parsers working"
   ],
   [
@@ -606,11 +606,11 @@ const translations = [
     "Roadmap"
   ],
   [
-    "Tokenizeris",
+    "Leksiskais analizators",
     "Tokenizer"
   ],
   [
-    "Parseris",
+    "Sintaktiskais analizators",
     "Parser"
   ],
   [
@@ -646,11 +646,11 @@ const translations = [
     "View registry →"
   ],
   [
-    "Skatīt tokenizeri →",
+    "Skatīt leksisko analizatoru →",
     "View tokenizer →"
   ],
   [
-    "Skatīt parseri →",
+    "Skatīt sintaktisko analizatoru →",
     "View parser →"
   ],
   [
@@ -658,7 +658,7 @@ const translations = [
     "Expression AST"
   ],
   [
-    "Skatīt izteiksmju parseri →",
+    "Skatīt izteiksmju sintaktisko analizatoru →",
     "View expression parser →"
   ],
   [
@@ -718,11 +718,19 @@ const translations = [
     "Project on GitHub ★"
   ],
   [
-    "Tokeni",
+    "Leksiskie elementi",
     "Tokens"
   ],
   [
-    "tokenizeris",
+    "Koda ģenerēšana",
+    "Codegen"
+  ],
+  [
+    "ATSKAITES PUNKTS",
+    "MILESTONE"
+  ],
+  [
+    "leksiskais analizators",
     "tokenizer"
   ],
   [
@@ -813,8 +821,8 @@ if (/[āčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ]/.test(visibleText)) {
 }
 
 const forbidden = [
-  "Tokenizeris",
-  "Parseris",
+  "Leksiskais analizators",
+  "Sintaktiskais analizators",
   "Principi",
   "Darbojas",
   "Atbalsti projektu",

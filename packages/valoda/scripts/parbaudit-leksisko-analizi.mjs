@@ -2,8 +2,8 @@ import { readFile } from "node:fs/promises"
 import { fileURLToPath } from "node:url"
 import {
   izveidoVardnicu,
-  tokenize
-} from "../src/tokenizer.mjs"
+  analizeLeksiski
+} from "../src/leksiskais-analizators.mjs"
 
 const registrsPath = fileURLToPath(
   new URL("../data/termini.json", import.meta.url)
@@ -29,28 +29,28 @@ const teksts = await readFile(
 )
 
 const vardnica = izveidoVardnicu(registrs)
-const tokeni = tokenize(teksts, vardnica)
+const leksiskieElementi = analizeLeksiski(teksts, vardnica)
 
-const nezinamie = tokeni.filter(
-  tokens => tokens.veids === "nezināms"
+const nezinamie = leksiskieElementi.filter(
+  leksiskaisElements => leksiskaisElements.veids === "nezināms"
 )
 
 console.log("")
-console.log("LatNe tokenizer")
+console.log("LatNe leksiskā analīze")
 console.log(`Apstiprināti termini: ${vardnica.size}`)
-console.log(`Tokeni: ${tokeni.length}`)
+console.log(`Leksiskie elementi: ${leksiskieElementi.length}`)
 console.log(`Nezināmi: ${nezinamie.length}`)
 console.log("")
 
-for (const tokens of tokeni.slice(0, 40)) {
-  const avots = tokens.avots
-    ? ` <- ${tokens.avots}`
+for (const leksiskaisElements of leksiskieElementi.slice(0, 40)) {
+  const avots = leksiskaisElements.avots
+    ? ` <- ${leksiskaisElements.avots}`
     : ""
 
   console.log(
-    `${tokens.rinda}:${tokens.kolonna}` +
-    `  ${tokens.veids}` +
-    `  ${tokens.vertiba}` +
+    `${leksiskaisElements.rinda}:${leksiskaisElements.kolonna}` +
+    `  ${leksiskaisElements.veids}` +
+    `  ${leksiskaisElements.vertiba}` +
     avots
   )
 }
@@ -59,10 +59,10 @@ if (nezinamie.length > 0) {
   console.log("")
   console.log("Nezināmie simboli:")
 
-  for (const tokens of nezinamie) {
+  for (const leksiskaisElements of nezinamie) {
     console.log(
-      `${tokens.rinda}:${tokens.kolonna}` +
-      `  ${tokens.vertiba}`
+      `${leksiskaisElements.rinda}:${leksiskaisElements.kolonna}` +
+      `  ${leksiskaisElements.vertiba}`
     )
   }
 

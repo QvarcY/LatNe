@@ -23,7 +23,7 @@ jobs:
           node-version-file: .node-version
           package-manager-cache: false
 
-      - name: Runtime
+      - name: Izpildvide
         run: |
           node --version
           corepack pnpm --version

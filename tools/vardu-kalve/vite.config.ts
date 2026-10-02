@@ -7,7 +7,7 @@ import {
 import { fileURLToPath } from "node:url"
 import { defineConfig, type Plugin } from "vite"
 
-const registryPath = fileURLToPath(
+const registraCels = fileURLToPath(
   new URL("../../packages/valoda/data/termini.json", import.meta.url)
 )
 
@@ -24,7 +24,7 @@ const allowedFields = new Set([
   "notes"
 ])
 
-type Term = {
+type Termins = {
   id: string
   source: string
   status: string
@@ -33,8 +33,8 @@ type Term = {
   [key: string]: unknown
 }
 
-type Registry = {
-  terms: Term[]
+type Registrs = {
+  terms: Termins[]
   [key: string]: unknown
 }
 
@@ -82,63 +82,63 @@ async function readJson(
   )
 }
 
-function isTerm(value: unknown): value is Term {
+function irTermins(value: unknown): value is Termins {
   if (!value || typeof value !== "object") {
     return false
   }
 
-  const term = value as Record<string, unknown>
+  const termins = value as Record<string, unknown>
 
   return (
-    typeof term.id === "string" &&
-    typeof term.source === "string" &&
-    typeof term.status === "string" &&
+    typeof termins.id === "string" &&
+    typeof termins.source === "string" &&
+    typeof termins.status === "string" &&
     (
-      term.latvian === null ||
-      typeof term.latvian === "string"
+      termins.latvian === null ||
+      typeof termins.latvian === "string"
     ) &&
-    typeof term.notes === "string"
+    typeof termins.notes === "string"
   )
 }
 
-function validateRegistry(
+function parbaudiRegistru(
   value: unknown
-): asserts value is Registry {
+): asserts value is Registrs {
   if (!value || typeof value !== "object") {
     throw new Error("Terminoloģijas reģistrs nav derīgs")
   }
 
-  const registry = value as Record<string, unknown>
+  const registrs = value as Record<string, unknown>
 
-  if (!Array.isArray(registry.terms)) {
+  if (!Array.isArray(registrs.terms)) {
     throw new Error("Terminoloģijas reģistrs nav derīgs")
   }
 
-  if (!registry.terms.every(isTerm)) {
+  if (!registrs.terms.every(irTermins)) {
     throw new Error("Reģistrā ir nederīgs termins")
   }
 
   const ids = new Set<string>()
 
-  for (const term of registry.terms) {
-    if (ids.has(term.id)) {
-      throw new Error(`Dublēts termina id: ${term.id}`)
+  for (const termins of registrs.terms) {
+    if (ids.has(termins.id)) {
+      throw new Error(`Dublēts termina id: ${termins.id}`)
     }
 
-    ids.add(term.id)
+    ids.add(termins.id)
 
-    if (!statuses.has(term.status)) {
+    if (!statuses.has(termins.status)) {
       throw new Error(
-        `Nederīgs statuss terminam: ${term.id}`
+        `Nederīgs statuss terminam: ${termins.id}`
       )
     }
 
     if (
-      term.status === "approved" &&
-      !term.latvian?.trim()
+      termins.status === "approved" &&
+      !termins.latvian?.trim()
     ) {
       throw new Error(
-        `Apstiprinātam terminam trūkst latviskā varianta: ${term.id}`
+        `Apstiprinātam terminam trūkst latviskā varianta: ${termins.id}`
       )
     }
   }
@@ -213,22 +213,22 @@ function normalizeChanges(
   return normalized
 }
 
-async function loadRegistry(): Promise<Registry> {
-  const text = await readFile(registryPath, "utf8")
-  const registry = JSON.parse(text) as unknown
+async function ieladeRegistru(): Promise<Registrs> {
+  const text = await readFile(registraCels, "utf8")
+  const registrs = JSON.parse(text) as unknown
 
-  validateRegistry(registry)
+  parbaudiRegistru(registrs)
 
-  return registry
+  return registrs
 }
 
-async function saveRegistry(
-  registry: Registry
+async function saglabaRegistru(
+  registrs: Registrs
 ): Promise<void> {
-  validateRegistry(registry)
+  parbaudiRegistru(registrs)
 
-  const text = JSON.stringify(registry, null, 2) + "\n"
-  const temporaryPath = `${registryPath}.tmp`
+  const text = JSON.stringify(registrs, null, 2) + "\n"
+  const temporaryPath = `${registraCels}.tmp`
 
   await rm(temporaryPath, { force: true })
 
@@ -244,15 +244,15 @@ async function saveRegistry(
       "utf8"
     )
 
-    const checkRegistry = JSON.parse(
+    const parbaudesRegistrs = JSON.parse(
       checkText
     ) as unknown
 
-    validateRegistry(checkRegistry)
+    parbaudiRegistru(parbaudesRegistrs)
 
     await rename(
       temporaryPath,
-      registryPath
+      registraCels
     )
   }
   catch (error) {
@@ -261,9 +261,9 @@ async function saveRegistry(
   }
 }
 
-function terminologyApi(): Plugin {
+function terminologijasApi(): Plugin {
   return {
-    name: "latne-terminology-api",
+    name: "latne-terminologijas-api",
 
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
@@ -302,13 +302,13 @@ function terminologyApi(): Plugin {
             throw new Error("Trūkst termina id")
           }
 
-          const registry = await loadRegistry()
+          const registrs = await ieladeRegistru()
 
-          const term = registry.terms.find(
+          const termins = registrs.terms.find(
             item => item.id === payload.id
           )
 
-          if (!term) {
+          if (!termins) {
             throw new Error("Termins nav atrasts")
           }
 
@@ -316,8 +316,8 @@ function terminologyApi(): Plugin {
             validateChanges(payload.changes)
           )
 
-          const candidate: Term = {
-            ...term,
+          const candidate: Termins = {
+            ...termins,
             ...changes
           }
 
@@ -331,16 +331,16 @@ function terminologyApi(): Plugin {
           }
 
           if (url.pathname === savePath) {
-            const nextRegistry: Registry = {
-              ...registry,
-              terms: registry.terms.map(item =>
+            const nakamaisRegistrs: Registrs = {
+              ...registrs,
+              terms: registrs.terms.map(item =>
                 item.id === candidate.id
                   ? candidate
                   : item
               )
             }
 
-            await saveRegistry(nextRegistry)
+            await saglabaRegistru(nakamaisRegistrs)
 
             sendJson(res, 200, {
               ok: true,
@@ -373,6 +373,6 @@ function terminologyApi(): Plugin {
 
 export default defineConfig({
   plugins: [
-    terminologyApi()
+    terminologijasApi()
   ]
 })

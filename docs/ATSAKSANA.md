@@ -3,7 +3,7 @@
 **Atjaunots:** 2026-10-02
 **Stabilais zars:** `main`
 **Aktīvais plānošanas zars:** `docs/roadmap-v2`
-**Nākamā engineering fāze:** 0A — reproducējama vide un kvalitātes sliedes
+**Nākamā izstrādes fāze:** 0A — reproducējama vide un kvalitātes pārbaudes
 
 Šis fails ir pirmais lasāmais dokuments, sākot jaunu LatNe darba sesiju.
 
@@ -29,13 +29,13 @@ Repozitorijam un dokumentācijai jābūt pietiekamiem.
  ↓
 terminoloģijas reģistrs
  ↓
-tokenizeris
+leksiskais analizators
  ↓
-deklarāciju parseris
+deklarāciju sintaktiskais analizators
  ↓
-statement parseris
+priekšrakstu sintaktiskais analizators
  ↓
-izteiksmju parseris
+izteiksmju sintaktiskais analizators
  ↓
 strukturēts AST
 ```
@@ -62,17 +62,17 @@ Terminoloģija:
 
 `packages/valoda/data/termini.json`
 
-Tokenizeris:
+Leksiskais analizators:
 
-`packages/valoda/src/tokenizer.mjs`
+`packages/valoda/src/leksiskais-analizators.mjs`
 
-Deklarāciju un statement parseris:
+Deklarāciju un priekšrakstu sintaktiskais analizators:
 
-`packages/valoda/src/parser.mjs`
+`packages/valoda/src/sintaktiskais-analizators.mjs`
 
-Izteiksmju parseris:
+Izteiksmju sintaktiskais analizators:
 
-`packages/valoda/src/expression-parser.mjs`
+`packages/valoda/src/izteiksmju-sintaktiskais-analizators.mjs`
 
 Pirmais LatNe avota paraugs:
 
@@ -80,9 +80,9 @@ Pirmais LatNe avota paraugs:
 
 Pārbaudes skripti:
 
-`packages/valoda/scripts/tokenize-example.mjs`
+`packages/valoda/scripts/parbaudit-leksisko-analizi.mjs`
 
-`packages/valoda/scripts/parse-example.mjs`
+`packages/valoda/scripts/parbaudit-sintaktisko-analizi.mjs`
 
 Publiskā ceļa karte:
 
@@ -98,11 +98,11 @@ Terminoloģijas reģistrā:
 
 Pirmais `.lat` paraugs:
 
-- 196 tokeni
+- 196 leksiskie elementi
 - 0 nezināmu simbolu
 - 5 augšējā līmeņa AST mezgli
 
-Parseris strukturēti saprot:
+Sintaktiskais analizators strukturēti saprot:
 
 - importu
 - saskarsmi
@@ -125,9 +125,9 @@ Parseris strukturēti saprot:
 
 ## Kāpēc nākamais darbs vairs nav uzreiz Class AST
 
-Valodas kodols ir izaudzis pietiekami tālu, lai turpmākas parsera un codegen izmaiņas bez automatizētām kvalitātes sliedēm palielinātu regresiju risku.
+Valodas kodols ir izaudzis pietiekami tālu, lai turpmākas sintaktiskā analizatora un koda ģenerēšanas izmaiņas bez automatizētām kvalitātes pārbaudēm palielinātu regresiju risku.
 
-Tāpēc pirms nākamās būtiskās parsera paplašināšanas tiek izpildīta `ROADMAP.md` fāze:
+Tāpēc pirms nākamās būtiskās sintaktiskā analizatora paplašināšanas tiek izpildīta `ROADMAP.md` fāze:
 
 **0A — reproducējama vide un kvalitātes sliedes.**
 
@@ -135,17 +135,17 @@ Tas nav valodas attīstības apturēšana.
 
 Tas ir īss infrastruktūras posms, lai nākamos valodas soļus varētu veikt droši.
 
-## Nākamais engineering bloks
+## Nākamais izstrādes bloks
 
 Secība:
 
-1. fiksēt atbalstīto Node.js runtime
-2. pārbaudīt clean install ar lockfile
+1. fiksēt atbalstīto Node.js izpildvidi
+2. pārbaudīt tīru atkarību instalāciju ar lockfile
 3. izveidot `ci.yml`
-4. CI pieslēgt esošās terminoloģijas, tokenizera un parsera pārbaudes
-5. CI pieslēgt Vārdu kalves check/build
-6. izveidot pirmo regresijas fixture sistēmu
-7. pievienot pirmos valid, invalid, edge-case un Unicode paraugus
+4. CI pieslēgt esošās terminoloģijas, leksiskās analīzes un sintaktiskās analīzes pārbaudes
+5. CI pieslēgt Vārdu kalves pārbaudi un būvēšanu
+6. izveidot pirmo regresijas paraugu sistēmu
+7. pievienot pirmos derīgos, nederīgos, robežgadījumu un Unicode paraugus
 
 Pēc šī bloka atgriezties pie:
 
@@ -189,7 +189,7 @@ pilnāki ķermeņi un parametri
 ↓
 template interpolation
 ↓
-source spans
+pirmkoda diapazoni
 ↓
 AST v1 kontrakts
 ↓
@@ -197,7 +197,7 @@ LatNe API minimums
 ↓
 semantiskās transformācijas
 ↓
-codegen
+koda ģenerēšana
 ↓
 JavaScript starprezultāts
 ↓
@@ -235,9 +235,9 @@ Tai jābūt sasaistītai ar tipu un semantisko operāciju.
 No repozitorija saknes:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-terminology.ps1
-node .\packages\valoda\scripts\tokenize-example.mjs
-node .\packages\valoda\scripts\parse-example.mjs
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\parbaudit-terminologiju.ps1
+node .\packages\valoda\scripts\parbaudit-leksisko-analizi.mjs
+node .\packages\valoda\scripts\parbaudit-sintaktisko-analizi.mjs
 pnpm --filter @latne/vardu-kalve check
 pnpm --filter @latne/vardu-kalve build
 git status --short
@@ -247,4 +247,4 @@ git status --short
 
 Pietiek ar:
 
-> Apskati QvarcY/LatNe repozitorija `main` zaru. Izlasi README un `docs/ATSAKSANA.md`, pēc tam aktuālo statusu, ceļa karti un arhitektūru. Turpini ar dokumentācijā norādīto nākamo engineering uzdevumu.
+> Apskati QvarcY/LatNe repozitorija `main` zaru. Izlasi README un `docs/ATSAKSANA.md`, pēc tam aktuālo statusu, ceļa karti un arhitektūru. Turpini ar dokumentācijā norādīto nākamo izstrādes uzdevumu.

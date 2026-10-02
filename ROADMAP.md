@@ -25,18 +25,18 @@ Ceļa karte ir dzīvs dokuments. Ja projekta robežas kļūst precīzākas, kop�
 
 ## Fāze 0A — reproducējama vide un kvalitātes sliedes
 
-Šīs pārbaudes tiek ieviestas pirms straujas parsera un codegen paplašināšanas.
+Šīs pārbaudes tiek ieviestas pirms straujas sintaktiskā analizatora un koda ģenerēšanas paplašināšanas.
 
 - [x] Fiksēt oficiāli atbalstīto Node.js versiju vai versiju diapazonu
-- [x] Fiksēt runtime prasības projekta konfigurācijā
-- [x] Pārbaudīt clean install ar fiksēto pnpm un lockfile
+- [x] Fiksēt izpildvides prasības projekta konfigurācijā
+- [x] Pārbaudīt tīru atkarību instalāciju ar fiksēto pnpm un lockfile
 - [x] Izveidot GitHub Actions `ci.yml`
 - [x] CI palaist terminoloģijas validāciju
-- [x] CI palaist tokenizera pārbaudi
-- [x] CI palaist parsera pārbaudi
-- [x] CI palaist Vārdu kalves TypeScript pārbaudi un build
-- [x] Izveidot pirmo regresijas fixture sistēmu
-- [x] Pievienot valid, invalid, edge-case un Unicode paraugus
+- [x] CI palaist leksiskās analīzes pārbaudi
+- [x] CI palaist sintaktiskās analīzes pārbaudi
+- [x] CI palaist Vārdu kalves TypeScript pārbaudi un būvēšanu
+- [x] Izveidot pirmo regresijas paraugu sistēmu
+- [x] Pievienot derīgus, nederīgus, robežgadījumu un Unicode paraugus
 
 Sākotnējais obligātais CI mērķis ir Linux.
 
@@ -51,10 +51,10 @@ Windows pārbaudi pievienot tad, kad pamatķēde ir stabila un sākas CLI izplat
 - [x] Izveidot JS/TS sintakses terminu kandidātu inventāru
 - [x] Izveidot Vārdu kalves MVP
 - [x] Apstiprināt pirmo LatNe atslēgvārdu kopu
-- [x] Izveidot tokenizera pamatu
-- [x] Izveidot parsera PoC
+- [x] Izveidot leksiskā analizatora pamatu
+- [x] Izveidot sintaktiskā analizatora PoC
 - [x] Definēt pirmo minimālo AST
-- [x] Izveidot darbības ķermeņa statement AST
+- [x] Izveidot darbības ķermeņa priekšrakstu AST
 - [x] Izveidot pirmo izteiksmju AST
 
 ### Nākamā izpildes secība
@@ -64,14 +64,14 @@ Windows pārbaudi pievienot tad, kad pamatķēde ir stabila un sākas CLI izplat
 - [ ] Strukturēt konstruktoru un tā parametrus
 - [ ] Strukturēt getter deklarāciju un atgriezes tipu
 - [ ] Izveidot piešķiršanas izteiksmju AST
-- [ ] Strukturēt konstruktora ķermeņa statements
+- [ ] Strukturēt konstruktora ķermeņa priekšrakstus
 - [ ] Strukturēt getter un metožu ķermeņu minimumu
 - [ ] Paplašināt funkciju parametru AST
 - [ ] Parsēt veidņu literāļu interpolācijas
-- [ ] Pievienot source span informāciju AST mezgliem
+- [ ] Pievienot pirmkoda diapazona informāciju AST mezgliem
 - [ ] Definēt AST mezglu obligātos un izvēles laukus
 - [ ] Publicēt pirmo `spec/ast-v1.md`
-- [ ] Pievienot AST v1 fixture pārbaudes
+- [ ] Pievienot AST v1 paraugu pārbaudes
 - [ ] Stabilizēt AST v1 kontraktu
 
 Plašāks `kamēr`, `pārslēdz` un citu konstrukciju pārklājums tiks turpināts pēc pirmās pilnās LatNe izpildes, ja tas nav nepieciešams pirmajam end-to-end paraugam.
@@ -86,11 +86,11 @@ API nosaukumus nedrīkst ieviest ar aklu globālu teksta aizvietošanu. Tulkojum
 
 ### Pirmajai izpildei nepieciešamais minimums
 
-- [ ] Inventarizēt JavaScript runtime un standarta API svešķermeņus pirmajā `.lat` paraugā
+- [ ] Inventarizēt JavaScript izpildvides un standarta API svešķermeņus pirmajā `.lat` paraugā
 - [ ] Definēt LatNe API terminoloģijas reģistra formātu
 - [ ] Definēt API termina kanonisko identitāti
 - [ ] Definēt API termina sasaisti ar tipu
-- [ ] Definēt semantiskās operācijas sasaisti ar codegen
+- [ ] Definēt semantiskās operācijas sasaisti ar koda ģenerēšanu
 - [ ] Izskatīt `Array.push` → `pievieno`
 - [ ] Izskatīt `Array.length` → `garums`
 - [ ] Ieviest pirmo semantisko API translāciju
@@ -104,7 +104,7 @@ API nosaukumus nedrīkst ieviest ar aklu globālu teksta aizvietošanu. Tulkojum
 - [ ] Inventarizēt objektu API
 - [ ] Inventarizēt kolekciju API
 - [ ] Inventarizēt globālos objektus un funkcijas
-- [ ] Izlemt, kuri ārējā runtime API nosaukumi LatNe kodā apzināti paliek netulkoti
+- [ ] Izlemt, kuri ārējās izpildvides API nosaukumi LatNe kodā apzināti paliek netulkoti
 - [ ] Integrēt API terminoloģijas pārbaudi Vārdu kalvē vai atsevišķā rīkā
 
 ---
@@ -116,9 +116,9 @@ API nosaukumus nedrīkst ieviest ar aklu globālu teksta aizvietošanu. Tulkojum
 ```text
 .lat
 ↓
-tokenizeris
+leksiskais analizators
 ↓
-parseris
+sintaktiskais analizators
 ↓
 AST
 ↓
@@ -131,7 +131,7 @@ JavaScript starprezultāts
 izpilde
 ```
 
-### Transformācijas un codegen
+### Transformācijas un koda ģenerēšana
 
 - [ ] Definēt AST transformāciju robežu
 - [ ] Izveidot pirmo koda ģeneratora moduli
@@ -153,7 +153,7 @@ izpilde
 - [ ] Palaist ģenerēto JavaScript
 - [ ] Palaist pirmo `.lat` programmu caur pilnu LatNe ķēdi
 
-Šis ir pirmais lielais LatNe valodas milestone.
+Šis ir pirmais lielais LatNe valodas atskaites punkts.
 
 ### CLI minimums
 
@@ -173,15 +173,15 @@ izpilde
 
 - [ ] Definēt LatNe diagnostikas kodu formātu
 - [ ] Definēt kļūdas smagumu
-- [ ] Savienot diagnostiku ar source span
+- [ ] Savienot diagnostiku ar pirmkoda diapazonu
 - [ ] Rādīt failu, rindu un kolonnu
-- [ ] Izveidot pirmos latviskos parsera kļūdu ziņojumus
-- [ ] Pievienot diagnostikas fixtures
+- [ ] Izveidot pirmos latviskos sintaktiskās analīzes kļūdu ziņojumus
+- [ ] Pievienot diagnostikas paraugus
 - [ ] Dokumentēt diagnostikas kontraktu
 
 ### Izstrādātāja rīki
 
-- [ ] Source maps
+- [ ] Pirmkoda kartes
 - [ ] Formattera pamats
 - [ ] VS Code sintakses izcelšana
 - [ ] Editor diagnostics
@@ -212,7 +212,7 @@ izpilde
 
 - [ ] Izveidot projekta tehnisko overview
 - [ ] Dokumentēt arhitektūru angliski
-- [ ] Dokumentēt compiler modeli angliski
+- [ ] Dokumentēt kompilatora modeli angliski
 - [ ] Izveidot angļu Contribution Guide
 - [ ] Izveidot tehnisko reference starptautiskai auditorijai
 

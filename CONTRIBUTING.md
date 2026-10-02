@@ -55,9 +55,9 @@ Apraksti:
 No repozitorija saknes palaid:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-terminology.ps1
-node .\packages\valoda\scripts\tokenize-example.mjs
-node .\packages\valoda\scripts\parse-example.mjs
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\parbaudit-terminologiju.ps1
+node .\packages\valoda\scripts\parbaudit-leksisko-analizi.mjs
+node .\packages\valoda\scripts\parbaudit-sintaktisko-analizi.mjs
 git diff --check
 ```
 
