@@ -35,8 +35,8 @@ Ceļa karte ir dzīvs dokuments. Ja projekta robežas kļūst precīzākas, kop�
 - [x] CI palaist tokenizera pārbaudi
 - [x] CI palaist parsera pārbaudi
 - [x] CI palaist Vārdu kalves TypeScript pārbaudi un build
-- [ ] Izveidot pirmo regresijas fixture sistēmu
-- [ ] Pievienot valid, invalid, edge-case un Unicode paraugus
+- [x] Izveidot pirmo regresijas fixture sistēmu
+- [x] Pievienot valid, invalid, edge-case un Unicode paraugus
 
 Sākotnējais obligātais CI mērķis ir Linux.
 

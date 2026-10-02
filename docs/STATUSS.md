@@ -2,7 +2,7 @@
 
 **Atjaunots:** 2026-10-02
 **Pašreizējais valodas stāvoklis:** strukturēts AST līdz izteiksmju līmenim
-**Nākamā engineering fāze:** 0A — reproducējama vide un kvalitātes sliedes
+**Nākamā engineering fāze:** 1 — klases ķermeņa AST v1
 
 ## Pašreizējā robeža
 
@@ -114,19 +114,19 @@ Tie ir reģistrēti kā nākotnes LatNe API slāņa darbs, nevis gala LatNe API.
 
 ## Kvalitātes robeža
 
-Pirms nākamās lielākās parsera paplašināšanas jāizveido reproducējamas vides un CI minimums.
+Fāze 0A ir pabeigta. Pirms nākamās lielākās parsera paplašināšanas ir nostiprināts reproducējamas vides un CI minimums.
 
 Tas ietver:
 
 - Node.js 24 LTS kā oficiāli atbalstīto runtime līniju (`>=24 <25`)
 - clean install pārbaudīts ar pnpm 12.6.0 un frozen lockfile
-- clean install pārbaudi
 - GitHub Actions CI darbojas uz Linux
 - terminoloģijas validācija darbojas CI
 - tokenizera pārbaude darbojas CI
 - parsera pārbaude darbojas CI
 - Vārdu kalves check/build darbojas CI
-- pirmo regresijas fixture sistēmu
+- regresijas fixture sistēma
+- valid, invalid, edge-case un Unicode fixture paraugi
 
 ## Nākamais valodas uzdevums pēc kvalitātes sliedēm
 

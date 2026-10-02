@@ -1219,3 +1219,37 @@ GitHub Actions run: `37009681073`
 Phase 0A progress: `8/10`.
 
 Nākamais solis: regresijas fixture sistēma ar valid, invalid, edge-case un Unicode paraugiem.
+
+---
+
+## 2026-10-02 — J0021 — Phase 0A pabeigta
+
+**Tips:** kvalitāte / regresijas testi
+**Statuss:** pabeigts
+
+Izveidota pirmā LatNe regresijas fixture sistēma.
+
+Pārbaudītās grupas:
+
+- `valid`
+- `invalid`
+- `edge-case`
+- `unicode`
+
+Lokāli un GitHub Linux CI veiksmīgi izpildās pilnā kvalitātes ķēde.
+
+Fixture commit:
+
+`4ecdaa2`
+
+GitHub Actions run:
+
+`37012802127`
+
+Phase 0A rezultāts:
+
+`10/10`
+
+Nākamais engineering uzdevums:
+
+**Klases ķermeņa AST v1.**
