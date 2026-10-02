@@ -118,7 +118,8 @@ Pirms nākamās lielākās parsera paplašināšanas jāizveido reproducējamas 
 
 Tas ietver:
 
-- fiksētu Node.js runtime prasību
+- Node.js 24 LTS kā oficiāli atbalstīto runtime līniju (`>=24 <25`)
+- clean install pārbaudīts ar pnpm 12.6.0 un frozen lockfile
 - clean install pārbaudi
 - GitHub Actions CI
 - esošo terminoloģijas, tokenizera un parsera pārbaudi CI

@@ -8,5 +8,9 @@
   "scripts": {
     "test": "echo \"Testi vēl nav ieviesti.\"",
     "statuss": "git status --short"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": "12.6.0"
   }
 }

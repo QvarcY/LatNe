@@ -27,9 +27,9 @@ Ceļa karte ir dzīvs dokuments. Ja projekta robežas kļūst precīzākas, kop�
 
 Šīs pārbaudes tiek ieviestas pirms straujas parsera un codegen paplašināšanas.
 
-- [ ] Fiksēt oficiāli atbalstīto Node.js versiju vai versiju diapazonu
-- [ ] Fiksēt runtime prasības projekta konfigurācijā
-- [ ] Pārbaudīt clean install ar fiksēto pnpm un lockfile
+- [x] Fiksēt oficiāli atbalstīto Node.js versiju vai versiju diapazonu
+- [x] Fiksēt runtime prasības projekta konfigurācijā
+- [x] Pārbaudīt clean install ar fiksēto pnpm un lockfile
 - [ ] Izveidot GitHub Actions `ci.yml`
 - [ ] CI palaist terminoloģijas validāciju
 - [ ] CI palaist tokenizera pārbaudi

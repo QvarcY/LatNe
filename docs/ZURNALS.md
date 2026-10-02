@@ -1158,3 +1158,40 @@ Pages workflow pirms publicēšanas ģenerē angļu versiju no aktuālā latvie�
 Lokāli vizuāli pārbaudīt abas valodu versijas.
 
 Pēc apstiprināšanas mergot `docs/roadmap-v2` uz `main`.
+
+---
+
+## 2026-10-02 — J0019 — Phase 0A runtime kontrakts un clean install
+
+**Tips:** kvalitāte / runtime / reproducējamība
+**Statuss:** pabeigts
+
+### Izveidots
+
+- oficiālā Node.js līnija: 24 LTS
+- `package.json` runtime prasība: `>=24 <25`
+- pnpm prasība: `12.6.0`
+- `.node-version`
+- clean install pārbaude ar `--frozen-lockfile`
+
+### Pārbaude
+
+Vide:
+
+- Node.js `v24.18.0`
+- pnpm `12.6.0`
+
+Clean install laikā `pnpm-lock.yaml` nemainījās.
+
+Pēc instalācijas veiksmīgi izpildīts:
+
+- Vārdu kalves TypeScript `check`
+- Vārdu kalves production `build`
+
+### Rezultāts
+
+Phase 0A pirmie trīs reproducējamās vides uzdevumi ir izpildīti.
+
+### Nākamais solis
+
+Izveidot GitHub Actions `ci.yml` un pieslēgt esošās projekta pārbaudes.
