@@ -95,26 +95,26 @@ LatNe standarta API slānis tiks veidots semantiski — nevis ar aklu teksta aiz
 
 ## Pašreizējais darbs
 
-Pirms nākamās lielās sintaktiskā analizatora paplašināšanas LatNe nostiprina projekta kvalitātes pamatu.
+**Fāze 0A — reproducējama vide un kvalitātes pārbaudes — ir pabeigta.**
 
-Aktīvā nākamā fāze:
+Projektam jau ir:
 
-**0A — reproducējama vide un kvalitātes sliedes**
-
-Tajā ietilpst:
-
-- oficiāla Node.js izpildvides prasība;
-- tīras atkarību instalācijas pārbaude;
+- fiksēta Node.js izpildvides prasība;
+- pārbaudāma tīra atkarību instalācija ar lockfile;
 - GitHub Actions CI;
-- terminoloģijas, leksiskās analīzes un sintaktiskās analīzes pārbaudes CI;
+- terminoloģijas, leksiskās analīzes un sintaktiskās analīzes pārbaudes;
 - Vārdu kalves pārbaude un būvēšana;
-- pirmā regresijas paraugu sistēma.
+- regresijas paraugu sistēma ar derīgiem, nederīgiem, robežgadījumu un Unicode paraugiem.
 
-Pēc šī īsā infrastruktūras posma nākamais valodas darbs ir:
+Pašreizējais valodas darbs ir **Fāze 1 — valodas kodols līdz AST v1**.
+
+Nākamais konkrētais uzdevums ir:
 
 **Klases ķermeņa AST v1.**
 
----
+Pirmajā iterācijā jāstrukturē klases lauki, pieejamības modifikatori, `nemaināms`, lauku tipi, konstruktora deklarācija un parametri, kā arī getter deklarācija un atgriezes tips.
+
+Pēc tam secīgi tiks papildināts piešķiršanas AST, ķermeņu un parametru struktūra, veidņu interpolācijas un pirmkoda diapazoni līdz stabilam AST v1 kontraktam.
 
 ## Galvenais tuvākais mērķis
 
@@ -160,7 +160,7 @@ Pirms nopietnas koda ģenerēšanas tiks stabilizēts **AST v1**, kas definēs:
 - obligātos un izvēles laukus;
 - pirmkoda diapazonus;
 - kanoniskās identitātes robežas;
-- strukturēta AST un pagaidu raw tokenu robežu.
+- strukturēta AST un pagaidu neapstrādātu leksisko elementu robežu.
 
 Skatīt:
 

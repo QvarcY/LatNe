@@ -2,8 +2,8 @@
 
 **Atjaunots:** 2026-10-02
 **Stabilais zars:** `main`
-**Aktīvais plānošanas zars:** `docs/roadmap-v2`
-**Nākamā izstrādes fāze:** 0A — reproducējama vide un kvalitātes pārbaudes
+**Darba sākumpunkts:** `main`
+**Nākamā izstrādes fāze:** 1 — klases ķermeņa AST v1
 
 Šis fails ir pirmais lasāmais dokuments, sākot jaunu LatNe darba sesiju.
 
@@ -123,33 +123,34 @@ Sintaktiskais analizators strukturēti saprot:
 - unārās izteiksmes
 - binārās izteiksmes ar pirmajām operatoru prioritātēm
 
-## Kāpēc nākamais darbs vairs nav uzreiz Class AST
+## Kāpēc nākamais darbs ir klases ķermeņa AST v1
 
-Valodas kodols ir izaudzis pietiekami tālu, lai turpmākas sintaktiskā analizatora un koda ģenerēšanas izmaiņas bez automatizētām kvalitātes pārbaudēm palielinātu regresiju risku.
+Fāze 0A ir pabeigta.
 
-Tāpēc pirms nākamās būtiskās sintaktiskā analizatora paplašināšanas tiek izpildīta `ROADMAP.md` fāze:
+Projektam jau ir reproducējama Node.js un pnpm vide, GitHub Actions CI, terminoloģijas un valodas kodola pārbaudes, Vārdu kalves būvēšanas pārbaude un pirmā regresijas paraugu sistēma.
 
-**0A — reproducējama vide un kvalitātes sliedes.**
+Tas nozīmē, ka valodas kodolu tagad var drošāk paplašināt, nepalielinot regresiju risku ar katru jaunu sintakses soli.
 
-Tas nav valodas attīstības apturēšana.
-
-Tas ir īss infrastruktūras posms, lai nākamos valodas soļus varētu veikt droši.
+Pašreizējā lielākā AST robeža ir klases ķermenis.
 
 ## Nākamais izstrādes bloks
 
+**Klases ķermeņa AST v1.**
+
 Secība:
 
-1. fiksēt atbalstīto Node.js izpildvidi
-2. pārbaudīt tīru atkarību instalāciju ar lockfile
-3. izveidot `ci.yml`
-4. CI pieslēgt esošās terminoloģijas, leksiskās analīzes un sintaktiskās analīzes pārbaudes
-5. CI pieslēgt Vārdu kalves pārbaudi un būvēšanu
-6. izveidot pirmo regresijas paraugu sistēmu
-7. pievienot pirmos derīgos, nederīgos, robežgadījumu un Unicode paraugus
+1. strukturēt klases laukus
+2. strukturēt pieejamības modifikatorus
+3. saglabāt `nemaināms` informāciju
+4. strukturēt lauku tipus
+5. strukturēt konstruktora deklarāciju
+6. strukturēt konstruktora parametrus
+7. strukturēt getter deklarāciju
+8. strukturēt getter atgriezes tipu
+9. pievienot regresijas paraugus jaunajai AST struktūrai
+10. pārbaudīt, ka `examples/pamata-paraugs.lat` joprojām iziet pilno kvalitātes pārbaudi
 
-Pēc šī bloka atgriezties pie:
-
-**Klases ķermeņa AST v1.**
+Konstruktora un gettera ķermeņus šajā pirmajā iterācijā vēl drīkst saglabāt kā neapstrādātu leksisko elementu kopas.
 
 ## Nākamā valodas robeža
 
@@ -179,9 +180,9 @@ Esošajam `pamata-paraugs.lat` pēc izmaiņas joprojām jāparsējas veiksmīgi.
 ## Ceļš līdz pirmajai izpildei
 
 ```text
-kvalitātes sliedes
+0A kvalitātes pārbaudes — pabeigts
 ↓
-klases AST
+klases AST ← pašreizējais darbs
 ↓
 piešķiršanas AST
 ↓
@@ -235,11 +236,7 @@ Tai jābūt sasaistītai ar tipu un semantisko operāciju.
 No repozitorija saknes:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\parbaudit-terminologiju.ps1
-node .\packages\valoda\scripts\parbaudit-leksisko-analizi.mjs
-node .\packages\valoda\scripts\parbaudit-sintaktisko-analizi.mjs
-pnpm --filter @latne/vardu-kalve check
-pnpm --filter @latne/vardu-kalve build
+corepack pnpm run check
 git status --short
 ```
 
