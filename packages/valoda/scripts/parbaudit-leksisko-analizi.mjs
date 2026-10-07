@@ -35,6 +35,84 @@ const nezināmie = leksiskieElementi.filter(
   leksiskaisElements => leksiskaisElements.veids === "nezināms"
 )
 
+const diapazonaParaugs =
+  analizēLeksiski(
+    "darbība sveic",
+    vārdnīca
+  )
+
+const darbībasElements =
+  diapazonaParaugs[0]
+
+const nosaukumaElements =
+  diapazonaParaugs[1]
+
+if (
+  darbībasElements
+    ?.diapazons?.sākums.rinda !== 1 ||
+  darbībasElements
+    ?.diapazons?.sākums.kolonna !== 1 ||
+  darbībasElements
+    ?.diapazons?.sākums.nobīde !== 0 ||
+  darbībasElements
+    ?.diapazons?.beigas.rinda !== 1 ||
+  darbībasElements
+    ?.diapazons?.beigas.kolonna !== 8 ||
+  darbībasElements
+    ?.diapazons?.beigas.nobīde !== 7
+) {
+  throw new Error(
+    "Pirmā leksiskā elementa diapazons neatbilst pusatvērtajam kontraktam"
+  )
+}
+
+if (
+  nosaukumaElements
+    ?.diapazons?.sākums.kolonna !== 9 ||
+  nosaukumaElements
+    ?.diapazons?.sākums.nobīde !== 8 ||
+  nosaukumaElements
+    ?.diapazons?.beigas.kolonna !== 14 ||
+  nosaukumaElements
+    ?.diapazons?.beigas.nobīde !== 13
+) {
+  throw new Error(
+    "Otrā leksiskā elementa diapazons neatbilst gaidītajam"
+  )
+}
+
+const veidnesParaugs =
+  analizēLeksiski(
+    "`A ${vērtība}`",
+    vārdnīca
+  )[0]
+
+const interpolācijasElements =
+  veidnesParaugs
+    ?.daļas
+    ?.find(
+      daļa =>
+        daļa.veids ===
+          "interpolācija"
+    )
+    ?.leksiskieElementi
+    ?.[0]
+
+if (
+  interpolācijasElements
+    ?.diapazons?.sākums.nobīde !== 5 ||
+  interpolācijasElements
+    ?.diapazons?.beigas.nobīde !== 12 ||
+  interpolācijasElements
+    ?.diapazons?.sākums.kolonna !== 6 ||
+  interpolācijasElements
+    ?.diapazons?.beigas.kolonna !== 13
+) {
+  throw new Error(
+    "Veidnes interpolācijas leksiskā elementa absolūtais diapazons nav saglabāts"
+  )
+}
+
 console.log("")
 console.log("LatNe leksiskā analīze")
 console.log(`Apstiprināti termini: ${vārdnīca.size}`)
