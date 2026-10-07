@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises"
 import { fileURLToPath } from "node:url"
 import {
-  izveidoVardnicu,
-  analizeLeksiski
+  izveidoVārdnīcu,
+  analizēLeksiski
 } from "../src/leksiskais-analizators.mjs"
 
 const registrsPath = fileURLToPath(
@@ -28,18 +28,18 @@ const teksts = await readFile(
   "utf8"
 )
 
-const vardnica = izveidoVardnicu(registrs)
-const leksiskieElementi = analizeLeksiski(teksts, vardnica)
+const vārdnīca = izveidoVārdnīcu(registrs)
+const leksiskieElementi = analizēLeksiski(teksts, vārdnīca)
 
-const nezinamie = leksiskieElementi.filter(
+const nezināmie = leksiskieElementi.filter(
   leksiskaisElements => leksiskaisElements.veids === "nezināms"
 )
 
 console.log("")
 console.log("LatNe leksiskā analīze")
-console.log(`Apstiprināti termini: ${vardnica.size}`)
+console.log(`Apstiprināti termini: ${vārdnīca.size}`)
 console.log(`Leksiskie elementi: ${leksiskieElementi.length}`)
-console.log(`Nezināmi: ${nezinamie.length}`)
+console.log(`Nezināmi: ${nezināmie.length}`)
 console.log("")
 
 for (const leksiskaisElements of leksiskieElementi.slice(0, 40)) {
@@ -50,19 +50,19 @@ for (const leksiskaisElements of leksiskieElementi.slice(0, 40)) {
   console.log(
     `${leksiskaisElements.rinda}:${leksiskaisElements.kolonna}` +
     `  ${leksiskaisElements.veids}` +
-    `  ${leksiskaisElements.vertiba}` +
+    `  ${leksiskaisElements.vērtība}` +
     avots
   )
 }
 
-if (nezinamie.length > 0) {
+if (nezināmie.length > 0) {
   console.log("")
   console.log("Nezināmie simboli:")
 
-  for (const leksiskaisElements of nezinamie) {
+  for (const leksiskaisElements of nezināmie) {
     console.log(
       `${leksiskaisElements.rinda}:${leksiskaisElements.kolonna}` +
-      `  ${leksiskaisElements.vertiba}`
+      `  ${leksiskaisElements.vērtība}`
     )
   }
 

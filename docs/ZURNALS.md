@@ -1478,3 +1478,59 @@ Pages galvenes mazā zīme paliek vienkārša un salasāma mazos izmēros.
 Nākamais engineering uzdevums:
 
 **Pirmkoda diapazona informācija AST mezgliem.**
+
+---
+
+## 2026-10-08 — J0030 — Latviešu identifikatoru normalizācijas recovery
+
+**Tips:** parseris / AST / kvalitāte / tehniskais parāds
+**Statuss:** pabeigts
+
+Pirms pirmkoda diapazonu AST darba tika apturēta turpmāka implementācija, jo jaunajam kontraktam bija izmantotas transliterētas formas `sakums` un `nobide`.
+
+Paplašināts audits atklāja, ka tā pati problēma jau pastāv esošajā lexer/parser/AST kodolā.
+
+Audita sākuma rezultāts:
+
+- 327 kritiski lietojumi
+- 25 kritiskas transliterētas formas
+
+Normalizēti:
+
+- lexer un parsera publiskie eksporti
+- tokenu publiskie lauki
+- AST publiskie lauki
+- saistītie iekšējie latviskie identifikatori
+- sintakses un regresijas pārbaudes
+
+Piemēri:
+
+```text
+izveidoVardnicu  → izveidoVārdnīcu
+analizeSintaksi  → analizēSintaksi
+vertiba          → vērtība
+kermenis         → ķermenis
+pieejamiba       → pieejamība
+merkis           → mērķis
+```
+
+Pievienots pastāvīgs quality gate:
+
+`corepack pnpm run check:identifikatori`
+
+Pēc normalizācijas:
+
+- repo-wide veco publisko transliterēto identifikatoru atlikums: 0
+- terminoloģija: 84/84 approved
+- kanoniskais lexer baseline: 196
+- nezināmi leksiskie elementi: 0
+- augšējā līmeņa AST mezgli: 5
+- klases ķermeņa mezgli: 6
+- veidnes daļas: 4
+- veidnes interpolācijas: 2
+- regresijas paraugi: 4/4 atbilstoši gaidītajam
+- Vārdu kalves TypeScript check un production build: zaļš
+
+Nākamais engineering uzdevums paliek:
+
+**Pirmkoda diapazona informācija AST mezgliem**, izmantojot pareizu latviešu rakstību, tostarp `sākums` un `nobīde`.

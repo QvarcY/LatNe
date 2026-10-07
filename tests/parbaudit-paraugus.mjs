@@ -3,12 +3,12 @@ import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import {
-  izveidoVardnicu,
-  analizeLeksiski
+  izveidoVārdnīcu,
+  analizēLeksiski
 } from "../packages/valoda/src/leksiskais-analizators.mjs"
 
 import {
-  analizeSintaksi
+  analizēSintaksi
 } from "../packages/valoda/src/sintaktiskais-analizators.mjs"
 
 const parauguSakne = fileURLToPath(
@@ -26,7 +26,7 @@ const registrs = JSON.parse(
   await readFile(registryPath, "utf8")
 )
 
-const vardnica = izveidoVardnicu(registrs)
+const vārdnīca = izveidoVārdnīcu(registrs)
 
 const grupas = [
   {
@@ -72,52 +72,52 @@ for (const grupa of grupas) {
   for (const fails of faili) {
     paraugi++
 
-    const cela = join(mape, fails)
+    const ceļa = join(mape, fails)
 
     const teksts = await readFile(
-      cela,
+      ceļa,
       "utf8"
     )
 
-    const leksiskieElementi = analizeLeksiski(
+    const leksiskieElementi = analizēLeksiski(
       teksts,
-      vardnica
+      vārdnīca
     )
 
-    const nezinamie = leksiskieElementi.filter(
+    const nezināmie = leksiskieElementi.filter(
       leksiskaisElements =>
         leksiskaisElements.veids === "nezināms"
     )
 
-    if (nezinamie.length > 0) {
+    if (nezināmie.length > 0) {
       throw new Error(
         `${grupa.nosaukums}/${fails}: ` +
-        `${nezinamie.length} nezināmi leksiskieElementi`
+        `${nezināmie.length} nezināmi leksiskieElementi`
       )
     }
 
-    let kluda = null
+    let kļūda = null
 
     try {
-      analizeSintaksi(leksiskieElementi)
+      analizēSintaksi(leksiskieElementi)
     }
     catch (error) {
-      kluda = error
+      kļūda = error
     }
 
     if (
       grupa.parsējas &&
-      kluda
+      kļūda
     ) {
       throw new Error(
         `${grupa.nosaukums}/${fails}: ` +
-        `negaidīta sintaktiskās analīzes kļūda: ${kluda.message}`
+        `negaidīta sintaktiskās analīzes kļūda: ${kļūda.message}`
       )
     }
 
     if (
       !grupa.parsējas &&
-      !kluda
+      !kļūda
     ) {
       throw new Error(
         `${grupa.nosaukums}/${fails}: ` +
@@ -125,13 +125,13 @@ for (const grupa of grupas) {
       )
     }
 
-    const rezultats =
+    const rezultāts =
       grupa.parsējas
         ? "OK"
         : "REJECTED"
 
     console.log(
-      `${rezultats}  ${grupa.nosaukums}/${fails}`
+      `${rezultāts}  ${grupa.nosaukums}/${fails}`
     )
   }
 }

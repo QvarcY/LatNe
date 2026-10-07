@@ -103,3 +103,21 @@ Drošības pārbaude apturēja patch pirms bojāta `parser.mjs` saglabāšanas.
 **Labojums:** vietās, kur paredzamas vairākas identiskas sakritības, izmantot kontrolētu visu sakritību aizstāšanu un pēc patch pārbaudīt, ka vecā konstrukcija vairs nepastāv.
 
 **Mācība:** teksta patch skriptiem jāvalidē ne tikai paredzētā jaunā konstrukcija, bet arī vecās konstrukcijas pilnīga pazušana.
+
+---
+
+## 2026-10-08 — K0009 — Latviskie identifikatori tika transliterēti pirms AST v1
+
+**Novērojums:** AST v1 sagatavošanas laikā tika pamanīts, ka jaunajam pirmkoda diapazona kontraktam bija piedāvātas formas `sakums` un `nobide` pareizo `sākums` un `nobīde` vietā.
+
+**Audits:** pārbaudot esošo lexer/parser/AST kodolu, tika atrasti 327 kritiski transliterētu identifikatoru lietojumi 25 formām.
+
+**Iemesls:** iepriekšējos parsera attīstības soļos JavaScript identifikatori tika rakstīti bez latviešu diakritiskajām zīmēm, lai gan LatNe projektam nebija tehniska iemesla šo ierobežojumu ieviest.
+
+**Sekas:** ja AST v1 tiktu stabilizēts šādā formā, transliterētie lauku un API nosaukumi kļūtu par ilgtermiņa saderības parādu.
+
+**Labojums:** normalizēti lexer/parser eksporti, tokenu un AST lauki, kā arī saistītie iekšējie identifikatori. Repo-wide pārbaude pēc labojuma neatrod vecos publiskos transliterētos identifikatorus.
+
+**Aizsardzība:** pilnajai kvalitātes ķēdei pievienota `check:identifikatori` pārbaude, kas rekursīvi pārbauda LatNe valodas kodolu un testus.
+
+**Mācība:** LatNe-owned latvisks identifikators nav "tehnisks ASCII nosaukums". Ja JavaScript atbalsta vajadzīgo Unicode identifikatoru, jāizmanto pareiza latviešu rakstība jau pirms publiskā kontrakta stabilizācijas.

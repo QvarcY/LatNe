@@ -7,6 +7,12 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 ## [Unreleased]
 
 ### Added
+#### 2026-10-08
+- normalizēti LatNe lexer, parsera, tokenu un AST latviskie identifikatori uz pareizu rakstību ar diakritiskajām zīmēm
+- publiskie parsera eksporti pārdēvēti uz `izveidoVārdnīcu`, `analizēLeksiski`, `analizēIzteiksmi`, `analizēPriekšrakstus`, `analizēSintaksi`, `analizēKlasesĶermeni` un `analizēParametrus`
+- tokenu un AST lauki, tostarp `vērtība`, `daļas`, `deklarācija`, `mainīgais`, `nosacījums`, `ķermenis`, `pieejamība`, `nemaināms`, `kreisā`, `labā` un `mērķis`, nostiprināti ar pareizu latviešu ortogrāfiju
+- pievienota pastāvīga `check:identifikatori` kvalitātes pārbaude pret transliterētu LatNe identifikatoru atgriešanos
+
 #### 2026-10-07
 - ieviests strukturēts klases ķermeņa AST
 - strukturēti klases lauki, pieejamības modifikatori, lauku tipi un `nemaināms` stāvoklis

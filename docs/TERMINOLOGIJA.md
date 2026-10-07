@@ -46,6 +46,25 @@ Katram kandidātam atsevišķi jāizlemj:
 - vai kandidāts jāsadala vairākās LatNe konstrukcijās
 - vai vairākus avota vārdus var apvienot vienā LatNe jēdzienā
 
+## Rakstība koda identifikatoros
+
+LatNe-owned publiskie un iekšējie identifikatori, ja tie ir latviešu vārdi, tiek rakstīti pilnā latviešu ortogrāfijā ar diakritiskajām zīmēm.
+
+Piemēri:
+
+- `vērtība`, nevis `vertiba`
+- `ķermenis`, nevis `kermenis`
+- `pieejamība`, nevis `pieejamiba`
+- `analizēSintaksi`, nevis `analizeSintaksi`
+- `sākums`, nevis `sakums`
+- `nobīde`, nevis `nobide`
+
+Šis princips attiecas uz lexer/parser API, tokenu kontraktu, AST laukiem un LatNe iekšējiem latviskajiem identifikatoriem.
+
+Ārēju formātu, trešo pušu API, URL, pakotņu ekosistēmu un citu tehniski noteiktu nosaukumu transliterācija vai angļu forma netiek automātiski pārdēvēta bez atsevišķa lēmuma.
+
+Transliterētu LatNe identifikatoru atgriešanos bloķē `check:identifikatori`.
+
 ## Pašreizējais stāvoklis
 
 Inventāra versijā 1 ir 84 kandidāti.

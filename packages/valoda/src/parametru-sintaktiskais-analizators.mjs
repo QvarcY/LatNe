@@ -1,19 +1,19 @@
-function sintaksesKluda(
-  zina,
+function sintaksesKļūda(
+  ziņa,
   leksiskaisElements
 ) {
   if (!leksiskaisElements) {
     throw new SyntaxError(
-      `${zina} faila beigās`
+      `${ziņa} faila beigās`
     )
   }
 
   throw new SyntaxError(
-    `${zina} rindā ${leksiskaisElements.rinda}, kolonnā ${leksiskaisElements.kolonna}: ${leksiskaisElements.vertiba}`
+    `${ziņa} rindā ${leksiskaisElements.rinda}, kolonnā ${leksiskaisElements.kolonna}: ${leksiskaisElements.vērtība}`
   )
 }
 
-export function analizeParametrus(
+export function analizēParametrus(
   leksiskieElementi,
   konteksts = "darbības"
 ) {
@@ -21,86 +21,86 @@ export function analizeParametrus(
     return []
   }
 
-  const dalas = []
-  let dala = []
+  const daļas = []
+  let daļa = []
 
   let iekavas = 0
-  let kvadratiekavas = 0
-  let figuriiekavas = 0
+  let kvadrātiekavas = 0
+  let figūriekavas = 0
 
   for (
     const leksiskaisElements
     of leksiskieElementi
   ) {
-    const dzilums =
+    const dziļums =
       iekavas +
-      kvadratiekavas +
-      figuriiekavas
+      kvadrātiekavas +
+      figūriekavas
 
     if (
-      leksiskaisElements.vertiba === "," &&
-      dzilums === 0
+      leksiskaisElements.vērtība === "," &&
+      dziļums === 0
     ) {
-      if (dala.length === 0) {
-        sintaksesKluda(
+      if (daļa.length === 0) {
+        sintaksesKļūda(
           `Tukšs ${konteksts} parametrs`,
           leksiskaisElements
         )
       }
 
-      dalas.push(dala)
-      dala = []
+      daļas.push(daļa)
+      daļa = []
       continue
     }
 
-    dala.push(leksiskaisElements)
+    daļa.push(leksiskaisElements)
 
     if (
-      leksiskaisElements.vertiba === "("
+      leksiskaisElements.vērtība === "("
     ) {
       iekavas++
     }
     else if (
-      leksiskaisElements.vertiba === ")"
+      leksiskaisElements.vērtība === ")"
     ) {
       iekavas--
     }
     else if (
-      leksiskaisElements.vertiba === "["
+      leksiskaisElements.vērtība === "["
     ) {
-      kvadratiekavas++
+      kvadrātiekavas++
     }
     else if (
-      leksiskaisElements.vertiba === "]"
+      leksiskaisElements.vērtība === "]"
     ) {
-      kvadratiekavas--
+      kvadrātiekavas--
     }
     else if (
-      leksiskaisElements.vertiba === "{"
+      leksiskaisElements.vērtība === "{"
     ) {
-      figuriiekavas++
+      figūriekavas++
     }
     else if (
-      leksiskaisElements.vertiba === "}"
+      leksiskaisElements.vērtība === "}"
     ) {
-      figuriiekavas--
+      figūriekavas--
     }
   }
 
-  if (dala.length > 0) {
-    dalas.push(dala)
+  if (daļa.length > 0) {
+    daļas.push(daļa)
   }
 
-  return dalas.map(dala => {
-    const nosaukums = dala[0]
-    const kols = dala[1]
-    const tipaElementi = dala.slice(2)
+  return daļas.map(daļa => {
+    const nosaukums = daļa[0]
+    const kols = daļa[1]
+    const tipaElementi = daļa.slice(2)
 
     if (
       !nosaukums ||
       nosaukums.veids !== "identifikators"
     ) {
-      sintaksesKluda(
+      sintaksesKļūda(
         `Gaidīts ${konteksts} parametra nosaukums`,
         nosaukums
       )
@@ -108,16 +108,16 @@ export function analizeParametrus(
 
     if (
       !kols ||
-      kols.vertiba !== ":"
+      kols.vērtība !== ":"
     ) {
-      sintaksesKluda(
+      sintaksesKļūda(
         `Gaidīts ":" aiz ${konteksts} parametra`,
         kols ?? nosaukums
       )
     }
 
     if (tipaElementi.length === 0) {
-      sintaksesKluda(
+      sintaksesKļūda(
         `Gaidīts ${konteksts} parametra tips`,
         kols
       )
@@ -125,12 +125,12 @@ export function analizeParametrus(
 
     return {
       veids: "Parametrs",
-      nosaukums: nosaukums.vertiba,
+      nosaukums: nosaukums.vērtība,
       tips:
         tipaElementi
           .map(
             leksiskaisElements =>
-              leksiskaisElements.vertiba
+              leksiskaisElements.vērtība
           )
           .join(""),
       rinda: nosaukums.rinda

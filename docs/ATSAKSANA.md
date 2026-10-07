@@ -1,6 +1,6 @@
 # LatNe darba atsākšana
 
-**Atjaunots:** 2026-10-07
+**Atjaunots:** 2026-10-08
 **Stabilais zars:** `main`
 **Darba sākumpunkts:** `main`
 **Nākamā izstrādes fāze:** 1 — pirmkoda diapazoni AST mezgliem
@@ -84,6 +84,8 @@ Pārbaudes skripti:
 
 `packages/valoda/scripts/parbaudit-sintaktisko-analizi.mjs`
 
+`packages/valoda/scripts/pārbaudīt-latviskos-identifikatorus.mjs`
+
 Publiskā ceļa karte:
 
 `ROADMAP.md`
@@ -143,7 +145,9 @@ Tehniskie checkpointi:
 - `fe4ab65` — strukturēts darbības parametru AST
 - `c617074` — strukturēts veidņu interpolāciju AST
 
-Pilnais `corepack pnpm run check` pēc `c617074` ir zaļš.
+Pēc identifikatoru normalizācijas pilnais `corepack pnpm run check` ir zaļš.
+
+Repo-wide auditā veco publisko transliterēto lexer/parser/AST identifikatoru atlikums ir 0.
 
 ## Pašreizējā robeža
 
@@ -163,8 +167,8 @@ AST mezgliem vēl nav vienota sākuma/beigu pirmkoda diapazona kontrakta.
 
 Mērķis:
 
-1. definēt minimālo diapazona formu AST v1
-2. saglabāt sākuma un beigu pozīciju konsekventā formā
+1. definēt minimālo diapazona formu AST v1 ar kanonisku latviešu rakstību
+2. saglabāt `sākums`, `beigas` un `nobīde` konsekventā formā
 3. sākt ar reprezentatīviem deklarāciju, priekšrakstu un izteiksmju mezgliem
 4. nepazaudēt pašreizējo `rinda` informāciju pārejas laikā
 5. pievienot regresijas pārbaudes

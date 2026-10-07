@@ -1,6 +1,6 @@
 # LatNe statuss
 
-**Atjaunots:** 2026-10-07
+**Atjaunots:** 2026-10-08
 **Pašreizējais valodas stāvoklis:** strukturēts AST līdz vienotam parametru kontraktam un veidņu interpolācijām
 **Nākamā izstrādes fāze:** 1 — pirmkoda diapazoni AST mezgliem
 
@@ -45,6 +45,8 @@ Valodas kodols:
 - strukturēti augšējā līmeņa `Darbība` parametri
 - vienots `Parametrs` AST konstruktoram, metodei un darbībai
 - strukturētas veidņu literāļu interpolācijas
+- normalizēta LatNe-owned lexer, parsera, tokenu un AST identifikatoru rakstība ar pilnām latviešu diakritiskajām zīmēm
+- ieviests pastāvīgs transliterētu LatNe identifikatoru quality gate
 
 Publiskā infrastruktūra:
 
@@ -160,6 +162,7 @@ Tas ietver:
 - tīra atkarību instalācija pārbaudīta ar pnpm 12.6.0 un frozen lockfile
 - GitHub Actions CI darbojas uz Linux
 - terminoloģijas validācija darbojas CI
+- LatNe identifikatoru ortogrāfijas pārbaude darbojas pilnajā kvalitātes ķēdē
 - leksiskās analīzes pārbaude darbojas CI
 - sintaktiskās analīzes pārbaude darbojas CI
 - Vārdu kalves pārbaude un būvēšana darbojas CI
@@ -175,6 +178,8 @@ Vienotais parametru AST un veidņu interpolāciju AST ir strukturēti.
 Nākamajā solī jādefinē un jāievieš konsekventa pirmkoda atrašanās vietas informācija AST mezgliem, lai nākamajos posmos varētu būvēt precīzu diagnostiku, pirmkoda kartes un stabilu AST v1 kontraktu.
 
 Pirmajā iterācijā jāvienojas par minimālo diapazona formu un jānostiprina tā ar regresijas pārbaudēm.
+
+Jaunie AST lauki jāveido tikai ar pilnu latviešu rakstību. Plānotais diapazona kontrakts nedrīkst ieviest transliterētas formas, piemēram, `sakums` vai `nobide`; jāizmanto `sākums` un `nobīde`.
 
 ## Ceļš līdz pirmajai palaišanai
 

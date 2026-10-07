@@ -1,34 +1,34 @@
 import {
-  analizeParametrus
+  analizēParametrus
 } from "./parametru-sintaktiskais-analizators.mjs"
 
-function sintaksesKluda(zina, leksiskaisElements) {
+function sintaksesKļūda(ziņa, leksiskaisElements) {
   if (!leksiskaisElements) {
-    throw new SyntaxError(`${zina} faila beigās`)
+    throw new SyntaxError(`${ziņa} faila beigās`)
   }
 
   throw new SyntaxError(
-    `${zina} rindā ${leksiskaisElements.rinda}, kolonnā ${leksiskaisElements.kolonna}: ${leksiskaisElements.vertiba}`
+    `${ziņa} rindā ${leksiskaisElements.rinda}, kolonnā ${leksiskaisElements.kolonna}: ${leksiskaisElements.vērtība}`
   )
 }
 
-export function analizeKlasesKermeni(
+export function analizēKlasesĶermeni(
   leksiskieElementi,
-  prieksrakstuAnalizators = null
+  priekšrakstuAnalizators = null
 ) {
   let indekss = 0
 
-  const kermenis = []
+  const ķermenis = []
   const lauki = []
   let konstruktors = null
   const getteri = []
   const metodes = []
 
-  const esosais = () =>
+  const esošais = () =>
     leksiskieElementi[indekss] ?? null
 
-  const panem = () => {
-    const leksiskaisElements = esosais()
+  const paņem = () => {
+    const leksiskaisElements = esošais()
 
     if (leksiskaisElements) {
       indekss++
@@ -38,7 +38,7 @@ export function analizeKlasesKermeni(
   }
 
   const irAvots = avots => {
-    const leksiskaisElements = esosais()
+    const leksiskaisElements = esošais()
 
     return Boolean(
       leksiskaisElements &&
@@ -47,17 +47,17 @@ export function analizeKlasesKermeni(
     )
   }
 
-  const irVertiba = vertiba =>
-    esosais()?.vertiba === vertiba
+  const irVērtība = vērtība =>
+    esošais()?.vērtība === vērtība
 
   const gaidiVeidu = veids => {
-    const leksiskaisElements = esosais()
+    const leksiskaisElements = esošais()
 
     if (
       !leksiskaisElements ||
       leksiskaisElements.veids !== veids
     ) {
-      sintaksesKluda(
+      sintaksesKļūda(
         `Gaidīts leksiskā elementa veids "${veids}"`,
         leksiskaisElements
       )
@@ -67,15 +67,15 @@ export function analizeKlasesKermeni(
     return leksiskaisElements
   }
 
-  const gaidiVertibu = vertiba => {
-    const leksiskaisElements = esosais()
+  const gaidiVērtību = vērtība => {
+    const leksiskaisElements = esošais()
 
     if (
       !leksiskaisElements ||
-      leksiskaisElements.vertiba !== vertiba
+      leksiskaisElements.vērtība !== vērtība
     ) {
-      sintaksesKluda(
-        `Gaidīts "${vertiba}"`,
+      sintaksesKļūda(
+        `Gaidīts "${vērtība}"`,
         leksiskaisElements
       )
     }
@@ -84,117 +84,117 @@ export function analizeKlasesKermeni(
     return leksiskaisElements
   }
 
-  const nolasitGrupu = (
-    atverosa,
-    aizverosa
+  const nolasītGrupu = (
+    atverošā,
+    aizverošā
   ) => {
-    gaidiVertibu(atverosa)
+    gaidiVērtību(atverošā)
 
     const saturs = []
-    let dzilums = 1
+    let dziļums = 1
 
     while (indekss < leksiskieElementi.length) {
-      const leksiskaisElements = panem()
+      const leksiskaisElements = paņem()
 
-      if (leksiskaisElements.vertiba === atverosa) {
-        dzilums++
+      if (leksiskaisElements.vērtība === atverošā) {
+        dziļums++
       }
-      else if (leksiskaisElements.vertiba === aizverosa) {
-        dzilums--
+      else if (leksiskaisElements.vērtība === aizverošā) {
+        dziļums--
 
-        if (dzilums === 0) {
+        if (dziļums === 0) {
           return saturs
         }
       }
 
-      if (dzilums > 0) {
+      if (dziļums > 0) {
         saturs.push(leksiskaisElements)
       }
     }
 
-    sintaksesKluda(
-      `Nav aizvērta grupa "${atverosa}"`,
+    sintaksesKļūda(
+      `Nav aizvērta grupa "${atverošā}"`,
       null
     )
   }
 
   while (indekss < leksiskieElementi.length) {
-    if (irVertiba(";")) {
-      panem()
+    if (irVērtība(";")) {
+      paņem()
       continue
     }
 
-    let pieejamiba = null
-    let nemainams = false
+    let pieejamība = null
+    let nemaināms = false
 
     if (
       irAvots("public") ||
       irAvots("protected") ||
       irAvots("private")
     ) {
-      pieejamiba = panem().avots
+      pieejamība = paņem().avots
     }
 
     if (irAvots("readonly")) {
-      nemainams = true
-      panem()
+      nemaināms = true
+      paņem()
     }
 
     if (irAvots("constructor")) {
-      const sakums = panem()
+      const sākums = paņem()
 
-      if (nemainams) {
-        sintaksesKluda(
+      if (nemaināms) {
+        sintaksesKļūda(
           'Modifikators "readonly" nav derīgs konstruktoram',
-          sakums
+          sākums
         )
       }
 
       if (konstruktors) {
-        sintaksesKluda(
+        sintaksesKļūda(
           "Klasei jau ir konstruktors",
-          sakums
+          sākums
         )
       }
 
       const parametruElementi =
-        nolasitGrupu("(", ")")
+        nolasītGrupu("(", ")")
 
-      const konstruktoraKermenis =
-        nolasitGrupu("{", "}")
+      const konstruktoraĶermenis =
+        nolasītGrupu("{", "}")
 
       konstruktors = {
         veids: "Konstruktors",
-        pieejamiba,
+        pieejamība,
         parametri:
-          analizeParametrus(
+          analizēParametrus(
             parametruElementi,
             "konstruktora"
           ),
-        kermenis:
-          typeof prieksrakstuAnalizators ===
+        ķermenis:
+          typeof priekšrakstuAnalizators ===
             "function"
-            ? prieksrakstuAnalizators(
-                konstruktoraKermenis
+            ? priekšrakstuAnalizators(
+                konstruktoraĶermenis
               )
             : null,
-        kermenaLeksiskieElementi:
-          konstruktoraKermenis,
-        rinda: sakums.rinda
+        ķermeņaLeksiskieElementi:
+          konstruktoraĶermenis,
+        rinda: sākums.rinda
       }
 
-      kermenis.push(konstruktors)
+      ķermenis.push(konstruktors)
 
       continue
     }
 
     if (irAvots("get")) {
-      const sakums = panem()
+      const sākums = paņem()
 
-      if (nemainams) {
-        sintaksesKluda(
+      if (nemaināms) {
+        sintaksesKļūda(
           'Modifikators "readonly" nav derīgs getterim',
-          sakums
+          sākums
         )
       }
 
@@ -202,69 +202,69 @@ export function analizeKlasesKermeni(
         gaidiVeidu("identifikators")
 
       const parametri =
-        nolasitGrupu("(", ")")
+        nolasītGrupu("(", ")")
 
       if (parametri.length > 0) {
-        sintaksesKluda(
+        sintaksesKļūda(
           "Getterim nedrīkst būt parametri",
           parametri[0]
         )
       }
 
-      gaidiVertibu(":")
+      gaidiVērtību(":")
 
       const atgriezesTips = []
 
       while (
-        esosais() &&
-        !irVertiba("{")
+        esošais() &&
+        !irVērtība("{")
       ) {
         atgriezesTips.push(
-          panem().vertiba
+          paņem().vērtība
         )
       }
 
       if (atgriezesTips.length === 0) {
-        sintaksesKluda(
+        sintaksesKļūda(
           "Gaidīts gettera atgriezes tips",
-          esosais()
+          esošais()
         )
       }
 
-      const getteraKermenis =
-        nolasitGrupu("{", "}")
+      const getteraĶermenis =
+        nolasītGrupu("{", "}")
 
       const getteris = {
         veids: "Getteris",
-        nosaukums: nosaukums.vertiba,
-        pieejamiba,
+        nosaukums: nosaukums.vērtība,
+        pieejamība,
         atgriezesTips:
           atgriezesTips.join(""),
-        kermenis:
-          typeof prieksrakstuAnalizators ===
+        ķermenis:
+          typeof priekšrakstuAnalizators ===
             "function"
-            ? prieksrakstuAnalizators(
-                getteraKermenis
+            ? priekšrakstuAnalizators(
+                getteraĶermenis
               )
             : null,
-        kermenaLeksiskieElementi:
-          getteraKermenis,
-        rinda: sakums.rinda
+        ķermeņaLeksiskieElementi:
+          getteraĶermenis,
+        rinda: sākums.rinda
       }
 
       getteri.push(getteris)
-      kermenis.push(getteris)
+      ķermenis.push(getteris)
 
       continue
     }
 
     if (irAvots("function")) {
-      const sakums = panem()
+      const sākums = paņem()
 
-      if (nemainams) {
-        sintaksesKluda(
+      if (nemaināms) {
+        sintaksesKļūda(
           'Modifikators "readonly" nav derīgs metodei',
-          sakums
+          sākums
         )
       }
 
@@ -272,51 +272,51 @@ export function analizeKlasesKermeni(
         gaidiVeidu("identifikators")
 
       const parametruElementi =
-        nolasitGrupu("(", ")")
+        nolasītGrupu("(", ")")
 
       const atgriezesTips = []
 
-      if (irVertiba(":")) {
-        panem()
+      if (irVērtība(":")) {
+        paņem()
 
         while (
-          esosais() &&
-          !irVertiba("{")
+          esošais() &&
+          !irVērtība("{")
         ) {
           atgriezesTips.push(
-            panem().vertiba
+            paņem().vērtība
           )
         }
       }
 
-      const metodesKermenis =
-        nolasitGrupu("{", "}")
+      const metodesĶermenis =
+        nolasītGrupu("{", "}")
 
       const metode = {
         veids: "Metode",
-        nosaukums: nosaukums.vertiba,
-        pieejamiba,
+        nosaukums: nosaukums.vērtība,
+        pieejamība,
         parametri:
-          analizeParametrus(
+          analizēParametrus(
             parametruElementi,
             "metodes"
           ),
         atgriezesTips:
           atgriezesTips.join(""),
-        kermenis:
-          typeof prieksrakstuAnalizators ===
+        ķermenis:
+          typeof priekšrakstuAnalizators ===
             "function"
-            ? prieksrakstuAnalizators(
-                metodesKermenis
+            ? priekšrakstuAnalizators(
+                metodesĶermenis
               )
             : null,
-        kermenaLeksiskieElementi:
-          metodesKermenis,
-        rinda: sakums.rinda
+        ķermeņaLeksiskieElementi:
+          metodesĶermenis,
+        rinda: sākums.rinda
       }
 
       metodes.push(metode)
-      kermenis.push(metode)
+      ķermenis.push(metode)
 
       continue
     }
@@ -324,46 +324,46 @@ export function analizeKlasesKermeni(
     const nosaukums =
       gaidiVeidu("identifikators")
 
-    gaidiVertibu(":")
+    gaidiVērtību(":")
 
     const tipaElementi = []
 
     while (
-      esosais() &&
-      esosais().rinda === nosaukums.rinda &&
-      !irVertiba(";")
+      esošais() &&
+      esošais().rinda === nosaukums.rinda &&
+      !irVērtība(";")
     ) {
       tipaElementi.push(
-        panem().vertiba
+        paņem().vērtība
       )
     }
 
     if (tipaElementi.length === 0) {
-      sintaksesKluda(
+      sintaksesKļūda(
         "Gaidīts klases lauka tips",
-        esosais() ?? nosaukums
+        esošais() ?? nosaukums
       )
     }
 
-    if (irVertiba(";")) {
-      panem()
+    if (irVērtība(";")) {
+      paņem()
     }
 
     const lauks = {
       veids: "KlasesLauks",
-      nosaukums: nosaukums.vertiba,
-      pieejamiba,
-      nemainams,
+      nosaukums: nosaukums.vērtība,
+      pieejamība,
+      nemaināms,
       tips: tipaElementi.join(""),
       rinda: nosaukums.rinda
     }
 
     lauki.push(lauks)
-    kermenis.push(lauks)
+    ķermenis.push(lauks)
   }
 
   return {
-    kermenis,
+    ķermenis,
     lauki,
     konstruktors,
     getteri,

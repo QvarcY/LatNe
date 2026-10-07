@@ -2,16 +2,16 @@ import { readFile } from "node:fs/promises"
 import { fileURLToPath } from "node:url"
 
 import {
-  izveidoVardnicu,
-  analizeLeksiski
+  izveidoVārdnīcu,
+  analizēLeksiski
 } from "../src/leksiskais-analizators.mjs"
 
 import {
-  analizeSintaksi
+  analizēSintaksi
 } from "../src/sintaktiskais-analizators.mjs"
 
 import {
-  analizeIzteiksmi as analizeIzteiksmesAst
+  analizēIzteiksmi as analizēIzteiksmesAst
 } from "../src/izteiksmju-sintaktiskais-analizators.mjs"
 
 const registrsPath = fileURLToPath(
@@ -40,50 +40,50 @@ const teksts = await readFile(
   "utf8"
 )
 
-const vardnica =
-  izveidoVardnicu(registrs)
+const vārdnīca =
+  izveidoVārdnīcu(registrs)
 
 const leksiskieElementi =
-  analizeLeksiski(teksts, vardnica)
+  analizēLeksiski(teksts, vārdnīca)
 
-const nezinamie = leksiskieElementi.filter(
+const nezināmie = leksiskieElementi.filter(
   leksiskaisElements =>
     leksiskaisElements.veids === "nezināms"
 )
 
-if (nezinamie.length > 0) {
+if (nezināmie.length > 0) {
   throw new Error(
-    `Sintaktisko analīzi nevar palaist: ${nezinamie.length} nezināmi leksiskieElementi`
+    `Sintaktisko analīzi nevar palaist: ${nezināmie.length} nezināmi leksiskieElementi`
   )
 }
 
-const ast = analizeSintaksi(leksiskieElementi)
+const ast = analizēSintaksi(leksiskieElementi)
 
-const darbiba = ast.elementi.find(
+const darbība = ast.elementi.find(
   mezgls =>
     mezgls.veids === "Darbība"
 )
 
-if (!darbiba) {
+if (!darbība) {
   throw new Error(
     "AST nav atrasta augšējā līmeņa darbība"
   )
 }
 
-if (!Array.isArray(darbiba.parametri)) {
+if (!Array.isArray(darbība.parametri)) {
   throw new Error(
     "Darbības parametri nav strukturēts AST masīvs"
   )
 }
 
-if (darbiba.parametri.length !== 0) {
+if (darbība.parametri.length !== 0) {
   throw new Error(
     "Kanoniskajai darbībai negaidīti parametri"
   )
 }
 
 if (
-  darbiba.parametruLeksiskoElementuSkaits !==
+  darbība.parametruLeksiskoElementuSkaits !==
     0
 ) {
   throw new Error(
@@ -92,7 +92,7 @@ if (
 }
 
 if (
-  "parametruLeksiskieElementi" in darbiba
+  "parametruLeksiskieElementi" in darbība
 ) {
   throw new Error(
     "Darbības AST satur veco neviennozīmīgo parametruLeksiskieElementi lauku"
@@ -100,32 +100,32 @@ if (
 }
 
 const parametruParaugaAst =
-  analizeSintaksi(
-    analizeLeksiski(
+  analizēSintaksi(
+    analizēLeksiski(
       `darbība sveic(
   vārds: teksts,
   reizes: skaitlis
 ): teksts {
   atgriez vārds
 }`,
-      vardnica
+      vārdnīca
     )
   )
 
-const parametruParaugaDarbiba =
+const parametruParaugaDarbība =
   parametruParaugaAst.elementi.find(
     mezgls =>
       mezgls.veids === "Darbība" &&
       mezgls.nosaukums === "sveic"
   )
 
-if (!parametruParaugaDarbiba) {
+if (!parametruParaugaDarbība) {
   throw new Error(
     "Parametru regresijas AST nav atrasta darbība"
   )
 }
 
-const gaiditieDarbibasParametri = [
+const gaidītieDarbībasParametri = [
   {
     nosaukums: "vārds",
     tips: "teksts"
@@ -137,8 +137,8 @@ const gaiditieDarbibasParametri = [
 ]
 
 if (
-  parametruParaugaDarbiba.parametri.length !==
-    gaiditieDarbibasParametri.length
+  parametruParaugaDarbība.parametri.length !==
+    gaidītieDarbībasParametri.length
 ) {
   throw new Error(
     "Darbības parametru AST ir negaidīts parametru skaits"
@@ -147,21 +147,21 @@ if (
 
 for (
   let i = 0;
-  i < gaiditieDarbibasParametri.length;
+  i < gaidītieDarbībasParametri.length;
   i++
 ) {
   const faktiskais =
-    parametruParaugaDarbiba.parametri[i]
+    parametruParaugaDarbība.parametri[i]
 
-  const gaiditais =
-    gaiditieDarbibasParametri[i]
+  const gaidītais =
+    gaidītieDarbībasParametri[i]
 
   if (
     faktiskais.veids !== "Parametrs" ||
     faktiskais.nosaukums !==
-      gaiditais.nosaukums ||
+      gaidītais.nosaukums ||
     faktiskais.tips !==
-      gaiditais.tips ||
+      gaidītais.tips ||
     !Number.isInteger(faktiskais.rinda)
   ) {
     throw new Error(
@@ -171,7 +171,7 @@ for (
 }
 
 if (
-  parametruParaugaDarbiba
+  parametruParaugaDarbība
     .parametruLeksiskoElementuSkaits <= 0
 ) {
   throw new Error(
@@ -180,7 +180,7 @@ if (
 }
 
 if (
-  parametruParaugaDarbiba.atgriezesTips !==
+  parametruParaugaDarbība.atgriezesTips !==
     "teksts"
 ) {
   throw new Error(
@@ -189,10 +189,10 @@ if (
 }
 
 if (
-  parametruParaugaDarbiba.kermenis.length !==
+  parametruParaugaDarbība.ķermenis.length !==
     1 ||
-  parametruParaugaDarbiba
-    .kermenis[0].veids !==
+  parametruParaugaDarbība
+    .ķermenis[0].veids !==
       "Atgriešana"
 ) {
   throw new Error(
@@ -214,28 +214,28 @@ if (!klase) {
 
 if (
   !Number.isInteger(
-    klase.kermenaLeksiskoElementuSkaits
+    klase.ķermeņaLeksiskoElementuSkaits
   ) ||
-  klase.kermenaLeksiskoElementuSkaits <= 0
+  klase.ķermeņaLeksiskoElementuSkaits <= 0
 ) {
   throw new Error(
     "Klases ķermeņa leksisko elementu skaits nav saglabāts"
   )
 }
 
-if ("kermenaLeksiskieElementi" in klase) {
+if ("ķermeņaLeksiskieElementi" in klase) {
   throw new Error(
-    "Klases AST satur veco neviennozīmīgo kermenaLeksiskieElementi lauku"
+    "Klases AST satur veco neviennozīmīgo ķermeņaLeksiskieElementi lauku"
   )
 }
 
-if (!Array.isArray(klase.kermenis)) {
+if (!Array.isArray(klase.ķermenis)) {
   throw new Error(
     "Klases AST ķermenis nav mezglu masīvs"
   )
 }
 
-const gaiditieKlasesMezgli = [
+const gaidītieKlasesMezgli = [
   "KlasesLauks",
   "KlasesLauks",
   "KlasesLauks",
@@ -245,22 +245,22 @@ const gaiditieKlasesMezgli = [
 ]
 
 if (
-  klase.kermenis.length !==
-  gaiditieKlasesMezgli.length
+  klase.ķermenis.length !==
+  gaidītieKlasesMezgli.length
 ) {
   throw new Error(
-    `Gaidīti ${gaiditieKlasesMezgli.length} klases ķermeņa mezgli, saņemti ${klase.kermenis.length}`
+    `Gaidīti ${gaidītieKlasesMezgli.length} klases ķermeņa mezgli, saņemti ${klase.ķermenis.length}`
   )
 }
 
 for (
   let i = 0;
-  i < gaiditieKlasesMezgli.length;
+  i < gaidītieKlasesMezgli.length;
   i++
 ) {
   if (
-    klase.kermenis[i].veids !==
-    gaiditieKlasesMezgli[i]
+    klase.ķermenis[i].veids !==
+    gaidītieKlasesMezgli[i]
   ) {
     throw new Error(
       `Klases ķermeņa mezgls ${i + 1} nav gaidītajā secībā`
@@ -268,58 +268,58 @@ for (
   }
 }
 
-const gaiditieLauki = [
+const gaidītieLauki = [
   {
     nosaukums: "vārds",
-    pieejamiba: "public",
-    nemainams: true,
+    pieejamība: "public",
+    nemaināms: true,
     tips: "teksts"
   },
   {
     nosaukums: "vecums",
-    pieejamiba: "public",
-    nemainams: false,
+    pieejamība: "public",
+    nemaināms: false,
     tips: "skaitlis"
   },
   {
     nosaukums: "aktīvs",
-    pieejamiba: "protected",
-    nemainams: false,
+    pieejamība: "protected",
+    nemaināms: false,
     tips: "loģisks"
   },
   {
     nosaukums: "loma",
-    pieejamiba: "private",
-    nemainams: false,
+    pieejamība: "private",
+    nemaināms: false,
     tips: "Loma"
   }
 ]
 
-if (klase.lauki.length !== gaiditieLauki.length) {
+if (klase.lauki.length !== gaidītieLauki.length) {
   throw new Error(
-    `Gaidīti ${gaiditieLauki.length} klases lauki, saņemti ${klase.lauki.length}`
+    `Gaidīti ${gaidītieLauki.length} klases lauki, saņemti ${klase.lauki.length}`
   )
 }
 
 for (
   let i = 0;
-  i < gaiditieLauki.length;
+  i < gaidītieLauki.length;
   i++
 ) {
   const faktiskais = klase.lauki[i]
-  const gaiditais = gaiditieLauki[i]
+  const gaidītais = gaidītieLauki[i]
 
   for (
     const lauks of [
       "nosaukums",
-      "pieejamiba",
-      "nemainams",
+      "pieejamība",
+      "nemaināms",
       "tips"
     ]
   ) {
     if (
       faktiskais[lauks] !==
-      gaiditais[lauks]
+      gaidītais[lauks]
     ) {
       throw new Error(
         `Klases lauka ${i + 1} neatbilstošs ${lauks}: ` +
@@ -335,7 +335,7 @@ if (!klase.konstruktors) {
   )
 }
 
-const gaiditieParametri = [
+const gaidītieParametri = [
   {
     nosaukums: "vārds",
     tips: "teksts"
@@ -348,7 +348,7 @@ const gaiditieParametri = [
 
 if (
   klase.konstruktors.parametri.length !==
-  gaiditieParametri.length
+  gaidītieParametri.length
 ) {
   throw new Error(
     "Konstruktoram ir negaidīts parametru skaits"
@@ -357,20 +357,20 @@ if (
 
 for (
   let i = 0;
-  i < gaiditieParametri.length;
+  i < gaidītieParametri.length;
   i++
 ) {
   const faktiskais =
     klase.konstruktors.parametri[i]
 
-  const gaiditais =
-    gaiditieParametri[i]
+  const gaidītais =
+    gaidītieParametri[i]
 
   if (
     faktiskais.nosaukums !==
-      gaiditais.nosaukums ||
+      gaidītais.nosaukums ||
     faktiskais.tips !==
-      gaiditais.tips
+      gaidītais.tips
   ) {
     throw new Error(
       `Konstruktora parametrs ${i + 1} neatbilst gaidītajam AST`
@@ -380,9 +380,9 @@ for (
 
 if (
   !Array.isArray(
-    klase.konstruktors.kermenaLeksiskieElementi
+    klase.konstruktors.ķermeņaLeksiskieElementi
   ) ||
-  klase.konstruktors.kermenaLeksiskieElementi.length === 0
+  klase.konstruktors.ķermeņaLeksiskieElementi.length === 0
 ) {
   throw new Error(
     "Konstruktora ķermeņa leksiskie elementi nav saglabāti"
@@ -391,7 +391,7 @@ if (
 
 if (
   !Array.isArray(
-    klase.konstruktors.kermenis
+    klase.konstruktors.ķermenis
   )
 ) {
   throw new Error(
@@ -400,23 +400,23 @@ if (
 }
 
 if (
-  klase.konstruktors.kermenis.length !== 4
+  klase.konstruktors.ķermenis.length !== 4
 ) {
   throw new Error(
-    `Gaidīti 4 konstruktora priekšraksti, saņemti ${klase.konstruktors.kermenis.length}`
+    `Gaidīti 4 konstruktora priekšraksti, saņemti ${klase.konstruktors.ķermenis.length}`
   )
 }
 
 for (
   let i = 0;
-  i < klase.konstruktors.kermenis.length;
+  i < klase.konstruktors.ķermenis.length;
   i++
 ) {
-  const prieksraksts =
-    klase.konstruktors.kermenis[i]
+  const priekšraksts =
+    klase.konstruktors.ķermenis[i]
 
   if (
-    prieksraksts.veids !==
+    priekšraksts.veids !==
       "Izteiksme"
   ) {
     throw new Error(
@@ -425,7 +425,7 @@ for (
   }
 
   if (
-    prieksraksts.izteiksme?.veids !==
+    priekšraksts.izteiksme?.veids !==
       "PiešķiršanasIzteiksme"
   ) {
     throw new Error(
@@ -453,9 +453,9 @@ if (
 
 if (
   !Array.isArray(
-    getteris.kermenaLeksiskieElementi
+    getteris.ķermeņaLeksiskieElementi
   ) ||
-  getteris.kermenaLeksiskieElementi.length === 0
+  getteris.ķermeņaLeksiskieElementi.length === 0
 ) {
   throw new Error(
     "Gettera ķermeņa leksiskie elementi nav saglabāti"
@@ -464,7 +464,7 @@ if (
 
 if (
   !Array.isArray(
-    getteris.kermenis
+    getteris.ķermenis
   )
 ) {
   throw new Error(
@@ -472,17 +472,17 @@ if (
   )
 }
 
-if (getteris.kermenis.length !== 1) {
+if (getteris.ķermenis.length !== 1) {
   throw new Error(
-    `Gaidīts 1 gettera priekšraksts, saņemti ${getteris.kermenis.length}`
+    `Gaidīts 1 gettera priekšraksts, saņemti ${getteris.ķermenis.length}`
   )
 }
 
-const getteraPrieksraksts =
-  getteris.kermenis[0]
+const getteraPriekšraksts =
+  getteris.ķermenis[0]
 
 if (
-  getteraPrieksraksts.veids !==
+  getteraPriekšraksts.veids !==
     "Atgriešana"
 ) {
   throw new Error(
@@ -491,7 +491,7 @@ if (
 }
 
 if (
-  getteraPrieksraksts.vertiba?.veids !==
+  getteraPriekšraksts.vērtība?.veids !==
     "Veidne"
 ) {
   throw new Error(
@@ -500,25 +500,25 @@ if (
 }
 
 const veidne =
-  getteraPrieksraksts.vertiba
+  getteraPriekšraksts.vērtība
 
 if (
-  !Array.isArray(veidne.dalas) ||
-  veidne.dalas.length !== 4
+  !Array.isArray(veidne.daļas) ||
+  veidne.daļas.length !== 4
 ) {
   throw new Error(
-    `Gaidītas 4 veidnes AST daļas, saņemtas ${veidne.dalas?.length ?? "nav"}`
+    `Gaidītas 4 veidnes AST daļas, saņemtas ${veidne.daļas?.length ?? "nav"}`
   )
 }
 
-const gaiditasVeidnesDalas = [
+const gaidītāsVeidnesDaļas = [
   {
     veids: "VeidnesInterpolācija",
     nosaukums: "vārds"
   },
   {
     veids: "VeidnesTeksts",
-    vertiba: " ("
+    vērtība: " ("
   },
   {
     veids: "VeidnesInterpolācija",
@@ -526,24 +526,24 @@ const gaiditasVeidnesDalas = [
   },
   {
     veids: "VeidnesTeksts",
-    vertiba: ")"
+    vērtība: ")"
   }
 ]
 
 for (
   let i = 0;
-  i < gaiditasVeidnesDalas.length;
+  i < gaidītāsVeidnesDaļas.length;
   i++
 ) {
-  const faktiska =
-    veidne.dalas[i]
+  const faktiskā =
+    veidne.daļas[i]
 
-  const gaidita =
-    gaiditasVeidnesDalas[i]
+  const gaidītā =
+    gaidītāsVeidnesDaļas[i]
 
   if (
-    faktiska.veids !==
-      gaidita.veids
+    faktiskā.veids !==
+      gaidītā.veids
   ) {
     throw new Error(
       `Veidnes daļa ${i + 1} nav gaidītā tipa`
@@ -551,12 +551,12 @@ for (
   }
 
   if (
-    gaidita.veids ===
+    gaidītā.veids ===
       "VeidnesTeksts"
   ) {
     if (
-      faktiska.vertiba !==
-        gaidita.vertiba
+      faktiskā.vērtība !==
+        gaidītā.vērtība
     ) {
       throw new Error(
         `Veidnes teksta daļa ${i + 1} neatbilst gaidītajai vērtībai`
@@ -567,14 +567,14 @@ for (
   }
 
   if (
-    faktiska.izteiksme?.veids !==
+    faktiskā.izteiksme?.veids !==
       "Īpašība" ||
-    faktiska.izteiksme
+    faktiskā.izteiksme
       .objekts?.veids !==
         "Šis" ||
-    faktiska.izteiksme
+    faktiskā.izteiksme
       .nosaukums !==
-        gaidita.nosaukums
+        gaidītā.nosaukums
   ) {
     throw new Error(
       `Veidnes interpolācija ${i + 1} neatbilst gaidītajam AST`
@@ -582,33 +582,33 @@ for (
   }
 }
 
-const veidnesInterpolacijas =
-  veidne.dalas.filter(
-    dala =>
-      dala.veids ===
+const veidnesInterpolācijas =
+  veidne.daļas.filter(
+    daļa =>
+      daļa.veids ===
         "VeidnesInterpolācija"
   )
 
 if (
-  veidnesInterpolacijas.length !== 2
+  veidnesInterpolācijas.length !== 2
 ) {
   throw new Error(
-    `Gaidītas 2 veidnes interpolācijas, saņemtas ${veidnesInterpolacijas.length}`
+    `Gaidītas 2 veidnes interpolācijas, saņemtas ${veidnesInterpolācijas.length}`
   )
 }
 
 const saliktasVeidnesAst =
-  analizeIzteiksmesAst(
-    analizeLeksiski(
+  analizēIzteiksmesAst(
+    analizēLeksiski(
       "`Rezultāts: ${vērtība + 1}`",
-      vardnica
+      vārdnīca
     )
   )
 
 if (
   saliktasVeidnesAst?.veids !==
     "Veidne" ||
-  saliktasVeidnesAst.dalas.length !==
+  saliktasVeidnesAst.daļas.length !==
     2
 ) {
   throw new Error(
@@ -616,28 +616,28 @@ if (
   )
 }
 
-const saliktaInterpolacija =
-  saliktasVeidnesAst.dalas[1]
+const saliktaInterpolācija =
+  saliktasVeidnesAst.daļas[1]
 
 if (
-  saliktaInterpolacija.veids !==
+  saliktaInterpolācija.veids !==
     "VeidnesInterpolācija" ||
-  saliktaInterpolacija
+  saliktaInterpolācija
     .izteiksme?.veids !==
       "BināraIzteiksme" ||
-  saliktaInterpolacija
+  saliktaInterpolācija
     .izteiksme.operators !== "+" ||
-  saliktaInterpolacija
-    .izteiksme.kreisa?.veids !==
+  saliktaInterpolācija
+    .izteiksme.kreisā?.veids !==
       "Identifikators" ||
-  saliktaInterpolacija
-    .izteiksme.kreisa.nosaukums !==
+  saliktaInterpolācija
+    .izteiksme.kreisā.nosaukums !==
       "vērtība" ||
-  saliktaInterpolacija
-    .izteiksme.laba?.veids !==
+  saliktaInterpolācija
+    .izteiksme.labā?.veids !==
       "Skaitlis" ||
-  saliktaInterpolacija
-    .izteiksme.laba.vertiba !== 1
+  saliktaInterpolācija
+    .izteiksme.labā.vērtība !== 1
 ) {
   throw new Error(
     "Veidnes interpolācija neizmanto pilno izteiksmju AST"
@@ -645,10 +645,10 @@ if (
 }
 
 const escapotasVeidnesAst =
-  analizeIzteiksmesAst(
-    analizeLeksiski(
+  analizēIzteiksmesAst(
+    analizēLeksiski(
       "`\\${navInterpolacija}`",
-      vardnica
+      vārdnīca
     )
   )
 
@@ -656,12 +656,12 @@ if (
   escapotasVeidnesAst?.veids !==
     "Veidne" ||
   !Array.isArray(
-    escapotasVeidnesAst.dalas
+    escapotasVeidnesAst.daļas
   ) ||
-  escapotasVeidnesAst.dalas.length !==
+  escapotasVeidnesAst.daļas.length !==
     1 ||
   escapotasVeidnesAst
-    .dalas[0].veids !==
+    .daļas[0].veids !==
       "VeidnesTeksts"
 ) {
   throw new Error(
@@ -670,9 +670,9 @@ if (
 }
 
 if (
-  escapotasVeidnesAst.dalas.some(
-    dala =>
-      dala.veids ===
+  escapotasVeidnesAst.daļas.some(
+    daļa =>
+      daļa.veids ===
         "VeidnesInterpolācija"
   )
 ) {
@@ -682,14 +682,14 @@ if (
 }
 
 const metodesParaugaAst =
-  analizeSintaksi(
-    analizeLeksiski(
+  analizēSintaksi(
+    analizēLeksiski(
       `klase MetodesParaugs {
   atvērts darbība sveic(vārds: teksts): teksts {
     atgriez vārds
   }
 }`,
-      vardnica
+      vārdnīca
     )
   )
 
@@ -724,7 +724,7 @@ const metode =
 if (
   metode.veids !== "Metode" ||
   metode.nosaukums !== "sveic" ||
-  metode.pieejamiba !== "public"
+  metode.pieejamība !== "public"
 ) {
   throw new Error(
     "Metodes deklarācijas AST neatbilst gaidītajam"
@@ -755,23 +755,23 @@ if (
 }
 
 if (
-  !Array.isArray(metode.kermenis) ||
-  metode.kermenis.length !== 1
+  !Array.isArray(metode.ķermenis) ||
+  metode.ķermenis.length !== 1
 ) {
   throw new Error(
     "Metodes ķermenis nav strukturēts"
   )
 }
 
-const metodesPrieksraksts =
-  metode.kermenis[0]
+const metodesPriekšraksts =
+  metode.ķermenis[0]
 
 if (
-  metodesPrieksraksts.veids !==
+  metodesPriekšraksts.veids !==
     "Atgriešana" ||
-  metodesPrieksraksts.vertiba?.veids !==
+  metodesPriekšraksts.vērtība?.veids !==
     "Identifikators" ||
-  metodesPrieksraksts.vertiba.nosaukums !==
+  metodesPriekšraksts.vērtība.nosaukums !==
     "vārds"
 ) {
   throw new Error(
@@ -781,9 +781,9 @@ if (
 
 if (
   !Array.isArray(
-    metode.kermenaLeksiskieElementi
+    metode.ķermeņaLeksiskieElementi
   ) ||
-  metode.kermenaLeksiskieElementi.length === 0
+  metode.ķermeņaLeksiskieElementi.length === 0
 ) {
   throw new Error(
     "Metodes raw ķermeņa elementi nav saglabāti"
@@ -791,7 +791,7 @@ if (
 }
 
 if (
-  !metodesParaugaKlase.kermenis.includes(
+  !metodesParaugaKlase.ķermenis.includes(
     metode
   )
 ) {
@@ -800,26 +800,26 @@ if (
   )
 }
 
-const pieskirsanas =
-  klase.konstruktors.kermenis.map(
-    prieksraksts =>
-      prieksraksts.izteiksme
+const piešķiršanas =
+  klase.konstruktors.ķermenis.map(
+    priekšraksts =>
+      priekšraksts.izteiksme
   )
 
-if (pieskirsanas.length !== 4) {
+if (piešķiršanas.length !== 4) {
   throw new Error(
-    `Gaidītas 4 konstruktora piešķiršanas izteiksmes, saņemtas ${pieskirsanas.length}`
+    `Gaidītas 4 konstruktora piešķiršanas izteiksmes, saņemtas ${piešķiršanas.length}`
   )
 }
 
-const gaiditieMerkji = [
+const gaidītieMērķi = [
   "vārds",
   "vecums",
   "aktīvs",
   "loma"
 ]
 
-const gaiditieVertibuVeidi = [
+const gaidītieVērtībuVeidi = [
   "Identifikators",
   "Identifikators",
   "Loģisks",
@@ -828,16 +828,16 @@ const gaiditieVertibuVeidi = [
 
 for (
   let i = 0;
-  i < pieskirsanas.length;
+  i < piešķiršanas.length;
   i++
 ) {
-  const pieskirsana =
-    pieskirsanas[i]
+  const piešķiršana =
+    piešķiršanas[i]
 
   if (
-    pieskirsana.veids !==
+    piešķiršana.veids !==
       "PiešķiršanasIzteiksme" ||
-    pieskirsana.operators !== "="
+    piešķiršana.operators !== "="
   ) {
     throw new Error(
       `Konstruktora piešķiršana ${i + 1} nav korekts piešķiršanas AST`
@@ -845,12 +845,12 @@ for (
   }
 
   if (
-    pieskirsana.merkis.veids !==
+    piešķiršana.mērķis.veids !==
       "Īpašība" ||
-    pieskirsana.merkis.objekts.veids !==
+    piešķiršana.mērķis.objekts.veids !==
       "Šis" ||
-    pieskirsana.merkis.nosaukums !==
-      gaiditieMerkji[i]
+    piešķiršana.mērķis.nosaukums !==
+      gaidītieMērķi[i]
   ) {
     throw new Error(
       `Konstruktora piešķiršanai ${i + 1} ir nepareizs mērķis`
@@ -858,8 +858,8 @@ for (
   }
 
   if (
-    pieskirsana.vertiba.veids !==
-      gaiditieVertibuVeidi[i]
+    piešķiršana.vērtība.veids !==
+      gaidītieVērtībuVeidi[i]
   ) {
     throw new Error(
       `Konstruktora piešķiršanai ${i + 1} ir nepareiza vērtība`
@@ -867,7 +867,7 @@ for (
   }
 }
 
-const pieskirsanasOperatori = [
+const piešķiršanasOperatori = [
   "=",
   "+=",
   "-=",
@@ -881,13 +881,13 @@ const pieskirsanasOperatori = [
 ]
 
 for (
-  const operators of pieskirsanasOperatori
+  const operators of piešķiršanasOperatori
 ) {
   const operatoraAst =
-    analizeIzteiksmesAst(
-      analizeLeksiski(
+    analizēIzteiksmesAst(
+      analizēLeksiski(
         `vērtība ${operators} 1`,
-        vardnica
+        vārdnīca
       )
     )
 
@@ -895,9 +895,9 @@ for (
     operatoraAst.veids !==
       "PiešķiršanasIzteiksme" ||
     operatoraAst.operators !== operators ||
-    operatoraAst.merkis.veids !==
+    operatoraAst.mērķis.veids !==
       "Identifikators" ||
-    operatoraAst.vertiba.veids !==
+    operatoraAst.vērtība.veids !==
       "Skaitlis"
   ) {
     throw new Error(
@@ -906,18 +906,18 @@ for (
   }
 }
 
-const labasAsociativitatesAst =
-  analizeIzteiksmesAst(
-    analizeLeksiski(
+const labāsAsociativitātesAst =
+  analizēIzteiksmesAst(
+    analizēLeksiski(
       "a = b = 1",
-      vardnica
+      vārdnīca
     )
   )
 
 if (
-  labasAsociativitatesAst.veids !==
+  labāsAsociativitātesAst.veids !==
     "PiešķiršanasIzteiksme" ||
-  labasAsociativitatesAst.vertiba.veids !==
+  labāsAsociativitātesAst.vērtība.veids !==
     "PiešķiršanasIzteiksme"
 ) {
   throw new Error(
@@ -925,25 +925,25 @@ if (
   )
 }
 
-let nederigsMerkisNoraidits = false
+let nederīgsMērķisNoraidīts = false
 
 try {
-  analizeIzteiksmesAst(
-    analizeLeksiski(
+  analizēIzteiksmesAst(
+    analizēLeksiski(
       "1 = vērtība",
-      vardnica
+      vārdnīca
     )
   )
 }
-catch (kluda) {
-  nederigsMerkisNoraidits =
-    kluda instanceof SyntaxError &&
-    kluda.message.includes(
+catch (kļūda) {
+  nederīgsMērķisNoraidīts =
+    kļūda instanceof SyntaxError &&
+    kļūda.message.includes(
       "Nederīgs piešķiršanas mērķis"
     )
 }
 
-if (!nederigsMerkisNoraidits) {
+if (!nederīgsMērķisNoraidīts) {
   throw new Error(
     "Nederīgs piešķiršanas mērķis netika noraidīts"
   )
@@ -957,15 +957,15 @@ console.log(
 )
 
 console.log(
-  `Darbības parametri: ${darbiba.parametri.length}`
+  `Darbības parametri: ${darbība.parametri.length}`
 )
 
 console.log(
-  `Darbības priekšraksti: ${darbiba.kermenis.length}`
+  `Darbības priekšraksti: ${darbība.ķermenis.length}`
 )
 
 console.log(
-  `Klases ķermeņa mezgli: ${klase.kermenis.length}`
+  `Klases ķermeņa mezgli: ${klase.ķermenis.length}`
 )
 
 console.log(
@@ -977,7 +977,7 @@ console.log(
 )
 
 console.log(
-  `Konstruktora priekšraksti: ${klase.konstruktors.kermenis.length}`
+  `Konstruktora priekšraksti: ${klase.konstruktors.ķermenis.length}`
 )
 
 console.log(
@@ -985,15 +985,15 @@ console.log(
 )
 
 console.log(
-  `Gettera priekšraksti: ${getteris.kermenis.length}`
+  `Gettera priekšraksti: ${getteris.ķermenis.length}`
 )
 
 console.log(
-  `Veidnes daļas: ${veidne.dalas.length}`
+  `Veidnes daļas: ${veidne.daļas.length}`
 )
 
 console.log(
-  `Veidnes interpolācijas: ${veidnesInterpolacijas.length}`
+  `Veidnes interpolācijas: ${veidnesInterpolācijas.length}`
 )
 
 console.log("")
@@ -1006,16 +1006,16 @@ for (
 ) {
   const mezgls = ast.elementi[i]
 
-  const pedejais =
+  const pēdējais =
     i === ast.elementi.length - 1
 
   const zars =
-    pedejais ? "└─" : "├─"
+    pēdējais ? "└─" : "├─"
 
   if (mezgls.veids === "Imports") {
     console.log(
       `${zars} Imports: ` +
-      `${mezgls.vardi.join(", ")} ` +
+      `${mezgls.vārdi.join(", ")} ` +
       `no ${mezgls.avots}`
     )
 
@@ -1034,7 +1034,7 @@ for (
     console.log(
       `${zars} Uzskaitījums: ` +
       `${mezgls.nosaukums} ` +
-      `[${mezgls.vertibas.join(", ")}]`
+      `[${mezgls.vērtības.join(", ")}]`
     )
 
     continue
@@ -1052,7 +1052,7 @@ for (
     console.log(
       `${zars} Darbība: ` +
       `${mezgls.nosaukums} ` +
-      `[priekšraksti: ${mezgls.kermenis.length}]`
+      `[priekšraksti: ${mezgls.ķermenis.length}]`
     )
   }
 }
@@ -1060,10 +1060,10 @@ for (
 console.log("")
 console.log("Darbības un izteiksmju AST")
 
-if (darbiba) {
+if (darbība) {
   console.log(
     JSON.stringify(
-      darbiba.kermenis,
+      darbība.ķermenis,
       null,
       2
     )
