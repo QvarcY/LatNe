@@ -9,10 +9,11 @@
                     "test":  "echo \"Testi vēl nav ieviesti.\"",
                     "statuss":  "git status --short",
                     "check:terminologija":  "node ./scripts/parbaudit-terminologiju.mjs",
+                    "check:identifikatori":  "node ./packages/valoda/scripts/pārbaudīt-latviskos-identifikatorus.mjs",
                     "check:leksika":  "node ./packages/valoda/scripts/parbaudit-leksisko-analizi.mjs",
                     "check:sintakse":  "node ./packages/valoda/scripts/parbaudit-sintaktisko-analizi.mjs",
                     "check:kalve":  "corepack pnpm --filter @latne/vardu-kalve check \u0026\u0026 corepack pnpm --filter @latne/vardu-kalve build",
-                    "check":  "corepack pnpm run check:terminologija \u0026\u0026 corepack pnpm run check:leksika \u0026\u0026 corepack pnpm run check:sintakse \u0026\u0026 corepack pnpm run check:paraugi \u0026\u0026 corepack pnpm run check:kalve",
+                    "check":  "corepack pnpm run check:terminologija \u0026\u0026 corepack pnpm run check:identifikatori \u0026\u0026 corepack pnpm run check:leksika \u0026\u0026 corepack pnpm run check:sintakse \u0026\u0026 corepack pnpm run check:paraugi \u0026\u0026 corepack pnpm run check:kalve",
                     "check:paraugi":  "node ./tests/parbaudit-paraugus.mjs"
                 },
     "engines":  {

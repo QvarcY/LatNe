@@ -7,6 +7,34 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 ## [Unreleased]
 
 ### Added
+#### 2026-10-08
+- normalizēti LatNe lexer, parsera, tokenu un AST latviskie identifikatori uz pareizu rakstību ar diakritiskajām zīmēm
+- publiskie parsera eksporti pārdēvēti uz `izveidoVārdnīcu`, `analizēLeksiski`, `analizēIzteiksmi`, `analizēPriekšrakstus`, `analizēSintaksi`, `analizēKlasesĶermeni` un `analizēParametrus`
+- tokenu un AST lauki, tostarp `vērtība`, `daļas`, `deklarācija`, `mainīgais`, `nosacījums`, `ķermenis`, `pieejamība`, `nemaināms`, `kreisā`, `labā` un `mērķis`, nostiprināti ar pareizu latviešu ortogrāfiju
+- pievienota pastāvīga `check:identifikatori` kvalitātes pārbaude pret transliterētu LatNe identifikatoru atgriešanos
+
+#### 2026-10-07
+- ieviests strukturēts klases ķermeņa AST
+- strukturēti klases lauki, pieejamības modifikatori, lauku tipi un `nemaināms` stāvoklis
+- strukturēta konstruktora deklarācija un parametri
+- strukturēta getter deklarācija un atgriezes tips
+- ieviests `PiešķiršanasIzteiksme` AST
+- pievienots vienkāršo un kombinēto piešķiršanas operatoru atbalsts
+- pievienota piešķiršanas izteiksmju labējās asociativitātes un mērķa validācijas pārbaude
+- pievienotas regresijas pārbaudes kanoniskajām konstruktora piešķiršanām
+- strukturēts konstruktora ķermeņa priekšrakstu AST
+- strukturēts gettera ķermeņa AST
+- pievienots minimāls klases `Metode` AST
+- klases metodei pievienota pieejamība, tipēti parametri, izvēles atgriezes tips un strukturēts ķermenis
+- konstruktora, gettera un metodes ķermeņiem izmantota kopīgā priekšrakstu analizatora infrastruktūra
+- pievienota klases metodes regresijas pārbaude, nemainot kanonisko pirmo `.lat` paraugu
+- augšējā līmeņa `Darbība` parametri strukturēti kā `Parametrs` AST mezgli
+- konstruktoram, klases metodei un darbībai ieviests kopīgs parametru analizators
+- veidņu literāļiem pievienotas strukturētas `VeidnesTeksts` un `VeidnesInterpolācija` daļas
+- veidņu interpolācijas izmanto pilno izteiksmju AST
+- pievienotas regresijas pārbaudes saliktai interpolācijas izteiksmei un escapotam interpolācijas marķierim
+- README un GitHub Pages pievienots jaunais LatNe logotips
+
 #### 2026-10-02
 
 - publiskā ceļa karte pārkārtota faktiskā izpildes secībā

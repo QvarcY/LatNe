@@ -1,5 +1,5 @@
-const SAKUMS = /[\p{L}_$]/u
-const TURPINAJUMS = /[\p{L}\p{N}_$]/u
+const SĀKUMS = /[\p{L}_$]/u
+const TURPINĀJUMS = /[\p{L}\p{N}_$]/u
 const CIPARS = /[0-9]/
 
 const OPERATORI = [
@@ -9,12 +9,12 @@ const OPERATORI = [
   "=", "+", "-", "*", "/", "%", "<", ">", "!", "&", "|", "^", "~"
 ]
 
-const PIETURZIMES = new Set([
+const PIETURZĪMES = new Set([
   "(", ")", "{", "}", "[", "]", ",", ";", ":", ".", "?"
 ])
 
-export function izveidoVardnicu(registrs) {
-  const vardnica = new Map()
+export function izveidoVārdnīcu(registrs) {
+  const vārdnīca = new Map()
 
   for (const termins of registrs.terms ?? []) {
     if (
@@ -24,38 +24,38 @@ export function izveidoVardnicu(registrs) {
       continue
     }
 
-    if (vardnica.has(termins.latvian)) {
+    if (vārdnīca.has(termins.latvian)) {
       throw new Error(
         `Dublēts LatNe vārds: ${termins.latvian}`
       )
     }
 
-    vardnica.set(termins.latvian, {
+    vārdnīca.set(termins.latvian, {
       avots: termins.source,
       kategorija: termins.category,
       terminaVeids: termins.kind
     })
   }
 
-  return vardnica
+  return vārdnīca
 }
 
-export function analizeLeksiski(teksts, vardnica) {
+export function analizēLeksiski(teksts, vārdnīca) {
   const leksiskieElementi = []
 
   let i = 0
   let rinda = 1
   let kolonna = 1
 
-  const pozicija = () => ({
+  const pozīcija = () => ({
     rinda,
     kolonna
   })
 
   const soli = () => {
-    const zime = teksts[i++]
+    const zīme = teksts[i++]
 
-    if (zime === "\n") {
+    if (zīme === "\n") {
       rinda++
       kolonna = 1
     }
@@ -63,27 +63,238 @@ export function analizeLeksiski(teksts, vardnica) {
       kolonna++
     }
 
-    return zime
+    return zīme
   }
 
   const pievieno = (
     veids,
-    vertiba,
-    sakums,
+    vērtība,
+    sākums,
     papildus = {}
   ) => {
     leksiskieElementi.push({
       veids,
-      vertiba,
-      ...sakums,
+      vērtība,
+      ...sākums,
       ...papildus
     })
   }
 
-  while (i < teksts.length) {
-    const zime = teksts[i]
+  const analizēVeidnesDaļas = (
+    raw,
+    sākums
+  ) => {
+    const gravis =
+      String.fromCharCode(96)
 
-    if (/\s/u.test(zime)) {
+    const aizvērta =
+      raw.endsWith(gravis)
+
+    const saturs =
+      raw.slice(
+        1,
+        aizvērta ? -1 : undefined
+      )
+
+    const pozīcijaSaturaOffsetam =
+      offset => {
+        let daļasRinda =
+          sākums.rinda
+
+        let daļasKolonna =
+          sākums.kolonna + 1
+
+        for (
+          let indekss = 0;
+          indekss < offset;
+          indekss++
+        ) {
+          if (saturs[indekss] === "\n") {
+            daļasRinda++
+            daļasKolonna = 1
+          }
+          else {
+            daļasKolonna++
+          }
+        }
+
+        return {
+          rinda: daļasRinda,
+          kolonna: daļasKolonna
+        }
+      }
+
+    const daļas = []
+
+    let tekstaSākums = 0
+    let indekss = 0
+
+    const pievienoTekstu =
+      beigas => {
+        if (beigas <= tekstaSākums) {
+          return
+        }
+
+        const pozīcija =
+          pozīcijaSaturaOffsetam(
+            tekstaSākums
+          )
+
+        daļas.push({
+          veids: "teksts",
+          vērtība:
+            saturs.slice(
+              tekstaSākums,
+              beigas
+            ),
+          ...pozīcija
+        })
+      }
+
+    while (indekss < saturs.length) {
+      if (saturs[indekss] === "\\") {
+        indekss += 2
+        continue
+      }
+
+      if (
+        saturs[indekss] !== "$" ||
+        saturs[indekss + 1] !== "{"
+      ) {
+        indekss++
+        continue
+      }
+
+      pievienoTekstu(indekss)
+
+      const izteiksmesSākums =
+        indekss + 2
+
+      const izteiksmesPozīcija =
+        pozīcijaSaturaOffsetam(
+          izteiksmesSākums
+        )
+
+      let beigas =
+        izteiksmesSākums
+
+      let dziļums = 1
+      let quote = null
+
+      while (
+        beigas < saturs.length &&
+        dziļums > 0
+      ) {
+        const zīme =
+          saturs[beigas]
+
+        if (quote) {
+          if (zīme === "\\") {
+            beigas += 2
+            continue
+          }
+
+          if (zīme === quote) {
+            quote = null
+          }
+
+          beigas++
+          continue
+        }
+
+        if (
+          zīme === '"' ||
+          zīme === "'"
+        ) {
+          quote = zīme
+          beigas++
+          continue
+        }
+
+        if (zīme === "{") {
+          dziļums++
+        }
+        else if (zīme === "}") {
+          dziļums--
+        }
+
+        beigas++
+      }
+
+      if (dziļums !== 0) {
+        throw new SyntaxError(
+          "Nav aizvērta veidnes interpolācija rindā " +
+          izteiksmesPozīcija.rinda +
+          ", kolonnā " +
+          izteiksmesPozīcija.kolonna
+        )
+      }
+
+      const izteiksmesBeigas =
+        beigas - 1
+
+      const izteiksmesTeksts =
+        saturs.slice(
+          izteiksmesSākums,
+          izteiksmesBeigas
+        )
+
+      if (
+        izteiksmesTeksts.trim()
+          .length === 0
+      ) {
+        throw new SyntaxError(
+          "Tukša veidnes interpolācija rindā " +
+          izteiksmesPozīcija.rinda +
+          ", kolonnā " +
+          izteiksmesPozīcija.kolonna
+        )
+      }
+
+      const interpolācijasElementi =
+        analizēLeksiski(
+          izteiksmesTeksts,
+          vārdnīca
+        ).map(
+          leksiskaisElements => ({
+            ...leksiskaisElements,
+            rinda:
+              izteiksmesPozīcija.rinda +
+              leksiskaisElements.rinda -
+              1,
+            kolonna:
+              leksiskaisElements.rinda ===
+                1
+                ? izteiksmesPozīcija
+                    .kolonna +
+                  leksiskaisElements
+                    .kolonna -
+                  1
+                : leksiskaisElements
+                    .kolonna
+          })
+        )
+
+      daļas.push({
+        veids: "interpolācija",
+        leksiskieElementi:
+          interpolācijasElementi,
+        ...izteiksmesPozīcija
+      })
+
+      indekss = beigas
+      tekstaSākums = beigas
+    }
+
+    pievienoTekstu(saturs.length)
+
+    return daļas
+  }
+
+  while (i < teksts.length) {
+    const zīme = teksts[i]
+
+    if (/\s/u.test(zīme)) {
       soli()
       continue
     }
@@ -118,111 +329,118 @@ export function analizeLeksiski(teksts, vardnica) {
       continue
     }
 
-    const sakums = pozicija()
+    const sākums = pozīcija()
 
-    if (zime === '"' || zime === "'") {
+    if (zīme === '"' || zīme === "'") {
       const quote = soli()
-      let vertiba = quote
+      let vērtība = quote
 
       while (i < teksts.length) {
-        const dala = soli()
-        vertiba += dala
+        const daļa = soli()
+        vērtība += daļa
 
         if (
-          dala === "\\" &&
+          daļa === "\\" &&
           i < teksts.length
         ) {
-          vertiba += soli()
+          vērtība += soli()
           continue
         }
 
-        if (dala === quote) {
+        if (daļa === quote) {
           break
         }
       }
 
       pievieno(
         "teksts",
-        vertiba,
-        sakums
+        vērtība,
+        sākums
       )
 
       continue
     }
 
-    if (zime === "`") {
-      let vertiba = soli()
+    if (zīme === "`") {
+      let vērtība = soli()
 
       while (i < teksts.length) {
-        const dala = soli()
-        vertiba += dala
+        const daļa = soli()
+        vērtība += daļa
 
         if (
-          dala === "\\" &&
+          daļa === "\\" &&
           i < teksts.length
         ) {
-          vertiba += soli()
+          vērtība += soli()
           continue
         }
 
-        if (dala === "`") {
+        if (daļa === "`") {
           break
         }
       }
 
       pievieno(
         "veidne",
-        vertiba,
-        sakums
+        vērtība,
+        sākums,
+        {
+          daļas:
+            analizēVeidnesDaļas(
+              vērtība,
+              sākums
+            )
+        }
       )
 
       continue
     }
 
-    if (CIPARS.test(zime)) {
-      let vertiba = ""
+    if (CIPARS.test(zīme)) {
+      let vērtība = ""
 
       while (
         i < teksts.length &&
         /[0-9._]/.test(teksts[i])
       ) {
-        vertiba += soli()
+        vērtība += soli()
       }
 
       pievieno(
         "skaitlis",
-        vertiba,
-        sakums
+        vērtība,
+        sākums
       )
 
       continue
     }
 
-    if (SAKUMS.test(zime)) {
-      let vertiba = soli()
+    if (SĀKUMS.test(zīme)) {
+      let vērtība = soli()
 
       while (
         i < teksts.length &&
-        TURPINAJUMS.test(teksts[i])
+        TURPINĀJUMS.test(teksts[i])
       ) {
-        vertiba += soli()
+        vērtība += soli()
       }
 
-      const termins = vardnica.get(vertiba)
+      const termins = vārdnīca.get(vērtība)
 
       if (termins) {
         pievieno(
           "termins",
-          vertiba,
-          sakums,
+          vērtība,
+          sākums,
           termins
         )
       }
       else {
         pievieno(
           "identifikators",
-          vertiba,
-          sakums
+          vērtība,
+          sākums
         )
       }
 
@@ -246,17 +464,17 @@ export function analizeLeksiski(teksts, vardnica) {
       pievieno(
         "operators",
         operators,
-        sakums
+        sākums
       )
 
       continue
     }
 
-    if (PIETURZIMES.has(zime)) {
+    if (PIETURZĪMES.has(zīme)) {
       pievieno(
         "pieturzīme",
         soli(),
-        sakums
+        sākums
       )
 
       continue
@@ -265,7 +483,7 @@ export function analizeLeksiski(teksts, vardnica) {
     pievieno(
       "nezināms",
       soli(),
-      sakums
+      sākums
     )
   }
 

@@ -1,6 +1,14 @@
 # LatNe
 
-**Programmē latviski.**
+<p align="center">
+  <img
+    src="site/assets/latne-logo.png"
+    alt="LatNe"
+    width="320"
+  >
+</p>
+
+<p align="center"><strong>Programmē latviski.</strong></p>
 
 LatNe ir neatkarīga atvērtā pirmkoda programmēšanas valoda un topošā izstrādes vide, kur latviešu valoda nav tikai dokumentācijas slānis — tā ir pašas programmēšanas pieredzes daļa.
 
@@ -97,24 +105,31 @@ LatNe standarta API slānis tiks veidots semantiski — nevis ar aklu teksta aiz
 
 **Fāze 0A — reproducējama vide un kvalitātes pārbaudes — ir pabeigta.**
 
-Projektam jau ir:
-
-- fiksēta Node.js izpildvides prasība;
-- pārbaudāma tīra atkarību instalācija ar lockfile;
-- GitHub Actions CI;
-- terminoloģijas, leksiskās analīzes un sintaktiskās analīzes pārbaudes;
-- Vārdu kalves pārbaude un būvēšana;
-- regresijas paraugu sistēma ar derīgiem, nederīgiem, robežgadījumu un Unicode paraugiem.
-
 Pašreizējais valodas darbs ir **Fāze 1 — valodas kodols līdz AST v1**.
 
-Nākamais konkrētais uzdevums ir:
+Jau strukturēts:
 
-**Klases ķermeņa AST v1.**
+- klases ķermenis;
+- klases lauki un pieejamības modifikatori;
+- `nemaināms` lauki un to tipi;
+- konstruktora deklarācija un parametri;
+- konstruktora ķermeņa priekšraksti;
+- getter deklarācija, atgriezes tips un ķermenis;
+- minimāls klases metodes AST;
+- metodes pieejamība, tipēti parametri, atgriezes tips un ķermenis;
+- piešķiršanas izteiksmes;
+- augšējā līmeņa `Darbība` parametri ar kopīgu `Parametrs` AST kontraktu;
+- veidņu literāļi ar strukturētām teksta daļām un interpolāciju izteiksmēm.
 
-Pirmajā iterācijā jāstrukturē klases lauki, pieejamības modifikatori, `nemaināms`, lauku tipi, konstruktora deklarācija un parametri, kā arī getter deklarācija un atgriezes tips.
+Konstruktors, klases metode un augšējā līmeņa `Darbība` tagad izmanto vienu kopīgu parametru analizatoru.
 
-Pēc tam secīgi tiks papildināts piešķiršanas AST, ķermeņu un parametru struktūra, veidņu interpolācijas un pirmkoda diapazoni līdz stabilam AST v1 kontraktam.
+Veidņu interpolācijas izmanto pilno izteiksmju AST, bet veidnes `raw` vērtība tiek saglabāta saderībai un diagnostikai.
+
+Konstruktora, gettera un klases metodes raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
+
+**Nākamais konkrētais uzdevums ir pirmkoda diapazona informācija AST mezgliem.**
+
+Pēc tam tiks definēti AST mezglu obligātie un izvēles lauki, publicēts pirmais `spec/ast-v1.md` un stabilizēts AST v1 kontrakts.
 
 ## Galvenais tuvākais mērķis
 

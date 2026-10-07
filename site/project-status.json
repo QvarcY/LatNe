@@ -1,9 +1,9 @@
 {
   "source": "ROADMAP.md",
   "overall": {
-    "done": 25,
+    "done": 34,
     "total": 130,
-    "percent": 19
+    "percent": 26
   },
   "phases": [
     {
@@ -23,9 +23,9 @@
     {
       "id": "1",
       "name": "valodas kodols līdz AST v1",
-      "done": 8,
+      "done": 17,
       "total": 22,
-      "percent": 36
+      "percent": 77
     },
     {
       "id": "1A",

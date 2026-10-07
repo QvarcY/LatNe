@@ -1,9 +1,9 @@
 # LatNe darba atsākšana
 
-**Atjaunots:** 2026-10-02
+**Atjaunots:** 2026-10-08
 **Stabilais zars:** `main`
 **Darba sākumpunkts:** `main`
-**Nākamā izstrādes fāze:** 1 — klases ķermeņa AST v1
+**Nākamā izstrādes fāze:** 1 — pirmkoda diapazoni AST mezgliem
 
 Šis fails ir pirmais lasāmais dokuments, sākot jaunu LatNe darba sesiju.
 
@@ -84,6 +84,8 @@ Pārbaudes skripti:
 
 `packages/valoda/scripts/parbaudit-sintaktisko-analizi.mjs`
 
+`packages/valoda/scripts/pārbaudīt-latviskos-identifikatorus.mjs`
+
 Publiskā ceļa karte:
 
 `ROADMAP.md`
@@ -101,98 +103,106 @@ Pirmais `.lat` paraugs:
 - 196 leksiskie elementi
 - 0 nezināmu simbolu
 - 5 augšējā līmeņa AST mezgli
+- 6 strukturēti klases ķermeņa mezgli
+- 4 klases lauki
+- 2 konstruktora parametri
+- 4 konstruktora priekšraksti
+- 1 getteris
+- 1 gettera priekšraksts
+- 4 kanoniskā gettera veidnes AST daļas
+- 2 kanoniskā gettera interpolācijas
 
-Sintaktiskais analizators strukturēti saprot:
+Sintaktiskais analizators strukturēti saprot arī:
 
-- importu
-- saskarsmi
-- uzskaitījumu
-- klasi augšējā līmenī
-- darbību
-- mainīgo deklarācijas
-- nosacījumus
-- `kam` ciklu
-- atgriešanu
-- kļūdu apstrādi
-- identifikatorus un literāļus
-- īpašību piekļuvi
-- funkciju izsaukumus
-- `gaidi`
-- `jauns`
-- masīvus
-- unārās izteiksmes
-- binārās izteiksmes ar pirmajām operatoru prioritātēm
+- klases laukus un pieejamības modifikatorus
+- `nemaināms` lauku informāciju un tipus
+- konstruktora deklarāciju un parametrus
+- konstruktora ķermeņa priekšrakstus
+- getter deklarāciju, atgriezes tipu un ķermeni
+- minimālu klases metodes deklarāciju
+- metodes pieejamību
+- metodes tipētos parametrus
+- metodes atgriezes tipu
+- metodes strukturētu ķermeni
+- piešķiršanas izteiksmes
+- vienkāršo un kombinētos piešķiršanas operatorus
+- labēji asociatīvas piešķiršanas izteiksmes
+- derīga piešķiršanas mērķa pārbaudi
+- strukturētus augšējā līmeņa `Darbība` parametrus
+- vienotu `Parametrs` AST konstruktoram, metodei un darbībai
+- strukturētas veidņu teksta daļas
+- strukturētas veidņu interpolācijas ar pilnu izteiksmju AST
 
-## Kāpēc nākamais darbs ir klases ķermeņa AST v1
+Klases metodes minimums tiek pārbaudīts ar atsevišķu sintakses regresijas paraugu, nemainot kanonisko `examples/pamata-paraugs.lat`.
 
-Fāze 0A ir pabeigta.
+Tehniskie checkpointi:
 
-Projektam jau ir reproducējama Node.js un pnpm vide, GitHub Actions CI, terminoloģijas un valodas kodola pārbaudes, Vārdu kalves būvēšanas pārbaude un pirmā regresijas paraugu sistēma.
+- `8195515` — strukturēts klases ķermeņa AST
+- `1d73f5d` — strukturēts piešķiršanas AST
+- `5e5e741` — strukturēts konstruktora ķermeņa AST
+- `6bf5ace` — strukturēts gettera ķermeņa AST
+- `91356b6` — minimāls klases metodes AST
+- `fe4ab65` — strukturēts darbības parametru AST
+- `c617074` — strukturēts veidņu interpolāciju AST
 
-Tas nozīmē, ka valodas kodolu tagad var drošāk paplašināt, nepalielinot regresiju risku ar katru jaunu sintakses soli.
+Pēc identifikatoru normalizācijas pilnais `corepack pnpm run check` ir zaļš.
 
-Pašreizējā lielākā AST robeža ir klases ķermenis.
+Repo-wide auditā veco publisko transliterēto lexer/parser/AST identifikatoru atlikums ir 0.
+
+## Pašreizējā robeža
+
+Konstruktors, klases metode un augšējā līmeņa `Darbība` izmanto kopīgu parametru analizatoru un vienotu `Parametrs` AST formu.
+
+Veidņu literāļi tiek sadalīti `VeidnesTeksts` un `VeidnesInterpolācija` mezglos. Interpolācijas tiek analizētas ar pilno izteiksmju parseri.
+
+Konstruktora, gettera un minimālas klases metodes ķermeņi ir strukturēti ar kopīgo priekšrakstu analizatoru.
+
+Raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
+
+AST mezgliem vēl nav vienota sākuma/beigu pirmkoda diapazona kontrakta.
 
 ## Nākamais izstrādes bloks
 
-**Klases ķermeņa AST v1.**
+**Pirmkoda diapazona informācija AST mezgliem.**
 
-Secība:
+Mērķis:
 
-1. strukturēt klases laukus
-2. strukturēt pieejamības modifikatorus
-3. saglabāt `nemaināms` informāciju
-4. strukturēt lauku tipus
-5. strukturēt konstruktora deklarāciju
-6. strukturēt konstruktora parametrus
-7. strukturēt getter deklarāciju
-8. strukturēt getter atgriezes tipu
-9. pievienot regresijas paraugus jaunajai AST struktūrai
-10. pārbaudīt, ka `examples/pamata-paraugs.lat` joprojām iziet pilno kvalitātes pārbaudi
+1. definēt minimālo diapazona formu AST v1 ar kanonisku latviešu rakstību
+2. saglabāt `sākums`, `beigas` un `nobīde` konsekventā formā
+3. sākt ar reprezentatīviem deklarāciju, priekšrakstu un izteiksmju mezgliem
+4. nepazaudēt pašreizējo `rinda` informāciju pārejas laikā
+5. pievienot regresijas pārbaudes
+6. palaist pilno `corepack pnpm run check`
 
-Konstruktora un gettera ķermeņus šajā pirmajā iterācijā vēl drīkst saglabāt kā neapstrādātu leksisko elementu kopas.
+Pēc tam:
 
-## Nākamā valodas robeža
-
-Klases `Lietotājs` ķermenis vēl netiek strukturēti parsēts.
-
-Pirmajā klases AST iterācijā jāatpazīst:
-
-- klases lauki
-- `atvērts`, `aizsargāts`, `privāts`
-- `nemaināms`
-- lauka tips
-- konstruktora deklarācija
-- konstruktora parametri
-- getter deklarācija `ņem`
-- getter atgriezes tips
-
-Konstruktora un gettera ķermeņus pirmajā iterācijā vēl drīkst saglabāt kā tokenu kopas.
-
-### Gatavības kritērijs
-
-`Klase Lietotājs` AST vairs nedrīkst būt tikai nosaukums un `kermenaTokeni`.
-
-Tam jāatspoguļo četri lauki, konstruktors un getteris.
-
-Esošajam `pamata-paraugs.lat` pēc izmaiņas joprojām jāparsējas veiksmīgi.
+- definēt AST mezglu obligātos un izvēles laukus
+- publicēt pirmo `spec/ast-v1.md`
+- pievienot AST v1 paraugu pārbaudes
+- nostiprināt AST v1 kontraktu
 
 ## Ceļš līdz pirmajai izpildei
 
 ```text
 0A kvalitātes pārbaudes — pabeigts
 ↓
-klases AST ← pašreizējais darbs
+klases AST — pabeigts
 ↓
-piešķiršanas AST
+piešķiršanas AST — pabeigts
 ↓
-pilnāki ķermeņi un parametri
+konstruktora ķermeņa AST — pabeigts
 ↓
-template interpolation
+getter un metožu minimums — pabeigts
 ↓
-pirmkoda diapazoni
+funkciju parametru AST — pabeigts
 ↓
-AST v1 kontrakts
+veidņu interpolācijas — pabeigts
+↓
+pirmkoda diapazoni ← pašreizējais darbs
+↓
+AST v1 lauku kontrakts
+↓
+AST v1 specifikācija
 ↓
 LatNe API minimums
 ↓

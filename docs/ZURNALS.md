@@ -1253,3 +1253,287 @@ Phase 0A rezultāts:
 Nākamais engineering uzdevums:
 
 **Klases ķermeņa AST v1.**
+
+---
+
+## 2026-10-07 — J0022 — Klases ķermeņa AST v1
+
+**Tips:** parseris / AST
+**Statuss:** pabeigts
+
+Klases `Lietotājs` ķermenis vairs nav tikai neapstrādāta tokenu kopa.
+
+Ieviests:
+
+- strukturēti `KlasesLauks` mezgli
+- pieejamības modifikatori
+- `nemaināms` stāvoklis
+- lauku tipi
+- `Konstruktors` mezgls
+- konstruktora parametri
+- `Getteris` mezgls
+- gettera atgriezes tips
+
+Kanoniskajā paraugā tiek iegūti:
+
+- 6 klases ķermeņa mezgli
+- 4 lauki
+- 2 konstruktora parametri
+- 1 getteris
+
+Konstruktora un gettera ķermeņi šajā checkpointā apzināti vēl palika kā neapstrādātas leksisko elementu kopas.
+
+Checkpoint:
+
+`8195515`
+
+---
+
+## 2026-10-07 — J0023 — Piešķiršanas izteiksmju AST
+
+**Tips:** parseris / AST / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Izteiksmju sintaktiskais analizators papildināts ar strukturētu `PiešķiršanasIzteiksme` mezglu.
+
+Ieviests:
+
+- `=`
+- `+=`
+- `-=`
+- `*=`
+- `/=`
+- `%=`
+- `**=`
+- `&&=`
+- `||=`
+- `??=`
+- labējā asociativitāte
+- piešķiršanas mērķa validācija
+- piešķiršanas parsēšana grupētās izteiksmēs, argumentos un masīvos
+
+Regresijas pārbaudes sedz četras kanoniskā `Lietotājs` konstruktora piešķiršanas, visus atbalstītos piešķiršanas operatorus, `a = b = 1` un nederīgu mērķi `1 = vērtība`.
+
+Pilnā kvalitātes ķēde pēc izmaiņas ir zaļa.
+
+Checkpoint:
+
+`1d73f5d`
+
+Nākamais engineering uzdevums:
+
+**Konstruktora ķermeņa priekšrakstu AST.**
+
+---
+
+## 2026-10-07 — J0024 — Konstruktora ķermeņa priekšrakstu AST
+
+**Tips:** parseris / AST
+**Statuss:** pabeigts
+
+Konstruktora ķermenis savienots ar esošo priekšrakstu analizatora infrastruktūru.
+
+Kanoniskajā `Lietotājs` konstruktorā tagad tiek iegūti četri strukturēti `Izteiksme` priekšraksti, kuru izteiksmes ir `PiešķiršanasIzteiksme` mezgli.
+
+Iepriekšējā piešķiršanas izteiksmju regresijas pārbaude vairs nepārlasa neapstrādātos leksiskos elementus pa rindām, bet pārbauda īsto `Konstruktors.ķermenis` AST ceļu.
+
+Raw ķermeņa leksiskie elementi pagaidām saglabāti kā pārejas lauks.
+
+Checkpoint:
+
+`5e5e741`
+
+---
+
+## 2026-10-07 — J0025 — Gettera ķermeņa AST
+
+**Tips:** parseris / AST
+**Statuss:** pabeigts
+
+Gettera ķermenis savienots ar to pašu priekšrakstu analizatora infrastruktūru.
+
+Kanoniskā gettera `apraksts` ķermenis tagad satur vienu strukturētu `Atgriešana` priekšrakstu.
+
+Atgriešanas vērtība šajā posmā paliek `Veidne` mezgls. Veidņu interpolāciju strukturēšana apzināti atlikta uz atsevišķu AST v1 soli.
+
+Raw gettera ķermeņa elementi pagaidām saglabāti kā pārejas lauks.
+
+Checkpoint:
+
+`6bf5ace`
+
+---
+
+## 2026-10-07 — J0026 — Minimāls klases metodes AST
+
+**Tips:** parseris / AST / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Klases parserim pievienots pirmais `Metode` mezgls.
+
+Minimālais metodes AST satur:
+
+- nosaukumu
+- pieejamību
+- tipētus parametrus
+- izvēles atgriezes tipu
+- strukturētu ķermeni
+- pārejas raw ķermeņa elementus
+
+Metodes ķermenis izmanto esošo priekšrakstu analizatoru.
+
+Atsevišķs regresijas paraugs pārbauda:
+
+```lat
+klase MetodesParaugs {
+  atvērts darbība sveic(vārds: teksts): teksts {
+    atgriez vārds
+  }
+}
+```
+
+Kanoniskais `examples/pamata-paraugs.lat` netika mainīts, tāpēc tā 196 leksisko elementu un 5 augšējā līmeņa mezglu baseline saglabājas.
+
+Checkpoint:
+
+`91356b6`
+
+Nākamais engineering uzdevums:
+
+**Funkciju parametru AST paplašināšana.**
+
+---
+
+## 2026-10-07 — J0027 — Darbības parametru AST
+
+**Tips:** parseris / AST / refaktorēšana
+**Statuss:** pabeigts
+
+Augšējā līmeņa `Darbība` deklarācijām pievienots strukturēts `parametri` masīvs.
+
+Konstruktors, klases metode un augšējā līmeņa darbība tagad izmanto vienu kopīgu parametru analizatoru un vienotu mezgla formu:
+
+```text
+Parametrs
+├─ veids
+├─ nosaukums
+├─ tips
+└─ rinda
+```
+
+Saglabāts pārejas lauks `parametruLeksiskoElementuSkaits`, bet vecais neviennozīmīgais `parametruLeksiskieElementi` lauks vairs netiek izmantots.
+
+Regresijas pārbaude sedz darbību ar diviem tipētiem parametriem.
+
+Checkpoint:
+
+`fe4ab65`
+
+---
+
+## 2026-10-07 — J0028 — Veidņu interpolāciju AST
+
+**Tips:** lexer / parseris / AST / regresijas pārbaudes
+**Statuss:** pabeigts
+
+`veidne` leksiskais elements saglabā vienu ārējo tokenu, bet tagad satur strukturētas daļas.
+
+Izteiksmju AST izmanto:
+
+- `VeidnesTeksts`
+- `VeidnesInterpolācija`
+
+Interpolācijas saturs tiek atkārtoti leksiski analizēts ar LatNe terminoloģijas vārdnīcu un nodots pilnajam izteiksmju parserim.
+
+Kanoniskā gettera veidne satur 4 AST daļas un 2 interpolācijas.
+
+Papildu regresijas pārbaudes sedz:
+
+- bināru izteiksmi `${vērtība + 1}`
+- escapotu `\${...}` marķieri
+
+Kanoniskais lexer baseline saglabājas 196 leksiskie elementi.
+
+Checkpoint:
+
+`c617074`
+
+---
+
+## 2026-10-07 — J0029 — LatNe logotips publiskajā identitātē
+
+**Tips:** publiskā identitāte / README / GitHub Pages
+**Statuss:** pabeigts
+
+Projektam pievienots jaunais LatNe logotips kā kanonisks publiskais attēls:
+
+`site/assets/latne-logo.png`
+
+Tas tiek izmantots:
+
+- GitHub README augšdaļā
+- GitHub Pages hero sadaļā līdzās dzīvajam LatNe koda piemēram
+
+Pages galvenes mazā zīme paliek vienkārša un salasāma mazos izmēros.
+
+Nākamais engineering uzdevums:
+
+**Pirmkoda diapazona informācija AST mezgliem.**
+
+---
+
+## 2026-10-08 — J0030 — Latviešu identifikatoru normalizācijas recovery
+
+**Tips:** parseris / AST / kvalitāte / tehniskais parāds
+**Statuss:** pabeigts
+
+Pirms pirmkoda diapazonu AST darba tika apturēta turpmāka implementācija, jo jaunajam kontraktam bija izmantotas transliterētas formas `sakums` un `nobide`.
+
+Paplašināts audits atklāja, ka tā pati problēma jau pastāv esošajā lexer/parser/AST kodolā.
+
+Audita sākuma rezultāts:
+
+- 327 kritiski lietojumi
+- 25 kritiskas transliterētas formas
+
+Normalizēti:
+
+- lexer un parsera publiskie eksporti
+- tokenu publiskie lauki
+- AST publiskie lauki
+- saistītie iekšējie latviskie identifikatori
+- sintakses un regresijas pārbaudes
+
+Piemēri:
+
+```text
+izveidoVardnicu  → izveidoVārdnīcu
+analizeSintaksi  → analizēSintaksi
+vertiba          → vērtība
+kermenis         → ķermenis
+pieejamiba       → pieejamība
+merkis           → mērķis
+```
+
+Pievienots pastāvīgs quality gate:
+
+`corepack pnpm run check:identifikatori`
+
+Pēc normalizācijas:
+
+- repo-wide veco publisko transliterēto identifikatoru atlikums: 0
+- otrajā neatkarīgajā auditā izlabots arī `mēģinaLeksiskieElementi` un quality-gate skripta paša transliterētie iekšējie identifikatori
+- identifikatoru guards pārbauda arī pats savu izpildāmo kodu
+- terminoloģija: 84/84 approved
+- kanoniskais lexer baseline: 196
+- nezināmi leksiskie elementi: 0
+- augšējā līmeņa AST mezgli: 5
+- klases ķermeņa mezgli: 6
+- veidnes daļas: 4
+- veidnes interpolācijas: 2
+- regresijas paraugi: 4/4 atbilstoši gaidītajam
+- Vārdu kalves TypeScript check un production build: zaļš
+
+Nākamais engineering uzdevums paliek:
+
+**Pirmkoda diapazona informācija AST mezgliem**, izmantojot pareizu latviešu rakstību, tostarp `sākums` un `nobīde`.

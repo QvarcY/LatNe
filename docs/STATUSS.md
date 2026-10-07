@@ -1,12 +1,12 @@
 # LatNe statuss
 
-**Atjaunots:** 2026-10-02
-**Pašreizējais valodas stāvoklis:** strukturēts AST līdz izteiksmju līmenim
-**Nākamā izstrādes fāze:** 1 — klases ķermeņa AST v1
+**Atjaunots:** 2026-10-08
+**Pašreizējais valodas stāvoklis:** strukturēts AST līdz vienotam parametru kontraktam un veidņu interpolācijām
+**Nākamā izstrādes fāze:** 1 — pirmkoda diapazoni AST mezgliem
 
 ## Pašreizējā robeža
 
-LatNe jau spēj nolasīt `.lat` avota failu un izveidot strukturētu AST līdz izteiksmju līmenim.
+LatNe jau spēj nolasīt `.lat` avota failu un izveidot strukturētu deklarāciju, priekšrakstu, izteiksmju un klases ķermeņa AST.
 
 Darbojošā ķēde:
 
@@ -37,6 +37,16 @@ Valodas kodols:
 - augšējā līmeņa deklarāciju sintaktiskais analizators
 - darbības ķermeņa priekšrakstu sintaktiskais analizators
 - atsevišķs izteiksmju sintaktiskais analizators
+- strukturēts klases ķermeņa AST
+- strukturētas piešķiršanas izteiksmes
+- strukturēts konstruktora ķermeņa AST
+- strukturēts gettera ķermeņa AST
+- minimāls klases metodes AST
+- strukturēti augšējā līmeņa `Darbība` parametri
+- vienots `Parametrs` AST konstruktoram, metodei un darbībai
+- strukturētas veidņu literāļu interpolācijas
+- normalizēta LatNe-owned lexer, parsera, tokenu un AST identifikatoru rakstība ar pilnām latviešu diakritiskajām zīmēm
+- ieviests pastāvīgs transliterētu LatNe identifikatoru quality gate
 
 Publiskā infrastruktūra:
 
@@ -75,6 +85,21 @@ Pašreizējais AST saprot:
 - loģiskās un nulles vērtības
 - unārās izteiksmes
 - pirmās bināro operatoru prioritātes
+- piešķiršanas izteiksmes
+- klases laukus
+- pieejamības modifikatorus
+- `nemaināms` lauku informāciju
+- konstruktora deklarāciju un parametrus
+- getter deklarāciju, atgriezes tipu un ķermeni
+- konstruktora ķermeņa priekšrakstus
+- klases metodes deklarāciju
+- klases metodes pieejamību
+- klases metodes tipētos parametrus
+- klases metodes atgriezes tipu
+- klases metodes strukturētu ķermeni
+- augšējā līmeņa darbības tipētos parametrus
+- veidņu teksta daļas
+- veidņu interpolācijas ar pilnu izteiksmju AST
 
 ## Pārbaudītais pirmais paraugs
 
@@ -87,17 +112,32 @@ Rezultāts:
 - 5 augšējā līmeņa AST mezgli
 - strukturēts darbības ķermenis
 - strukturētas izteiksmes
+- 4 strukturēti konstruktora priekšraksti
+- 1 strukturēts gettera priekšraksts
+- 4 strukturētas kanoniskā gettera veidnes daļas
+- 2 strukturētas kanoniskā gettera interpolācijas
 
 ## Aktuālie ierobežojumi
 
-Klases ķermenis vēl nav strukturēts AST.
+Augšējā līmeņa `Darbība`, konstruktors un klases metode tagad izmanto vienu kopīgu `Parametrs` AST kontraktu.
+
+Veidņu literāļi tagad satur:
+
+- `VeidnesTeksts`
+- `VeidnesInterpolācija`
+- pilnu interpolācijas izteiksmes AST
+- sākotnējo `raw` veidnes vērtību
+
+Regresijas pārbaudes sedz arī bināru izteiksmi interpolācijā un escapotu `\${...}` marķieri.
+
+Konstruktora, gettera un metodes raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
 Nav vēl:
 
-- pilna piešķiršanas AST
-- pilnas funkciju parametru struktūras
-- veidņu interpolāciju AST
-- pirmkoda diapazona kontrakta AST līmenī
+- noklusējuma parametru vērtību AST
+- plašāka klases metožu modifikatoru atbalsta, piemēram, `async` un `static`
+- pilna pirmkoda diapazona kontrakta AST mezgliem
+- definēta AST mezglu obligāto un izvēles lauku specifikācija
 - stabilas AST v1 specifikācijas
 - LatNe API semantiskās translācijas
 - koda ģeneratora
@@ -122,36 +162,38 @@ Tas ietver:
 - tīra atkarību instalācija pārbaudīta ar pnpm 12.6.0 un frozen lockfile
 - GitHub Actions CI darbojas uz Linux
 - terminoloģijas validācija darbojas CI
+- LatNe identifikatoru ortogrāfijas pārbaude darbojas pilnajā kvalitātes ķēdē
 - leksiskās analīzes pārbaude darbojas CI
 - sintaktiskās analīzes pārbaude darbojas CI
 - Vārdu kalves pārbaude un būvēšana darbojas CI
 - regresijas paraugu sistēma
 - derīgi, nederīgi, robežgadījumu un Unicode paraugi
 
-## Nākamais valodas uzdevums pēc kvalitātes sliedēm
+## Nākamais valodas uzdevums
 
-**Klases ķermeņa AST v1.**
+**Pirmkoda diapazona informācija AST mezgliem.**
 
-Jāstrukturē:
+Vienotais parametru AST un veidņu interpolāciju AST ir strukturēti.
 
-- lauki
-- pieejamības modifikatori
-- `nemaināms`
-- lauku tipi
-- konstruktora deklarācija un parametri
-- getter deklarācija un atgriezes tips
+Nākamajā solī jādefinē un jāievieš konsekventa pirmkoda atrašanās vietas informācija AST mezgliem, lai nākamajos posmos varētu būvēt precīzu diagnostiku, pirmkoda kartes un stabilu AST v1 kontraktu.
 
-Konstruktora un gettera ķermeņus pirmajā iterācijā vēl drīkst saglabāt kā tokenu kopas.
+Pirmajā iterācijā jāvienojas par minimālo diapazona formu un jānostiprina tā ar regresijas pārbaudēm.
+
+Jaunie AST lauki jāveido tikai ar pilnu latviešu rakstību. Plānotais diapazona kontrakts nedrīkst ieviest transliterētas formas, piemēram, `sakums` vai `nobide`; jāizmanto `sākums` un `nobīde`.
 
 ## Ceļš līdz pirmajai palaišanai
 
 ```text
 kvalitātes sliedes
-→ klases AST
-→ piešķiršanas AST
-→ pilnāki ķermeņi
-→ pirmkoda diapazoni
-→ AST v1
+→ klases AST ✓
+→ piešķiršanas AST ✓
+→ konstruktora ķermeņa AST ✓
+→ getter un metožu minimums ✓
+→ funkciju parametru AST ✓
+→ veidņu interpolācijas ✓
+→ pirmkoda diapazoni ← pašreizējais darbs
+→ AST v1 lauku kontrakts
+→ AST v1 specifikācija
 → API minimums
 → semantiskās transformācijas
 → koda ģenerators
