@@ -326,6 +326,43 @@ if (
   )
 }
 
+if (
+  !Array.isArray(
+    getteris.kermenis
+  )
+) {
+  throw new Error(
+    "Gettera ķermenis nav strukturētu priekšrakstu masīvs"
+  )
+}
+
+if (getteris.kermenis.length !== 1) {
+  throw new Error(
+    `Gaidīts 1 gettera priekšraksts, saņemti ${getteris.kermenis.length}`
+  )
+}
+
+const getteraPrieksraksts =
+  getteris.kermenis[0]
+
+if (
+  getteraPrieksraksts.veids !==
+    "Atgriešana"
+) {
+  throw new Error(
+    "Gettera priekšraksts nav atgriešanas priekšraksts"
+  )
+}
+
+if (
+  getteraPrieksraksts.vertiba?.veids !==
+    "Veidne"
+) {
+  throw new Error(
+    "Gettera atgriešanas vērtība nav veidnes AST"
+  )
+}
+
 const pieskirsanas =
   klase.konstruktors.kermenis.map(
     prieksraksts =>
@@ -506,6 +543,10 @@ console.log(
 
 console.log(
   `Getteri: ${klase.getteri.length}`
+)
+
+console.log(
+  `Gettera priekšraksti: ${getteris.kermenis.length}`
 )
 
 console.log("")

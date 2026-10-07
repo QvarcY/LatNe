@@ -337,6 +337,13 @@ export function analizeKlasesKermeni(
         pieejamiba,
         atgriezesTips:
           atgriezesTips.join(""),
+        kermenis:
+          typeof prieksrakstuAnalizators ===
+            "function"
+            ? prieksrakstuAnalizators(
+                getteraKermenis
+              )
+            : null,
         kermenaLeksiskieElementi:
           getteraKermenis,
         rinda: sakums.rinda
