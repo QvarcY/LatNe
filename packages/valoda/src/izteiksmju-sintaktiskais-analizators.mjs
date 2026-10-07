@@ -206,8 +206,51 @@ export function analizeIzteiksmi(leksiskieElementi) {
     if (leksiskaisElements.veids === "veidne") {
       panem()
 
+      const dalas =
+        Array.isArray(
+          leksiskaisElements.dalas
+        )
+          ? leksiskaisElements.dalas.map(
+              dala => {
+                if (
+                  dala.veids === "teksts"
+                ) {
+                  return {
+                    veids:
+                      "VeidnesTeksts",
+                    vertiba:
+                      dala.vertiba,
+                    rinda: dala.rinda
+                  }
+                }
+
+                if (
+                  dala.veids ===
+                    "interpolacija"
+                ) {
+                  return {
+                    veids:
+                      "VeidnesInterpolācija",
+                    izteiksme:
+                      analizeIzteiksmi(
+                        dala
+                          .leksiskieElementi
+                      ),
+                    rinda: dala.rinda
+                  }
+                }
+
+                izteiksmesKluda(
+                  "Neatpazīta veidnes daļa",
+                  leksiskaisElements
+                )
+              }
+            )
+          : []
+
       return {
         veids: "Veidne",
+        dalas,
         raw: leksiskaisElements.vertiba,
         rinda: leksiskaisElements.rinda
       }

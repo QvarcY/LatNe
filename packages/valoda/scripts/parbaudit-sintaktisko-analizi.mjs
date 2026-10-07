@@ -499,6 +499,188 @@ if (
   )
 }
 
+const veidne =
+  getteraPrieksraksts.vertiba
+
+if (
+  !Array.isArray(veidne.dalas) ||
+  veidne.dalas.length !== 4
+) {
+  throw new Error(
+    `Gaidītas 4 veidnes AST daļas, saņemtas ${veidne.dalas?.length ?? "nav"}`
+  )
+}
+
+const gaiditasVeidnesDalas = [
+  {
+    veids: "VeidnesInterpolācija",
+    nosaukums: "vārds"
+  },
+  {
+    veids: "VeidnesTeksts",
+    vertiba: " ("
+  },
+  {
+    veids: "VeidnesInterpolācija",
+    nosaukums: "vecums"
+  },
+  {
+    veids: "VeidnesTeksts",
+    vertiba: ")"
+  }
+]
+
+for (
+  let i = 0;
+  i < gaiditasVeidnesDalas.length;
+  i++
+) {
+  const faktiska =
+    veidne.dalas[i]
+
+  const gaidita =
+    gaiditasVeidnesDalas[i]
+
+  if (
+    faktiska.veids !==
+      gaidita.veids
+  ) {
+    throw new Error(
+      `Veidnes daļa ${i + 1} nav gaidītā tipa`
+    )
+  }
+
+  if (
+    gaidita.veids ===
+      "VeidnesTeksts"
+  ) {
+    if (
+      faktiska.vertiba !==
+        gaidita.vertiba
+    ) {
+      throw new Error(
+        `Veidnes teksta daļa ${i + 1} neatbilst gaidītajai vērtībai`
+      )
+    }
+
+    continue
+  }
+
+  if (
+    faktiska.izteiksme?.veids !==
+      "Īpašība" ||
+    faktiska.izteiksme
+      .objekts?.veids !==
+        "Šis" ||
+    faktiska.izteiksme
+      .nosaukums !==
+        gaidita.nosaukums
+  ) {
+    throw new Error(
+      `Veidnes interpolācija ${i + 1} neatbilst gaidītajam AST`
+    )
+  }
+}
+
+const veidnesInterpolacijas =
+  veidne.dalas.filter(
+    dala =>
+      dala.veids ===
+        "VeidnesInterpolācija"
+  )
+
+if (
+  veidnesInterpolacijas.length !== 2
+) {
+  throw new Error(
+    `Gaidītas 2 veidnes interpolācijas, saņemtas ${veidnesInterpolacijas.length}`
+  )
+}
+
+const saliktasVeidnesAst =
+  analizeIzteiksmesAst(
+    analizeLeksiski(
+      "`Rezultāts: ${vērtība + 1}`",
+      vardnica
+    )
+  )
+
+if (
+  saliktasVeidnesAst?.veids !==
+    "Veidne" ||
+  saliktasVeidnesAst.dalas.length !==
+    2
+) {
+  throw new Error(
+    "Saliktas veidnes AST struktūra neatbilst gaidītajai"
+  )
+}
+
+const saliktaInterpolacija =
+  saliktasVeidnesAst.dalas[1]
+
+if (
+  saliktaInterpolacija.veids !==
+    "VeidnesInterpolācija" ||
+  saliktaInterpolacija
+    .izteiksme?.veids !==
+      "BināraIzteiksme" ||
+  saliktaInterpolacija
+    .izteiksme.operators !== "+" ||
+  saliktaInterpolacija
+    .izteiksme.kreisa?.veids !==
+      "Identifikators" ||
+  saliktaInterpolacija
+    .izteiksme.kreisa.nosaukums !==
+      "vērtība" ||
+  saliktaInterpolacija
+    .izteiksme.laba?.veids !==
+      "Skaitlis" ||
+  saliktaInterpolacija
+    .izteiksme.laba.vertiba !== 1
+) {
+  throw new Error(
+    "Veidnes interpolācija neizmanto pilno izteiksmju AST"
+  )
+}
+
+const escapotasVeidnesAst =
+  analizeIzteiksmesAst(
+    analizeLeksiski(
+      "`\\${navInterpolacija}`",
+      vardnica
+    )
+  )
+
+if (
+  escapotasVeidnesAst?.veids !==
+    "Veidne" ||
+  !Array.isArray(
+    escapotasVeidnesAst.dalas
+  ) ||
+  escapotasVeidnesAst.dalas.length !==
+    1 ||
+  escapotasVeidnesAst
+    .dalas[0].veids !==
+      "VeidnesTeksts"
+) {
+  throw new Error(
+    "Escapots interpolācijas marķieris netika saglabāts kā veidnes teksts"
+  )
+}
+
+if (
+  escapotasVeidnesAst.dalas.some(
+    dala =>
+      dala.veids ===
+        "VeidnesInterpolācija"
+  )
+) {
+  throw new Error(
+    "Escapots interpolācijas marķieris kļūdaini parsēts kā interpolācija"
+  )
+}
+
 const metodesParaugaAst =
   analizeSintaksi(
     analizeLeksiski(
@@ -804,6 +986,14 @@ console.log(
 
 console.log(
   `Gettera priekšraksti: ${getteris.kermenis.length}`
+)
+
+console.log(
+  `Veidnes daļas: ${veidne.dalas.length}`
+)
+
+console.log(
+  `Veidnes interpolācijas: ${veidnesInterpolacijas.length}`
 )
 
 console.log("")
