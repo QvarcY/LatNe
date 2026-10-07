@@ -1335,7 +1335,7 @@ Konstruktora ķermenis savienots ar esošo priekšrakstu analizatora infrastrukt
 
 Kanoniskajā `Lietotājs` konstruktorā tagad tiek iegūti četri strukturēti `Izteiksme` priekšraksti, kuru izteiksmes ir `PiešķiršanasIzteiksme` mezgli.
 
-Iepriekšējā piešķiršanas izteiksmju regresijas pārbaude vairs nepārlasa neapstrādātos leksiskos elementus pa rindām, bet pārbauda īsto `Konstruktors.kermenis` AST ceļu.
+Iepriekšējā piešķiršanas izteiksmju regresijas pārbaude vairs nepārlasa neapstrādātos leksiskos elementus pa rindām, bet pārbauda īsto `Konstruktors.ķermenis` AST ceļu.
 
 Raw ķermeņa leksiskie elementi pagaidām saglabāti kā pārejas lauks.
 
