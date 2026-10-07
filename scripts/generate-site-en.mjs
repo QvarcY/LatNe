@@ -61,6 +61,13 @@ html = replaceRequired(
 
 html = replaceRequired(
   html,
+  'src="./assets/latne-hero.jpg"',
+  'src="../assets/latne-hero.jpg"',
+  "hero image path"
+);
+
+html = replaceRequired(
+  html,
   '<script src="./app.js" defer></script>',
   '<script src="../app.js" defer></script>',
   "app path"

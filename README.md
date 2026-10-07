@@ -2,13 +2,11 @@
 
 <p align="center">
   <img
-    src="site/assets/latne-logo.png"
-    alt="LatNe"
-    width="320"
+    src="site/assets/latne-hero.jpg"
+    alt="LatNe — Programmē latviski"
+    width="100%"
   >
 </p>
-
-<p align="center"><strong>Programmē latviski.</strong></p>
 
 LatNe ir neatkarīga atvērtā pirmkoda programmēšanas valoda un topošā izstrādes vide, kur latviešu valoda nav tikai dokumentācijas slānis — tā ir pašas programmēšanas pieredzes daļa.
 
