@@ -10,6 +10,10 @@ import {
   analizēParametrus
 } from "./parametru-sintaktiskais-analizators.mjs"
 
+import {
+  izveidoDiapazonu
+} from "./pirmkoda-diapazons.mjs"
+
 function sintaksesKļūda(ziņa, leksiskaisElements) {
   if (!leksiskaisElements) {
     throw new SyntaxError(`${ziņa} faila beigās`)
@@ -329,7 +333,16 @@ export function analizēPriekšrakstus(leksiskieElementi) {
         izteiksme.length > 0
           ? analizēIzteiksmesAst(izteiksme)
           : null,
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          izteiksme.length > 0
+            ? izteiksme[
+                izteiksme.length - 1
+              ]
+            : sākums
+        )
     }
   }
 
