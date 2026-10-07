@@ -8,6 +8,10 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- definēts vienots AST pirmkoda diapazona kontrakts ar `sākums`, `beigas`, `rinda`, `kolonna` un `nobīde`
+- leksiskajiem elementiem pievienoti pusatvērti pirmkoda diapazoni
+- pirmajā AST diapazonu iterācijā pārklāti `Identifikators`, `Parametrs` un `Atgriešana`
+- pievienotas pirmkoda diapazonu regresijas pārbaudes, tostarp veidnes interpolācijas absolūtajai nobīdei
 - normalizēti LatNe lexer, parsera, tokenu un AST latviskie identifikatori uz pareizu rakstību ar diakritiskajām zīmēm
 - publiskie parsera eksporti pārdēvēti uz `izveidoVārdnīcu`, `analizēLeksiski`, `analizēIzteiksmi`, `analizēPriekšrakstus`, `analizēSintaksi`, `analizēKlasesĶermeni` un `analizēParametrus`
 - tokenu un AST lauki, tostarp `vērtība`, `daļas`, `deklarācija`, `mainīgais`, `nosacījums`, `ķermenis`, `pieejamība`, `nemaināms`, `kreisā`, `labā` un `mērķis`, nostiprināti ar pareizu latviešu ortogrāfiju
