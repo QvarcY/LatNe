@@ -47,16 +47,23 @@ html = replaceRequired(
 
 html = replaceRequired(
   html,
-  'href="./styles.css"',
-  'href="../styles.css"',
+  'href="./styles.css?v=20261008-header-1"',
+  'href="../styles.css?v=20261008-header-1"',
   "stylesheet path"
+);
+
+html = replaceRequired(
+  html,
+  'src="./assets/latne-logo.png?v=20261008-header-1"',
+  'src="../assets/latne-logo.png?v=20261008-header-1"',
+  "header logo path"
 );
 
 html = replaceRequired(
   html,
   'src="./assets/latne-logo.png"',
   'src="../assets/latne-logo.png"',
-  "logo path"
+  "hero logo path"
 );
 
 html = replaceRequired(
