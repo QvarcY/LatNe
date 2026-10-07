@@ -120,4 +120,6 @@ Drošības pārbaude apturēja patch pirms bojāta `parser.mjs` saglabāšanas.
 
 **Aizsardzība:** pilnajai kvalitātes ķēdei pievienota `check:identifikatori` pārbaude, kas rekursīvi pārbauda LatNe valodas kodolu un testus.
 
+**Papildu audits:** pēc pirmā recovery checkpointa neatkarīga identifikatoru inventarizācija atrada vēl vienu saliktu iekšējo formu `meginaLeksiskieElementi` un transliterētus identifikatorus pašā quality-gate skriptā. Tie izlaboti otrajā pārejā, un guards turpmāk pārbauda arī pats savu izpildāmo kodu.
+
 **Mācība:** LatNe-owned latvisks identifikators nav "tehnisks ASCII nosaukums". Ja JavaScript atbalsta vajadzīgo Unicode identifikatoru, jāizmanto pareiza latviešu rakstība jau pirms publiskā kontrakta stabilizācijas.

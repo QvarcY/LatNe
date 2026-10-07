@@ -350,13 +350,13 @@ export function analizēPriekšrakstus(leksiskieElementi) {
   const analizēMēģinaBloku = () => {
     const sākums = gaidiAvotu("try")
 
-    const meginaLeksiskieElementi =
+    const mēģinaLeksiskieElementi =
       nolasītGrupu("{", "}")
 
     const mezgls = {
       veids: "Mēģinājums",
       mēģina:
-        analizēPriekšrakstus(meginaLeksiskieElementi),
+        analizēPriekšrakstus(mēģinaLeksiskieElementi),
       ķer: null,
       beigas: null,
       rinda: sākums.rinda

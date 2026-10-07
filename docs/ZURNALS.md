@@ -1521,6 +1521,8 @@ Pievienots pastāvīgs quality gate:
 Pēc normalizācijas:
 
 - repo-wide veco publisko transliterēto identifikatoru atlikums: 0
+- otrajā neatkarīgajā auditā izlabots arī `mēģinaLeksiskieElementi` un quality-gate skripta paša transliterētie iekšējie identifikatori
+- identifikatoru guards pārbauda arī pats savu izpildāmo kodu
 - terminoloģija: 84/84 approved
 - kanoniskais lexer baseline: 196
 - nezināmi leksiskie elementi: 0

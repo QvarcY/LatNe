@@ -15,7 +15,7 @@ const saknes = [
   "tests"
 ]
 
-const atlautiePaplasinajumi =
+const atļautiePaplašinājumi =
   new Set([
     ".mjs",
     ".js",
@@ -62,7 +62,16 @@ const aizliegtieIdentifikatori = [
   "ipasiba",
   "prieksraksts",
   "pazinojumi",
-  "kluda"
+  "kluda",
+  "meginaLeksiskieElementi",
+  "atlautiePaplasinajumi",
+  "savacFailus",
+  "rezultats",
+  "cels",
+  "parkapumi",
+  "relativais",
+  "unikals",
+  "parkapums"
 ]
 
 const aizliegtieFragmenti = [
@@ -89,12 +98,18 @@ const aizliegtieFragmenti = [
   "dzil",
   "figuriiekav",
   "kvadratiekav",
-  "uzskaitij"
+  "uzskaitij",
+  "megina",
+  "parkap",
+  "paplasin",
+  "savac",
+  "unikal",
+  "rezultat"
 ]
 
-function savacFailus(
+function savācFailus(
   mape,
-  rezultats
+  rezultāts
 ) {
   for (
     const ieraksts
@@ -105,31 +120,31 @@ function savacFailus(
       }
     )
   ) {
-    const cels =
+    const ceļš =
       join(
         mape,
         ieraksts.name
       )
 
     if (ieraksts.isDirectory()) {
-      savacFailus(
-        cels,
-        rezultats
+      savācFailus(
+        ceļš,
+        rezultāts
       )
 
       continue
     }
 
     if (
-      !atlautiePaplasinajumi.has(
+      !atļautiePaplašinājumi.has(
         extname(ieraksts.name)
       )
     ) {
       continue
     }
 
-    rezultats.push(
-      cels.replaceAll("\\", "/")
+    rezultāts.push(
+      ceļš.replaceAll("\\", "/")
     )
   }
 }
@@ -137,31 +152,39 @@ function savacFailus(
 const faili = []
 
 for (const sakne of saknes) {
-  savacFailus(
+  savācFailus(
     sakne,
     faili
   )
 }
 
-const parkapumi = []
+const pārkāpumi = []
 
 for (const fails of faili) {
-  const relativais =
+  const relatīvais =
     relative(
       ".",
       fails
     )
       .replaceAll("\\", "/")
 
-  if (relativais === pats) {
-    continue
-  }
-
-  const rindas =
+  let failsTeksts =
     readFileSync(
       fails,
       "utf8"
     )
+
+  if (relatīvais === pats) {
+    failsTeksts =
+      failsTeksts
+        .replace(
+          /const aizliegtieIdentifikatori = \[[\s\S]*?\]\r?\n\r?\nconst aizliegtieFragmenti = \[[\s\S]*?\]\r?\n/u,
+          ""
+        )
+  }
+
+  const rindas =
+    failsTeksts
       .split(/\r?\n/u)
 
   for (
@@ -183,10 +206,10 @@ for (const fails of faili) {
         )
 
       if (izteiksme.test(rinda)) {
-        parkapumi.push({
-          fails: relativais,
+        pārkāpumi.push({
+          fails: relatīvais,
           rinda: indekss + 1,
-          vertiba: aizliegtais,
+          vērtība: aizliegtais,
           veids: "identifikators"
         })
       }
@@ -197,10 +220,10 @@ for (const fails of faili) {
       of aizliegtieFragmenti
     ) {
       if (rinda.includes(fragments)) {
-        parkapumi.push({
-          fails: relativais,
+        pārkāpumi.push({
+          fails: relatīvais,
           rinda: indekss + 1,
-          vertiba: fragments,
+          vērtība: fragments,
           veids: "fragments"
         })
       }
@@ -208,33 +231,33 @@ for (const fails of faili) {
   }
 }
 
-const unikals = [
+const unikāls = [
   ...new Map(
-    parkapumi.map(
-      parkapums => [
+    pārkāpumi.map(
+      pārkāpums => [
         [
-          parkapums.fails,
-          parkapums.rinda,
-          parkapums.vertiba,
-          parkapums.veids
+          pārkāpums.fails,
+          pārkāpums.rinda,
+          pārkāpums.vērtība,
+          pārkāpums.veids
         ].join("|"),
-        parkapums
+        pārkāpums
       ]
     )
   ).values()
 ]
 
-if (unikals.length > 0) {
+if (unikāls.length > 0) {
   console.error(
     "Atrasti transliterēti LatNe identifikatori:"
   )
 
   for (
-    const parkapums
-    of unikals
+    const pārkāpums
+    of unikāls
   ) {
     console.error(
-      `${parkapums.fails}:${parkapums.rinda}  ${parkapums.vertiba} (${parkapums.veids})`
+      `${pārkāpums.fails}:${pārkāpums.rinda}  ${pārkāpums.vērtība} (${pārkāpums.veids})`
     )
   }
 
@@ -242,6 +265,6 @@ if (unikals.length > 0) {
 }
 else {
   console.log(
-    `LatNe identifikatori OK: ${faili.length - 1} faili`
+    `LatNe identifikatori OK: ${faili.length} faili`
   )
 }
