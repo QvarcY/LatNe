@@ -160,6 +160,36 @@ Tā nepieciešama:
 
 Diagnostikas sistēma tiks veidota virs strukturētas pirmkoda diapazona informācijas, nevis tikai teksta kļūdu ziņojumiem.
 
+AST v1 diapazona minimālais kontrakts:
+
+```text
+diapazons
+├─ sākums
+│  ├─ rinda
+│  ├─ kolonna
+│  └─ nobīde
+└─ beigas
+   ├─ rinda
+   ├─ kolonna
+   └─ nobīde
+```
+
+Semantika:
+
+- diapazons ir pusatvērts: `[sākums, beigas)`
+- `rinda` un `kolonna` ir 1-bāzētas
+- `nobīde` ir 0-bāzēta JavaScript virknes pozīcija
+- esošais mezgla `rinda` lauks pārejas laikā tiek saglabāts
+- diapazons tiek veidots no leksisko elementu diapazoniem ar kopīgu `izveidoDiapazonu` palīgfunkciju
+
+Pirmā reprezentatīvā iterācija pārklāj:
+
+- `Identifikators` — viena leksiskā elementa izteiksmes mezglu
+- `Parametrs` — vairāku leksisko elementu strukturētu mezglu
+- `Atgriešana` — priekšrakstu no atslēgvārda līdz izteiksmes beigām
+
+Šī ir pamata infrastruktūra, ne pilns AST v1 diapazonu pārklājums.
+
 ## Klases slānis
 
 Klase pašlaik tiek atpazīta augšējā līmenī, bet tās ķermenis vēl nav pilnībā strukturēts.
