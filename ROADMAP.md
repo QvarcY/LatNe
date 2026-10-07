@@ -59,11 +59,11 @@ Windows pārbaudi pievienot tad, kad pamatķēde ir stabila un sākas CLI izplat
 
 ### Nākamā izpildes secība
 
-- [ ] Izveidot klases ķermeņa AST v1
-- [ ] Strukturēt klases laukus un pieejamības modifikatorus
-- [ ] Strukturēt konstruktoru un tā parametrus
-- [ ] Strukturēt getter deklarāciju un atgriezes tipu
-- [ ] Izveidot piešķiršanas izteiksmju AST
+- [x] Izveidot klases ķermeņa AST v1
+- [x] Strukturēt klases laukus un pieejamības modifikatorus
+- [x] Strukturēt konstruktoru un tā parametrus
+- [x] Strukturēt getter deklarāciju un atgriezes tipu
+- [x] Izveidot piešķiršanas izteiksmju AST
 - [ ] Strukturēt konstruktora ķermeņa priekšrakstus
 - [ ] Strukturēt getter un metožu ķermeņu minimumu
 - [ ] Paplašināt funkciju parametru AST

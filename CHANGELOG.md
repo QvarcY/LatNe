@@ -7,6 +7,15 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 ## [Unreleased]
 
 ### Added
+#### 2026-10-07
+- ieviests strukturēts klases ķermeņa AST
+- strukturēti klases lauki, pieejamības modifikatori, lauku tipi un `nemaināms` stāvoklis
+- strukturēta konstruktora deklarācija un parametri
+- strukturēta getter deklarācija un atgriezes tips
+- ieviests `PiešķiršanasIzteiksme` AST
+- pievienots vienkāršo un kombinēto piešķiršanas operatoru atbalsts
+- pievienota assignment labējās asociativitātes un mērķa validācijas pārbaude
+- pievienotas regresijas pārbaudes kanoniskajām konstruktora piešķiršanām
 #### 2026-10-02
 
 - publiskā ceļa karte pārkārtota faktiskā izpildes secībā

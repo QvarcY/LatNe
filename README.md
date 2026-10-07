@@ -97,24 +97,22 @@ LatNe standarta API slānis tiks veidots semantiski — nevis ar aklu teksta aiz
 
 **Fāze 0A — reproducējama vide un kvalitātes pārbaudes — ir pabeigta.**
 
-Projektam jau ir:
-
-- fiksēta Node.js izpildvides prasība;
-- pārbaudāma tīra atkarību instalācija ar lockfile;
-- GitHub Actions CI;
-- terminoloģijas, leksiskās analīzes un sintaktiskās analīzes pārbaudes;
-- Vārdu kalves pārbaude un būvēšana;
-- regresijas paraugu sistēma ar derīgiem, nederīgiem, robežgadījumu un Unicode paraugiem.
-
 Pašreizējais valodas darbs ir **Fāze 1 — valodas kodols līdz AST v1**.
 
-Nākamais konkrētais uzdevums ir:
+Jau strukturēts:
 
-**Klases ķermeņa AST v1.**
+- klases ķermenis;
+- klases lauki un pieejamības modifikatori;
+- `nemaināms` lauki un to tipi;
+- konstruktora deklarācija un parametri;
+- getter deklarācija un atgriezes tips;
+- piešķiršanas izteiksmes.
 
-Pirmajā iterācijā jāstrukturē klases lauki, pieejamības modifikatori, `nemaināms`, lauku tipi, konstruktora deklarācija un parametri, kā arī getter deklarācija un atgriezes tips.
+Piešķiršanas AST atbalsta vienkāršo un kombinētos piešķiršanas operatorus, saglabā labējo asociativitāti un pārbauda derīgu piešķiršanas mērķi.
 
-Pēc tam secīgi tiks papildināts piešķiršanas AST, ķermeņu un parametru struktūra, veidņu interpolācijas un pirmkoda diapazoni līdz stabilam AST v1 kontraktam.
+**Nākamais konkrētais uzdevums ir konstruktora ķermeņa priekšrakstu AST.**
+
+Pēc tam secīgi tiks strukturēts getter un metožu ķermeņu minimums, pilnāki parametri, veidņu interpolācijas un pirmkoda diapazoni līdz stabilam AST v1 kontraktam.
 
 ## Galvenais tuvākais mērķis
 

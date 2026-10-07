@@ -101,92 +101,79 @@ Pirmais `.lat` paraugs:
 - 196 leksiskie elementi
 - 0 nezināmu simbolu
 - 5 augšējā līmeņa AST mezgli
+- 6 strukturēti klases ķermeņa mezgli
+- 4 klases lauki
+- 2 konstruktora parametri
+- 1 getteris
 
-Sintaktiskais analizators strukturēti saprot:
+Sintaktiskais analizators strukturēti saprot arī:
 
-- importu
-- saskarsmi
-- uzskaitījumu
-- klasi augšējā līmenī
-- darbību
-- mainīgo deklarācijas
-- nosacījumus
-- `kam` ciklu
-- atgriešanu
-- kļūdu apstrādi
-- identifikatorus un literāļus
-- īpašību piekļuvi
-- funkciju izsaukumus
-- `gaidi`
-- `jauns`
-- masīvus
-- unārās izteiksmes
-- binārās izteiksmes ar pirmajām operatoru prioritātēm
+- klases laukus un pieejamības modifikatorus
+- `nemaināms` lauku informāciju un tipus
+- konstruktora deklarāciju un parametrus
+- getter deklarāciju un atgriezes tipu
+- piešķiršanas izteiksmes
+- vienkāršo un kombinētos piešķiršanas operatorus
+- labēji asociatīvas piešķiršanas izteiksmes
+- derīga piešķiršanas mērķa pārbaudi
 
-## Kāpēc nākamais darbs ir klases ķermeņa AST v1
+Tehniskie checkpointi:
 
-Fāze 0A ir pabeigta.
+- `8195515` — strukturēts klases ķermeņa AST
+- `1d73f5d` — strukturēts piešķiršanas AST
 
-Projektam jau ir reproducējama Node.js un pnpm vide, GitHub Actions CI, terminoloģijas un valodas kodola pārbaudes, Vārdu kalves būvēšanas pārbaude un pirmā regresijas paraugu sistēma.
+Pilnais `corepack pnpm run check` pēc `1d73f5d` ir zaļš.
 
-Tas nozīmē, ka valodas kodolu tagad var drošāk paplašināt, nepalielinot regresiju risku ar katru jaunu sintakses soli.
+## Pašreizējā robeža
 
-Pašreizējā lielākā AST robeža ir klases ķermenis.
+Konstruktora un gettera ķermeņi vēl glabājas kā neapstrādātas leksisko elementu kopas.
+
+Kanoniskajā `Lietotājs` konstruktorā ir četras piešķiršanas:
+
+```lat
+šis.vārds = vārds
+šis.vecums = vecums
+šis.aktīvs = patiess
+šis.loma = Loma.lietotājs
+```
+
+Izteiksmju analizators tās jau spēj pārvērst `PiešķiršanasIzteiksme` AST mezglos, bet konstruktora ķermenis vēl nav savienots ar priekšrakstu AST.
 
 ## Nākamais izstrādes bloks
 
-**Klases ķermeņa AST v1.**
+**Konstruktora ķermeņa priekšrakstu AST.**
 
-Secība:
+Mērķis:
 
-1. strukturēt klases laukus
-2. strukturēt pieejamības modifikatorus
-3. saglabāt `nemaināms` informāciju
-4. strukturēt lauku tipus
-5. strukturēt konstruktora deklarāciju
-6. strukturēt konstruktora parametrus
-7. strukturēt getter deklarāciju
-8. strukturēt getter atgriezes tipu
-9. pievienot regresijas paraugus jaunajai AST struktūrai
-10. pārbaudīt, ka `examples/pamata-paraugs.lat` joprojām iziet pilno kvalitātes pārbaudi
+1. pārtraukt konstruktora ķermeņa uzturēšanu tikai kā raw tokenu kopu
+2. izmantot esošo priekšrakstu un izteiksmju parsera infrastruktūru
+3. iegūt četrus strukturētus konstruktora priekšrakstus
+4. saglabāt vai skaidri dokumentēt raw tokenu pārejas lauku, ja tas vēl nepieciešams
+5. pievienot regresijas pārbaudes
+6. palaist pilno `corepack pnpm run check`
 
-Konstruktora un gettera ķermeņus šajā pirmajā iterācijā vēl drīkst saglabāt kā neapstrādātu leksisko elementu kopas.
+Pēc tam:
 
-## Nākamā valodas robeža
-
-Klases `Lietotājs` ķermenis vēl netiek strukturēti parsēts.
-
-Pirmajā klases AST iterācijā jāatpazīst:
-
-- klases lauki
-- `atvērts`, `aizsargāts`, `privāts`
-- `nemaināms`
-- lauka tips
-- konstruktora deklarācija
-- konstruktora parametri
-- getter deklarācija `ņem`
-- getter atgriezes tips
-
-Konstruktora un gettera ķermeņus pirmajā iterācijā vēl drīkst saglabāt kā tokenu kopas.
-
-### Gatavības kritērijs
-
-`Klase Lietotājs` AST vairs nedrīkst būt tikai nosaukums un `kermenaTokeni`.
-
-Tam jāatspoguļo četri lauki, konstruktors un getteris.
-
-Esošajam `pamata-paraugs.lat` pēc izmaiņas joprojām jāparsējas veiksmīgi.
+- strukturēt getter un metožu ķermeņu minimumu
+- paplašināt funkciju parametru AST
+- parsēt veidņu interpolācijas
+- pievienot pirmkoda diapazonus
+- nostiprināt AST v1 kontraktu
 
 ## Ceļš līdz pirmajai izpildei
 
 ```text
 0A kvalitātes pārbaudes — pabeigts
 ↓
-klases AST ← pašreizējais darbs
+klases AST — pabeigts
 ↓
-piešķiršanas AST
+piešķiršanas AST — pabeigts
 ↓
-pilnāki ķermeņi un parametri
+konstruktora ķermeņa AST ← pašreizējais darbs
+↓
+getter un metožu ķermeņi
+↓
+pilnāki parametri
 ↓
 template interpolation
 ↓

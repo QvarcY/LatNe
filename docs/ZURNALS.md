@@ -1253,3 +1253,73 @@ Phase 0A rezultāts:
 Nākamais engineering uzdevums:
 
 **Klases ķermeņa AST v1.**
+
+---
+
+## 2026-10-07 — J0022 — Klases ķermeņa AST v1
+
+**Tips:** parseris / AST
+**Statuss:** pabeigts
+
+Klases `Lietotājs` ķermenis vairs nav tikai neapstrādāta tokenu kopa.
+
+Ieviests:
+
+- strukturēti `KlasesLauks` mezgli
+- pieejamības modifikatori
+- `nemaināms` stāvoklis
+- lauku tipi
+- `Konstruktors` mezgls
+- konstruktora parametri
+- `Getteris` mezgls
+- gettera atgriezes tips
+
+Kanoniskajā paraugā tiek iegūti:
+
+- 6 klases ķermeņa mezgli
+- 4 lauki
+- 2 konstruktora parametri
+- 1 getteris
+
+Konstruktora un gettera ķermeņi šajā checkpointā apzināti vēl palika kā neapstrādātas leksisko elementu kopas.
+
+Checkpoint:
+
+`8195515`
+
+---
+
+## 2026-10-07 — J0023 — Piešķiršanas izteiksmju AST
+
+**Tips:** parseris / AST / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Izteiksmju sintaktiskais analizators papildināts ar strukturētu `PiešķiršanasIzteiksme` mezglu.
+
+Ieviests:
+
+- `=`
+- `+=`
+- `-=`
+- `*=`
+- `/=`
+- `%=`
+- `**=`
+- `&&=`
+- `||=`
+- `??=`
+- labējā asociativitāte
+- piešķiršanas mērķa validācija
+- piešķiršanas parsēšana grupētās izteiksmēs, argumentos un masīvos
+
+Regresijas pārbaudes sedz četras kanoniskā `Lietotājs` konstruktora piešķiršanas, visus atbalstītos piešķiršanas operatorus, `a = b = 1` un nederīgu mērķi `1 = vērtība`.
+
+Pilnā kvalitātes ķēde pēc izmaiņas ir zaļa.
+
+Checkpoint:
+
+`1d73f5d`
+
+Nākamais engineering uzdevums:
+
+**Konstruktora ķermeņa priekšrakstu AST.**

@@ -1,12 +1,12 @@
 # LatNe statuss
 
-**Atjaunots:** 2026-10-02
-**Pašreizējais valodas stāvoklis:** strukturēts AST līdz izteiksmju līmenim
-**Nākamā izstrādes fāze:** 1 — klases ķermeņa AST v1
+**Atjaunots:** 2026-10-07
+**Pašreizējais valodas stāvoklis:** strukturēts AST līdz klases ķermeņa un piešķiršanas izteiksmju līmenim
+**Nākamā izstrādes fāze:** 1 — konstruktora ķermeņa priekšrakstu AST
 
 ## Pašreizējā robeža
 
-LatNe jau spēj nolasīt `.lat` avota failu un izveidot strukturētu AST līdz izteiksmju līmenim.
+LatNe jau spēj nolasīt `.lat` avota failu un izveidot strukturētu deklarāciju, priekšrakstu, izteiksmju un klases ķermeņa AST.
 
 Darbojošā ķēde:
 
@@ -37,6 +37,8 @@ Valodas kodols:
 - augšējā līmeņa deklarāciju sintaktiskais analizators
 - darbības ķermeņa priekšrakstu sintaktiskais analizators
 - atsevišķs izteiksmju sintaktiskais analizators
+- strukturēts klases ķermeņa AST
+- strukturētas piešķiršanas izteiksmes
 
 Publiskā infrastruktūra:
 
@@ -75,6 +77,12 @@ Pašreizējais AST saprot:
 - loģiskās un nulles vērtības
 - unārās izteiksmes
 - pirmās bināro operatoru prioritātes
+- piešķiršanas izteiksmes
+- klases laukus
+- pieejamības modifikatorus
+- `nemaināms` lauku informāciju
+- konstruktora deklarāciju un parametrus
+- getter deklarāciju un atgriezes tipu
 
 ## Pārbaudītais pirmais paraugs
 
@@ -90,11 +98,12 @@ Rezultāts:
 
 ## Aktuālie ierobežojumi
 
-Klases ķermenis vēl nav strukturēts AST.
+Konstruktora un gettera ķermeņi pašlaik vēl tiek saglabāti kā neapstrādātu leksisko elementu kopas.
 
 Nav vēl:
 
-- pilna piešķiršanas AST
+- strukturēta konstruktora ķermeņa priekšrakstu AST
+- strukturēta getter un metožu ķermeņu minimuma
 - pilnas funkciju parametru struktūras
 - veidņu interpolāciju AST
 - pirmkoda diapazona kontrakta AST līmenī
@@ -128,27 +137,21 @@ Tas ietver:
 - regresijas paraugu sistēma
 - derīgi, nederīgi, robežgadījumu un Unicode paraugi
 
-## Nākamais valodas uzdevums pēc kvalitātes sliedēm
+## Nākamais valodas uzdevums
 
-**Klases ķermeņa AST v1.**
+**Konstruktora ķermeņa priekšrakstu AST.**
 
-Jāstrukturē:
+Klases ķermeņa pirmā strukturētā iterācija un piešķiršanas izteiksmju AST ir pabeigti.
 
-- lauki
-- pieejamības modifikatori
-- `nemaināms`
-- lauku tipi
-- konstruktora deklarācija un parametri
-- getter deklarācija un atgriezes tips
-
-Konstruktora un gettera ķermeņus pirmajā iterācijā vēl drīkst saglabāt kā tokenu kopas.
+Nākamajā solī četri `Lietotājs` konstruktora piešķīrumi vairs nedrīkst palikt tikai raw leksisko elementu kopā. Tie jāatspoguļo kā strukturēti priekšrakstu mezgli, izmantojot jau ieviesto `PiešķiršanasIzteiksme` AST.
 
 ## Ceļš līdz pirmajai palaišanai
 
 ```text
 kvalitātes sliedes
-→ klases AST
-→ piešķiršanas AST
+→ klases AST ✓
+→ piešķiršanas AST ✓
+→ konstruktora ķermeņa AST ← pašreizējais darbs
 → pilnāki ķermeņi
 → pirmkoda diapazoni
 → AST v1
