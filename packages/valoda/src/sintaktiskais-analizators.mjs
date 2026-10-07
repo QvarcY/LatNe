@@ -6,6 +6,10 @@ import {
   analizeKlasesKermeni
 } from "./klases-sintaktiskais-analizators.mjs"
 
+import {
+  analizeParametrus
+} from "./parametru-sintaktiskais-analizators.mjs"
+
 function sintaksesKluda(zina, leksiskaisElements) {
   if (!leksiskaisElements) {
     throw new SyntaxError(`${zina} faila beigās`)
@@ -788,7 +792,12 @@ export function analizeSintaksi(leksiskieElementi) {
         modifikatori.includes("export"),
       asinhrona:
         modifikatori.includes("async"),
-      parametruLeksiskieElementi:
+      parametri:
+        analizeParametrus(
+          parametri,
+          "darbības"
+        ),
+      parametruLeksiskoElementuSkaits:
         parametri.length,
       atgriezesTips:
         atgriezesTips.join(""),

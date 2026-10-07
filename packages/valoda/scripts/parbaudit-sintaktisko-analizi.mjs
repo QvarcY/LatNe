@@ -64,6 +64,142 @@ const darbiba = ast.elementi.find(
     mezgls.veids === "Darbība"
 )
 
+if (!darbiba) {
+  throw new Error(
+    "AST nav atrasta augšējā līmeņa darbība"
+  )
+}
+
+if (!Array.isArray(darbiba.parametri)) {
+  throw new Error(
+    "Darbības parametri nav strukturēts AST masīvs"
+  )
+}
+
+if (darbiba.parametri.length !== 0) {
+  throw new Error(
+    "Kanoniskajai darbībai negaidīti parametri"
+  )
+}
+
+if (
+  darbiba.parametruLeksiskoElementuSkaits !==
+    0
+) {
+  throw new Error(
+    "Kanoniskās darbības parametru leksisko elementu skaits nav 0"
+  )
+}
+
+if (
+  "parametruLeksiskieElementi" in darbiba
+) {
+  throw new Error(
+    "Darbības AST satur veco neviennozīmīgo parametruLeksiskieElementi lauku"
+  )
+}
+
+const parametruParaugaAst =
+  analizeSintaksi(
+    analizeLeksiski(
+      `darbība sveic(
+  vārds: teksts,
+  reizes: skaitlis
+): teksts {
+  atgriez vārds
+}`,
+      vardnica
+    )
+  )
+
+const parametruParaugaDarbiba =
+  parametruParaugaAst.elementi.find(
+    mezgls =>
+      mezgls.veids === "Darbība" &&
+      mezgls.nosaukums === "sveic"
+  )
+
+if (!parametruParaugaDarbiba) {
+  throw new Error(
+    "Parametru regresijas AST nav atrasta darbība"
+  )
+}
+
+const gaiditieDarbibasParametri = [
+  {
+    nosaukums: "vārds",
+    tips: "teksts"
+  },
+  {
+    nosaukums: "reizes",
+    tips: "skaitlis"
+  }
+]
+
+if (
+  parametruParaugaDarbiba.parametri.length !==
+    gaiditieDarbibasParametri.length
+) {
+  throw new Error(
+    "Darbības parametru AST ir negaidīts parametru skaits"
+  )
+}
+
+for (
+  let i = 0;
+  i < gaiditieDarbibasParametri.length;
+  i++
+) {
+  const faktiskais =
+    parametruParaugaDarbiba.parametri[i]
+
+  const gaiditais =
+    gaiditieDarbibasParametri[i]
+
+  if (
+    faktiskais.veids !== "Parametrs" ||
+    faktiskais.nosaukums !==
+      gaiditais.nosaukums ||
+    faktiskais.tips !==
+      gaiditais.tips ||
+    !Number.isInteger(faktiskais.rinda)
+  ) {
+    throw new Error(
+      `Darbības parametrs ${i + 1} neatbilst gaidītajam AST`
+    )
+  }
+}
+
+if (
+  parametruParaugaDarbiba
+    .parametruLeksiskoElementuSkaits <= 0
+) {
+  throw new Error(
+    "Darbības parametru pārejas skaits nav saglabāts"
+  )
+}
+
+if (
+  parametruParaugaDarbiba.atgriezesTips !==
+    "teksts"
+) {
+  throw new Error(
+    "Parametru regresijas darbībai ir nepareizs atgriezes tips"
+  )
+}
+
+if (
+  parametruParaugaDarbiba.kermenis.length !==
+    1 ||
+  parametruParaugaDarbiba
+    .kermenis[0].veids !==
+      "Atgriešana"
+) {
+  throw new Error(
+    "Parametru regresijas darbības ķermenis nav saglabāts"
+  )
+}
+
 const klase = ast.elementi.find(
   mezgls =>
     mezgls.veids === "Klase" &&
@@ -638,11 +774,13 @@ console.log(
   `AST augšējie mezgli: ${ast.elementi.length}`
 )
 
-if (darbiba) {
-  console.log(
-    `Darbības priekšraksti: ${darbiba.kermenis.length}`
-  )
-}
+console.log(
+  `Darbības parametri: ${darbiba.parametri.length}`
+)
+
+console.log(
+  `Darbības priekšraksti: ${darbiba.kermenis.length}`
+)
 
 console.log(
   `Klases ķermeņa mezgli: ${klase.kermenis.length}`
