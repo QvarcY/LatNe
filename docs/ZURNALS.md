@@ -1415,6 +1415,7 @@ Konstruktors, klases metode un augšējā līmeņa darbība tagad izmanto vienu 
 
 ```text
 Parametrs
+├─ veids
 ├─ nosaukums
 ├─ tips
 └─ rinda
