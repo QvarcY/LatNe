@@ -49,7 +49,8 @@ export function analizēLeksiski(teksts, vārdnīca) {
 
   const pozīcija = () => ({
     rinda,
-    kolonna
+    kolonna,
+    nobīde: i
   })
 
   const soli = () => {
@@ -72,10 +73,22 @@ export function analizēLeksiski(teksts, vārdnīca) {
     sākums,
     papildus = {}
   ) => {
+    const beigas =
+      pozīcija()
+
     leksiskieElementi.push({
       veids,
       vērtība,
-      ...sākums,
+      rinda: sākums.rinda,
+      kolonna: sākums.kolonna,
+      diapazons: {
+        sākums: {
+          ...sākums
+        },
+        beigas: {
+          ...beigas
+        }
+      },
       ...papildus
     })
   }
@@ -120,7 +133,11 @@ export function analizēLeksiski(teksts, vārdnīca) {
 
         return {
           rinda: daļasRinda,
-          kolonna: daļasKolonna
+          kolonna: daļasKolonna,
+          nobīde:
+            sākums.nobīde +
+            1 +
+            offset
         }
       }
 
@@ -251,28 +268,56 @@ export function analizēLeksiski(teksts, vārdnīca) {
         )
       }
 
+      const pielāgoPozīciju =
+        pozīcija => ({
+          rinda:
+            izteiksmesPozīcija.rinda +
+            pozīcija.rinda -
+            1,
+          kolonna:
+            pozīcija.rinda === 1
+              ? izteiksmesPozīcija
+                  .kolonna +
+                pozīcija.kolonna -
+                1
+              : pozīcija.kolonna,
+          nobīde:
+            izteiksmesPozīcija.nobīde +
+            pozīcija.nobīde
+        })
+
       const interpolācijasElementi =
         analizēLeksiski(
           izteiksmesTeksts,
           vārdnīca
         ).map(
-          leksiskaisElements => ({
-            ...leksiskaisElements,
-            rinda:
-              izteiksmesPozīcija.rinda +
-              leksiskaisElements.rinda -
-              1,
-            kolonna:
-              leksiskaisElements.rinda ===
-                1
-                ? izteiksmesPozīcija
-                    .kolonna +
-                  leksiskaisElements
-                    .kolonna -
-                  1
-                : leksiskaisElements
-                    .kolonna
-          })
+          leksiskaisElements => {
+            const diapazonaSākums =
+              pielāgoPozīciju(
+                leksiskaisElements
+                  .diapazons.sākums
+              )
+
+            const diapazonaBeigas =
+              pielāgoPozīciju(
+                leksiskaisElements
+                  .diapazons.beigas
+              )
+
+            return {
+              ...leksiskaisElements,
+              rinda:
+                diapazonaSākums.rinda,
+              kolonna:
+                diapazonaSākums.kolonna,
+              diapazons: {
+                sākums:
+                  diapazonaSākums,
+                beigas:
+                  diapazonaBeigas
+              }
+            }
+          }
         )
 
       daļas.push({
