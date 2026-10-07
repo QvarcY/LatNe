@@ -843,7 +843,11 @@ if (
   throw new Error("English canonical URL missing");
 }
 
-if (!html.includes('href="../styles.css"')) {
+if (
+  !html.includes(
+    'href="../styles.css?v=20261008-header-1"'
+  )
+) {
   throw new Error("English stylesheet path missing");
 }
 
