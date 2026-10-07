@@ -1537,3 +1537,47 @@ Pēc normalizācijas:
 Nākamais engineering uzdevums paliek:
 
 **Pirmkoda diapazona informācija AST mezgliem**, izmantojot pareizu latviešu rakstību, tostarp `sākums` un `nobīde`.
+
+---
+
+## 2026-10-08 — J0031 — Pirmkoda diapazonu AST bāze
+
+**Tips:** lexer / parseris / AST / diagnostikas pamats
+**Statuss:** pabeigts
+
+Definēts vienots pirmkoda diapazona kontrakts:
+
+```text
+diapazons
+├─ sākums { rinda, kolonna, nobīde }
+└─ beigas { rinda, kolonna, nobīde }
+```
+
+Semantika:
+
+- pusatvērts intervāls `[sākums, beigas)`
+- `rinda` un `kolonna` ir 1-bāzētas
+- `nobīde` ir 0-bāzēta JavaScript virknes pozīcija
+- esošais `rinda` lauks pārejas laikā netiek noņemts
+
+Pievienots kopīgs palīgs:
+
+`packages/valoda/src/pirmkoda-diapazons.mjs`
+
+Leksiskais analizators tagad saglabā diapazonu katram leksiskajam elementam. Veidņu interpolāciju iekšējie leksiskie elementi tiek pārbīdīti uz absolūtajām avota pozīcijām.
+
+Pirmā reprezentatīvā AST iterācija:
+
+- `Identifikators`
+- `Parametrs`
+- `Atgriešana`
+
+Regresijas pārbaudes nostiprina:
+
+- viena leksiskā elementa pusatvērto diapazonu
+- vairāku leksisko elementu `Parametrs` diapazonu
+- `Atgriešana` diapazonu no atslēgvārda līdz izteiksmes beigām
+- veidnes interpolācijas absolūto `nobīde`
+
+ROADMAP pirmkoda diapazonu uzdevums vēl nav atzīmēts kā pabeigts. Nākamais apakšsolis ir pārklājuma paplašināšana uz saliktām izteiksmēm, deklarācijām un klases mezgliem.
+
