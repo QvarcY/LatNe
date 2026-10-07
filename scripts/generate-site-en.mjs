@@ -309,10 +309,6 @@ const translations = [
     "You can help LatNe even without writing a line of code."
   ],
   [
-    "Nākamais: pirmkoda diapazoni AST mezgliem",
-    "Next: source spans for AST nodes"
-  ],
-  [
     "Fāze 0A — reproducējama vide un kvalitātes sliedes",
     "Phase 0A — reproducible environment and quality gates"
   ],
@@ -371,14 +367,6 @@ const translations = [
   [
     "LatNe sākums",
     "LatNe home"
-  ],
-  [
-    "Atvērtā pirmkoda projekts",
-    "Open-source project"
-  ],
-  [
-    "Patīk LatNe? GitHub ★",
-    "LatNe on GitHub ★"
   ],
   [
     "Palīdzi LatNe augt",
@@ -599,10 +587,6 @@ const translations = [
   [
     "Atbalsti projektu",
     "Support the project"
-  ],
-  [
-    "Skatīt kodu",
-    "View code"
   ],
   [
     "Dokumentācija",
