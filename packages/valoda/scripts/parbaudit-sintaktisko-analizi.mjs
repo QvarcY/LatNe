@@ -10,6 +10,10 @@ import {
   analizeSintaksi
 } from "../src/sintaktiskais-analizators.mjs"
 
+import {
+  analizeIzteiksmi as analizeIzteiksmesAst
+} from "../src/izteiksmju-sintaktiskais-analizators.mjs"
+
 const registrsPath = fileURLToPath(
   new URL(
     "../data/termini.json",
@@ -274,6 +278,177 @@ if (
 ) {
   throw new Error(
     "Gettera ķermeņa leksiskie elementi nav saglabāti"
+  )
+}
+
+const pieskirsanasRindas = [
+  ...new Set(
+    klase.konstruktors
+      .kermenaLeksiskieElementi
+      .filter(
+        leksiskaisElements =>
+          leksiskaisElements.vertiba === "="
+      )
+      .map(
+        leksiskaisElements =>
+          leksiskaisElements.rinda
+      )
+  )
+]
+
+const pieskirsanas =
+  pieskirsanasRindas.map(
+    rinda =>
+      analizeIzteiksmesAst(
+        klase.konstruktors
+          .kermenaLeksiskieElementi
+          .filter(
+            leksiskaisElements =>
+              leksiskaisElements.rinda === rinda
+          )
+      )
+  )
+
+if (pieskirsanas.length !== 4) {
+  throw new Error(
+    `Gaidītas 4 konstruktora piešķiršanas izteiksmes, saņemtas ${pieskirsanas.length}`
+  )
+}
+
+const gaiditieMerkji = [
+  "vārds",
+  "vecums",
+  "aktīvs",
+  "loma"
+]
+
+const gaiditieVertibuVeidi = [
+  "Identifikators",
+  "Identifikators",
+  "Loģisks",
+  "Īpašība"
+]
+
+for (
+  let i = 0;
+  i < pieskirsanas.length;
+  i++
+) {
+  const pieskirsana =
+    pieskirsanas[i]
+
+  if (
+    pieskirsana.veids !==
+      "PiešķiršanasIzteiksme" ||
+    pieskirsana.operators !== "="
+  ) {
+    throw new Error(
+      `Konstruktora piešķiršana ${i + 1} nav korekts piešķiršanas AST`
+    )
+  }
+
+  if (
+    pieskirsana.merkis.veids !==
+      "Īpašība" ||
+    pieskirsana.merkis.objekts.veids !==
+      "Šis" ||
+    pieskirsana.merkis.nosaukums !==
+      gaiditieMerkji[i]
+  ) {
+    throw new Error(
+      `Konstruktora piešķiršanai ${i + 1} ir nepareizs mērķis`
+    )
+  }
+
+  if (
+    pieskirsana.vertiba.veids !==
+      gaiditieVertibuVeidi[i]
+  ) {
+    throw new Error(
+      `Konstruktora piešķiršanai ${i + 1} ir nepareiza vērtība`
+    )
+  }
+}
+
+const pieskirsanasOperatori = [
+  "=",
+  "+=",
+  "-=",
+  "*=",
+  "/=",
+  "%=",
+  "**=",
+  "&&=",
+  "||=",
+  "??="
+]
+
+for (
+  const operators of pieskirsanasOperatori
+) {
+  const operatoraAst =
+    analizeIzteiksmesAst(
+      analizeLeksiski(
+        `vērtība ${operators} 1`,
+        vardnica
+      )
+    )
+
+  if (
+    operatoraAst.veids !==
+      "PiešķiršanasIzteiksme" ||
+    operatoraAst.operators !== operators ||
+    operatoraAst.merkis.veids !==
+      "Identifikators" ||
+    operatoraAst.vertiba.veids !==
+      "Skaitlis"
+  ) {
+    throw new Error(
+      `Piešķiršanas operators ${operators} neveido gaidīto AST`
+    )
+  }
+}
+
+const labasAsociativitatesAst =
+  analizeIzteiksmesAst(
+    analizeLeksiski(
+      "a = b = 1",
+      vardnica
+    )
+  )
+
+if (
+  labasAsociativitatesAst.veids !==
+    "PiešķiršanasIzteiksme" ||
+  labasAsociativitatesAst.vertiba.veids !==
+    "PiešķiršanasIzteiksme"
+) {
+  throw new Error(
+    "Piešķiršanas izteiksme nav labēji asociatīva"
+  )
+}
+
+let nederigsMerkisNoraidits = false
+
+try {
+  analizeIzteiksmesAst(
+    analizeLeksiski(
+      "1 = vērtība",
+      vardnica
+    )
+  )
+}
+catch (kluda) {
+  nederigsMerkisNoraidits =
+    kluda instanceof SyntaxError &&
+    kluda.message.includes(
+      "Nederīgs piešķiršanas mērķis"
+    )
+}
+
+if (!nederigsMerkisNoraidits) {
+  throw new Error(
+    "Nederīgs piešķiršanas mērķis netika noraidīts"
   )
 }
 

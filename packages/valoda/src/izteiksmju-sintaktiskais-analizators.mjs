@@ -17,6 +17,19 @@ const PRIORITATES = new Map([
   ["%", 7]
 ])
 
+const PIESKIRSANAS_OPERATORI = new Set([
+  "=",
+  "+=",
+  "-=",
+  "*=",
+  "/=",
+  "%=",
+  "**=",
+  "&&=",
+  "||=",
+  "??="
+])
+
 function izteiksmesKluda(zina, leksiskaisElements) {
   if (!leksiskaisElements) {
     throw new SyntaxError(
@@ -88,7 +101,7 @@ export function analizeIzteiksmi(leksiskieElementi) {
 
     while (indekss < leksiskieElementi.length) {
       argumenti.push(
-        analizeBinaro(0)
+        analizePieskirsanu()
       )
 
       if (irVertiba(",")) {
@@ -122,7 +135,7 @@ export function analizeIzteiksmi(leksiskieElementi) {
 
     while (indekss < leksiskieElementi.length) {
       elementi.push(
-        analizeBinaro(0)
+        analizePieskirsanu()
       )
 
       if (irVertiba(",")) {
@@ -249,7 +262,7 @@ export function analizeIzteiksmi(leksiskieElementi) {
       panem()
 
       const izteiksme =
-        analizeBinaro(0)
+        analizePieskirsanu()
 
       gaidiVertibu(")")
 
@@ -442,8 +455,46 @@ export function analizeIzteiksmi(leksiskieElementi) {
     return kreisa
   }
 
+  const analizePieskirsanu = () => {
+    const merkis =
+      analizeBinaro(0)
+
+    const operators = esosais()
+
+    if (
+      !operators ||
+      operators.veids !== "operators" ||
+      !PIESKIRSANAS_OPERATORI.has(
+        operators.vertiba
+      )
+    ) {
+      return merkis
+    }
+
+    if (
+      merkis.veids !== "Identifikators" &&
+      merkis.veids !== "Īpašība"
+    ) {
+      izteiksmesKluda(
+        "Nederīgs piešķiršanas mērķis",
+        operators
+      )
+    }
+
+    panem()
+
+    return {
+      veids: "PiešķiršanasIzteiksme",
+      operators: operators.vertiba,
+      merkis,
+      vertiba:
+        analizePieskirsanu(),
+      rinda: merkis.rinda
+    }
+  }
+
   const rezultats =
-    analizeBinaro(0)
+    analizePieskirsanu()
 
   if (indekss < leksiskieElementi.length) {
     izteiksmesKluda(
