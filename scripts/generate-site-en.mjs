@@ -589,10 +589,6 @@ const translations = [
     "Support the project"
   ],
   [
-    "Dokumentācija",
-    "Documentation"
-  ],
-  [
     "Ceļa karte",
     "Roadmap"
   ],
