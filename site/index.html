@@ -139,131 +139,36 @@
   </header>
 
   <main>
-    <section class="hero hero-with-banner section" id="sakums">
-      <div class="shell hero-visual reveal">
-        <img
-          class="hero-banner-image"
-          src="./assets/latne-hero.jpg"
-          alt="LatNe — Programmē latviski"
-          width="1672"
-          height="941"
-        >
-      </div>
-
-      <div class="shell hero-grid">
-        <div class="hero-copy reveal">
-          <img
-            class="hero-logo"
-            src="./assets/latne-logo.png"
-            alt="LatNe"
-            width="360"
-            height="360"
-          >
-
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Atvērtā pirmkoda projekts
+    <section class="hero section" id="sakums">
+      <div class="shell hero-layout">
+        <div class="hero-top">
+          <div class="hero-logo-panel reveal">
+            <img
+              class="hero-logo"
+              src="./assets/latne-logo.png"
+              alt="LatNe"
+              width="520"
+              height="520"
+            >
           </div>
 
-          <h1 class="hero-semantic">
-            Programmē
-            <span>latviski.</span>
-          </h1>
+          <div class="code-window reveal reveal-delay-1">
+            <div class="code-window-top">
+              <div class="window-controls" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
 
-          <p class="hero-lead hero-semantic">
-            LatNe ir neatkarīga latviska programmēšanas valoda un topošā
-            izstrādes vide, kur latviešu valoda nav dekorācija — tā ir
-            programmēšanas pieredzes pamats.
-          </p>
+              <span class="code-file">piemers.lat</span>
 
-          <div class="hero-actions hero-actions-primary">
-            <a
-              class="button button-primary"
-              href="https://github.com/QvarcY/LatNe"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span aria-hidden="true">★</span>
-              Patīk LatNe? GitHub ★
-            </a>
-
-            <a
-              class="button button-secondary"
-              href="#lidzdarboties"
-            >
-              Līdzdarboties
-              <span aria-hidden="true">→</span>
-            </a>
-
-            <a
-              class="button button-coffee"
-              href="https://buymeacoffee.com/craftin"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span aria-hidden="true">☕</span>
-              Atbalstīt projektu
-            </a>
-          </div>
-
-          <div class="hero-quick-links">
-            <a
-              href="https://github.com/QvarcY/LatNe"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Skatīt kodu
-            </a>
-
-            <span>·</span>
-
-            <a
-              href="https://github.com/QvarcY/LatNe/blob/main/docs/ATSAKSANA.md"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Dokumentācija
-            </a>
-
-            <span>·</span>
-
-            <a
-              href="https://github.com/QvarcY/LatNe/blob/main/ROADMAP.md"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ceļa karte
-            </a>
-          </div>
-
-          <div class="hero-note">
-            <span class="status-dot status-dot-live"></span>
-            Nākamais: pirmkoda diapazoni AST mezgliem
-            <span class="hero-star-count" data-star-wrapper hidden>
-              ·
-              <strong data-star-count></strong>
-              GitHub ★
-            </span>
-          </div>
-        </div>
-
-        <div class="code-window reveal reveal-delay-1">
-          <div class="code-window-top">
-            <div class="window-controls" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
+              <span class="code-live">
+                <span></span>
+                LATNE
+              </span>
             </div>
 
-            <span class="code-file">piemers.lat</span>
-
-            <span class="code-live">
-              <span></span>
-              LATNE
-            </span>
-          </div>
-
-          <pre class="code-block" aria-label="LatNe koda piemērs"><code><span class="kw">eksportē</span> <span class="kw">asinhroni</span> <span class="kw">darbība</span> ielādēLietotājus() {
+            <pre class="code-block" aria-label="LatNe koda piemērs"><code><span class="kw">eksportē</span> <span class="kw">asinhroni</span> <span class="kw">darbība</span> ielādēLietotājus() {
   <span class="kw">nemainīgs</span> dati =
     <span class="kw">gaidi</span> lasiDatus(<span class="str">"lietotaji.json"</span>)
 
@@ -276,20 +181,33 @@
   <span class="kw">atgriez</span> dati
 }</code></pre>
 
-          <div class="code-statuses">
-            <span class="code-status code-status-live">
-              <b>✓</b> Leksiskais analizators
-            </span>
-            <span class="code-status code-status-live">
-              <b>✓</b> Sintaktiskais analizators
-            </span>
-            <span class="code-status code-status-live">
-              <b>✓</b> AST
-            </span>
-            <span class="code-status code-status-future">
-              <b>○</b> Izpilde top
-            </span>
+            <div class="code-statuses">
+              <span class="code-status code-status-live">
+                <b>✓</b> Leksiskais analizators
+              </span>
+              <span class="code-status code-status-live">
+                <b>✓</b> Sintaktiskais analizators
+              </span>
+              <span class="code-status code-status-live">
+                <b>✓</b> AST
+              </span>
+              <span class="code-status code-status-future">
+                <b>○</b> Izpilde top
+              </span>
+            </div>
           </div>
+        </div>
+
+        <div class="hero-message reveal reveal-delay-2">
+          <h1>
+            Programmē <span>latviski.</span>
+          </h1>
+
+          <p class="hero-lead">
+            LatNe ir neatkarīga latviska programmēšanas valoda un topošā
+            izstrādes vide, kur latviešu valoda nav dekorācija — tā ir
+            programmēšanas pieredzes pamats.
+          </p>
         </div>
       </div>
     </section>

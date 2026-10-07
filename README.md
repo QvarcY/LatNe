@@ -1,11 +1,35 @@
 # LatNe
 
+<table>
+  <tr>
+    <td width="44%" align="center">
+      <img
+        src="site/assets/latne-logo.png"
+        alt="LatNe"
+        width="330"
+      >
+    </td>
+    <td width="56%">
+      <pre><code>eksportē asinhroni darbība ielādēLietotājus() {
+  nemainīgs dati =
+    gaidi lasiDatus("lietotaji.json")
+
+  kam (nemainīgs ieraksts ar dati) {
+    ja (ieraksts.vārds == nekas) {
+      turpini
+    }
+  }
+
+  atgriez dati
+}</code></pre>
+    </td>
+  </tr>
+</table>
+
+<h2 align="center">Programmē latviski.</h2>
+
 <p align="center">
-  <img
-    src="site/assets/latne-hero.jpg"
-    alt="LatNe — Programmē latviski"
-    width="100%"
-  >
+  LatNe ir neatkarīga latviska programmēšanas valoda un topošā izstrādes vide, kur latviešu valoda nav dekorācija — tā ir programmēšanas pieredzes pamats.
 </p>
 
 LatNe ir neatkarīga atvērtā pirmkoda programmēšanas valoda un topošā izstrādes vide, kur latviešu valoda nav tikai dokumentācijas slānis — tā ir pašas programmēšanas pieredzes daļa.
