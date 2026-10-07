@@ -1,3 +1,7 @@
+import {
+  izveidoDiapazonu
+} from "./pirmkoda-diapazons.mjs"
+
 function sintaksesKļūda(
   ziņa,
   leksiskaisElements
@@ -133,7 +137,14 @@ export function analizēParametrus(
               leksiskaisElements.vērtība
           )
           .join(""),
-      rinda: nosaukums.rinda
+      rinda: nosaukums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          nosaukums,
+          tipaElementi[
+            tipaElementi.length - 1
+          ]
+        )
     }
   })
 }
