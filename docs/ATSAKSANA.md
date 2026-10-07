@@ -3,7 +3,7 @@
 **Atjaunots:** 2026-10-07
 **Stabilais zars:** `main`
 **Darba sākumpunkts:** `main`
-**Nākamā izstrādes fāze:** 1 — funkciju parametru AST
+**Nākamā izstrādes fāze:** 1 — pirmkoda diapazoni AST mezgliem
 
 Šis fails ir pirmais lasāmais dokuments, sākot jaunu LatNe darba sesiju.
 
@@ -107,6 +107,8 @@ Pirmais `.lat` paraugs:
 - 4 konstruktora priekšraksti
 - 1 getteris
 - 1 gettera priekšraksts
+- 4 kanoniskā gettera veidnes AST daļas
+- 2 kanoniskā gettera interpolācijas
 
 Sintaktiskais analizators strukturēti saprot arī:
 
@@ -124,6 +126,10 @@ Sintaktiskais analizators strukturēti saprot arī:
 - vienkāršo un kombinētos piešķiršanas operatorus
 - labēji asociatīvas piešķiršanas izteiksmes
 - derīga piešķiršanas mērķa pārbaudi
+- strukturētus augšējā līmeņa `Darbība` parametrus
+- vienotu `Parametrs` AST konstruktoram, metodei un darbībai
+- strukturētas veidņu teksta daļas
+- strukturētas veidņu interpolācijas ar pilnu izteiksmju AST
 
 Klases metodes minimums tiek pārbaudīts ar atsevišķu sintakses regresijas paraugu, nemainot kanonisko `examples/pamata-paraugs.lat`.
 
@@ -134,36 +140,41 @@ Tehniskie checkpointi:
 - `5e5e741` — strukturēts konstruktora ķermeņa AST
 - `6bf5ace` — strukturēts gettera ķermeņa AST
 - `91356b6` — minimāls klases metodes AST
+- `fe4ab65` — strukturēts darbības parametru AST
+- `c617074` — strukturēts veidņu interpolāciju AST
 
-Pilnais `corepack pnpm run check` pēc `91356b6` ir zaļš.
+Pilnais `corepack pnpm run check` pēc `c617074` ir zaļš.
 
 ## Pašreizējā robeža
 
-Konstruktora, gettera un minimālas klases metodes ķermeņi tagad ir strukturēti ar kopīgo priekšrakstu analizatoru.
+Konstruktors, klases metode un augšējā līmeņa `Darbība` izmanto kopīgu parametru analizatoru un vienotu `Parametrs` AST formu.
+
+Veidņu literāļi tiek sadalīti `VeidnesTeksts` un `VeidnesInterpolācija` mezglos. Interpolācijas tiek analizētas ar pilno izteiksmju parseri.
+
+Konstruktora, gettera un minimālas klases metodes ķermeņi ir strukturēti ar kopīgo priekšrakstu analizatoru.
 
 Raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
-Augšējā līmeņa `Darbība` deklarācijām parametri vēl nav strukturēti kā `Parametrs` AST mezgli. Parseris pašlaik saglabā tikai parametru leksisko elementu skaitu.
+AST mezgliem vēl nav vienota sākuma/beigu pirmkoda diapazona kontrakta.
 
 ## Nākamais izstrādes bloks
 
-**Funkciju parametru AST paplašināšana.**
+**Pirmkoda diapazona informācija AST mezgliem.**
 
 Mērķis:
 
-1. strukturēt augšējā līmeņa `Darbība` parametrus
-2. izmantot vienotu parametra mezgla formu ar konstruktoru un klases metodi
-3. saglabāt nosaukumu, tipu un rindas informāciju
-4. saglabāt pašreizējo kanoniskā parauga uzvedību
+1. definēt minimālo diapazona formu AST v1
+2. saglabāt sākuma un beigu pozīciju konsekventā formā
+3. sākt ar reprezentatīviem deklarāciju, priekšrakstu un izteiksmju mezgliem
+4. nepazaudēt pašreizējo `rinda` informāciju pārejas laikā
 5. pievienot regresijas pārbaudes
 6. palaist pilno `corepack pnpm run check`
 
 Pēc tam:
 
-- parsēt veidņu interpolācijas
-- pievienot pirmkoda diapazonus
 - definēt AST mezglu obligātos un izvēles laukus
 - publicēt pirmo `spec/ast-v1.md`
+- pievienot AST v1 paraugu pārbaudes
 - nostiprināt AST v1 kontraktu
 
 ## Ceļš līdz pirmajai izpildei
@@ -179,13 +190,15 @@ konstruktora ķermeņa AST — pabeigts
 ↓
 getter un metožu minimums — pabeigts
 ↓
-funkciju parametru AST ← pašreizējais darbs
+funkciju parametru AST — pabeigts
 ↓
-template interpolation
+veidņu interpolācijas — pabeigts
 ↓
-pirmkoda diapazoni
+pirmkoda diapazoni ← pašreizējais darbs
 ↓
-AST v1 kontrakts
+AST v1 lauku kontrakts
+↓
+AST v1 specifikācija
 ↓
 LatNe API minimums
 ↓

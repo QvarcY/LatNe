@@ -66,8 +66,8 @@ Windows pārbaudi pievienot tad, kad pamatķēde ir stabila un sākas CLI izplat
 - [x] Izveidot piešķiršanas izteiksmju AST
 - [x] Strukturēt konstruktora ķermeņa priekšrakstus
 - [x] Strukturēt getter un metožu ķermeņu minimumu
-- [ ] Paplašināt funkciju parametru AST
-- [ ] Parsēt veidņu literāļu interpolācijas
+- [x] Paplašināt funkciju parametru AST
+- [x] Parsēt veidņu literāļu interpolācijas
 - [ ] Pievienot pirmkoda diapazona informāciju AST mezgliem
 - [ ] Definēt AST mezglu obligātos un izvēles laukus
 - [ ] Publicēt pirmo `spec/ast-v1.md`

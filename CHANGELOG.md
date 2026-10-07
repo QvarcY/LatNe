@@ -22,6 +22,12 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - klases metodei pievienota pieejamība, tipēti parametri, izvēles atgriezes tips un strukturēts ķermenis
 - konstruktora, gettera un metodes ķermeņiem izmantota kopīgā priekšrakstu analizatora infrastruktūra
 - pievienota klases metodes regresijas pārbaude, nemainot kanonisko pirmo `.lat` paraugu
+- augšējā līmeņa `Darbība` parametri strukturēti kā `Parametrs` AST mezgli
+- konstruktoram, klases metodei un darbībai ieviests kopīgs parametru analizators
+- veidņu literāļiem pievienotas strukturētas `VeidnesTeksts` un `VeidnesInterpolācija` daļas
+- veidņu interpolācijas izmanto pilno izteiksmju AST
+- pievienotas regresijas pārbaudes saliktai interpolācijas izteiksmei un escapotam interpolācijas marķierim
+- README un GitHub Pages pievienots jaunais LatNe logotips
 
 #### 2026-10-02
 

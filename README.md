@@ -1,6 +1,14 @@
 # LatNe
 
-**Programmē latviski.**
+<p align="center">
+  <img
+    src="site/assets/latne-logo.png"
+    alt="LatNe"
+    width="320"
+  >
+</p>
+
+<p align="center"><strong>Programmē latviski.</strong></p>
 
 LatNe ir neatkarīga atvērtā pirmkoda programmēšanas valoda un topošā izstrādes vide, kur latviešu valoda nav tikai dokumentācijas slānis — tā ir pašas programmēšanas pieredzes daļa.
 
@@ -109,15 +117,19 @@ Jau strukturēts:
 - getter deklarācija, atgriezes tips un ķermenis;
 - minimāls klases metodes AST;
 - metodes pieejamība, tipēti parametri, atgriezes tips un ķermenis;
-- piešķiršanas izteiksmes.
+- piešķiršanas izteiksmes;
+- augšējā līmeņa `Darbība` parametri ar kopīgu `Parametrs` AST kontraktu;
+- veidņu literāļi ar strukturētām teksta daļām un interpolāciju izteiksmēm.
 
-Konstruktora, gettera un klases metodes ķermeņi izmanto kopīgo priekšrakstu analizatora infrastruktūru.
+Konstruktors, klases metode un augšējā līmeņa `Darbība` tagad izmanto vienu kopīgu parametru analizatoru.
 
-Raw leksiskie elementi konstruktoram, getterim un metodei pagaidām tiek saglabāti kā pārejas lauki, bet vairs nav vienīgais ķermeņa attēlojums.
+Veidņu interpolācijas izmanto pilno izteiksmju AST, bet veidnes `raw` vērtība tiek saglabāta saderībai un diagnostikai.
 
-**Nākamais konkrētais uzdevums ir funkciju parametru AST paplašināšana.**
+Konstruktora, gettera un klases metodes raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
-Pēc tam secīgi tiks strukturētas veidņu interpolācijas, pirmkoda diapazoni un AST v1 kontrakts.
+**Nākamais konkrētais uzdevums ir pirmkoda diapazona informācija AST mezgliem.**
+
+Pēc tam tiks definēti AST mezglu obligātie un izvēles lauki, publicēts pirmais `spec/ast-v1.md` un stabilizēts AST v1 kontrakts.
 
 ## Galvenais tuvākais mērķis
 

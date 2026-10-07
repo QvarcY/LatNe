@@ -54,6 +54,13 @@ html = replaceRequired(
 
 html = replaceRequired(
   html,
+  'src="./assets/latne-logo.png"',
+  'src="../assets/latne-logo.png"',
+  "logo path"
+);
+
+html = replaceRequired(
+  html,
   '<script src="./app.js" defer></script>',
   '<script src="../app.js" defer></script>',
   "app path"
@@ -302,8 +309,8 @@ const translations = [
     "You can help LatNe even without writing a line of code."
   ],
   [
-    "Nākamais: reproducējama vide un kvalitātes sliedes",
-    "Next: reproducible environment and quality gates"
+    "Nākamais: pirmkoda diapazoni AST mezgliem",
+    "Next: source spans for AST nodes"
   ],
   [
     "Fāze 0A — reproducējama vide un kvalitātes sliedes",

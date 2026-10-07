@@ -1401,3 +1401,80 @@ Checkpoint:
 Nākamais engineering uzdevums:
 
 **Funkciju parametru AST paplašināšana.**
+
+---
+
+## 2026-10-07 — J0027 — Darbības parametru AST
+
+**Tips:** parseris / AST / refaktorēšana
+**Statuss:** pabeigts
+
+Augšējā līmeņa `Darbība` deklarācijām pievienots strukturēts `parametri` masīvs.
+
+Konstruktors, klases metode un augšējā līmeņa darbība tagad izmanto vienu kopīgu parametru analizatoru un vienotu mezgla formu:
+
+```text
+Parametrs
+├─ nosaukums
+├─ tips
+└─ rinda
+```
+
+Saglabāts pārejas lauks `parametruLeksiskoElementuSkaits`, bet vecais neviennozīmīgais `parametruLeksiskieElementi` lauks vairs netiek izmantots.
+
+Regresijas pārbaude sedz darbību ar diviem tipētiem parametriem.
+
+Checkpoint:
+
+`fe4ab65`
+
+---
+
+## 2026-10-07 — J0028 — Veidņu interpolāciju AST
+
+**Tips:** lexer / parseris / AST / regresijas pārbaudes
+**Statuss:** pabeigts
+
+`veidne` leksiskais elements saglabā vienu ārējo tokenu, bet tagad satur strukturētas daļas.
+
+Izteiksmju AST izmanto:
+
+- `VeidnesTeksts`
+- `VeidnesInterpolācija`
+
+Interpolācijas saturs tiek atkārtoti leksiski analizēts ar LatNe terminoloģijas vārdnīcu un nodots pilnajam izteiksmju parserim.
+
+Kanoniskā gettera veidne satur 4 AST daļas un 2 interpolācijas.
+
+Papildu regresijas pārbaudes sedz:
+
+- bināru izteiksmi `${vērtība + 1}`
+- escapotu `\${...}` marķieri
+
+Kanoniskais lexer baseline saglabājas 196 leksiskie elementi.
+
+Checkpoint:
+
+`c617074`
+
+---
+
+## 2026-10-07 — J0029 — LatNe logotips publiskajā identitātē
+
+**Tips:** publiskā identitāte / README / GitHub Pages
+**Statuss:** pabeigts
+
+Projektam pievienots jaunais LatNe logotips kā kanonisks publiskais attēls:
+
+`site/assets/latne-logo.png`
+
+Tas tiek izmantots:
+
+- GitHub README augšdaļā
+- GitHub Pages hero sadaļā līdzās dzīvajam LatNe koda piemēram
+
+Pages galvenes mazā zīme paliek vienkārša un salasāma mazos izmēros.
+
+Nākamais engineering uzdevums:
+
+**Pirmkoda diapazona informācija AST mezgliem.**
