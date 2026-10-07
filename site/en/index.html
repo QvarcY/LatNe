@@ -139,129 +139,36 @@
   </header>
 
   <main>
-    <section class="hero hero-with-banner section" id="sakums">
-      <div class="shell hero-visual reveal">
-        <img
-          class="hero-banner-image"
-          src="../assets/latne-hero.jpg"
-          alt="LatNe — Programmē latviski"
-          width="1672"
-          height="941"
-        >
-      </div>
-
-      <div class="shell hero-grid">
-        <div class="hero-copy reveal">
-          <img
-            class="hero-logo"
-            src="../assets/latne-logo.png"
-            alt="LatNe"
-            width="360"
-            height="360"
-          >
-
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Open-source project
+    <section class="hero section" id="sakums">
+      <div class="shell hero-layout">
+        <div class="hero-top">
+          <div class="hero-logo-panel reveal">
+            <img
+              class="hero-logo"
+              src="../assets/latne-logo.png"
+              alt="LatNe"
+              width="520"
+              height="520"
+            >
           </div>
 
-          <h1 class="hero-semantic">
-            Program
-            <span>in Latvian.</span>
-          </h1>
+          <div class="code-window reveal reveal-delay-1">
+            <div class="code-window-top">
+              <div class="window-controls" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
 
-          <p class="hero-lead hero-semantic">
-            LatNe is an independent programming language and emerging development environment built for Latvian, where the language is not decoration — it is part of the programming experience.
-          </p>
+              <span class="code-file">piemers.lat</span>
 
-          <div class="hero-actions hero-actions-primary">
-            <a
-              class="button button-primary"
-              href="https://github.com/QvarcY/LatNe"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span aria-hidden="true">★</span>
-              LatNe on GitHub ★
-            </a>
-
-            <a
-              class="button button-secondary"
-              href="#lidzdarboties"
-            >
-              Contribute
-              <span aria-hidden="true">→</span>
-            </a>
-
-            <a
-              class="button button-coffee"
-              href="https://buymeacoffee.com/craftin"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span aria-hidden="true">☕</span>
-              Support the project
-            </a>
-          </div>
-
-          <div class="hero-quick-links">
-            <a
-              href="https://github.com/QvarcY/LatNe"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View code
-            </a>
-
-            <span>·</span>
-
-            <a
-              href="https://github.com/QvarcY/LatNe/blob/main/docs/ATSAKSANA.md"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Documentation
-            </a>
-
-            <span>·</span>
-
-            <a
-              href="https://github.com/QvarcY/LatNe/blob/main/ROADMAP.md"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Roadmap
-            </a>
-          </div>
-
-          <div class="hero-note">
-            <span class="status-dot status-dot-live"></span>
-            Next: source spans for AST nodes
-            <span class="hero-star-count" data-star-wrapper hidden>
-              ·
-              <strong data-star-count></strong>
-              GitHub ★
-            </span>
-          </div>
-        </div>
-
-        <div class="code-window reveal reveal-delay-1">
-          <div class="code-window-top">
-            <div class="window-controls" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
+              <span class="code-live">
+                <span></span>
+                LATNE
+              </span>
             </div>
 
-            <span class="code-file">piemers.lat</span>
-
-            <span class="code-live">
-              <span></span>
-              LATNE
-            </span>
-          </div>
-
-          <pre class="code-block" aria-label="LatNe code example"><code><span class="kw">eksportē</span> <span class="kw">asinhroni</span> <span class="kw">darbība</span> ielādēLietotājus() {
+            <pre class="code-block" aria-label="LatNe code example"><code><span class="kw">eksportē</span> <span class="kw">asinhroni</span> <span class="kw">darbība</span> ielādēLietotājus() {
   <span class="kw">nemainīgs</span> dati =
     <span class="kw">gaidi</span> lasiDatus(<span class="str">"lietotaji.json"</span>)
 
@@ -274,20 +181,31 @@
   <span class="kw">atgriez</span> dati
 }</code></pre>
 
-          <div class="code-statuses">
-            <span class="code-status code-status-live">
-              <b>✓</b> Tokenizer
-            </span>
-            <span class="code-status code-status-live">
-              <b>✓</b> Parser
-            </span>
-            <span class="code-status code-status-live">
-              <b>✓</b> AST
-            </span>
-            <span class="code-status code-status-future">
-              <b>○</b> Execution planned
-            </span>
+            <div class="code-statuses">
+              <span class="code-status code-status-live">
+                <b>✓</b> Tokenizer
+              </span>
+              <span class="code-status code-status-live">
+                <b>✓</b> Parser
+              </span>
+              <span class="code-status code-status-live">
+                <b>✓</b> AST
+              </span>
+              <span class="code-status code-status-future">
+                <b>○</b> Execution planned
+              </span>
+            </div>
           </div>
+        </div>
+
+        <div class="hero-message reveal reveal-delay-2">
+          <h1>
+            Program <span>in Latvian.</span>
+          </h1>
+
+          <p class="hero-lead">
+            LatNe is an independent programming language and emerging development environment built for Latvian, where the language is not decoration — it is part of the programming experience.
+          </p>
         </div>
       </div>
     </section>
