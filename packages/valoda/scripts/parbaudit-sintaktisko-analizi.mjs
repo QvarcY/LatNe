@@ -253,6 +253,51 @@ if (
   )
 }
 
+if (
+  !Array.isArray(
+    klase.konstruktors.kermenis
+  )
+) {
+  throw new Error(
+    "Konstruktora ķermenis nav strukturētu priekšrakstu masīvs"
+  )
+}
+
+if (
+  klase.konstruktors.kermenis.length !== 4
+) {
+  throw new Error(
+    `Gaidīti 4 konstruktora priekšraksti, saņemti ${klase.konstruktors.kermenis.length}`
+  )
+}
+
+for (
+  let i = 0;
+  i < klase.konstruktors.kermenis.length;
+  i++
+) {
+  const prieksraksts =
+    klase.konstruktors.kermenis[i]
+
+  if (
+    prieksraksts.veids !==
+      "Izteiksme"
+  ) {
+    throw new Error(
+      `Konstruktora priekšraksts ${i + 1} nav izteiksmes priekšraksts`
+    )
+  }
+
+  if (
+    prieksraksts.izteiksme?.veids !==
+      "PiešķiršanasIzteiksme"
+  ) {
+    throw new Error(
+      `Konstruktora priekšraksts ${i + 1} nesatur piešķiršanas AST`
+    )
+  }
+}
+
 if (klase.getteri.length !== 1) {
   throw new Error(
     `Gaidīts 1 getteris, saņemti ${klase.getteri.length}`
@@ -281,32 +326,10 @@ if (
   )
 }
 
-const pieskirsanasRindas = [
-  ...new Set(
-    klase.konstruktors
-      .kermenaLeksiskieElementi
-      .filter(
-        leksiskaisElements =>
-          leksiskaisElements.vertiba === "="
-      )
-      .map(
-        leksiskaisElements =>
-          leksiskaisElements.rinda
-      )
-  )
-]
-
 const pieskirsanas =
-  pieskirsanasRindas.map(
-    rinda =>
-      analizeIzteiksmesAst(
-        klase.konstruktors
-          .kermenaLeksiskieElementi
-          .filter(
-            leksiskaisElements =>
-              leksiskaisElements.rinda === rinda
-          )
-      )
+  klase.konstruktors.kermenis.map(
+    prieksraksts =>
+      prieksraksts.izteiksme
   )
 
 if (pieskirsanas.length !== 4) {
@@ -475,6 +498,10 @@ console.log(
 
 console.log(
   `Konstruktora parametri: ${klase.konstruktors.parametri.length}`
+)
+
+console.log(
+  `Konstruktora priekšraksti: ${klase.konstruktors.kermenis.length}`
 )
 
 console.log(

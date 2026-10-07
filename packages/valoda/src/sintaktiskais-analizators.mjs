@@ -727,7 +727,10 @@ export function analizeSintaksi(leksiskieElementi) {
       nolasitGrupu("{", "}")
 
     const klasesKermenis =
-      analizeKlasesKermeni(saturs)
+      analizeKlasesKermeni(
+        saturs,
+        analizePrieksrakstus
+      )
 
     return {
       veids: "Klase",

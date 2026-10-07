@@ -111,7 +111,10 @@ function analizeKlasesParametrus(leksiskieElementi) {
   })
 }
 
-export function analizeKlasesKermeni(leksiskieElementi) {
+export function analizeKlasesKermeni(
+  leksiskieElementi,
+  prieksrakstuAnalizators = null
+) {
   let indekss = 0
 
   const kermenis = []
@@ -265,6 +268,13 @@ export function analizeKlasesKermeni(leksiskieElementi) {
           analizeKlasesParametrus(
             parametruElementi
           ),
+        kermenis:
+          typeof prieksrakstuAnalizators ===
+            "function"
+            ? prieksrakstuAnalizators(
+                konstruktoraKermenis
+              )
+            : null,
         kermenaLeksiskieElementi:
           konstruktoraKermenis,
         rinda: sakums.rinda
