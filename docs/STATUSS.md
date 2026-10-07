@@ -45,6 +45,9 @@ Valodas kodols:
 - strukturēti augšējā līmeņa `Darbība` parametri
 - vienots `Parametrs` AST konstruktoram, metodei un darbībai
 - strukturētas veidņu literāļu interpolācijas
+- definēta vienota `diapazons.sākums / diapazons.beigas` pirmkoda atrašanās vietas struktūra
+- leksiskajiem elementiem saglabāti `rinda`, `kolonna` un 0-bāzēta `nobīde` diapazonā
+- pirmie AST diapazoni ieviesti `Identifikators`, `Parametrs` un `Atgriešana` mezgliem
 - normalizēta LatNe-owned lexer, parsera, tokenu un AST identifikatoru rakstība ar pilnām latviešu diakritiskajām zīmēm
 - ieviests pastāvīgs transliterētu LatNe identifikatoru quality gate
 
@@ -136,7 +139,7 @@ Nav vēl:
 
 - noklusējuma parametru vērtību AST
 - plašāka klases metožu modifikatoru atbalsta, piemēram, `async` un `static`
-- pilna pirmkoda diapazona kontrakta AST mezgliem
+- pilna pirmkoda diapazonu pārklājuma visiem AST mezgliem
 - definēta AST mezglu obligāto un izvēles lauku specifikācija
 - stabilas AST v1 specifikācijas
 - LatNe API semantiskās translācijas
@@ -173,13 +176,19 @@ Tas ietver:
 
 **Pirmkoda diapazona informācija AST mezgliem.**
 
-Vienotais parametru AST un veidņu interpolāciju AST ir strukturēti.
+Minimālais diapazona kontrakts tagad ir definēts un nostiprināts ar regresijas pārbaudēm.
 
-Nākamajā solī jādefinē un jāievieš konsekventa pirmkoda atrašanās vietas informācija AST mezgliem, lai nākamajos posmos varētu būvēt precīzu diagnostiku, pirmkoda kartes un stabilu AST v1 kontraktu.
+Pirmā iterācija pārklāj trīs reprezentatīvus mezglus:
 
-Pirmajā iterācijā jāvienojas par minimālo diapazona formu un jānostiprina tā ar regresijas pārbaudēm.
+- `Identifikators`
+- `Parametrs`
+- `Atgriešana`
 
-Jaunie AST lauki jāveido tikai ar pilnu latviešu rakstību. Plānotais diapazona kontrakts nedrīkst ieviest transliterētas formas, piemēram, `sakums` vai `nobide`; jāizmanto `sākums` un `nobīde`.
+Kontrakts izmanto pusatvērtu `[sākums, beigas)` intervālu, 1-bāzētu `rinda` un `kolonna`, kā arī 0-bāzētu `nobīde`.
+
+Nākamajā apakšsolī diapazons jāpaplašina uz saliktām izteiksmēm, deklarācijām un klases mezgliem. ROADMAP uzdevums paliek nepabeigts, līdz pārklājums ir pietiekams AST v1 stabilizācijai.
+
+Jaunie AST lauki joprojām jāveido tikai ar pilnu latviešu rakstību.
 
 ## Ceļš līdz pirmajai palaišanai
 
