@@ -156,13 +156,11 @@ code {
 
 .brand-mark {
   display: block;
-  width: 38px;
+  width: 58px;
   height: 38px;
-  flex: 0 0 38px;
-  background:
-    url("./assets/latne-logo.png")
-    center / contain
-    no-repeat;
+  flex: 0 0 58px;
+  object-fit: cover;
+  object-position: center top;
   filter:
     drop-shadow(0 6px 16px rgba(197, 44, 74, 0.22));
 }
