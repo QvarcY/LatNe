@@ -105,14 +105,19 @@ Jau strukturēts:
 - klases lauki un pieejamības modifikatori;
 - `nemaināms` lauki un to tipi;
 - konstruktora deklarācija un parametri;
-- getter deklarācija un atgriezes tips;
+- konstruktora ķermeņa priekšraksti;
+- getter deklarācija, atgriezes tips un ķermenis;
+- minimāls klases metodes AST;
+- metodes pieejamība, tipēti parametri, atgriezes tips un ķermenis;
 - piešķiršanas izteiksmes.
 
-Piešķiršanas AST atbalsta vienkāršo un kombinētos piešķiršanas operatorus, saglabā labējo asociativitāti un pārbauda derīgu piešķiršanas mērķi.
+Konstruktora, gettera un klases metodes ķermeņi izmanto kopīgo priekšrakstu analizatora infrastruktūru.
 
-**Nākamais konkrētais uzdevums ir konstruktora ķermeņa priekšrakstu AST.**
+Raw leksiskie elementi konstruktoram, getterim un metodei pagaidām tiek saglabāti kā pārejas lauki, bet vairs nav vienīgais ķermeņa attēlojums.
 
-Pēc tam secīgi tiks strukturēts getter un metožu ķermeņu minimums, pilnāki parametri, veidņu interpolācijas un pirmkoda diapazoni līdz stabilam AST v1 kontraktam.
+**Nākamais konkrētais uzdevums ir funkciju parametru AST paplašināšana.**
+
+Pēc tam secīgi tiks strukturētas veidņu interpolācijas, pirmkoda diapazoni un AST v1 kontrakts.
 
 ## Galvenais tuvākais mērķis
 

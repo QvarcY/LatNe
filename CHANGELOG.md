@@ -14,8 +14,15 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - strukturēta getter deklarācija un atgriezes tips
 - ieviests `PiešķiršanasIzteiksme` AST
 - pievienots vienkāršo un kombinēto piešķiršanas operatoru atbalsts
-- pievienota assignment labējās asociativitātes un mērķa validācijas pārbaude
+- pievienota piešķiršanas izteiksmju labējās asociativitātes un mērķa validācijas pārbaude
 - pievienotas regresijas pārbaudes kanoniskajām konstruktora piešķiršanām
+- strukturēts konstruktora ķermeņa priekšrakstu AST
+- strukturēts gettera ķermeņa AST
+- pievienots minimāls klases `Metode` AST
+- klases metodei pievienota pieejamība, tipēti parametri, izvēles atgriezes tips un strukturēts ķermenis
+- konstruktora, gettera un metodes ķermeņiem izmantota kopīgā priekšrakstu analizatora infrastruktūra
+- pievienota klases metodes regresijas pārbaude, nemainot kanonisko pirmo `.lat` paraugu
+
 #### 2026-10-02
 
 - publiskā ceļa karte pārkārtota faktiskā izpildes secībā

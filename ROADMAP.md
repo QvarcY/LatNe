@@ -64,8 +64,8 @@ Windows pārbaudi pievienot tad, kad pamatķēde ir stabila un sākas CLI izplat
 - [x] Strukturēt konstruktoru un tā parametrus
 - [x] Strukturēt getter deklarāciju un atgriezes tipu
 - [x] Izveidot piešķiršanas izteiksmju AST
-- [ ] Strukturēt konstruktora ķermeņa priekšrakstus
-- [ ] Strukturēt getter un metožu ķermeņu minimumu
+- [x] Strukturēt konstruktora ķermeņa priekšrakstus
+- [x] Strukturēt getter un metožu ķermeņu minimumu
 - [ ] Paplašināt funkciju parametru AST
 - [ ] Parsēt veidņu literāļu interpolācijas
 - [ ] Pievienot pirmkoda diapazona informāciju AST mezgliem

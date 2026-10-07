@@ -1323,3 +1323,81 @@ Checkpoint:
 Nākamais engineering uzdevums:
 
 **Konstruktora ķermeņa priekšrakstu AST.**
+
+---
+
+## 2026-10-07 — J0024 — Konstruktora ķermeņa priekšrakstu AST
+
+**Tips:** parseris / AST
+**Statuss:** pabeigts
+
+Konstruktora ķermenis savienots ar esošo priekšrakstu analizatora infrastruktūru.
+
+Kanoniskajā `Lietotājs` konstruktorā tagad tiek iegūti četri strukturēti `Izteiksme` priekšraksti, kuru izteiksmes ir `PiešķiršanasIzteiksme` mezgli.
+
+Iepriekšējā piešķiršanas izteiksmju regresijas pārbaude vairs nepārlasa neapstrādātos leksiskos elementus pa rindām, bet pārbauda īsto `Konstruktors.kermenis` AST ceļu.
+
+Raw ķermeņa leksiskie elementi pagaidām saglabāti kā pārejas lauks.
+
+Checkpoint:
+
+`5e5e741`
+
+---
+
+## 2026-10-07 — J0025 — Gettera ķermeņa AST
+
+**Tips:** parseris / AST
+**Statuss:** pabeigts
+
+Gettera ķermenis savienots ar to pašu priekšrakstu analizatora infrastruktūru.
+
+Kanoniskā gettera `apraksts` ķermenis tagad satur vienu strukturētu `Atgriešana` priekšrakstu.
+
+Atgriešanas vērtība šajā posmā paliek `Veidne` mezgls. Veidņu interpolāciju strukturēšana apzināti atlikta uz atsevišķu AST v1 soli.
+
+Raw gettera ķermeņa elementi pagaidām saglabāti kā pārejas lauks.
+
+Checkpoint:
+
+`6bf5ace`
+
+---
+
+## 2026-10-07 — J0026 — Minimāls klases metodes AST
+
+**Tips:** parseris / AST / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Klases parserim pievienots pirmais `Metode` mezgls.
+
+Minimālais metodes AST satur:
+
+- nosaukumu
+- pieejamību
+- tipētus parametrus
+- izvēles atgriezes tipu
+- strukturētu ķermeni
+- pārejas raw ķermeņa elementus
+
+Metodes ķermenis izmanto esošo priekšrakstu analizatoru.
+
+Atsevišķs regresijas paraugs pārbauda:
+
+```lat
+klase MetodesParaugs {
+  atvērts darbība sveic(vārds: teksts): teksts {
+    atgriez vārds
+  }
+}
+```
+
+Kanoniskais `examples/pamata-paraugs.lat` netika mainīts, tāpēc tā 196 leksisko elementu un 5 augšējā līmeņa mezglu baseline saglabājas.
+
+Checkpoint:
+
+`91356b6`
+
+Nākamais engineering uzdevums:
+
+**Funkciju parametru AST paplašināšana.**

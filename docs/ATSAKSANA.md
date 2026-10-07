@@ -1,9 +1,9 @@
 # LatNe darba atsākšana
 
-**Atjaunots:** 2026-10-02
+**Atjaunots:** 2026-10-07
 **Stabilais zars:** `main`
 **Darba sākumpunkts:** `main`
-**Nākamā izstrādes fāze:** 1 — klases ķermeņa AST v1
+**Nākamā izstrādes fāze:** 1 — funkciju parametru AST
 
 Šis fails ir pirmais lasāmais dokuments, sākot jaunu LatNe darba sesiju.
 
@@ -104,60 +104,66 @@ Pirmais `.lat` paraugs:
 - 6 strukturēti klases ķermeņa mezgli
 - 4 klases lauki
 - 2 konstruktora parametri
+- 4 konstruktora priekšraksti
 - 1 getteris
+- 1 gettera priekšraksts
 
 Sintaktiskais analizators strukturēti saprot arī:
 
 - klases laukus un pieejamības modifikatorus
 - `nemaināms` lauku informāciju un tipus
 - konstruktora deklarāciju un parametrus
-- getter deklarāciju un atgriezes tipu
+- konstruktora ķermeņa priekšrakstus
+- getter deklarāciju, atgriezes tipu un ķermeni
+- minimālu klases metodes deklarāciju
+- metodes pieejamību
+- metodes tipētos parametrus
+- metodes atgriezes tipu
+- metodes strukturētu ķermeni
 - piešķiršanas izteiksmes
 - vienkāršo un kombinētos piešķiršanas operatorus
 - labēji asociatīvas piešķiršanas izteiksmes
 - derīga piešķiršanas mērķa pārbaudi
 
+Klases metodes minimums tiek pārbaudīts ar atsevišķu sintakses regresijas paraugu, nemainot kanonisko `examples/pamata-paraugs.lat`.
+
 Tehniskie checkpointi:
 
 - `8195515` — strukturēts klases ķermeņa AST
 - `1d73f5d` — strukturēts piešķiršanas AST
+- `5e5e741` — strukturēts konstruktora ķermeņa AST
+- `6bf5ace` — strukturēts gettera ķermeņa AST
+- `91356b6` — minimāls klases metodes AST
 
-Pilnais `corepack pnpm run check` pēc `1d73f5d` ir zaļš.
+Pilnais `corepack pnpm run check` pēc `91356b6` ir zaļš.
 
 ## Pašreizējā robeža
 
-Konstruktora un gettera ķermeņi vēl glabājas kā neapstrādātas leksisko elementu kopas.
+Konstruktora, gettera un minimālas klases metodes ķermeņi tagad ir strukturēti ar kopīgo priekšrakstu analizatoru.
 
-Kanoniskajā `Lietotājs` konstruktorā ir četras piešķiršanas:
+Raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
-```lat
-šis.vārds = vārds
-šis.vecums = vecums
-šis.aktīvs = patiess
-šis.loma = Loma.lietotājs
-```
-
-Izteiksmju analizators tās jau spēj pārvērst `PiešķiršanasIzteiksme` AST mezglos, bet konstruktora ķermenis vēl nav savienots ar priekšrakstu AST.
+Augšējā līmeņa `Darbība` deklarācijām parametri vēl nav strukturēti kā `Parametrs` AST mezgli. Parseris pašlaik saglabā tikai parametru leksisko elementu skaitu.
 
 ## Nākamais izstrādes bloks
 
-**Konstruktora ķermeņa priekšrakstu AST.**
+**Funkciju parametru AST paplašināšana.**
 
 Mērķis:
 
-1. pārtraukt konstruktora ķermeņa uzturēšanu tikai kā raw tokenu kopu
-2. izmantot esošo priekšrakstu un izteiksmju parsera infrastruktūru
-3. iegūt četrus strukturētus konstruktora priekšrakstus
-4. saglabāt vai skaidri dokumentēt raw tokenu pārejas lauku, ja tas vēl nepieciešams
+1. strukturēt augšējā līmeņa `Darbība` parametrus
+2. izmantot vienotu parametra mezgla formu ar konstruktoru un klases metodi
+3. saglabāt nosaukumu, tipu un rindas informāciju
+4. saglabāt pašreizējo kanoniskā parauga uzvedību
 5. pievienot regresijas pārbaudes
 6. palaist pilno `corepack pnpm run check`
 
 Pēc tam:
 
-- strukturēt getter un metožu ķermeņu minimumu
-- paplašināt funkciju parametru AST
 - parsēt veidņu interpolācijas
 - pievienot pirmkoda diapazonus
+- definēt AST mezglu obligātos un izvēles laukus
+- publicēt pirmo `spec/ast-v1.md`
 - nostiprināt AST v1 kontraktu
 
 ## Ceļš līdz pirmajai izpildei
@@ -169,11 +175,11 @@ klases AST — pabeigts
 ↓
 piešķiršanas AST — pabeigts
 ↓
-konstruktora ķermeņa AST ← pašreizējais darbs
+konstruktora ķermeņa AST — pabeigts
 ↓
-getter un metožu ķermeņi
+getter un metožu minimums — pabeigts
 ↓
-pilnāki parametri
+funkciju parametru AST ← pašreizējais darbs
 ↓
 template interpolation
 ↓

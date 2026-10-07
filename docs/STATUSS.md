@@ -1,8 +1,8 @@
 # LatNe statuss
 
 **Atjaunots:** 2026-10-07
-**Pašreizējais valodas stāvoklis:** strukturēts AST līdz klases ķermeņa un piešķiršanas izteiksmju līmenim
-**Nākamā izstrādes fāze:** 1 — konstruktora ķermeņa priekšrakstu AST
+**Pašreizējais valodas stāvoklis:** strukturēts AST līdz klases konstruktoru, getteru un metožu ķermeņu minimumam
+**Nākamā izstrādes fāze:** 1 — funkciju parametru AST paplašināšana
 
 ## Pašreizējā robeža
 
@@ -39,6 +39,9 @@ Valodas kodols:
 - atsevišķs izteiksmju sintaktiskais analizators
 - strukturēts klases ķermeņa AST
 - strukturētas piešķiršanas izteiksmes
+- strukturēts konstruktora ķermeņa AST
+- strukturēts gettera ķermeņa AST
+- minimāls klases metodes AST
 
 Publiskā infrastruktūra:
 
@@ -82,7 +85,13 @@ Pašreizējais AST saprot:
 - pieejamības modifikatorus
 - `nemaināms` lauku informāciju
 - konstruktora deklarāciju un parametrus
-- getter deklarāciju un atgriezes tipu
+- getter deklarāciju, atgriezes tipu un ķermeni
+- konstruktora ķermeņa priekšrakstus
+- klases metodes deklarāciju
+- klases metodes pieejamību
+- klases metodes tipētos parametrus
+- klases metodes atgriezes tipu
+- klases metodes strukturētu ķermeni
 
 ## Pārbaudītais pirmais paraugs
 
@@ -95,16 +104,28 @@ Rezultāts:
 - 5 augšējā līmeņa AST mezgli
 - strukturēts darbības ķermenis
 - strukturētas izteiksmes
+- 4 strukturēti konstruktora priekšraksti
+- 1 strukturēts gettera priekšraksts
 
 ## Aktuālie ierobežojumi
 
-Konstruktora un gettera ķermeņi pašlaik vēl tiek saglabāti kā neapstrādātu leksisko elementu kopas.
+Konstruktora un gettera ķermeņi tagad ir strukturēti ar kopīgo priekšrakstu analizatoru.
+
+Klases metodei ir ieviests pirmais minimālais AST ar:
+
+- pieejamību
+- nosaukumu
+- tipētiem parametriem
+- izvēles atgriezes tipu
+- strukturētu ķermeni
+
+Konstruktora, gettera un metodes raw leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
 Nav vēl:
 
-- strukturēta konstruktora ķermeņa priekšrakstu AST
-- strukturēta getter un metožu ķermeņu minimuma
-- pilnas funkciju parametru struktūras
+- pilnas augšējā līmeņa funkciju parametru AST struktūras
+- noklusējuma parametru vērtību AST
+- plašāka klases metožu modifikatoru atbalsta, piemēram, `async` un `static`
 - veidņu interpolāciju AST
 - pirmkoda diapazona kontrakta AST līmenī
 - stabilas AST v1 specifikācijas
@@ -139,11 +160,13 @@ Tas ietver:
 
 ## Nākamais valodas uzdevums
 
-**Konstruktora ķermeņa priekšrakstu AST.**
+**Funkciju parametru AST paplašināšana.**
 
-Klases ķermeņa pirmā strukturētā iterācija un piešķiršanas izteiksmju AST ir pabeigti.
+Klases konstruktora, gettera un metodes ķermeņu minimums ir strukturēts.
 
-Nākamajā solī četri `Lietotājs` konstruktora piešķīrumi vairs nedrīkst palikt tikai raw leksisko elementu kopā. Tie jāatspoguļo kā strukturēti priekšrakstu mezgli, izmantojot jau ieviesto `PiešķiršanasIzteiksme` AST.
+Klases konstruktoru un metožu parametri jau tiek attēloti kā `Parametrs` mezgli, bet augšējā līmeņa `Darbība` deklarācija pašlaik vēl saglabā tikai parametru leksisko elementu skaitu.
+
+Nākamajā solī augšējā līmeņa funkciju parametri jāpārvērš strukturētā AST, saglabājot vienotu parametru kontraktu ar klases konstruktoru un metodi.
 
 ## Ceļš līdz pirmajai palaišanai
 
@@ -151,8 +174,10 @@ Nākamajā solī četri `Lietotājs` konstruktora piešķīrumi vairs nedrīkst 
 kvalitātes sliedes
 → klases AST ✓
 → piešķiršanas AST ✓
-→ konstruktora ķermeņa AST ← pašreizējais darbs
-→ pilnāki ķermeņi
+→ konstruktora ķermeņa AST ✓
+→ getter un metožu minimums ✓
+→ funkciju parametru AST ← pašreizējais darbs
+→ veidņu interpolācijas
 → pirmkoda diapazoni
 → AST v1
 → API minimums
