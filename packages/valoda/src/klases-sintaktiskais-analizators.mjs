@@ -8,7 +8,10 @@ function sintaksesKluda(zina, leksiskaisElements) {
   )
 }
 
-function analizeKlasesParametrus(leksiskieElementi) {
+function analizeKlasesParametrus(
+  leksiskieElementi,
+  konteksts = "konstruktora"
+) {
   if (leksiskieElementi.length === 0) {
     return []
   }
@@ -32,7 +35,7 @@ function analizeKlasesParametrus(leksiskieElementi) {
     ) {
       if (dala.length === 0) {
         sintaksesKluda(
-          "Tukšs konstruktora parametrs",
+          `Tukšs ${konteksts} parametrs`,
           leksiskaisElements
         )
       }
@@ -78,21 +81,21 @@ function analizeKlasesParametrus(leksiskieElementi) {
       nosaukums.veids !== "identifikators"
     ) {
       sintaksesKluda(
-        "Gaidīts konstruktora parametra nosaukums",
+        `Gaidīts ${konteksts} parametra nosaukums`,
         nosaukums
       )
     }
 
     if (!kols || kols.vertiba !== ":") {
       sintaksesKluda(
-        'Gaidīts ":" aiz konstruktora parametra',
+        `Gaidīts ":" aiz ${konteksts} parametra`,
         kols ?? nosaukums
       )
     }
 
     if (tipaElementi.length === 0) {
       sintaksesKluda(
-        "Gaidīts konstruktora parametra tips",
+        `Gaidīts ${konteksts} parametra tips`,
         kols
       )
     }
@@ -121,6 +124,7 @@ export function analizeKlasesKermeni(
   const lauki = []
   let konstruktors = null
   const getteri = []
+  const metodes = []
 
   const esosais = () =>
     leksiskieElementi[indekss] ?? null
@@ -355,6 +359,69 @@ export function analizeKlasesKermeni(
       continue
     }
 
+    if (irAvots("function")) {
+      const sakums = panem()
+
+      if (nemainams) {
+        sintaksesKluda(
+          'Modifikators "readonly" nav derīgs metodei',
+          sakums
+        )
+      }
+
+      const nosaukums =
+        gaidiVeidu("identifikators")
+
+      const parametruElementi =
+        nolasitGrupu("(", ")")
+
+      const atgriezesTips = []
+
+      if (irVertiba(":")) {
+        panem()
+
+        while (
+          esosais() &&
+          !irVertiba("{")
+        ) {
+          atgriezesTips.push(
+            panem().vertiba
+          )
+        }
+      }
+
+      const metodesKermenis =
+        nolasitGrupu("{", "}")
+
+      const metode = {
+        veids: "Metode",
+        nosaukums: nosaukums.vertiba,
+        pieejamiba,
+        parametri:
+          analizeKlasesParametrus(
+            parametruElementi,
+            "metodes"
+          ),
+        atgriezesTips:
+          atgriezesTips.join(""),
+        kermenis:
+          typeof prieksrakstuAnalizators ===
+            "function"
+            ? prieksrakstuAnalizators(
+                metodesKermenis
+              )
+            : null,
+        kermenaLeksiskieElementi:
+          metodesKermenis,
+        rinda: sakums.rinda
+      }
+
+      metodes.push(metode)
+      kermenis.push(metode)
+
+      continue
+    }
+
     const nosaukums =
       gaidiVeidu("identifikators")
 
@@ -400,6 +467,7 @@ export function analizeKlasesKermeni(
     kermenis,
     lauki,
     konstruktors,
-    getteri
+    getteri,
+    metodes
   }
 }

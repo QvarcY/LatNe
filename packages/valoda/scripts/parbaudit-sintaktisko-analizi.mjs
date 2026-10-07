@@ -363,6 +363,125 @@ if (
   )
 }
 
+const metodesParaugaAst =
+  analizeSintaksi(
+    analizeLeksiski(
+      `klase MetodesParaugs {
+  atvērts darbība sveic(vārds: teksts): teksts {
+    atgriez vārds
+  }
+}`,
+      vardnica
+    )
+  )
+
+const metodesParaugaKlase =
+  metodesParaugaAst.elementi.find(
+    mezgls =>
+      mezgls.veids === "Klase" &&
+      mezgls.nosaukums ===
+        "MetodesParaugs"
+  )
+
+if (!metodesParaugaKlase) {
+  throw new Error(
+    "Metodes regresijas AST nav atrasta klase"
+  )
+}
+
+if (
+  !Array.isArray(
+    metodesParaugaKlase.metodes
+  ) ||
+  metodesParaugaKlase.metodes.length !== 1
+) {
+  throw new Error(
+    "Klases metodes AST nav izveidots"
+  )
+}
+
+const metode =
+  metodesParaugaKlase.metodes[0]
+
+if (
+  metode.veids !== "Metode" ||
+  metode.nosaukums !== "sveic" ||
+  metode.pieejamiba !== "public"
+) {
+  throw new Error(
+    "Metodes deklarācijas AST neatbilst gaidītajam"
+  )
+}
+
+if (
+  metode.atgriezesTips !== "teksts"
+) {
+  throw new Error(
+    "Metodes atgriezes tips neatbilst gaidītajam"
+  )
+}
+
+if (
+  !Array.isArray(metode.parametri) ||
+  metode.parametri.length !== 1 ||
+  metode.parametri[0].veids !==
+    "Parametrs" ||
+  metode.parametri[0].nosaukums !==
+    "vārds" ||
+  metode.parametri[0].tips !==
+    "teksts"
+) {
+  throw new Error(
+    "Metodes parametru AST neatbilst gaidītajam"
+  )
+}
+
+if (
+  !Array.isArray(metode.kermenis) ||
+  metode.kermenis.length !== 1
+) {
+  throw new Error(
+    "Metodes ķermenis nav strukturēts"
+  )
+}
+
+const metodesPrieksraksts =
+  metode.kermenis[0]
+
+if (
+  metodesPrieksraksts.veids !==
+    "Atgriešana" ||
+  metodesPrieksraksts.vertiba?.veids !==
+    "Identifikators" ||
+  metodesPrieksraksts.vertiba.nosaukums !==
+    "vārds"
+) {
+  throw new Error(
+    "Metodes ķermeņa AST neatbilst gaidītajam"
+  )
+}
+
+if (
+  !Array.isArray(
+    metode.kermenaLeksiskieElementi
+  ) ||
+  metode.kermenaLeksiskieElementi.length === 0
+) {
+  throw new Error(
+    "Metodes raw ķermeņa elementi nav saglabāti"
+  )
+}
+
+if (
+  !metodesParaugaKlase.kermenis.includes(
+    metode
+  )
+) {
+  throw new Error(
+    "Metode nav iekļauta klases ķermeņa AST"
+  )
+}
+
 const pieskirsanas =
   klase.konstruktors.kermenis.map(
     prieksraksts =>

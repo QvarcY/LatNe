@@ -747,6 +747,8 @@ export function analizeSintaksi(leksiskieElementi) {
         klasesKermenis.konstruktors,
       getteri:
         klasesKermenis.getteri,
+      metodes:
+        klasesKermenis.metodes,
       rinda: sakums.rinda
     }
   }
