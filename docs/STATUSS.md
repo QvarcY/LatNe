@@ -48,6 +48,7 @@ Valodas kodols:
 - definēta vienota `diapazons.sākums / diapazons.beigas` pirmkoda atrašanās vietas struktūra
 - leksiskajiem elementiem saglabāti `rinda`, `kolonna` un 0-bāzēta `nobīde` diapazonā
 - pirmie AST diapazoni ieviesti `Identifikators`, `Parametrs` un `Atgriešana` mezgliem
+- salikto izteiksmju diapazoni ieviesti `Īpašība`, `Izsaukums`, `BināraIzteiksme` un `PiešķiršanasIzteiksme` mezgliem
 - normalizēta LatNe-owned lexer, parsera, tokenu un AST identifikatoru rakstība ar pilnām latviešu diakritiskajām zīmēm
 - ieviests pastāvīgs transliterētu LatNe identifikatoru quality gate
 
@@ -178,15 +179,22 @@ Tas ietver:
 
 Minimālais diapazona kontrakts tagad ir definēts un nostiprināts ar regresijas pārbaudēm.
 
-Pirmā iterācija pārklāj trīs reprezentatīvus mezglus:
+Pirmā iterācija pārklāja trīs reprezentatīvus mezglus:
 
 - `Identifikators`
 - `Parametrs`
 - `Atgriešana`
 
+Otrā iterācija pārklāj saliktās izteiksmes:
+
+- `Īpašība`
+- `Izsaukums`
+- `BināraIzteiksme`
+- `PiešķiršanasIzteiksme`
+
 Kontrakts izmanto pusatvērtu `[sākums, beigas)` intervālu, 1-bāzētu `rinda` un `kolonna`, kā arī 0-bāzētu `nobīde`.
 
-Nākamajā apakšsolī diapazons jāpaplašina uz saliktām izteiksmēm, deklarācijām un klases mezgliem. ROADMAP uzdevums paliek nepabeigts, līdz pārklājums ir pietiekams AST v1 stabilizācijai.
+Nākamajā apakšsolī diapazons jāpaplašina uz augšējā līmeņa deklarācijām un klases mezgliem. ROADMAP uzdevums paliek nepabeigts, līdz pārklājums ir pietiekams AST v1 stabilizācijai.
 
 Jaunie AST lauki joprojām jāveido tikai ar pilnu latviešu rakstību.
 
