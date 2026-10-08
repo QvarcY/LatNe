@@ -141,11 +141,11 @@ Jau strukturēts:
 - metodes pieejamība, tipēti parametri, atgriezes tips un ķermenis;
 - piešķiršanas izteiksmes;
 - augšējā līmeņa `Darbība` parametri ar kopīgu `Parametrs` AST kontraktu;
-- veidņu literāļi ar strukturētām teksta daļām un interpolāciju izteiksmēm.
+- veidņu literāļi ar strukturētām teksta daļām un aizpildījumiem.
 
 Konstruktors, klases metode un augšējā līmeņa `Darbība` tagad izmanto vienu kopīgu parametru analizatoru.
 
-Veidņu interpolācijas izmanto pilno izteiksmju AST, bet veidnes `pieraksts` vērtība tiek saglabāta saderībai un diagnostikai.
+Veidņu aizpildījumi izmanto pilno izteiksmju AST, bet veidnes `pieraksts` vērtība tiek saglabāta saderībai un diagnostikai.
 
 Konstruktora, iegūšanas un klases metodes neapstrādātie ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
