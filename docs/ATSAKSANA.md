@@ -189,7 +189,8 @@ Pašreizējais stāvoklis:
 - regresijas pārbaudes sedz abus `KārtasCikls` variantus, nepilnīgas skaitītāja galvenes noraidīšanu un `veids` operatora AST semantiku
 - deklarāciju AST vērtības ir `"konstante"` / `"mainīgais"` / `"funkcijasMainīgais"`; `var` atbilstošais `funkcijasMainīgais` paliek saderībai, bet jaunā LatNe kodā nav ieteicams
 - `Nosacījums.citādi` stabilais tips ir `null | Priekšraksts[]`; `citādi ja` ir viena iegulta `Nosacījums` mezgla masīvs
-- nākamie lēmumi: `Mēģinājums.ķer` un `Imports.avots` forma
+- `Mēģinājums.ķer` stabilais tips ir `null | { parametrs: teksts | null, ķermenis: Priekšraksts[] }`; tas ir `Mēģinājums` iekšējs objekts bez sava `veids`, `rinda` un `diapazons`
+- nākamais lēmums: `Imports.avots` forma
 - pēc pārējo lauku lēmumu pabeigšanas jāpublicē pirmais `spec/ast-v1.md`
 
 Pēc tam:
