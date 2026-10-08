@@ -3,7 +3,7 @@
 **Atjaunots:** 2026-10-08
 **Stabilais zars:** `main`
 **Darba sākumpunkts:** `main`
-**Nākamā izstrādes fāze:** 1 — pirmkoda diapazoni AST mezgliem
+**Nākamā izstrādes fāze:** 1 — AST v1 lauku kontrakts
 
 Šis fails ir pirmais lasāmais dokuments, sākot jaunu LatNe darba sesiju.
 
@@ -161,31 +161,25 @@ Neapstrādātie ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pāre
 
 AST diapazona minimālais kontrakts ir ieviests kā pusatvērts `[sākums, beigas)` intervāls ar `rinda`, `kolonna` un `nobīde`.
 
-Pirmie diapazoni ir `Identifikators`, `Parametrs` un `Atgriešana` mezgliem. Salikto izteiksmju diapazoni ieviesti arī `Īpašība`, `Izsaukums`, `BināraIzteiksme` un `PiešķiršanasIzteiksme`. Augšējā līmeņa deklarāciju diapazoni ieviesti `Imports`, `Saskarsme`, `Uzskaitījums`, `Klase` un `Darbība`. Klases iekšējo mezglu diapazoni ieviesti `KlasesLauks`, `Konstruktors`, `Iegūšana` un `Metode`. Esošais `rinda` lauks pārejas laikā saglabāts.
+Pirmkoda diapazoni ir ieviesti visiem 40 pašreizējiem AST mezglu tipiem. Regresijas audits pieprasa derīgu `diapazons` katram zināmajam AST mezglam un pārbauda bērnu diapazonu iekļaušanos vecāka mezgla robežās. Tukšai `Programma` saknei ir nulles garuma diapazons `1:1 / nobīde 0`. Esošais `rinda` lauks pārejas laikā saglabāts.
 
 ## Nākamais izstrādes bloks
 
-**Pirmkoda diapazona informācija AST mezgliem.**
+**AST mezglu obligāto un izvēles lauku kontrakts.**
 
-Pirmā iterācija ir pabeigta:
+Pirmkoda diapazonu ROADMAP uzdevums ir pabeigts.
 
-1. definēts `diapazons.sākums / diapazons.beigas` kontrakts
-2. `rinda` un `kolonna` ir 1-bāzētas
-3. `nobīde` ir 0-bāzēta
-4. saglabāts esošais `rinda` lauks
-5. pārklāti `Identifikators`, `Parametrs` un `Atgriešana`
-6. pievienotas regresijas pārbaudes
+Nākamais solis:
 
-Nākamais apakšsolis:
-
-- veikt atlikušā AST diapazonu pārklājuma auditu
-- pievienot diapazonus vēl nepārklātajiem izteiksmju un priekšrakstu mezgliem
-- pēc pietiekama pārklājuma atzīmēt ROADMAP pirmkoda diapazonu uzdevumu kā pabeigtu
+- inventarizēt visu 40 AST mezglu tipu laukus
+- katram laukam noteikt statusu: obligāts, izvēles vai pārejas
+- izlemt `rinda` lauka turpmāko statusu blakus `diapazons`
+- izlemt `ķermeņaLeksiskieElementi` pārejas lauku turpmāko statusu
+- nofiksēt vienotu nulles un tukšu kolekciju semantiku
+- pēc tam publicēt pirmo `spec/ast-v1.md`
 
 Pēc tam:
 
-- definēt AST mezglu obligātos un izvēles laukus
-- publicēt pirmo `spec/ast-v1.md`
 - pievienot AST v1 paraugu pārbaudes
 - nostiprināt AST v1 kontraktu
 
@@ -206,9 +200,9 @@ funkciju parametru AST — pabeigts
 ↓
 veidņu interpolācijas — pabeigts
 ↓
-pirmkoda diapazoni ← pašreizējais darbs
+pirmkoda diapazoni — pabeigts
 ↓
-AST v1 lauku kontrakts
+AST v1 lauku kontrakts ← pašreizējais darbs
 ↓
 AST v1 specifikācija
 ↓
