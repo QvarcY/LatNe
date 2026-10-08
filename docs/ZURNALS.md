@@ -1851,3 +1851,24 @@ Par pārejas / iekšējiem laukiem ārpus stabilā AST v1 publiskā kontrakta ap
 
 Nākamais neatrisinātais AST v1 jautājums ir vienota `null`, `""`, `[]` un neesoša lauka semantika.
 
+---
+
+## 2026-10-08 — J0041 — AST v1 tukšuma semantika
+
+**Tips:** AST / kontrakts
+**Statuss:** pabeigts
+
+Apstiprināta vienota AST v1 semantika neesošām un tukšām vērtībām.
+
+- kolekcijas lauks vienmēr eksistē un tukšā stāvoklī ir `[]`
+- izvēles viena vērtība vienmēr eksistē un neesamības gadījumā ir `null`
+- `""` netiek izmantota kā neesošas vērtības marķieris
+- diskriminētu variantu lauki pastāv tikai tajā variantā, kuram tie pieder
+- `Nosacījums.citādi` saglabā atšķirību starp `null`, `[]` un satura masīvu
+
+No šī lēmuma izriet, ka pašreizējie `Darbība.atgriezesTips: ""` un `Metode.atgriezesTips: ""` pirms AST v1 kontrakta pabeigšanas būs jāsaskaņo uz `null`, ja atgriezes tips nav norādīts.
+
+Šajā solī parsera AST forma vēl netiek mainīta; fiksēts kontrakta lēmums.
+
+Nākamais darbs ir precīzi nofiksēt `KārtasCikls`, `Nosacījums.citādi` un `Mēģinājums.ķer` formas.
+
