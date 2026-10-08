@@ -683,7 +683,12 @@ export function analizēSintaksi(leksiskieElementi) {
       veids: "Imports",
       vārdi,
       avots: avots.vērtība,
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          avots
+        )
     }
   }
 
@@ -697,11 +702,21 @@ export function analizēSintaksi(leksiskieElementi) {
     const saturs =
       nolasītGrupu("{", "}")
 
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ]
+
     return {
       veids: "Saskarsme",
       nosaukums: nosaukums.vērtība,
       ķermeņaLeksiskieElementi: saturs.length,
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          beigas
+        )
     }
   }
 
@@ -725,15 +740,28 @@ export function analizēSintaksi(leksiskieElementi) {
           leksiskaisElements.vērtība
       )
 
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ]
+
     return {
       veids: "Uzskaitījums",
       nosaukums: nosaukums.vērtība,
       vērtības,
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          beigas
+        )
     }
   }
 
-  const analizēKlasi = modifikatori => {
+  const analizēKlasi = (
+    modifikatori,
+    deklarācijasSākums
+  ) => {
     const sākums =
       gaidiAvotu("class")
 
@@ -742,6 +770,11 @@ export function analizēSintaksi(leksiskieElementi) {
 
     const saturs =
       nolasītGrupu("{", "}")
+
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ]
 
     const klasesĶermenis =
       analizēKlasesĶermeni(
@@ -766,11 +799,20 @@ export function analizēSintaksi(leksiskieElementi) {
         klasesĶermenis.getteri,
       metodes:
         klasesĶermenis.metodes,
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          deklarācijasSākums ??
+            sākums,
+          beigas
+        )
     }
   }
 
-  const analizēDarbību = modifikatori => {
+  const analizēDarbību = (
+    modifikatori,
+    deklarācijasSākums
+  ) => {
     const sākums =
       gaidiAvotu("function")
 
@@ -798,6 +840,11 @@ export function analizēSintaksi(leksiskieElementi) {
     const saturs =
       nolasītGrupu("{", "}")
 
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ]
+
     return {
       veids: "Darbība",
       nosaukums: nosaukums.vērtība,
@@ -818,7 +865,13 @@ export function analizēSintaksi(leksiskieElementi) {
         saturs.length,
       ķermenis:
         analizēPriekšrakstus(saturs),
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          deklarācijasSākums ??
+            sākums,
+          beigas
+        )
     }
   }
 
@@ -849,6 +902,9 @@ export function analizēSintaksi(leksiskieElementi) {
       continue
     }
 
+    const deklarācijasSākums =
+      esošais()
+
     const modifikatori = []
 
     while (
@@ -862,7 +918,10 @@ export function analizēSintaksi(leksiskieElementi) {
 
     if (irAvots("class")) {
       elementi.push(
-        analizēKlasi(modifikatori)
+        analizēKlasi(
+          modifikatori,
+          deklarācijasSākums
+        )
       )
 
       continue
@@ -870,7 +929,10 @@ export function analizēSintaksi(leksiskieElementi) {
 
     if (irAvots("function")) {
       elementi.push(
-        analizēDarbību(modifikatori)
+        analizēDarbību(
+          modifikatori,
+          deklarācijasSākums
+        )
       )
 
       continue
