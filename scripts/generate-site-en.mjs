@@ -416,7 +416,7 @@ const translations = [
     "top-level AST nodes"
   ],
   [
-    "vairs nav tikai tokenu teksts",
+    "vairs nav tikai leksisko elementu virkne",
     "no longer just token text"
   ],
   [
