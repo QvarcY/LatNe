@@ -190,7 +190,7 @@ Audits aptver:
 
 Katram zināmajam AST mezglam regresijas pārbaude pieprasa derīgu `diapazons` struktūru un pārbauda, ka bērna mezgla diapazons neiziet ārpus vecāka mezgla robežām. Tukšai `Programma` saknei tiek lietots nulles garuma diapazons `1:1 / nobīde 0`.
 
-Nākamajā solī jāfiksē, kuri lauki katram AST mezgla tipam ir obligāti, kuri izvēles un kuri ir pārejas lauki. Īpaši jāizlemj `rinda` pārejas lauka un `ķermeņaLeksiskieElementi` turpmākais statuss pirms `spec/ast-v1.md` publicēšanas.
+AST v1 lauku auditā `rinda` ir apstiprināts kā pārejas lauks, bet `ķermeņaLeksiskieElementi`, `ķermeņaLeksiskoElementuSkaits` un `parametruLeksiskoElementuSkaits` ir apstiprināti kā pārejas / iekšēji lauki ārpus stabilā AST v1 publiskā kontrakta. Nākamais lēmums ir vienota `null`, tukšu kolekciju, tukšu virkņu un neesošu lauku semantika.
 
 ## Ceļš līdz pirmajai palaišanai
 
