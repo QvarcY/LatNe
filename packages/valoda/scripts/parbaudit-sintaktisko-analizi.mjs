@@ -664,7 +664,7 @@ const gaidītieKlasesMezgli = [
   "KlasesLauks",
   "KlasesLauks",
   "Konstruktors",
-  "Getteris"
+  "Iegūšana"
 ]
 
 if (
@@ -857,73 +857,73 @@ for (
   }
 }
 
-if (klase.getteri.length !== 1) {
+if (klase.iegūšanas.length !== 1) {
   throw new Error(
-    `Gaidīts 1 getteris, saņemti ${klase.getteri.length}`
+    `Gaidīts 1 iegūšana, saņemti ${klase.iegūšanas.length}`
   )
 }
 
-const getteris = klase.getteri[0]
+const iegūšana = klase.iegūšanas[0]
 
 if (
-  getteris.nosaukums !== "apraksts" ||
-  getteris.atgriezesTips !== "teksts"
+  iegūšana.nosaukums !== "apraksts" ||
+  iegūšana.atgriezesTips !== "teksts"
 ) {
   throw new Error(
-    "Gettera AST neatbilst gaidītajai deklarācijai"
+    "Iegūšanas AST neatbilst gaidītajai deklarācijai"
   )
 }
 
 if (
   !Array.isArray(
-    getteris.ķermeņaLeksiskieElementi
+    iegūšana.ķermeņaLeksiskieElementi
   ) ||
-  getteris.ķermeņaLeksiskieElementi.length === 0
+  iegūšana.ķermeņaLeksiskieElementi.length === 0
 ) {
   throw new Error(
-    "Gettera ķermeņa leksiskie elementi nav saglabāti"
+    "Iegūšanas ķermeņa leksiskie elementi nav saglabāti"
   )
 }
 
 if (
   !Array.isArray(
-    getteris.ķermenis
+    iegūšana.ķermenis
   )
 ) {
   throw new Error(
-    "Gettera ķermenis nav strukturētu priekšrakstu masīvs"
+    "Iegūšanas ķermenis nav strukturētu priekšrakstu masīvs"
   )
 }
 
-if (getteris.ķermenis.length !== 1) {
+if (iegūšana.ķermenis.length !== 1) {
   throw new Error(
-    `Gaidīts 1 gettera priekšraksts, saņemti ${getteris.ķermenis.length}`
+    `Gaidīts 1 iegūšanas priekšraksts, saņemti ${iegūšana.ķermenis.length}`
   )
 }
 
-const getteraPriekšraksts =
-  getteris.ķermenis[0]
+const iegūšanasPriekšraksts =
+  iegūšana.ķermenis[0]
 
 if (
-  getteraPriekšraksts.veids !==
+  iegūšanasPriekšraksts.veids !==
     "Atgriešana"
 ) {
   throw new Error(
-    "Gettera priekšraksts nav atgriešanas priekšraksts"
+    "Iegūšanas priekšraksts nav atgriešanas priekšraksts"
   )
 }
 
 if (
-  getteraPriekšraksts.vērtība?.veids !==
+  iegūšanasPriekšraksts.vērtība?.veids !==
     "Veidne"
 ) {
   throw new Error(
-    "Gettera atgriešanas vērtība nav veidnes AST"
+    "Iegūšanas atgriešanas vērtība nav veidnes AST"
   )
 }
 
 const veidne =
-  getteraPriekšraksts.vērtība
+  iegūšanasPriekšraksts.vērtība
 
 if (
   !Array.isArray(veidne.daļas) ||
@@ -1209,7 +1209,7 @@ if (
   metode.ķermeņaLeksiskieElementi.length === 0
 ) {
   throw new Error(
-    "Metodes raw ķermeņa elementi nav saglabāti"
+    "Metodes neapstrādātie ķermeņa elementi nav saglabāti"
   )
 }
 
@@ -1404,11 +1404,11 @@ console.log(
 )
 
 console.log(
-  `Getteri: ${klase.getteri.length}`
+  `Iegūšanas: ${klase.iegūšanas.length}`
 )
 
 console.log(
-  `Gettera priekšraksti: ${getteris.ķermenis.length}`
+  `Iegūšanas priekšraksti: ${iegūšana.ķermenis.length}`
 )
 
 console.log(
