@@ -99,8 +99,12 @@ export function analizēIzteiksmi(leksiskieElementi) {
     const argumenti = []
 
     if (irVērtība(")")) {
-      paņem()
-      return argumenti
+      const beigas = paņem()
+
+      return {
+        argumenti,
+        beigas
+      }
     }
 
     while (indekss < leksiskieElementi.length) {
@@ -113,8 +117,13 @@ export function analizēIzteiksmi(leksiskieElementi) {
         continue
       }
 
-      gaidiVērtību(")")
-      return argumenti
+      const beigas =
+        gaidiVērtību(")")
+
+      return {
+        argumenti,
+        beigas
+      }
     }
 
     izteiksmesKļūda(
@@ -330,8 +339,16 @@ export function analizēIzteiksmi(leksiskieElementi) {
     )
   }
 
-  const analizēPostfiksu = sakne => {
+  const analizēPostfiksu = (
+    sakne,
+    sākumaIndekss
+  ) => {
     let mezgls = sakne
+
+    const sākums =
+      leksiskieElementi[
+        sākumaIndekss
+      ]
 
     while (indekss < leksiskieElementi.length) {
       if (irVērtība(".")) {
@@ -356,18 +373,34 @@ export function analizēIzteiksmi(leksiskieElementi) {
           veids: "Īpašība",
           objekts: mezgls,
           nosaukums: īpašība.vērtība,
-          rinda: mezgls.rinda
+          rinda: mezgls.rinda,
+          diapazons:
+            izveidoDiapazonu(
+              sākums,
+              īpašība
+            )
         }
 
         continue
       }
 
       if (irVērtība("(")) {
+        const {
+          argumenti,
+          beigas
+        } =
+          analizēArgumentus()
+
         mezgls = {
           veids: "Izsaukums",
           izsaucamais: mezgls,
-          argumenti: analizēArgumentus(),
-          rinda: mezgls.rinda
+          argumenti,
+          rinda: mezgls.rinda,
+          diapazons:
+            izveidoDiapazonu(
+              sākums,
+              beigas
+            )
         }
 
         continue
@@ -389,6 +422,9 @@ export function analizēIzteiksmi(leksiskieElementi) {
       )
     }
 
+    const vienībasSākumaIndekss =
+      indekss
+
     if (irAvots("await")) {
       paņem()
 
@@ -402,9 +438,13 @@ export function analizēIzteiksmi(leksiskieElementi) {
     if (irAvots("new")) {
       paņem()
 
+      const konstruktoraSākumaIndekss =
+        indekss
+
       const sakne =
         analizēPostfiksu(
-          analizēPamatu()
+          analizēPamatu(),
+          konstruktoraSākumaIndekss
         )
 
       if (sakne.veids === "Izsaukums") {
@@ -457,11 +497,14 @@ export function analizēIzteiksmi(leksiskieElementi) {
     }
 
     return analizēPostfiksu(
-      analizēPamatu()
+      analizēPamatu(),
+      vienībasSākumaIndekss
     )
   }
 
   function analizēBināro(minPrioritāte) {
+    const sākums = esošais()
+
     let kreisā = analizēVienību()
 
     while (indekss < leksiskieElementi.length) {
@@ -493,13 +536,23 @@ export function analizēIzteiksmi(leksiskieElementi) {
           prioritāte + 1
         )
 
+      const beigas =
+        leksiskieElementi[
+          indekss - 1
+        ]
+
       kreisā = {
         veids: "BināraIzteiksme",
         operators:
           operators.vērtība,
         kreisā,
         labā,
-        rinda: kreisā.rinda
+        rinda: kreisā.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            sākums,
+            beigas
+          )
       }
     }
 
@@ -507,6 +560,8 @@ export function analizēIzteiksmi(leksiskieElementi) {
   }
 
   const analizēPiešķiršanu = () => {
+    const sākums = esošais()
+
     const mērķis =
       analizēBināro(0)
 
@@ -534,13 +589,25 @@ export function analizēIzteiksmi(leksiskieElementi) {
 
     paņem()
 
+    const vērtība =
+      analizēPiešķiršanu()
+
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ]
+
     return {
       veids: "PiešķiršanasIzteiksme",
       operators: operators.vērtība,
       mērķis,
-      vērtība:
-        analizēPiešķiršanu(),
-      rinda: mērķis.rinda
+      vērtība,
+      rinda: mērķis.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          beigas
+        )
     }
   }
 
