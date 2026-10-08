@@ -76,7 +76,9 @@ const aizliegtieIdentifikatori = [
   "getteri",
   "raw",
   "UnāraIzteiksme",
-  "KamCikls"
+  "KamCikls",
+  "VeidnesInterpolācija",
+  "interpolācija"
 ]
 
 const aizliegtieFragmenti = [
@@ -112,7 +114,8 @@ const aizliegtieFragmenti = [
   "rezultat",
   "getter",
   "Getter",
-  "raw"
+  "raw",
+  "interpolāc"
 ]
 
 function savācFailus(
