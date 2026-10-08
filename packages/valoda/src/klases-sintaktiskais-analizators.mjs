@@ -2,6 +2,10 @@ import {
   analizēParametrus
 } from "./parametru-sintaktiskais-analizators.mjs"
 
+import {
+  izveidoDiapazonu
+} from "./pirmkoda-diapazons.mjs"
+
 function sintaksesKļūda(ziņa, leksiskaisElements) {
   if (!leksiskaisElements) {
     throw new SyntaxError(`${ziņa} faila beigās`)
@@ -124,6 +128,9 @@ export function analizēKlasesĶermeni(
       continue
     }
 
+    const deklarācijasSākums =
+      esošais()
+
     let pieejamība = null
     let nemaināms = false
 
@@ -163,6 +170,11 @@ export function analizēKlasesĶermeni(
       const konstruktoraĶermenis =
         nolasītGrupu("{", "}")
 
+      const beigas =
+        leksiskieElementi[
+          indekss - 1
+        ]
+
       konstruktors = {
         veids: "Konstruktors",
         pieejamība,
@@ -180,7 +192,13 @@ export function analizēKlasesĶermeni(
             : null,
         ķermeņaLeksiskieElementi:
           konstruktoraĶermenis,
-        rinda: sākums.rinda
+        rinda: sākums.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            deklarācijasSākums ??
+              sākums,
+            beigas
+          )
       }
 
       ķermenis.push(konstruktors)
@@ -234,6 +252,11 @@ export function analizēKlasesĶermeni(
       const saturs =
         nolasītGrupu("{", "}")
 
+      const beigas =
+        leksiskieElementi[
+          indekss - 1
+        ]
+
       const iegūšana = {
         veids: "Iegūšana",
         nosaukums: nosaukums.vērtība,
@@ -249,7 +272,13 @@ export function analizēKlasesĶermeni(
             : null,
         ķermeņaLeksiskieElementi:
           saturs,
-        rinda: sākums.rinda
+        rinda: sākums.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            deklarācijasSākums ??
+              sākums,
+            beigas
+          )
       }
 
       iegūšanas.push(iegūšana)
@@ -292,6 +321,11 @@ export function analizēKlasesĶermeni(
       const metodesĶermenis =
         nolasītGrupu("{", "}")
 
+      const beigas =
+        leksiskieElementi[
+          indekss - 1
+        ]
+
       const metode = {
         veids: "Metode",
         nosaukums: nosaukums.vērtība,
@@ -312,7 +346,13 @@ export function analizēKlasesĶermeni(
             : null,
         ķermeņaLeksiskieElementi:
           metodesĶermenis,
-        rinda: sākums.rinda
+        rinda: sākums.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            deklarācijasSākums ??
+              sākums,
+            beigas
+          )
       }
 
       metodes.push(metode)
@@ -327,15 +367,22 @@ export function analizēKlasesĶermeni(
     gaidiVērtību(":")
 
     const tipaElementi = []
+    let beigas = null
 
     while (
       esošais() &&
       esošais().rinda === nosaukums.rinda &&
       !irVērtība(";")
     ) {
+      const tipaElements =
+        paņem()
+
       tipaElementi.push(
-        paņem().vērtība
+        tipaElements.vērtība
       )
+
+      beigas =
+        tipaElements
     }
 
     if (tipaElementi.length === 0) {
@@ -346,7 +393,8 @@ export function analizēKlasesĶermeni(
     }
 
     if (irVērtība(";")) {
-      paņem()
+      beigas =
+        paņem()
     }
 
     const lauks = {
@@ -355,7 +403,14 @@ export function analizēKlasesĶermeni(
       pieejamība,
       nemaināms,
       tips: tipaElementi.join(""),
-      rinda: nosaukums.rinda
+      rinda: nosaukums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          deklarācijasSākums ??
+            nosaukums,
+          beigas ??
+            nosaukums
+        )
     }
 
     lauki.push(lauks)
