@@ -113,7 +113,7 @@ const zināmieAstVeidi =
     "Teksts",
     "Veidne",
     "VeidnesTeksts",
-    "VeidnesInterpolācija",
+    "VeidnesAizpildījums",
     "Nekas",
     "Loģisks",
     "Nenoteikts",
@@ -1155,7 +1155,7 @@ if (
 
 const gaidītāsVeidnesDaļas = [
   {
-    veids: "VeidnesInterpolācija",
+    veids: "VeidnesAizpildījums",
     nosaukums: "vārds"
   },
   {
@@ -1163,7 +1163,7 @@ const gaidītāsVeidnesDaļas = [
     vērtība: " ("
   },
   {
-    veids: "VeidnesInterpolācija",
+    veids: "VeidnesAizpildījums",
     nosaukums: "vecums"
   },
   {
@@ -1219,23 +1219,23 @@ for (
         gaidītā.nosaukums
   ) {
     throw new Error(
-      `Veidnes interpolācija ${i + 1} neatbilst gaidītajam AST`
+      `Veidnes aizpildījums ${i + 1} neatbilst gaidītajam AST`
     )
   }
 }
 
-const veidnesInterpolācijas =
+const veidnesAizpildījumi =
   veidne.daļas.filter(
     daļa =>
       daļa.veids ===
-        "VeidnesInterpolācija"
+        "VeidnesAizpildījums"
   )
 
 if (
-  veidnesInterpolācijas.length !== 2
+  veidnesAizpildījumi.length !== 2
 ) {
   throw new Error(
-    `Gaidītas 2 veidnes interpolācijas, saņemtas ${veidnesInterpolācijas.length}`
+    `Gaidītas 2 veidnes aizpildījumi, saņemtas ${veidnesAizpildījumi.length}`
   )
 }
 
@@ -1258,31 +1258,31 @@ if (
   )
 }
 
-const saliktaInterpolācija =
+const saliktsAizpildījums =
   saliktasVeidnesAst.daļas[1]
 
 if (
-  saliktaInterpolācija.veids !==
-    "VeidnesInterpolācija" ||
-  saliktaInterpolācija
+  saliktsAizpildījums.veids !==
+    "VeidnesAizpildījums" ||
+  saliktsAizpildījums
     .izteiksme?.veids !==
       "BināraIzteiksme" ||
-  saliktaInterpolācija
+  saliktsAizpildījums
     .izteiksme.operators !== "+" ||
-  saliktaInterpolācija
+  saliktsAizpildījums
     .izteiksme.kreisā?.veids !==
       "Identifikators" ||
-  saliktaInterpolācija
+  saliktsAizpildījums
     .izteiksme.kreisā.nosaukums !==
       "vērtība" ||
-  saliktaInterpolācija
+  saliktsAizpildījums
     .izteiksme.labā?.veids !==
       "Skaitlis" ||
-  saliktaInterpolācija
+  saliktsAizpildījums
     .izteiksme.labā.vērtība !== 1
 ) {
   throw new Error(
-    "Veidnes interpolācija neizmanto pilno izteiksmju AST"
+    "Veidnes aizpildījums neizmanto pilno izteiksmju AST"
   )
 }
 
@@ -1307,7 +1307,7 @@ if (
       "VeidnesTeksts"
 ) {
   throw new Error(
-    "Escapots interpolācijas marķieris netika saglabāts kā veidnes teksts"
+    "Escapots aizpildījuma marķieris netika saglabāts kā veidnes teksts"
   )
 }
 
@@ -1315,11 +1315,11 @@ if (
   escapotasVeidnesAst.daļas.some(
     daļa =>
       daļa.veids ===
-        "VeidnesInterpolācija"
+        "VeidnesAizpildījums"
   )
 ) {
   throw new Error(
-    "Escapots interpolācijas marķieris kļūdaini parsēts kā interpolācija"
+    "Escapots aizpildījuma marķieris kļūdaini parsēts kā aizpildījums"
   )
 }
 
@@ -1813,7 +1813,7 @@ console.log(
 )
 
 console.log(
-  `Veidnes interpolācijas: ${veidnesInterpolācijas.length}`
+  `Veidnes aizpildījumss: ${veidnesAizpildījumi.length}`
 )
 
 console.log("")
