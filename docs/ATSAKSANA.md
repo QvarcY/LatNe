@@ -180,7 +180,9 @@ Pašreizējais stāvoklis:
 - diskriminētu variantu cita varianta lauki objektā neeksistē
 - `Nosacījums.citādi` saglabā `null` / `[]` / satura masīva semantiku
 - pašreizējais `Darbība.atgriezesTips: ""` un `Metode.atgriezesTips: ""` vēl jāsaskaņo ar apstiprināto `null` noteikumu
-- nākamie lēmumi: `KārtasCikls` precīzā forma, `Nosacījums.citādi` forma `citādi ja` gadījumā un `Mēģinājums.ķer`
+- `KārtasCikls` AST v1 jāatbalsta gan kolekcijas cikls, gan klasiska trīsdaļīga skaitītāja cikla galvene; pašreizējais `vispārīgs` starpstāvoklis pirms AST v1 jānomaina ar pilnvērtīgu parseri
+- pirms ieviešanas jāapstiprina skaitītāja cikla AST lauku nosaukumi
+- nākamie pārējie lēmumi: `Nosacījums.citādi` forma `citādi ja` gadījumā un `Mēģinājums.ķer`
 - pēc pārējo lauku lēmumu pabeigšanas jāpublicē pirmais `spec/ast-v1.md`
 
 Pēc tam:
