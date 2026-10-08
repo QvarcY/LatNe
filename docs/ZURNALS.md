@@ -2017,3 +2017,27 @@ Semantika:
 
 Parsera esošā forma nebija jāmaina. Pievienotas regresijas pārbaudes, kas nostiprina `null`, tukšu `[]` un iegulta `Nosacījums` formu.
 
+---
+
+## 2026-10-08 — J0048 — Mēģinājums.ķer AST v1 forma
+
+**Tips:** AST / kontrakts / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Apstiprināta `Mēģinājums.ķer` stabilā AST v1 forma:
+
+```text
+null | {
+  parametrs: teksts | null,
+  ķermenis: Priekšraksts[]
+}
+```
+
+`ķer` paliek strukturēts `Mēģinājums` iekšējais objekts, nevis patstāvīgs AST mezgls. Tāpēc tam nav sava `veids`, `rinda` vai `diapazons`.
+
+Ja `ķer` bloka nav, lauks ir `null`. Tukšam parametram tiek izmantots `parametrs: null`, bet tukšam `ķer` ķermenim — `ķermenis: []`.
+
+Parsera esošā forma nebija jāmaina. Regresijas pārbaudes nostiprina gan `ķer: null`, gan strukturēto objektu ar parametru un ķermeni, gan metadatu lauku neesamību.
+
+Pēc šī lēmuma AST v1 lauku auditā neatrisināta paliek tikai `Imports.avots` forma.
+
