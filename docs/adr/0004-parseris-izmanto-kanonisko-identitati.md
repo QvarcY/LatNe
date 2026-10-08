@@ -1,4 +1,4 @@
-# ADR 0004 — Parseris izmanto kanonisko termina identitāti
+# ADR 0004 — Sintaktiskais analizators izmanto kanonisko termina identitāti
 
 **Datums:** 2026-10-01
 **Statuss:** Pieņemts
@@ -11,9 +11,9 @@ Ja parsera gramatika būtu tieši piesaistīta konkrētām latviešu vārdu virk
 
 ## Lēmums
 
-Tokenizeris apstiprinātam terminam saglabā kanonisko avota identitāti.
+Leksiskais analizators apstiprinātam terminam saglabā kanonisko avota identitāti.
 
-Parseris gramatikas lēmumus pieņem pēc šīs identitātes, nevis pēc konkrētā latviskā teksta.
+Sintaktiskais analizators gramatikas lēmumus pieņem pēc šīs identitātes, nevis pēc konkrētā latviskā teksta.
 
 Piemēram:
 
