@@ -31,9 +31,9 @@ AST v1 jādefinē:
 - izvēles lauki
 - source span forma
 - kanoniskās identitātes lauki, kur tie nepieciešami
-- robeža starp strukturētu AST un pagaidu raw tokeniem
+- robeža starp strukturētu AST un pagaidu neapstrādātiem leksiskajiem elementiem
 
-Raw tokenu kopas drīkst palikt tikai apzināti dokumentētos pārejas mezglos.
+Neapstrādātu leksisko elementu kopas drīkst palikt tikai apzināti dokumentētos pārejas mezglos.
 
 ## Sekas
 
