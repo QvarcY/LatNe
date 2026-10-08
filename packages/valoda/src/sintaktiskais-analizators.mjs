@@ -25,6 +25,25 @@ function sintaksesKļūda(ziņa, leksiskaisElements) {
   )
 }
 
+const DEKLARĀCIJU_SEMANTIKA = new Map([
+  ["const", "konstante"],
+  ["let", "mainīgais"],
+  ["var", "funkcijasMainīgais"]
+])
+
+function deklarācijasSemantika(avots) {
+  const semantika =
+    DEKLARĀCIJU_SEMANTIKA.get(avots)
+
+  if (!semantika) {
+    throw new Error(
+      `Neatpazīta deklarācijas identitāte: ${avots}`
+    )
+  }
+
+  return semantika
+}
+
 function analizēKamGalveni(leksiskieElementi) {
   if (
     leksiskieElementi.length >= 4 &&
@@ -40,7 +59,10 @@ function analizēKamGalveni(leksiskieElementi) {
   ) {
     return {
       variants: "kolekcija",
-      deklarācija: leksiskieElementi[0].avots,
+      deklarācija:
+        deklarācijasSemantika(
+          leksiskieElementi[0].avots
+        ),
       mainīgais: leksiskieElementi[1].vērtība,
       kolekcija:
         analizēIzteiksmesAst(
@@ -345,7 +367,10 @@ export function analizēPriekšrakstus(leksiskieElementi) {
 
     return {
       veids: "Mainīgais",
-      deklarācija: sākums.avots,
+      deklarācija:
+        deklarācijasSemantika(
+          sākums.avots
+        ),
       nosaukums: nosaukums.vērtība,
       tips:
         tips.length > 0
