@@ -247,6 +247,167 @@ pārbaudiDiapazonu(
   "Identifikators"
 )
 
+const īpašībasAst =
+  analizēIzteiksmesAst(
+    analizēLeksiski(
+      "lietotājs.vārds",
+      vārdnīca
+    )
+  )
+
+if (
+  īpašībasAst?.veids !==
+    "Īpašība" ||
+  īpašībasAst.nosaukums !==
+    "vārds"
+) {
+  throw new Error(
+    "Diapazona regresijas izteiksme nav īpašības piekļuve"
+  )
+}
+
+pārbaudiDiapazonu(
+  īpašībasAst.diapazons,
+  {
+    sākums: {
+      rinda: 1,
+      kolonna: 1,
+      nobīde: 0
+    },
+    beigas: {
+      rinda: 1,
+      kolonna: 16,
+      nobīde: 15
+    }
+  },
+  "Īpašība"
+)
+
+const izsaukumaAst =
+  analizēIzteiksmesAst(
+    analizēLeksiski(
+      "sveic(vārds, reizes)",
+      vārdnīca
+    )
+  )
+
+if (
+  izsaukumaAst?.veids !==
+    "Izsaukums" ||
+  izsaukumaAst.argumenti.length !== 2
+) {
+  throw new Error(
+    "Diapazona regresijas izteiksme nav izsaukums ar diviem argumentiem"
+  )
+}
+
+pārbaudiDiapazonu(
+  izsaukumaAst.diapazons,
+  {
+    sākums: {
+      rinda: 1,
+      kolonna: 1,
+      nobīde: 0
+    },
+    beigas: {
+      rinda: 1,
+      kolonna: 21,
+      nobīde: 20
+    }
+  },
+  "Izsaukums"
+)
+
+const binārāsIzteiksmesAst =
+  analizēIzteiksmesAst(
+    analizēLeksiski(
+      "vērtība + 1",
+      vārdnīca
+    )
+  )
+
+if (
+  binārāsIzteiksmesAst?.veids !==
+    "BināraIzteiksme" ||
+  binārāsIzteiksmesAst.operators !== "+"
+) {
+  throw new Error(
+    "Diapazona regresijas izteiksme nav bināra izteiksme"
+  )
+}
+
+pārbaudiDiapazonu(
+  binārāsIzteiksmesAst.diapazons,
+  {
+    sākums: {
+      rinda: 1,
+      kolonna: 1,
+      nobīde: 0
+    },
+    beigas: {
+      rinda: 1,
+      kolonna: 12,
+      nobīde: 11
+    }
+  },
+  "BināraIzteiksme"
+)
+
+const piešķiršanasDiapazonaAst =
+  analizēIzteiksmesAst(
+    analizēLeksiski(
+      "mērķis = vērtība + 1",
+      vārdnīca
+    )
+  )
+
+if (
+  piešķiršanasDiapazonaAst?.veids !==
+    "PiešķiršanasIzteiksme" ||
+  piešķiršanasDiapazonaAst
+    .vērtība?.veids !==
+      "BināraIzteiksme"
+) {
+  throw new Error(
+    "Diapazona regresijas izteiksme nav piešķiršana ar bināru vērtību"
+  )
+}
+
+pārbaudiDiapazonu(
+  piešķiršanasDiapazonaAst.diapazons,
+  {
+    sākums: {
+      rinda: 1,
+      kolonna: 1,
+      nobīde: 0
+    },
+    beigas: {
+      rinda: 1,
+      kolonna: 21,
+      nobīde: 20
+    }
+  },
+  "PiešķiršanasIzteiksme"
+)
+
+pārbaudiDiapazonu(
+  piešķiršanasDiapazonaAst
+    .vērtība.diapazons,
+  {
+    sākums: {
+      rinda: 1,
+      kolonna: 10,
+      nobīde: 9
+    },
+    beigas: {
+      rinda: 1,
+      kolonna: 21,
+      nobīde: 20
+    }
+  },
+  "PiešķiršanasIzteiksmes binārā vērtība"
+)
+
 const atgriešana =
   parametruParaugaDarbība
     .ķermenis[0]
