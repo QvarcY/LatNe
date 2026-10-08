@@ -568,7 +568,7 @@ export function analizēIzteiksmi(leksiskieElementi) {
         ]
 
       return {
-        veids: "UnāraIzteiksme",
+        veids: "PirmsIzteiksme",
         operators: leksiskaisElements.vērtība,
         izteiksme,
         rinda: leksiskaisElements.rinda,
@@ -592,7 +592,7 @@ export function analizēIzteiksmi(leksiskieElementi) {
         ]
 
       return {
-        veids: "UnāraIzteiksme",
+        veids: "PirmsIzteiksme",
         operators: "typeof",
         izteiksme,
         rinda: leksiskaisElements.rinda,
