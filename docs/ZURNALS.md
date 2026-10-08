@@ -1392,7 +1392,7 @@ klase MetodesParaugs {
 }
 ```
 
-Kanoniskais `examples/pamata-paraugs.lat` netika mainīts, tāpēc tā 196 leksisko elementu un 5 augšējā līmeņa mezglu baseline saglabājas.
+Kanoniskais `examples/pamata-paraugs.lat` netika mainīts, tāpēc tā 196 leksisko elementu un 5 augšējā līmeņa mezglu atskaites stāvoklis saglabājas.
 
 Checkpoint:
 
