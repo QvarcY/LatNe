@@ -153,17 +153,35 @@ Pašreiz daži AST lauki glabā nevis LatNe rakstību, bet terminoloģijas reģi
 
 Šajā auditā šīs vērtības netiek mainītas. Pirms AST v1 iesaldēšanas jāizlemj, vai šī ir apzināta AST v1 semantika.
 
-## Jautājumi AST v1 kontraktam
+## Apstiprinātie AST v1 lauku lēmumi
 
-Pēc faktiskā lauku audita ir jāpieņem atsevišķi lēmumi par:
+### `rinda`
 
-1. `rinda` — vai tas paliek AST v1 laukā, vai kļūst par pārejas lauku blakus `diapazons`;
-2. `ķermeņaLeksiskieElementi`, `ķermeņaLeksiskoElementuSkaits` un `parametruLeksiskoElementuSkaits` — kuri no tiem vispār pieder stabilam AST;
-3. vienotu `null`, `""`, `[]` un neesoša lauka semantiku;
-4. `KārtasCikls` variantu lauku kontraktu;
-5. `Nosacījums.citādi` formu, īpaši `citādi ja` gadījumu;
-6. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
-7. avota identitātes vērtības `const`, `let`, `var`, `of`, `typeof` AST laukos;
-8. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
+`rinda` ir **pārejas lauks**.
 
-Tikai pēc šo punktu apstiprināšanas drīkst definēt katra lauka statusu kā **obligāts**, **izvēles** vai **pārejas** un pēc tam virzīties uz `spec/ast-v1.md`.
+Tas pagaidām paliek pašreizējā AST saderības dēļ, bet nav stabilās AST v1 publiskās semantikas daļa. Stabilā atrašanās vietas informācija ir `diapazons`.
+
+Šis lēmums pats par sevi vēl nenozīmē `rinda` izņemšanu no parsera.
+
+### Leksisko elementu palīglauki
+
+Šie lauki ir **pārejas / iekšēji** un neietilpst stabilajā AST v1 publiskajā kontraktā:
+
+- `ķermeņaLeksiskieElementi`
+- `ķermeņaLeksiskoElementuSkaits`
+- `parametruLeksiskoElementuSkaits`
+
+Tie pagaidām netiek dzēsti, kamēr nav pārbaudīts, ka neviens pārejas tests vai iekšējais solis uz tiem nebalstās.
+
+## Atlikušie jautājumi AST v1 kontraktam
+
+Pēc faktiskā lauku audita vēl jāpieņem lēmumi par:
+
+1. vienotu `null`, `""`, `[]` un neesoša lauka semantiku;
+2. `KārtasCikls` variantu lauku kontraktu;
+3. `Nosacījums.citādi` formu, īpaši `citādi ja` gadījumu;
+4. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
+5. avota identitātes vērtības `const`, `let`, `var`, `of`, `typeof` AST laukos;
+6. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
+
+Tikai pēc šo punktu apstiprināšanas drīkst pabeigt visu lauku statusu kā **obligāts**, **izvēles** vai **pārejas** un pēc tam virzīties uz `spec/ast-v1.md`.
