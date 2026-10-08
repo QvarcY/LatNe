@@ -341,7 +341,7 @@ export function analizēPriekšrakstus(leksiskieElementi) {
       ]
 
     return {
-      veids: "KamCikls",
+      veids: "KārtasCikls",
       ...analizēKamGalveni(galvene),
       ķermenis:
         analizēPriekšrakstus(ķermenis),
