@@ -1610,3 +1610,35 @@ Nākamais apakšsolis:
 
 **augšējā līmeņa deklarāciju un klases AST mezglu diapazoni**.
 
+---
+
+## 2026-10-08 — J0033 — Augšējā līmeņa deklarāciju pirmkoda diapazoni
+
+**Tips:** parseris / AST / diagnostikas pamats
+**Statuss:** pabeigts
+
+Pirmkoda diapazonu kontrakts paplašināts uz visām piecām pašreiz atbalstītajām augšējā līmeņa deklarācijām:
+
+- `Imports`
+- `Saskarsme`
+- `Uzskaitījums`
+- `Klase`
+- `Darbība`
+
+Robežas:
+
+- `Imports` sākas pie `importē` un beidzas aiz avota teksta literāļa
+- `Saskarsme`, `Uzskaitījums` un `Klase` beidzas aiz aizverošās `}`
+- `Darbība` beidzas aiz darbības ķermeņa aizverošās `}`
+- `Klase` un `Darbība` sākas pie pirmā modifikatora, ja deklarācijai ir `eksportē` vai `asinhroni`
+
+Esošais `rinda` lauks nav mainīts. Tas turpina norādīt pašas deklarācijas atslēgvārda rindu, kamēr `diapazons.sākums` apraksta pilnu deklarāciju kopā ar modifikatoriem.
+
+Kanoniskais `examples/pamata-paraugs.lat` regresijas tests pārbauda visu piecu deklarāciju avota robežas pret faktisko parauga tekstu.
+
+ROADMAP pirmkoda diapazonu uzdevums vēl paliek atvērts.
+
+Nākamais apakšsolis:
+
+**klases iekšējo AST mezglu diapazoni**.
+
