@@ -8,6 +8,9 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- `KārtasCikls` kolekcijas variants AST izmanto semantisko `"kolekcija"`, nevis avota identitāti `"of"`
+- `PirmsIzteiksme.operators` LatNe `veids` operatoram izmanto semantisko `"veids"`, nevis `"typeof"`
+- AST specifikācijas tipa pierakstā `string`, `boolean` un `Number` aizstāti ar LatNe `teksts`, `loģisks` un `skaitlis`
 - `Darbība.atgriezesTips` un `Metode.atgriezesTips` neesošai vērtībai tagad izmanto `null`, nevis tukšu virkni
 - `KārtasCikls` papildināts ar strukturētu `variants: "skaitītājs"` galveni un laukiem `sākums`, `nosacījums`, `solis`
 - noņemts nepabeigtais `KārtasCikls` `variants: "vispārīgs"` starpstāvoklis

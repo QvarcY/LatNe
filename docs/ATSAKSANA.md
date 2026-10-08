@@ -181,10 +181,13 @@ Pašreizējais stāvoklis:
 - `Nosacījums.citādi` saglabā `null` / `[]` / satura masīva semantiku
 - `Darbība.atgriezesTips` un `Metode.atgriezesTips` izmanto `null`, ja atgriezes tips nav norādīts; regresijas pārbaudes sedz abus gadījumus
 - `KārtasCikls` atbalsta kolekcijas variantu un klasisku trīsdaļīgu skaitītāja variantu
+- kolekcijas variantam ir semantiska AST vērtība `variants: "kolekcija"`, nevis avota identitāte `"of"`
 - skaitītāja variantam ir `variants: "skaitītājs"` un apstiprinātie lauki `sākums`, `nosacījums`, `solis`
+- `PirmsIzteiksme.operators` LatNe `veids` operatoram ir semantiskā vērtība `"veids"`, nevis `"typeof"`
+- AST specifikācijas tipa pierakstā lietojam LatNe `teksts`, `loģisks` un `skaitlis`, nevis `string`, `boolean` un `Number`
 - iepriekšējais `variants: "vispārīgs"` starpstāvoklis ir noņemts
-- regresijas pārbaudes sedz abus `KārtasCikls` variantus un nepilnīgas skaitītāja galvenes noraidīšanu
-- nākamie lēmumi: `Nosacījums.citādi` forma `citādi ja` gadījumā un `Mēģinājums.ķer`
+- regresijas pārbaudes sedz abus `KārtasCikls` variantus, nepilnīgas skaitītāja galvenes noraidīšanu un `veids` operatora AST semantiku
+- nākamie lēmumi: `Nosacījums.citādi`, `Mēģinājums.ķer`, deklarāciju `const` / `let` / `var` semantiskās vērtības un `Imports.avots` forma
 - pēc pārējo lauku lēmumu pabeigšanas jāpublicē pirmais `spec/ast-v1.md`
 
 Pēc tam:
