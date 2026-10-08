@@ -752,11 +752,62 @@ for (
   }
 }
 
+const gaidītieLaukuDiapazoni = [
+  [
+    "atvērts nemaināms vārds: teksts",
+    "\n  atvērts vecums: skaitlis"
+  ],
+  [
+    "atvērts vecums: skaitlis",
+    "\n  aizsargāts aktīvs: loģisks"
+  ],
+  [
+    "aizsargāts aktīvs: loģisks",
+    "\n  privāts loma: Loma"
+  ],
+  [
+    "privāts loma: Loma",
+    "\n\n  konstruktors("
+  ]
+]
+
+for (
+  let i = 0;
+  i < gaidītieLaukuDiapazoni.length;
+  i++
+) {
+  const [
+    sākumaFragments,
+    nākamaisFragments
+  ] =
+    gaidītieLaukuDiapazoni[i]
+
+  pārbaudiDiapazonu(
+    klase.lauki[i].diapazons,
+    gaidāmaisDeklarācijasDiapazons(
+      teksts,
+      sākumaFragments,
+      nākamaisFragments
+    ),
+    `KlasesLauks ${i + 1}`
+  )
+}
+
 if (!klase.konstruktors) {
   throw new Error(
     "Klases AST nav konstruktora"
   )
 }
+
+pārbaudiDiapazonu(
+  klase.konstruktors.diapazons,
+  gaidāmaisDeklarācijasDiapazons(
+    teksts,
+    "konstruktors(",
+    "\n\n  ņem apraksts"
+  ),
+  "Konstruktors"
+)
 
 const gaidītieParametri = [
   {
@@ -873,6 +924,16 @@ if (
     "Iegūšanas AST neatbilst gaidītajai deklarācijai"
   )
 }
+
+pārbaudiDiapazonu(
+  iegūšana.diapazons,
+  gaidāmaisDeklarācijasDiapazons(
+    teksts,
+    "ņem apraksts",
+    "\n}"
+  ),
+  "Iegūšana"
+)
 
 if (
   !Array.isArray(
@@ -1104,14 +1165,17 @@ if (
   )
 }
 
-const metodesParaugaAst =
-  analizēSintaksi(
-    analizēLeksiski(
-      `klase MetodesParaugs {
+const metodesParaugaTeksts =
+  `klase MetodesParaugs {
   atvērts darbība sveic(vārds: teksts): teksts {
     atgriez vārds
   }
-}`,
+}`
+
+const metodesParaugaAst =
+  analizēSintaksi(
+    analizēLeksiski(
+      metodesParaugaTeksts,
       vārdnīca
     )
   )
@@ -1153,6 +1217,16 @@ if (
     "Metodes deklarācijas AST neatbilst gaidītajam"
   )
 }
+
+pārbaudiDiapazonu(
+  metode.diapazons,
+  gaidāmaisDeklarācijasDiapazons(
+    metodesParaugaTeksts,
+    "atvērts darbība sveic",
+    "\n}"
+  ),
+  "Metode"
+)
 
 if (
   metode.atgriezesTips !== "teksts"

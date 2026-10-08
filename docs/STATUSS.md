@@ -201,9 +201,16 @@ Trešā iterācija pārklāj augšējā līmeņa deklarācijas:
 - `Klase`
 - `Darbība`
 
+Ceturtā iterācija pārklāj klases iekšējos mezglus:
+
+- `KlasesLauks`
+- `Konstruktors`
+- `Iegūšana`
+- `Metode`
+
 Kontrakts izmanto pusatvērtu `[sākums, beigas)` intervālu, 1-bāzētu `rinda` un `kolonna`, kā arī 0-bāzētu `nobīde`.
 
-Nākamajā apakšsolī diapazons jāpaplašina uz klases iekšējiem AST mezgliem. ROADMAP uzdevums paliek nepabeigts, līdz pārklājums ir pietiekams AST v1 stabilizācijai.
+Nākamajā apakšsolī jāveic atlikušā AST diapazonu pārklājuma audits un jāpaplašina diapazoni uz tiem izteiksmju un priekšrakstu mezgliem, kuri vēl nav pārklāti. ROADMAP uzdevums paliek nepabeigts, līdz pārklājums ir pietiekams AST v1 stabilizācijai.
 
 Jaunie AST lauki joprojām jāveido tikai ar pilnu latviešu rakstību.
 
