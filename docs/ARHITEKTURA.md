@@ -188,7 +188,16 @@ Pirmā reprezentatīvā iterācija pārklāj:
 - `Parametrs` — vairāku leksisko elementu strukturētu mezglu
 - `Atgriešana` — priekšrakstu no atslēgvārda līdz izteiksmes beigām
 
-Šī ir pamata infrastruktūra, ne pilns AST v1 diapazonu pārklājums.
+Otrā iterācija paplašina to uz saliktām izteiksmēm:
+
+- `Īpašība` — no objekta sākuma līdz īpašības nosaukuma beigām
+- `Izsaukums` — no izsaucamā sākuma līdz aizverošajai iekavai
+- `BināraIzteiksme` — no kreisās puses sākuma līdz labās puses beigām
+- `PiešķiršanasIzteiksme` — no mērķa sākuma līdz piešķirtās vērtības beigām
+
+Salikto izteiksmju diapazoni tiek veidoti no parsera patērēto leksisko elementu robežām, lai tie nosegtu visu sintaktisko konstrukciju arī tad, ja kādam bērna mezglam diapazons vēl nav ieviests.
+
+Šī joprojām ir pamata infrastruktūra, ne pilns AST v1 diapazonu pārklājums.
 
 ## Klases slānis
 
