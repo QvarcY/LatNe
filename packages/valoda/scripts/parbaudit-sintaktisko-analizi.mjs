@@ -318,6 +318,97 @@ function gaidāmaisDeklarācijasDiapazons(
   }
 }
 
+const nosacījumsBezCitādi =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      `ja (patiess) {
+  atkļūdo
+}`,
+      vārdnīca
+    )
+  )[0]
+
+if (
+  nosacījumsBezCitādi?.veids !==
+    "Nosacījums" ||
+  nosacījumsBezCitādi.citādi !==
+    null
+) {
+  throw new Error(
+    "Nosacījums bez citādi neizmanto null"
+  )
+}
+
+const nosacījumsArTukšuCitādi =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      `ja (patiess) {
+  atkļūdo
+} citādi {
+}`,
+      vārdnīca
+    )
+  )[0]
+
+if (
+  nosacījumsArTukšuCitādi?.veids !==
+    "Nosacījums" ||
+  !Array.isArray(
+    nosacījumsArTukšuCitādi.citādi
+  ) ||
+  nosacījumsArTukšuCitādi.citādi
+    .length !== 0
+) {
+  throw new Error(
+    "Tukšs citādi neveido tukšu priekšrakstu masīvu"
+  )
+}
+
+const nosacījumsArCitādiJa =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      `ja (patiess) {
+  atkļūdo
+} citādi ja (nepatiess) {
+  atkļūdo
+} citādi {
+}`,
+      vārdnīca
+    )
+  )[0]
+
+const iegultaisNosacījums =
+  nosacījumsArCitādiJa
+    ?.citādi?.[0]
+
+if (
+  nosacījumsArCitādiJa?.veids !==
+    "Nosacījums" ||
+  !Array.isArray(
+    nosacījumsArCitādiJa.citādi
+  ) ||
+  nosacījumsArCitādiJa.citādi
+    .length !== 1 ||
+  iegultaisNosacījums?.veids !==
+    "Nosacījums" ||
+  !Array.isArray(
+    iegultaisNosacījums.ķermenis
+  ) ||
+  iegultaisNosacījums.ķermenis
+    .length !== 1 ||
+  iegultaisNosacījums.ķermenis[0]
+    ?.veids !== "Atkļūdošana" ||
+  !Array.isArray(
+    iegultaisNosacījums.citādi
+  ) ||
+  iegultaisNosacījums.citādi
+    .length !== 0
+) {
+  throw new Error(
+    "citādi ja neveido iegultu Nosacījums priekšrakstu"
+  )
+}
+
 const deklarācijuSemantikasParaugi = [
   [
     "nemainīgs vērtība = 1",

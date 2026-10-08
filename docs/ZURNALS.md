@@ -1994,3 +1994,26 @@ Leksiskais un sintaktiskais analizators drīkst iekšēji izmantot `const`, `let
 
 Regresijas pārbaudes sedz visas trīs deklarāciju formas. Skaitītāja `KārtasCikls` ar `lai` pieprasa `sākums.deklarācija: "mainīgais"`, bet kolekcijas cikls ar `nemainīgs` pieprasa `deklarācija: "konstante"`.
 
+---
+
+## 2026-10-08 — J0047 — Nosacījums.citādi AST v1 forma
+
+**Tips:** AST / kontrakts / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Apstiprināta `Nosacījums.citādi` stabilā AST v1 forma:
+
+```text
+null | Priekšraksts[]
+```
+
+Semantika:
+
+- `null` nozīmē, ka avotā nav `citādi`;
+- `[]` nozīmē tukšu `citādi {}`;
+- netukšs masīvs satur `citādi` ķermeņa priekšrakstus.
+
+`citādi ja (...)` netiek ieviests kā atsevišķs lauks vai īpašs AST variants. Tas ir `citādi` ķermenis ar vienu iegultu `Nosacījums` mezglu. Garāka `citādi ja` ķēde veidojas rekursīvi pēc tā paša principa.
+
+Parsera esošā forma nebija jāmaina. Pievienotas regresijas pārbaudes, kas nostiprina `null`, tukšu `[]` un iegulta `Nosacījums` formu.
+

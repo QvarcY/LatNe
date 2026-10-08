@@ -42,7 +42,7 @@ Visiem šīs tabulas mezgliem, izņemot `Programma`, papildus ir `rinda` un `dia
 | Mezgls | Pašreizējie semantiskie lauki | Pašreizējā tukšuma / nulles uzvedība | Piezīme |
 |---|---|---|---|
 | `Mainīgais` | `deklarācija`, `nosaukums`, `tips`, `vērtība` | `tips: null`, ja nav tipa; `vērtība: null`, ja nav sākuma vērtības | `deklarācija` ir `"konstante"` / `"mainīgais"` / `"funkcijasMainīgais"` |
-| `Nosacījums` | `nosacījums`, `ķermenis`, `citādi` | `ķermenis: []`, ja tukšs; `citādi: null`, ja nav `citādi`; tukšs `citādi {}` dod `[]` | `citādi ja` pašlaik tiek glabāts kā viena `Nosacījums` mezgla masīvs |
+| `Nosacījums` | `nosacījums`, `ķermenis`, `citādi` | `ķermenis: []`, ja tukšs; `citādi: null`, ja nav `citādi`; tukšs `citādi {}` dod `[]` | `citādi ja` ir `citādi` masīvs ar vienu iegultu `Nosacījums` mezglu |
 | `KārtasCikls` | kopīgi: `variants`, `ķermenis`; kolekcijas variantam: `deklarācija`, `mainīgais`, `kolekcija`; skaitītāja variantam: `sākums`, `nosacījums`, `solis` | varianta specifiskie lauki netiek izveidoti kā `null`; tie vienkārši nav otra varianta objektā | Varianti ir `"kolekcija"` un `"skaitītājs"` |
 | `Atgriešana` | `vērtība` | `vērtība: null`, ja nav atgriežamās izteiksmes | — |
 | `Metiens` | `vērtība` | parseris sagaida izteiksmi | — |
@@ -83,6 +83,34 @@ diapazons
 ```
 
 Skaitītāja variantā `sākums` ir `Mainīgais` mezgls, `nosacījums` ir izteiksmes AST un `solis` ir izteiksmes AST. Pašreizējā regresijas pārbaude sedz `solis` kā `PiešķiršanasIzteiksme` ar `+=`.
+
+### `Nosacījums.citādi` stabilā forma
+
+`Nosacījums.citādi` AST v1 tips ir:
+
+```text
+null | Priekšraksts[]
+```
+
+Semantika:
+
+- `null` — avotā nav `citādi`;
+- `[]` — avotā ir tukšs `citādi {}`;
+- netukšs `Priekšraksts[]` — `citādi` ķermeņa AST.
+
+`citādi ja (...)` nav atsevišķs lauks vai AST mezgla variants. Tas tiek attēlots kā `citādi` ķermenis ar vienu iegultu `Nosacījums` mezglu:
+
+```text
+citādi: [
+  Nosacījums {
+    nosacījums: ...
+    ķermenis: [...]
+    citādi: ...
+  }
+]
+```
+
+Garāka `citādi ja` ķēde veidojas rekursīvi pēc tā paša principa. Šī forma ir apstiprināta kā stabilā AST v1 semantika.
 
 ### `Mēģinājums.ķer` faktiskā forma
 
@@ -190,7 +218,7 @@ Apstiprināti šādi AST v1 noteikumi:
 2. **Izvēles viena vērtība vienmēr eksistē.** Ja vērtības nav, lauks ir `null`.
 3. **Tukša virkne `""` neapzīmē neesošu vērtību.** Tā ir derīga tikai tad, ja tukša virkne pati ir semantiska vērtība, piemēram `Teksts.vērtība`.
 4. **Diskriminētu variantu lauki netiek piepildīti ar `null`.** Ja mezgla forma ir noteikta ar diskriminatoru, konkrētā varianta lauki ir obligāti, bet cita varianta lauki objektā neeksistē.
-5. **`Nosacījums.citādi` saglabā pašreizējo trīsstāvokļu nozīmi:** `null` nozīmē, ka `citādi` nav; `[]` nozīmē tukšu `citādi {}`; netukšs masīvs satur `citādi` ķermeņa AST.
+5. **`Nosacījums.citādi` stabilais tips ir `null | Priekšraksts[]`:** `null` nozīmē, ka `citādi` nav; `[]` nozīmē tukšu `citādi {}`; netukšs masīvs satur `citādi` ķermeņa AST; `citādi ja` ir viena iegulta `Nosacījums` mezgla masīvs.
 
 `Darbība.atgriezesTips` un `Metode.atgriezesTips` ir saskaņoti ar šo noteikumu: ja atgriezes tips nav norādīts, to vērtība ir `null`. Norādīts atgriezes tips joprojām ir virkne.
 
@@ -224,8 +252,7 @@ Iepriekšējais `variants: "vispārīgs"` starpstāvoklis vairs netiek veidots.
 
 Pēc faktiskā lauku audita vēl jāpieņem lēmumi par:
 
-1. `Nosacījums.citādi` precīzo satura formu `citādi ja` gadījumā; `null` / `[]` / satura masīva semantika jau ir apstiprināta;
-2. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
-3. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
+1. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
+2. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
 
 Tikai pēc šo punktu apstiprināšanas drīkst pabeigt visu lauku statusu kā **obligāts**, **izvēles** vai **pārejas** un pēc tam virzīties uz `spec/ast-v1.md`.
