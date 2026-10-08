@@ -41,7 +41,7 @@ Visiem šīs tabulas mezgliem, izņemot `Programma`, papildus ir `rinda` un `dia
 
 | Mezgls | Pašreizējie semantiskie lauki | Pašreizējā tukšuma / nulles uzvedība | Piezīme |
 |---|---|---|---|
-| `Mainīgais` | `deklarācija`, `nosaukums`, `tips`, `vērtība` | `tips: null`, ja nav tipa; `vērtība: null`, ja nav sākuma vērtības | `deklarācija` pašlaik glabā avota identitāti `const` / `let` / `var` |
+| `Mainīgais` | `deklarācija`, `nosaukums`, `tips`, `vērtība` | `tips: null`, ja nav tipa; `vērtība: null`, ja nav sākuma vērtības | `deklarācija` ir `"konstante"` / `"mainīgais"` / `"funkcijasMainīgais"` |
 | `Nosacījums` | `nosacījums`, `ķermenis`, `citādi` | `ķermenis: []`, ja tukšs; `citādi: null`, ja nav `citādi`; tukšs `citādi {}` dod `[]` | `citādi ja` pašlaik tiek glabāts kā viena `Nosacījums` mezgla masīvs |
 | `KārtasCikls` | kopīgi: `variants`, `ķermenis`; kolekcijas variantam: `deklarācija`, `mainīgais`, `kolekcija`; skaitītāja variantam: `sākums`, `nosacījums`, `solis` | varianta specifiskie lauki netiek izveidoti kā `null`; tie vienkārši nav otra varianta objektā | Varianti ir `"kolekcija"` un `"skaitītājs"` |
 | `Atgriešana` | `vērtība` | `vērtība: null`, ja nav atgriežamās izteiksmes | — |
@@ -146,18 +146,21 @@ Papildus `Darbība.parametruLeksiskoElementuSkaits` jau ir skaidri nosaukts kā 
 
 Regresijas AST diapazonu audits apzināti neiet iekšā `ķermeņaLeksiskieElementi`, jo tur var atrasties leksiskie elementi, nevis AST mezgli.
 
-## Lauku vērtības, kurās saglabāta avota identitāte
+## Semantiskās AST vērtības
 
-Pašreiz daži AST lauki glabā nevis LatNe rakstību, bet terminoloģijas reģistra avota identitāti:
+Publiskais AST v1 neizvada deklarāciju JavaScript avota identitāti.
 
-- `Mainīgais.deklarācija`: `"const"`, `"let"`, `"var"`;
-- `KārtasCikls.deklarācija`: `"const"`, `"let"`, `"var"`.
+Gan `Mainīgais.deklarācija`, gan kolekcijas `KārtasCikls.deklarācija` izmanto:
 
-`KārtasCikls.variants` kolekcijas forma vairs neizmanto avota identitāti `"of"`; AST semantiskā vērtība ir `"kolekcija"`.
+- `"konstante"` — avota `const`;
+- `"mainīgais"` — avota `let`;
+- `"funkcijasMainīgais"` — avota `var`.
 
-`PirmsIzteiksme.operators` LatNe `veids` gadījumā vairs neizmanto avota identitāti `"typeof"`; AST semantiskā vērtība ir `"veids"`.
+`funkcijasMainīgais` saglabā būtisko atšķirību no `let`: šī deklarācijas forma atbilst `var` funkcijas tvēruma uzvedībai. LatNe jaunā kodā šo formu nav ieteicams izmantot; tā paliek parserī saderībai.
 
-Neatrisināts paliek tikai deklarāciju `"const"` / `"let"` / `"var"` semantiskais attēlojums AST v1.
+`KārtasCikls.variants` kolekcijas forma izmanto semantisko vērtību `"kolekcija"`, nevis avota identitāti `"of"`.
+
+`PirmsIzteiksme.operators` LatNe `veids` gadījumā izmanto semantisko vērtību `"veids"`, nevis avota identitāti `"typeof"`.
 
 ## Apstiprinātie AST v1 lauku lēmumi
 
@@ -201,7 +204,8 @@ Apstiprināts un ieviests:
 
 - `KārtasCikls.variants: "kolekcija"` iepriekšējā `"of"` vietā;
 - `PirmsIzteiksme.operators: "veids"` iepriekšējā `"typeof"` vietā;
-- AST specifikācijas tipa pierakstā izmanto LatNe tipus, piemēram `teksts`, `loģisks` un `skaitlis`, nevis TypeScript / JavaScript `string`, `boolean` un `Number`.
+- AST specifikācijas tipa pierakstā izmanto LatNe tipus, piemēram `teksts`, `loģisks` un `skaitlis`, nevis TypeScript / JavaScript `string`, `boolean` un `Number`;
+- deklarāciju AST vērtības ir `konstante`, `mainīgais` un `funkcijasMainīgais`, nevis `const`, `let` un `var`.
 
 Leksiskais un sintaktiskais analizators drīkst iekšēji turpināt izmantot terminoloģijas reģistra `source` identitāti konstrukciju atpazīšanai. Šī iekšējā identitāte nav AST v1 publiskā semantika.
 
@@ -222,7 +226,6 @@ Pēc faktiskā lauku audita vēl jāpieņem lēmumi par:
 
 1. `Nosacījums.citādi` precīzo satura formu `citādi ja` gadījumā; `null` / `[]` / satura masīva semantika jau ir apstiprināta;
 2. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
-3. deklarāciju semantiskās vērtības pašreizējo `const`, `let`, `var` vietā;
-4. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
+3. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
 
 Tikai pēc šo punktu apstiprināšanas drīkst pabeigt visu lauku statusu kā **obligāts**, **izvēles** vai **pārejas** un pēc tam virzīties uz `spec/ast-v1.md`.
