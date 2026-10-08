@@ -187,11 +187,24 @@ No šiem noteikumiem izriet, ka pašreizējie `Darbība.atgriezesTips: ""` un `M
 
 Šajā auditā parsera uzvedība vēl netiek mainīta.
 
+## Apstiprinātais KārtasCikls tvērums
+
+`KārtasCikls` AST v1 ir jāatbalsta abas LatNe `kam` formas:
+
+- secīga iešana pa kolekciju;
+- klasiska trīsdaļīga skaitītāja cikla galvene.
+
+Pašreizējais `variants: "vispārīgs"` vēl nav stabils AST v1 kontrakts. Tas šobrīd visu galveni mēģina analizēt kā vienu izteiksmi un tādēļ nav pietiekams pilnvērtīgai `sākums; nosacījums; solis` formai.
+
+Pirms AST v1 iesaldēšanas skaitītāja cikla parseris ir jāpabeidz un jāpapildina ar regresijas pārbaudēm.
+
+Šajā dokumentācijas solī netiek ieviesti jauni AST lauku nosaukumi. Skaitītāja cikla precīzie lauki vispirms jāapstiprina projekta autoram.
+
 ## Atlikušie jautājumi AST v1 kontraktam
 
 Pēc faktiskā lauku audita vēl jāpieņem lēmumi par:
 
-1. `KārtasCikls` abu variantu precīzo obligāto lauku formu; varianta lauku neesamības princips jau ir apstiprināts;
+1. `KārtasCikls` abu variantu precīzo obligāto lauku formu un skaitītāja cikla lauku nosaukumiem;
 2. `Nosacījums.citādi` precīzo satura formu `citādi ja` gadījumā; `null` / `[]` / satura masīva semantika jau ir apstiprināta;
 3. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
 4. avota identitātes vērtības `const`, `let`, `var`, `of`, `typeof` AST laukos;
