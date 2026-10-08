@@ -228,7 +228,7 @@ const translations = [
     "Node.js runtime contract, clean install, GitHub Actions CI and the first regression fixture suite."
   ],
   [
-    "Lauki, pieejamības modifikatori, konstruktors, parametri un getter struktūra.",
+    "Lauki, pieejamības modifikatori, konstruktors, parametri un īpašību iegūšana.",
     "Fields, access modifiers, constructor, parameters and getter structure."
   ],
   [
