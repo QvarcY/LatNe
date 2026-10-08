@@ -227,7 +227,7 @@ Izteiksmēs papildus pārklāti:
 - `Teksts`
 - `Veidne`
 - `VeidnesTeksts`
-- `VeidnesInterpolācija`
+- `VeidnesAizpildījums`
 - `Nekas`
 - `Loģisks`
 - `Nenoteikts`

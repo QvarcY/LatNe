@@ -110,7 +110,7 @@ Pirmais `.lat` paraugs:
 - 1 iegūšana
 - 1 iegūšanas priekšraksts
 - 4 kanoniskās iegūšanas veidnes AST daļas
-- 2 kanoniskās iegūšanas interpolācijas
+- 2 kanoniskās iegūšanas aizpildījumi
 
 Sintaktiskais analizators strukturēti saprot arī:
 
@@ -131,7 +131,7 @@ Sintaktiskais analizators strukturēti saprot arī:
 - strukturētus augšējā līmeņa `Darbība` parametrus
 - vienotu `Parametrs` AST konstruktoram, metodei un darbībai
 - strukturētas veidņu teksta daļas
-- strukturētas veidņu interpolācijas ar pilnu izteiksmju AST
+- strukturēti veidņu aizpildījumi ar pilnu izteiksmju AST
 
 Klases metodes minimums tiek pārbaudīts ar atsevišķu sintakses regresijas paraugu, nemainot kanonisko `examples/pamata-paraugs.lat`.
 
@@ -143,7 +143,7 @@ Tehniskie checkpointi:
 - `6bf5ace` — strukturēts iegūšanas ķermeņa AST
 - `91356b6` — minimāls klases metodes AST
 - `fe4ab65` — strukturēts darbības parametru AST
-- `c617074` — strukturēts veidņu interpolāciju AST
+- `c617074` — strukturēts veidņu aizpildījumu AST
 
 Pēc identifikatoru normalizācijas pilnais `corepack pnpm run check` ir zaļš.
 
@@ -153,7 +153,7 @@ Repo-wide auditā veco publisko transliterēto lexer/parser/AST identifikatoru a
 
 Konstruktors, klases metode un augšējā līmeņa `Darbība` izmanto kopīgu parametru analizatoru un vienotu `Parametrs` AST formu.
 
-Veidņu literāļi tiek sadalīti `VeidnesTeksts` un `VeidnesInterpolācija` mezglos. Interpolācijas tiek analizētas ar pilno izteiksmju parseri.
+Veidņu literāļi tiek sadalīti `VeidnesTeksts` un `VeidnesAizpildījums` mezglos. Aizpildījumi tiek analizēti ar pilno izteiksmju parseri.
 
 Konstruktora, iegūšanas un minimālas klases metodes ķermeņi ir strukturēti ar kopīgo priekšrakstu analizatoru.
 
@@ -198,7 +198,7 @@ iegūšanas un metožu minimums — pabeigts
 ↓
 funkciju parametru AST — pabeigts
 ↓
-veidņu interpolācijas — pabeigts
+veidņu aizpildījumi — pabeigts
 ↓
 pirmkoda diapazoni — pabeigts
 ↓

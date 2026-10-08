@@ -253,7 +253,7 @@ export function analizēLeksiski(teksts, vārdnīca) {
 
       if (dziļums !== 0) {
         throw new SyntaxError(
-          "Nav aizvērta veidnes interpolācija rindā " +
+          "Nav aizvērts veidnes aizpildījums rindā " +
           izteiksmesPozīcija.rinda +
           ", kolonnā " +
           izteiksmesPozīcija.kolonna
@@ -274,7 +274,7 @@ export function analizēLeksiski(teksts, vārdnīca) {
           .length === 0
       ) {
         throw new SyntaxError(
-          "Tukša veidnes interpolācija rindā " +
+          "Tukšs veidnes aizpildījums rindā " +
           izteiksmesPozīcija.rinda +
           ", kolonnā " +
           izteiksmesPozīcija.kolonna
@@ -299,7 +299,7 @@ export function analizēLeksiski(teksts, vārdnīca) {
             pozīcija.nobīde
         })
 
-      const interpolācijasElementi =
+      const aizpildījumaElementi =
         analizēLeksiski(
           izteiksmesTeksts,
           vārdnīca
@@ -333,27 +333,27 @@ export function analizēLeksiski(teksts, vārdnīca) {
           }
         )
 
-      const interpolācijasSākums =
+      const aizpildījumaSākums =
         pozīcijaSaturaOffsetam(
           indekss
         )
 
-      const interpolācijasBeigas =
+      const aizpildījumaBeigas =
         pozīcijaSaturaOffsetam(
           beigas
         )
 
       daļas.push({
-        veids: "interpolācija",
+        veids: "aizpildījums",
         leksiskieElementi:
-          interpolācijasElementi,
+          aizpildījumaElementi,
         ...izteiksmesPozīcija,
         diapazons: {
           sākums: {
-            ...interpolācijasSākums
+            ...aizpildījumaSākums
           },
           beigas: {
-            ...interpolācijasBeigas
+            ...aizpildījumaBeigas
           }
         }
       })
