@@ -5,7 +5,7 @@
 
 ## Konteksts
 
-LatNe parseris jau veido strukturētu deklarāciju, statement un izteiksmju AST.
+LatNe sintaktiskais analizators jau veido strukturētu deklarāciju, priekšrakstu un izteiksmju AST.
 
 Nākamajos posmos AST kļūs ievērojami plašāks:
 
@@ -16,7 +16,7 @@ Nākamajos posmos AST kļūs ievērojami plašāks:
 - source spans
 - LatNe API semantika
 
-Ja koda ģenerators tiktu būvēts tieši uz parsera pagaidu iekšējām struktūrām, katra parsera izmaiņa varētu nekontrolēti mainīt codegen uzvedību.
+Ja koda ģenerators tiktu būvēts tieši uz sintaktiskā analizatora pagaidu iekšējām struktūrām, katra sintaktiskā analizatora izmaiņa varētu nekontrolēti mainīt koda ģeneratora uzvedību.
 
 ## Lēmums
 
@@ -39,15 +39,15 @@ Neapstrādātu leksisko elementu kopas drīkst palikt tikai apzināti dokumentē
 
 Pozitīvi:
 
-- parseri var attīstīt neatkarīgāk no codegen
-- codegen saņem stabilāku ievadi
+- sintaktisko analizatoru var attīstīt neatkarīgāk no koda ģeneratora
+- koda ģenerators saņem stabilāku ievadi
 - AST var testēt atsevišķi
 - diagnostikai un editor tooling ir skaidra avota struktūra
 - nākotnes transformācijas var balstīties uz vienotu kontraktu
 
 Izmaksas:
 
-- pirms codegen jāiegulda laiks AST specifikācijā
+- pirms koda ģenerēšanas jāiegulda laiks AST specifikācijā
 - daži pašreizējie pagaidu mezgli būs jāpārstrukturē
 - AST izmaiņas pēc v1 būs jāveic apzināti
 
