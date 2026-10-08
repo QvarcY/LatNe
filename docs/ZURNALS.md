@@ -1830,3 +1830,24 @@ Līdz ar AST nosaukumu arī LatNe paša leksiskajā analizatorā un regresijas p
 
 Citi AST nosaukumi šajā solī netiek mainīti.
 
+---
+
+## 2026-10-08 — J0040 — AST v1 pirmie lauku lēmumi
+
+**Tips:** AST / kontrakts
+**Statuss:** pabeigts
+
+Pēc visu 40 pašreizējo AST mezglu tipu lauku inventarizācijas apstiprināti pirmie divi AST v1 lauku kontrakta lēmumi.
+
+`rinda` ir pārejas lauks. Tas pagaidām paliek saderībai, bet stabilajā AST v1 publiskajā kontraktā atrašanās vietu nosaka `diapazons`.
+
+Par pārejas / iekšējiem laukiem ārpus stabilā AST v1 publiskā kontrakta apstiprināti:
+
+- `ķermeņaLeksiskieElementi`
+- `ķermeņaLeksiskoElementuSkaits`
+- `parametruLeksiskoElementuSkaits`
+
+Šajā solī šie lauki netiek dzēsti no parsera. Tiek fiksēts tikai to kontrakta statuss.
+
+Nākamais neatrisinātais AST v1 jautājums ir vienota `null`, `""`, `[]` un neesoša lauka semantika.
+
