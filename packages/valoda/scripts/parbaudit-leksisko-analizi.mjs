@@ -87,29 +87,29 @@ const veidnesParaugs =
     vārdnīca
   )[0]
 
-const interpolācijasElements =
+const aizpildījumaElements =
   veidnesParaugs
     ?.daļas
     ?.find(
       daļa =>
         daļa.veids ===
-          "interpolācija"
+          "aizpildījums"
     )
     ?.leksiskieElementi
     ?.[0]
 
 if (
-  interpolācijasElements
+  aizpildījumaElements
     ?.diapazons?.sākums.nobīde !== 5 ||
-  interpolācijasElements
+  aizpildījumaElements
     ?.diapazons?.beigas.nobīde !== 12 ||
-  interpolācijasElements
+  aizpildījumaElements
     ?.diapazons?.sākums.kolonna !== 6 ||
-  interpolācijasElements
+  aizpildījumaElements
     ?.diapazons?.beigas.kolonna !== 13
 ) {
   throw new Error(
-    "Veidnes interpolācijas leksiskā elementa absolūtais diapazons nav saglabāts"
+    "Veidnes aizpildījuma leksiskā elementa absolūtais diapazons nav saglabāts"
   )
 }
 
