@@ -179,7 +179,7 @@ Pašreizējais stāvoklis:
 - `""` nav neesošas vērtības marķieris
 - diskriminētu variantu cita varianta lauki objektā neeksistē
 - `Nosacījums.citādi` saglabā `null` / `[]` / satura masīva semantiku
-- pašreizējais `Darbība.atgriezesTips: ""` un `Metode.atgriezesTips: ""` vēl jāsaskaņo ar apstiprināto `null` noteikumu
+- `Darbība.atgriezesTips` un `Metode.atgriezesTips` izmanto `null`, ja atgriezes tips nav norādīts; regresijas pārbaudes sedz abus gadījumus
 - `KārtasCikls` atbalsta kolekcijas variantu un klasisku trīsdaļīgu skaitītāja variantu
 - skaitītāja variantam ir `variants: "skaitītājs"` un apstiprinātie lauki `sākums`, `nosacījums`, `solis`
 - iepriekšējais `variants: "vispārīgs"` starpstāvoklis ir noņemts
