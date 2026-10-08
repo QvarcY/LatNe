@@ -98,6 +98,25 @@ Piemēri:
 
 `UnāraIzteiksme` → `PirmsIzteiksme`
 
+## Apstiprinātie AST nosaukumi
+
+Skaidri apstiprināti:
+
+- `Programma`
+- `Imports`
+- `KlasesLauks`
+- `Identifikators`
+- `Parametrs`
+- `Konstruktors`
+- `Iegūšana`
+- `PirmsIzteiksme`
+- `BināraIzteiksme`
+- `PiešķiršanasIzteiksme`
+- `VeidnesTeksts`
+- `KārtasCikls`
+
+`ApstākļaCikls` ir apstiprinātais nosaukums nākotnes `kamēr` AST mezglam. Tas vēl nav ieviests sintaktiskajā analizatorā.
+
 Jauns LatNe nosaukums, AST mezgla tips vai AST lauks nekļūst kanonisks bez skaidra projekta autora apstiprinājuma.
 
 Šīs pārejas tiek veiktas kontrolētā refaktorā ar pilnu CI pārbaudi.
