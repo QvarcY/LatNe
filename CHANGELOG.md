@@ -8,6 +8,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- AST `UnāraIzteiksme` pārsaukta par apstiprināto `PirmsIzteiksme`
 - AST `Getteris` un `getteri` pārsaukti par `Iegūšana` un `iegūšanas`
 - AST `raw` lauks pārsaukts par `pieraksts`
 - kvalitātes pārbaude nepieļauj `getter` un `raw` atgriešanos LatNe kodolā
@@ -19,7 +20,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - diapazoni pievienoti augšējā līmeņa deklarācijām: `Imports`, `Saskarsme`, `Uzskaitījums`, `Klase` un `Darbība`
 - diapazoni pievienoti klases iekšējiem mezgliem: `KlasesLauks`, `Konstruktors`, `Iegūšana` un `Metode`
 - pabeigts pirmkoda diapazonu pārklājums visiem 40 pašreizējiem AST mezglu tipiem
-- atlikušajiem izteiksmju mezgliem pievienoti diapazoni, tostarp `Masīvs`, `Veidne`, `Grupa`, `Gaidīšana`, `Jauns` un `UnāraIzteiksme`
+- atlikušajiem izteiksmju mezgliem pievienoti diapazoni, tostarp `Masīvs`, `Veidne`, `Grupa`, `Gaidīšana`, `Jauns` un `PirmsIzteiksme`
 - atlikušajiem priekšrakstu mezgliem pievienoti diapazoni, tostarp `Mainīgais`, `Nosacījums`, `KamCikls`, `Mēģinājums`, `Metiens` un vienkāršie vadības priekšraksti
 - `Programma` saknei definēts arī tukša avota nulles garuma diapazons
 - pievienots pilns AST diapazonu audits, kas pārbauda visu zināmo mezglu tipu pārklājumu un bērnu robežas
