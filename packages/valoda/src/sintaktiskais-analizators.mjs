@@ -11,7 +11,8 @@ import {
 } from "./parametru-sintaktiskais-analizators.mjs"
 
 import {
-  izveidoDiapazonu
+  izveidoDiapazonu,
+  izveidoTukšuDiapazonu
 } from "./pirmkoda-diapazons.mjs"
 
 function sintaksesKļūda(ziņa, leksiskaisElements) {
@@ -1030,6 +1031,6 @@ export function analizēSintaksi(leksiskieElementi) {
               leksiskieElementi.length - 1
             ]
           )
-        : null
+        : izveidoTukšuDiapazonu()
   }
 }
