@@ -74,7 +74,8 @@ const aizliegtieIdentifikatori = [
   "parkapums",
   "getteris",
   "getteri",
-  "raw"
+  "raw",
+  "UnāraIzteiksme"
 ]
 
 const aizliegtieFragmenti = [
