@@ -267,11 +267,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
 
                 if (
                   daļa.veids ===
-                    "interpolācija"
+                    "aizpildījums"
                 ) {
                   return {
                     veids:
-                      "VeidnesInterpolācija",
+                      "VeidnesAizpildījums",
                     izteiksme:
                       analizēIzteiksmi(
                         daļa
