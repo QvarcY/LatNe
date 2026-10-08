@@ -8,6 +8,9 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- AST `KamCikls` pārsaukts par apstiprināto `KārtasCikls`
+- `PiešķiršanasIzteiksme` apstiprināts kā kanoniskais AST nosaukums
+- `ApstākļaCikls` rezervēts nākotnes `kamēr` AST mezglam
 - AST `UnāraIzteiksme` pārsaukta par apstiprināto `PirmsIzteiksme`
 - AST `Getteris` un `getteri` pārsaukti par `Iegūšana` un `iegūšanas`
 - AST `raw` lauks pārsaukts par `pieraksts`
@@ -21,7 +24,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - diapazoni pievienoti klases iekšējiem mezgliem: `KlasesLauks`, `Konstruktors`, `Iegūšana` un `Metode`
 - pabeigts pirmkoda diapazonu pārklājums visiem 40 pašreizējiem AST mezglu tipiem
 - atlikušajiem izteiksmju mezgliem pievienoti diapazoni, tostarp `Masīvs`, `Veidne`, `Grupa`, `Gaidīšana`, `Jauns` un `PirmsIzteiksme`
-- atlikušajiem priekšrakstu mezgliem pievienoti diapazoni, tostarp `Mainīgais`, `Nosacījums`, `KamCikls`, `Mēģinājums`, `Metiens` un vienkāršie vadības priekšraksti
+- atlikušajiem priekšrakstu mezgliem pievienoti diapazoni, tostarp `Mainīgais`, `Nosacījums`, `KārtasCikls`, `Mēģinājums`, `Metiens` un vienkāršie vadības priekšraksti
 - `Programma` saknei definēts arī tukša avota nulles garuma diapazons
 - pievienots pilns AST diapazonu audits, kas pārbauda visu zināmo mezglu tipu pārklājumu un bērnu robežas
 - pievienotas pirmkoda diapazonu regresijas pārbaudes, tostarp veidnes interpolācijas absolūtajai nobīdei, salikto izteiksmju, pilnu deklarāciju un klases iekšējo mezglu robežām

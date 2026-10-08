@@ -75,7 +75,8 @@ const aizliegtieIdentifikatori = [
   "getteris",
   "getteri",
   "raw",
-  "UnāraIzteiksme"
+  "UnāraIzteiksme",
+  "KamCikls"
 ]
 
 const aizliegtieFragmenti = [

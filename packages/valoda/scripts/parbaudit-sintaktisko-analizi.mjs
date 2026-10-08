@@ -100,7 +100,7 @@ const zināmieAstVeidi =
     "Parametrs",
     "Mainīgais",
     "Nosacījums",
-    "KamCikls",
+    "KārtasCikls",
     "Atgriešana",
     "Metiens",
     "Mēģinājums",
