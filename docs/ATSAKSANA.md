@@ -161,7 +161,7 @@ Neapstrādātie ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pāre
 
 AST diapazona minimālais kontrakts ir ieviests kā pusatvērts `[sākums, beigas)` intervāls ar `rinda`, `kolonna` un `nobīde`.
 
-Pirmie diapazoni ir `Identifikators`, `Parametrs` un `Atgriešana` mezgliem. Salikto izteiksmju diapazoni ieviesti arī `Īpašība`, `Izsaukums`, `BināraIzteiksme` un `PiešķiršanasIzteiksme`. Augšējā līmeņa deklarāciju diapazoni ieviesti `Imports`, `Saskarsme`, `Uzskaitījums`, `Klase` un `Darbība`. Esošais `rinda` lauks pārejas laikā saglabāts.
+Pirmie diapazoni ir `Identifikators`, `Parametrs` un `Atgriešana` mezgliem. Salikto izteiksmju diapazoni ieviesti arī `Īpašība`, `Izsaukums`, `BināraIzteiksme` un `PiešķiršanasIzteiksme`. Augšējā līmeņa deklarāciju diapazoni ieviesti `Imports`, `Saskarsme`, `Uzskaitījums`, `Klase` un `Darbība`. Klases iekšējo mezglu diapazoni ieviesti `KlasesLauks`, `Konstruktors`, `Iegūšana` un `Metode`. Esošais `rinda` lauks pārejas laikā saglabāts.
 
 ## Nākamais izstrādes bloks
 
@@ -178,7 +178,8 @@ Pirmā iterācija ir pabeigta:
 
 Nākamais apakšsolis:
 
-- pievienot diapazonus klases iekšējiem AST mezgliem
+- veikt atlikušā AST diapazonu pārklājuma auditu
+- pievienot diapazonus vēl nepārklātajiem izteiksmju un priekšrakstu mezgliem
 - pēc pietiekama pārklājuma atzīmēt ROADMAP pirmkoda diapazonu uzdevumu kā pabeigtu
 
 Pēc tam:
