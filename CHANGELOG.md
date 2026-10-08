@@ -8,6 +8,10 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- AST `Getteris` un `getteri` pārsaukti par `Iegūšana` un `iegūšanas`
+- AST `raw` lauks pārsaukts par `pieraksts`
+- kvalitātes pārbaude nepieļauj `getter` un `raw` atgriešanos LatNe kodolā
+- projekta terminoloģijas politika papildināta ar principu dot priekšroku vienam skaidram latviešu vārdam, ja tas ir pietiekams
 - definēts vienots AST pirmkoda diapazona kontrakts ar `sākums`, `beigas`, `rinda`, `kolonna` un `nobīde`
 - leksiskajiem elementiem pievienoti pusatvērti pirmkoda diapazoni
 - pirmajā AST diapazonu iterācijā pārklāti `Identifikators`, `Parametrs` un `Atgriešana`
@@ -23,16 +27,16 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - ieviests strukturēts klases ķermeņa AST
 - strukturēti klases lauki, pieejamības modifikatori, lauku tipi un `nemaināms` stāvoklis
 - strukturēta konstruktora deklarācija un parametri
-- strukturēta getter deklarācija un atgriezes tips
+- strukturēta iegūšanas deklarācija un atgriezes tips
 - ieviests `PiešķiršanasIzteiksme` AST
 - pievienots vienkāršo un kombinēto piešķiršanas operatoru atbalsts
 - pievienota piešķiršanas izteiksmju labējās asociativitātes un mērķa validācijas pārbaude
 - pievienotas regresijas pārbaudes kanoniskajām konstruktora piešķiršanām
 - strukturēts konstruktora ķermeņa priekšrakstu AST
-- strukturēts gettera ķermeņa AST
+- strukturēts iegūšanas ķermeņa AST
 - pievienots minimāls klases `Metode` AST
 - klases metodei pievienota pieejamība, tipēti parametri, izvēles atgriezes tips un strukturēts ķermenis
-- konstruktora, gettera un metodes ķermeņiem izmantota kopīgā priekšrakstu analizatora infrastruktūra
+- konstruktora, iegūšanas un metodes ķermeņiem izmantota kopīgā priekšrakstu analizatora infrastruktūra
 - pievienota klases metodes regresijas pārbaude, nemainot kanonisko pirmo `.lat` paraugu
 - augšējā līmeņa `Darbība` parametri strukturēti kā `Parametrs` AST mezgli
 - konstruktoram, klases metodei un darbībai ieviests kopīgs parametru analizators
