@@ -859,7 +859,7 @@ for (
 
 if (klase.iegūšanas.length !== 1) {
   throw new Error(
-    `Gaidīts 1 iegūšana, saņemti ${klase.iegūšanas.length}`
+    `Gaidīta 1 iegūšana, saņemta ${klase.iegūšanas.length}`
   )
 }
 
