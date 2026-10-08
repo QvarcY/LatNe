@@ -1965,7 +1965,7 @@ PirmsIzteiksme.operators
 
 Parseris konstrukciju atpazīšanai joprojām drīkst iekšēji izmantot terminoloģijas reģistra `source` identitātes `of` un `typeof`. Tās vairs netiek izlaistas publiskajā AST šajos laukos.
 
-AST specifikācijas tipa pierakstā TypeScript `string` vietā turpmāk lieto LatNe `teksts`. Piemēram, `Mēģinājums.ķer.parametrs` dokumentēts kā `teksts | null`.
+AST specifikācijas tipa pierakstā turpmāk lieto LatNe tipus: `teksts`, `loģisks` un `skaitlis`, nevis TypeScript / JavaScript `string`, `boolean` un `Number`. Piemēram, `Mēģinājums.ķer.parametrs` dokumentēts kā `teksts | null`.
 
 Pievienota regresijas pārbaude `veids vērtība`, kas pieprasa `PirmsIzteiksme.operators: "veids"`. Kolekcijas `KārtasCikls` regressijas pārbaude tagad pieprasa `variants: "kolekcija"`.
 
