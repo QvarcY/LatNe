@@ -782,7 +782,7 @@ Tas novērš viena monolīta sintaktiskā analizatora faila veidošanos un ļauj
 
 Veidņu literāļi pašlaik tiek saglabāti kā viens `Veidne` mezgls.
 
-Interpolācijas vēl netiek parsētas atsevišķos AST mezglos.
+Aizpildījumi vēl netiek parsēti atsevišķos AST mezglos.
 
 Nav vēl ieviestas visas iespējamās piešķiršanas, loģikas un valodas konstrukcijas.
 
@@ -1354,7 +1354,7 @@ Iegūšanas ķermenis savienots ar to pašu priekšrakstu analizatora infrastruk
 
 Kanoniskās iegūšanas `apraksts` ķermenis tagad satur vienu strukturētu `Atgriešana` priekšrakstu.
 
-Atgriešanas vērtība šajā posmā paliek `Veidne` mezgls. Veidņu interpolāciju strukturēšana apzināti atlikta uz atsevišķu AST v1 soli.
+Atgriešanas vērtība šajā posmā paliek `Veidne` mezgls. Veidņu aizpildījumu strukturēšana apzināti atlikta uz atsevišķu AST v1 soli.
 
 Neapstrādātie iegūšanas ķermeņa elementi pagaidām saglabāti kā pārejas lauks.
 
@@ -1431,7 +1431,7 @@ Checkpoint:
 
 ---
 
-## 2026-10-07 — J0028 — Veidņu interpolāciju AST
+## 2026-10-07 — J0028 — Veidņu aizpildījumu AST
 
 **Tips:** leksiskā analīze / sintaktiskā analīze / AST / regresijas pārbaudes
 **Statuss:** pabeigts
@@ -1441,11 +1441,11 @@ Checkpoint:
 Izteiksmju AST izmanto:
 
 - `VeidnesTeksts`
-- `VeidnesInterpolācija`
+- `VeidnesAizpildījums`
 
-Interpolācijas saturs tiek atkārtoti leksiski analizēts ar LatNe terminoloģijas vārdnīcu un nodots pilnajam izteiksmju parserim.
+Aizpildījuma saturs tiek atkārtoti leksiski analizēts ar LatNe terminoloģijas vārdnīcu un nodots pilnajam izteiksmju parserim.
 
-Kanoniskās iegūšanas veidne satur 4 AST daļas un 2 interpolācijas.
+Kanoniskās iegūšanas veidne satur 4 AST daļas un 2 aizpildījumi.
 
 Papildu regresijas pārbaudes sedz:
 
@@ -1530,7 +1530,7 @@ Pēc normalizācijas:
 - augšējā līmeņa AST mezgli: 5
 - klases ķermeņa mezgli: 6
 - veidnes daļas: 4
-- veidnes interpolācijas: 2
+- veidnes aizpildījumi: 2
 - regresijas paraugi: 4/4 atbilstoši gaidītajam
 - Vārdu kalves TypeScript check un production build: zaļš
 
@@ -1564,7 +1564,7 @@ Pievienots kopīgs palīgs:
 
 `packages/valoda/src/pirmkoda-diapazons.mjs`
 
-Leksiskais analizators tagad saglabā diapazonu katram leksiskajam elementam. Veidņu interpolāciju iekšējie leksiskie elementi tiek pārbīdīti uz absolūtajām avota pozīcijām.
+Leksiskais analizators tagad saglabā diapazonu katram leksiskajam elementam. Veidņu aizpildījumu iekšējie leksiskie elementi tiek pārbīdīti uz absolūtajām avota pozīcijām.
 
 Pirmā reprezentatīvā AST iterācija:
 
@@ -1577,7 +1577,7 @@ Regresijas pārbaudes nostiprina:
 - viena leksiskā elementa pusatvērto diapazonu
 - vairāku leksisko elementu `Parametrs` diapazonu
 - `Atgriešana` diapazonu no atslēgvārda līdz izteiksmes beigām
-- veidnes interpolācijas absolūto `nobīde`
+- veidnes aizpildījuma absolūto `nobīde`
 
 ROADMAP pirmkoda diapazonu uzdevums vēl nav atzīmēts kā pabeigts. Nākamais apakšsolis ir pārklājuma paplašināšana uz saliktām izteiksmēm, deklarācijām un klases mezgliem.
 
@@ -1720,7 +1720,7 @@ Auditā atrastie vēl nepārklātie izteiksmju mezgli:
 - `Teksts`
 - `Veidne`
 - `VeidnesTeksts`
-- `VeidnesInterpolācija`
+- `VeidnesAizpildījums`
 - `Nekas`
 - `Loģisks`
 - `Nenoteikts`
@@ -1748,7 +1748,7 @@ Papildus:
 
 - `Programma` saknei vienmēr ir diapazons
 - tukšai programmai tas ir nulles garuma `1:1 / nobīde 0` diapazons
-- veidnes teksta daļām un interpolācijām lexerī saglabāti precīzi apakšdiapazoni
+- veidnes teksta daļām un aizpildījumiem leksiskajā analizatorā saglabāti precīzi apakšdiapazoni
 - regresijas pārbaude uztur visu 40 pašreizējo AST mezglu tipu kopu
 - audits izgāžas, ja kādam zināmajam AST mezglam nav derīga `diapazons`
 - audits pārbauda, ka bērna AST diapazons neiziet ārpus vecāka AST diapazona
@@ -1808,6 +1808,25 @@ ApstākļaCikls
 ```
 
 `ApstākļaCikls` vēl netiek ieviests, jo `kamēr` sintaktiskais analizators pašlaik nav daļa no pirmās AST v1 robežas. Nosaukums ir rezervēts turpmākai ieviešanai.
+
+Citi AST nosaukumi šajā solī netiek mainīti.
+
+---
+
+## 2026-10-08 — J0039 — AST nosaukums VeidnesAizpildījums
+
+**Tips:** AST / terminoloģija
+**Statuss:** pabeigts
+
+Iepriekšējais AST nosaukums `VeidnesInterpolācija` aizstāts ar projekta autora apstiprināto nosaukumu:
+
+```text
+VeidnesInterpolācija → VeidnesAizpildījums
+```
+
+`VeidnesAizpildījums` apzīmē `${...}` daļu veidnē, kuras izteiksmes vērtība aizpilda konkrēto vietu veidnes tekstā.
+
+Līdz ar AST nosaukumu arī LatNe paša leksiskajā analizatorā un regresijas pārbaudēs iekšējais daļas tips `interpolācija` pārsaukts par `aizpildījums`. Vecā interpolācijas terminoloģija kodolā tiek noraidīta ar kvalitātes pārbaudi.
 
 Citi AST nosaukumi šajā solī netiek mainīti.
 
