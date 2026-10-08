@@ -1,7 +1,7 @@
 # LatNe statuss
 
 **Atjaunots:** 2026-10-08
-**Pašreizējais valodas stāvoklis:** strukturēts AST līdz vienotam parametru kontraktam un veidņu interpolācijām
+**Pašreizējais valodas stāvoklis:** strukturēts AST līdz vienotam parametru kontraktam un veidņu aizpildījumiem
 **Nākamā izstrādes fāze:** 1 — AST v1 lauku kontrakts
 
 ## Pašreizējā robeža
@@ -44,7 +44,7 @@ Valodas kodols:
 - minimāls klases metodes AST
 - strukturēti augšējā līmeņa `Darbība` parametri
 - vienots `Parametrs` AST konstruktoram, metodei un darbībai
-- strukturētas veidņu literāļu interpolācijas
+- strukturētas veidņu literāļu aizpildījumi
 - definēta vienota `diapazons.sākums / diapazons.beigas` pirmkoda atrašanās vietas struktūra
 - leksiskajiem elementiem saglabāti `rinda`, `kolonna` un 0-bāzēta `nobīde` diapazonā
 - pirmie AST diapazoni ieviesti `Identifikators`, `Parametrs` un `Atgriešana` mezgliem
@@ -107,7 +107,7 @@ Pašreizējais AST saprot:
 - klases metodes strukturētu ķermeni
 - augšējā līmeņa darbības tipētos parametrus
 - veidņu teksta daļas
-- veidņu interpolācijas ar pilnu izteiksmju AST
+- veidņu aizpildījumi ar pilnu izteiksmju AST
 
 ## Pārbaudītais pirmais paraugs
 
@@ -123,7 +123,7 @@ Rezultāts:
 - 4 strukturēti konstruktora priekšraksti
 - 1 strukturēts iegūšanas priekšraksts
 - 4 strukturētas kanoniskās iegūšanas veidnes daļas
-- 2 strukturētas kanoniskās iegūšanas interpolācijas
+- 2 strukturēti kanoniskās iegūšanas aizpildījumi
 
 ## Aktuālie ierobežojumi
 
@@ -132,11 +132,11 @@ Augšējā līmeņa `Darbība`, konstruktors un klases metode tagad izmanto vien
 Veidņu literāļi tagad satur:
 
 - `VeidnesTeksts`
-- `VeidnesInterpolācija`
-- pilnu interpolācijas izteiksmes AST
+- `VeidnesAizpildījums`
+- pilnu aizpildījuma izteiksmes AST
 - sākotnējo `pieraksts` veidnes vērtību
 
-Regresijas pārbaudes sedz arī bināru izteiksmi interpolācijā un escapotu `\${...}` marķieri.
+Regresijas pārbaudes sedz arī bināru izteiksmi aizpildījumā un escapotu `\${...}` marķieri.
 
 Konstruktora, iegūšanas un metodes neapstrādātie ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
@@ -201,7 +201,7 @@ kvalitātes sliedes
 → konstruktora ķermeņa AST ✓
 → iegūšanas un metožu minimums ✓
 → funkciju parametru AST ✓
-→ veidņu interpolācijas ✓
+→ veidņu aizpildījumi ✓
 → pirmkoda diapazoni ✓
 → AST v1 lauku kontrakts ← pašreizējais darbs
 → AST v1 specifikācija
