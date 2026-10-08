@@ -28,11 +28,11 @@ Visiem 40 pašreizējiem AST mezglu tipiem ir:
 | `Saskarsme` | `nosaukums`, `ķermeņaLeksiskieElementi` | ķermeņa lauks ir skaitlis | Lauka nosaukums izklausās pēc kolekcijas, bet faktiskā vērtība ir `saturs.length` |
 | `Uzskaitījums` | `nosaukums`, `vērtības` | `vērtības: []`, ja nav identifikatoru | Vērtības pašlaik ir virkņu masīvs |
 | `Klase` | `nosaukums`, `eksportēta`, `ķermeņaLeksiskoElementuSkaits`, `ķermenis`, `lauki`, `konstruktors`, `iegūšanas`, `metodes` | kolekcijas ir masīvi; `konstruktors: null`, ja tā nav | `ķermenis` satur klases lauku/konstruktora/iegūšanas/metodes mezglus |
-| `Darbība` | `nosaukums`, `eksportēta`, `asinhrona`, `parametri`, `parametruLeksiskoElementuSkaits`, `atgriezesTips`, `ķermeņaLeksiskieElementi`, `ķermenis` | `parametri: []`; `atgriezesTips: ""`, ja tips nav norādīts; `ķermenis: []`, ja tukšs | `ķermeņaLeksiskieElementi` šeit ir skaitlis, nevis leksisko elementu masīvs |
+| `Darbība` | `nosaukums`, `eksportēta`, `asinhrona`, `parametri`, `parametruLeksiskoElementuSkaits`, `atgriezesTips`, `ķermeņaLeksiskieElementi`, `ķermenis` | `parametri: []`; `atgriezesTips: null`, ja tips nav norādīts; `ķermenis: []`, ja tukšs | `ķermeņaLeksiskieElementi` šeit ir skaitlis, nevis leksisko elementu masīvs |
 | `KlasesLauks` | `nosaukums`, `pieejamība`, `nemaināms`, `tips` | `pieejamība: null`, ja nav modifikatora; `nemaināms` ir boolean; `tips` parserī nedrīkst būt tukšs | — |
 | `Konstruktors` | `pieejamība`, `parametri`, `ķermenis`, `ķermeņaLeksiskieElementi` | `pieejamība: null`; `parametri: []`; `ķermenis` var būt `null`, ja klases analizators izsaukts bez priekšrakstu analizatora | `ķermeņaLeksiskieElementi` ir pilns leksisko elementu masīvs |
 | `Iegūšana` | `nosaukums`, `pieejamība`, `atgriezesTips`, `ķermenis`, `ķermeņaLeksiskieElementi` | `pieejamība: null`; `atgriezesTips` parserī nedrīkst būt tukšs; `ķermenis` var būt `null` standalone klases analizatorā | `ķermeņaLeksiskieElementi` ir pilns leksisko elementu masīvs |
-| `Metode` | `nosaukums`, `pieejamība`, `parametri`, `atgriezesTips`, `ķermenis`, `ķermeņaLeksiskieElementi` | `pieejamība: null`; `parametri: []`; `atgriezesTips: ""`, ja nav norādīts; `ķermenis` var būt `null` standalone klases analizatorā | `ķermeņaLeksiskieElementi` ir pilns leksisko elementu masīvs |
+| `Metode` | `nosaukums`, `pieejamība`, `parametri`, `atgriezesTips`, `ķermenis`, `ķermeņaLeksiskieElementi` | `pieejamība: null`; `parametri: []`; `atgriezesTips: null`, ja nav norādīts; `ķermenis` var būt `null` standalone klases analizatorā | `ķermeņaLeksiskieElementi` ir pilns leksisko elementu masīvs |
 | `Parametrs` | `nosaukums`, `tips` | `tips` parserī nedrīkst būt tukšs | — |
 
 Visiem šīs tabulas mezgliem, izņemot `Programma`, papildus ir `rinda` un `diapazons`.
@@ -187,9 +187,9 @@ Apstiprināti šādi AST v1 noteikumi:
 4. **Diskriminētu variantu lauki netiek piepildīti ar `null`.** Ja mezgla forma ir noteikta ar diskriminatoru, konkrētā varianta lauki ir obligāti, bet cita varianta lauki objektā neeksistē.
 5. **`Nosacījums.citādi` saglabā pašreizējo trīsstāvokļu nozīmi:** `null` nozīmē, ka `citādi` nav; `[]` nozīmē tukšu `citādi {}`; netukšs masīvs satur `citādi` ķermeņa AST.
 
-No šiem noteikumiem izriet, ka pašreizējie `Darbība.atgriezesTips: ""` un `Metode.atgriezesTips: ""` neatbilst apstiprinātajai AST v1 semantikai. Pirms kontrakta pabeigšanas tie jāsaskaņo ar izvēles vienas vērtības noteikumu, izmantojot `null`, ja atgriezes tips nav norādīts.
+`Darbība.atgriezesTips` un `Metode.atgriezesTips` ir saskaņoti ar šo noteikumu: ja atgriezes tips nav norādīts, to vērtība ir `null`. Norādīts atgriezes tips joprojām ir virkne.
 
-Šajā auditā parsera uzvedība vēl netiek mainīta.
+`Iegūšana.atgriezesTips` paliek obligāts un parserī nedrīkst būt tukšs.
 
 ## Apstiprinātais KārtasCikls tvērums
 
