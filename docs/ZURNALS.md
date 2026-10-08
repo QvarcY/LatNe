@@ -1728,7 +1728,7 @@ Auditā atrastie vēl nepārklātie izteiksmju mezgli:
 - `Grupa`
 - `Gaidīšana`
 - `Jauns`
-- `UnāraIzteiksme`
+- `PirmsIzteiksme`
 
 Auditā atrastie vēl nepārklātie priekšrakstu mezgli:
 
@@ -1753,7 +1753,7 @@ Papildus:
 - audits izgāžas, ja kādam zināmajam AST mezglam nav derīga `diapazons`
 - audits pārbauda, ka bērna AST diapazons neiziet ārpus vecāka AST diapazona
 
-Mērķētie izteiksmju paraugi sedz literāļus, masīvu, grupu, īpašību, izsaukumu, `gaidi`, `jauns`, unāro, bināro un piešķiršanas izteiksmi. Atsevišķs priekšraksta paraugs sedz `Pārtraukšana`.
+Mērķētie izteiksmju paraugi sedz literāļus, masīvu, grupu, īpašību, izsaukumu, `gaidi`, `jauns`, `PirmsIzteiksme`, bināro un piešķiršanas izteiksmi. Atsevišķs priekšraksta paraugs sedz `Pārtraukšana`.
 
 Pilnais CI pēc ieviešanas ir zaļš.
 
@@ -1762,4 +1762,23 @@ ROADMAP uzdevums **Pievienot pirmkoda diapazona informāciju AST mezgliem** ir p
 Nākamais valodas darbs:
 
 **definēt AST mezglu obligātos un izvēles laukus**.
+
+---
+
+## 2026-10-08 — J0037 — AST nosaukums PirmsIzteiksme
+
+**Tips:** AST / terminoloģija
+**Statuss:** pabeigts
+
+Pēc terminoloģijas pārskatīšanas iepriekšējais AST nosaukums `UnāraIzteiksme` tika atzīts par neapstiprinātu un neskaidru.
+
+Apstiprinātais nosaukums:
+
+```text
+UnāraIzteiksme → PirmsIzteiksme
+```
+
+`PirmsIzteiksme` pašlaik apzīmē izteiksmes, kurās operators atrodas pirms vienas izteiksmes, piemēram `-vērtība`, `!aktīvs`, `~maska` un `veids vērtība`.
+
+Terminoloģijas procesā nostiprināta papildu robeža: jauns LatNe nosaukums, AST mezgla tips vai AST lauks nekļūst kanonisks bez skaidra projekta autora apstiprinājuma.
 
