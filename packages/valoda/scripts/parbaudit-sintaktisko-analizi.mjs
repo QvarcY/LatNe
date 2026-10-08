@@ -84,6 +84,142 @@ function pārbaudiDiapazonu(
   }
 }
 
+function pozīcijaNobīdei(
+  avots,
+  nobīde
+) {
+  const pirms =
+    avots.slice(
+      0,
+      nobīde
+    )
+
+  const rindas =
+    pirms.split("\n")
+
+  return {
+    rinda: rindas.length,
+    kolonna:
+      rindas[rindas.length - 1]
+        .length + 1,
+    nobīde
+  }
+}
+
+function gaidāmaisDeklarācijasDiapazons(
+  avots,
+  sākumaFragments,
+  nākamaisFragments = null
+) {
+  const sākumaNobīde =
+    avots.indexOf(
+      sākumaFragments
+    )
+
+  if (sākumaNobīde < 0) {
+    throw new Error(
+      `Nav atrasts deklarācijas sākums: ${sākumaFragments}`
+    )
+  }
+
+  let beiguNobīde =
+    nākamaisFragments === null
+      ? avots.length
+      : avots.indexOf(
+          nākamaisFragments,
+          sākumaNobīde +
+            sākumaFragments.length
+        )
+
+  if (beiguNobīde < 0) {
+    throw new Error(
+      `Nav atrasta nākamā deklarācija: ${nākamaisFragments}`
+    )
+  }
+
+  while (
+    beiguNobīde > sākumaNobīde &&
+    /\s/u.test(
+      avots[beiguNobīde - 1]
+    )
+  ) {
+    beiguNobīde--
+  }
+
+  return {
+    sākums:
+      pozīcijaNobīdei(
+        avots,
+        sākumaNobīde
+      ),
+    beigas:
+      pozīcijaNobīdei(
+        avots,
+        beiguNobīde
+      )
+  }
+}
+
+const imports =
+  ast.elementi.find(
+    mezgls =>
+      mezgls.veids === "Imports"
+  )
+
+const saskarsme =
+  ast.elementi.find(
+    mezgls =>
+      mezgls.veids ===
+        "Saskarsme"
+  )
+
+const uzskaitījums =
+  ast.elementi.find(
+    mezgls =>
+      mezgls.veids ===
+        "Uzskaitījums"
+  )
+
+if (
+  !imports ||
+  !saskarsme ||
+  !uzskaitījums
+) {
+  throw new Error(
+    "AST trūkst kāda augšējā līmeņa deklarāciju diapazona regresijas mezgla"
+  )
+}
+
+pārbaudiDiapazonu(
+  imports.diapazons,
+  gaidāmaisDeklarācijasDiapazons(
+    teksts,
+    "importē ",
+    "\nsaskarsme "
+  ),
+  "Imports"
+)
+
+pārbaudiDiapazonu(
+  saskarsme.diapazons,
+  gaidāmaisDeklarācijasDiapazons(
+    teksts,
+    "saskarsme LietotājaDati",
+    "\n\nuzskaitījums "
+  ),
+  "Saskarsme"
+)
+
+pārbaudiDiapazonu(
+  uzskaitījums.diapazons,
+  gaidāmaisDeklarācijasDiapazons(
+    teksts,
+    "uzskaitījums Loma",
+    "\n\nklase "
+  ),
+  "Uzskaitījums"
+)
+
 const darbība = ast.elementi.find(
   mezgls =>
     mezgls.veids === "Darbība"
@@ -94,6 +230,15 @@ if (!darbība) {
     "AST nav atrasta augšējā līmeņa darbība"
   )
 }
+
+pārbaudiDiapazonu(
+  darbība.diapazons,
+  gaidāmaisDeklarācijasDiapazons(
+    teksts,
+    "eksportē asinhroni darbība ielādēLietotājus"
+  ),
+  "Darbība"
+)
 
 if (!Array.isArray(darbība.parametri)) {
   throw new Error(
@@ -479,6 +624,16 @@ if (!klase) {
     'AST nav atrasta klase "Lietotājs"'
   )
 }
+
+pārbaudiDiapazonu(
+  klase.diapazons,
+  gaidāmaisDeklarācijasDiapazons(
+    teksts,
+    "klase Lietotājs",
+    "\n\neksportē asinhroni darbība "
+  ),
+  "Klase"
+)
 
 if (
   !Number.isInteger(
