@@ -1581,3 +1581,32 @@ Regresijas pārbaudes nostiprina:
 
 ROADMAP pirmkoda diapazonu uzdevums vēl nav atzīmēts kā pabeigts. Nākamais apakšsolis ir pārklājuma paplašināšana uz saliktām izteiksmēm, deklarācijām un klases mezgliem.
 
+---
+
+## 2026-10-08 — J0032 — Salikto izteiksmju pirmkoda diapazoni
+
+**Tips:** parseris / AST / diagnostikas pamats
+**Statuss:** pabeigts
+
+Pirmkoda diapazonu kontrakts paplašināts uz četriem salikto izteiksmju mezgliem:
+
+- `Īpašība`
+- `Izsaukums`
+- `BināraIzteiksme`
+- `PiešķiršanasIzteiksme`
+
+Diapazoni sedz visu konkrētās konstrukcijas avota fragmentu:
+
+- īpašības piekļuve — no objekta sākuma līdz īpašības nosaukuma beigām
+- izsaukums — līdz aizverošajai `)`
+- binārā izteiksme — no kreisās puses sākuma līdz labās puses beigām
+- piešķiršana — no mērķa sākuma līdz pilnas vērtības beigām
+
+Parseris robežas veido no patērētajiem leksiskajiem elementiem, nevis pieprasa, lai visiem bērnu mezgliem jau būtu diapazons. Tas ļauj diapazonu pārklājumu paplašināt pakāpeniski.
+
+Regresijas pārbaudes sedz atsevišķu īpašības piekļuvi, izsaukumu ar argumentiem, bināru izteiksmi un piešķiršanu, kuras labā puse pati ir bināra izteiksme.
+
+Nākamais apakšsolis:
+
+**augšējā līmeņa deklarāciju un klases AST mezglu diapazoni**.
+
