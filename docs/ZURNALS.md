@@ -1782,3 +1782,32 @@ UnāraIzteiksme → PirmsIzteiksme
 
 Terminoloģijas procesā nostiprināta papildu robeža: jauns LatNe nosaukums, AST mezgla tips vai AST lauks nekļūst kanonisks bez skaidra projekta autora apstiprinājuma.
 
+---
+
+## 2026-10-08 — J0038 — Ciklu un piešķiršanas AST nosaukumi
+
+**Tips:** AST / terminoloģija
+**Statuss:** pabeigts
+
+Apstiprināti trīs terminoloģijas lēmumi.
+
+Pašreizējais `kam` AST mezgls:
+
+```text
+KamCikls → KārtasCikls
+```
+
+`KārtasCikls` apzīmē strukturētu `kam` ciklu, tostarp secīgu iterāciju pa kolekciju un vispārīgo `for` tipa galveni.
+
+`PiešķiršanasIzteiksme` paliek nemainīts un ir apstiprināts kā kanoniskais AST nosaukums piešķiršanas konstrukcijām, piemēram `a = 1` un `a += 1`.
+
+Nākotnes `kamēr` konstrukcijai apstiprināts AST nosaukums:
+
+```text
+ApstākļaCikls
+```
+
+`ApstākļaCikls` vēl netiek ieviests, jo `kamēr` sintaktiskais analizators pašlaik nav daļa no pirmās AST v1 robežas. Nosaukums ir rezervēts turpmākai ieviešanai.
+
+Citi AST nosaukumi šajā solī netiek mainīti.
+
