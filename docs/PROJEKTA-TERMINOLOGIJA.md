@@ -96,4 +96,8 @@ Piemēri:
 
 `Getteris` → `Iegūšana`
 
+`UnāraIzteiksme` → `PirmsIzteiksme`
+
+Jauns LatNe nosaukums, AST mezgla tips vai AST lauks nekļūst kanonisks bez skaidra projekta autora apstiprinājuma.
+
 Šīs pārejas tiek veiktas kontrolētā refaktorā ar pilnu CI pārbaudi.
