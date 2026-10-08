@@ -53,7 +53,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - pievienota atsevišķa pirmās pilnās `.lat` izpildes fāze
 - pievienots diagnostikas un developer experience plāns
 - pievienots bilingvālas dokumentācijas un Education MVP plāns
-- pieņemts ADR 0007 par AST v1 kā codegen kontraktu
+- pieņemts ADR 0007 par AST v1 kā koda ģeneratora kontraktu
 - sinhronizēta atsākšanas, statusa un arhitektūras dokumentācija
 - GitHub Pages sinhronizēta ar 130 uzdevumu ROADMAP v2
 - publiskajā lapā pievienoti "Mācies ar LatNe" un "Būvē ar LatNe" virzieni
@@ -67,10 +67,10 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 - visi 84 LatNe terminoloģijas kandidāti izskatīti un apstiprināti
 - pievienots pirmais `.lat` sintakses paraugs
-- izveidots pirmais LatNe tokenizeris
-- izveidots deklarāciju parseris un pirmais AST
-- izveidots darbības ķermeņa statement parseris
-- izveidots atsevišķs izteiksmju parseris
+- izveidots pirmais LatNe leksiskais analizators
+- izveidots deklarāciju sintaktiskais analizators un pirmais AST
+- izveidots darbības ķermeņa priekšrakstu sintaktiskais analizators
+- izveidots atsevišķs izteiksmju sintaktiskais analizators
 - ieviesti pirmie literāļu, izsaukumu, īpašību, `gaidi`, `jauns`, masīvu un bināro operatoru AST mezgli
 - dokumentēts atsevišķs LatNe iebūvētā API terminoloģijas slānis
 - pievienots darba atsākšanas dokuments
