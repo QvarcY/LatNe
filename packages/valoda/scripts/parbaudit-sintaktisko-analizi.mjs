@@ -59,6 +59,31 @@ if (nezināmie.length > 0) {
 
 const ast = analizēSintaksi(leksiskieElementi)
 
+function pārbaudiDiapazonu(
+  diapazons,
+  gaidītais,
+  konteksts
+) {
+  if (
+    diapazons?.sākums.rinda !==
+      gaidītais.sākums.rinda ||
+    diapazons?.sākums.kolonna !==
+      gaidītais.sākums.kolonna ||
+    diapazons?.sākums.nobīde !==
+      gaidītais.sākums.nobīde ||
+    diapazons?.beigas.rinda !==
+      gaidītais.beigas.rinda ||
+    diapazons?.beigas.kolonna !==
+      gaidītais.beigas.kolonna ||
+    diapazons?.beigas.nobīde !==
+      gaidītais.beigas.nobīde
+  ) {
+    throw new Error(
+      `${konteksts} diapazons neatbilst gaidītajam: ${JSON.stringify(diapazons)}`
+    )
+  }
+}
+
 const darbība = ast.elementi.find(
   mezgls =>
     mezgls.veids === "Darbība"
@@ -169,6 +194,88 @@ for (
     )
   }
 }
+
+pārbaudiDiapazonu(
+  parametruParaugaDarbība
+    .parametri[0].diapazons,
+  {
+    sākums: {
+      rinda: 2,
+      kolonna: 3,
+      nobīde: 17
+    },
+    beigas: {
+      rinda: 2,
+      kolonna: 16,
+      nobīde: 30
+    }
+  },
+  "Parametrs"
+)
+
+const identifikatoraAst =
+  analizēIzteiksmesAst(
+    analizēLeksiski(
+      "vērtība",
+      vārdnīca
+    )
+  )
+
+if (
+  identifikatoraAst?.veids !==
+    "Identifikators"
+) {
+  throw new Error(
+    "Diapazona regresijas izteiksme nav identifikators"
+  )
+}
+
+pārbaudiDiapazonu(
+  identifikatoraAst.diapazons,
+  {
+    sākums: {
+      rinda: 1,
+      kolonna: 1,
+      nobīde: 0
+    },
+    beigas: {
+      rinda: 1,
+      kolonna: 8,
+      nobīde: 7
+    }
+  },
+  "Identifikators"
+)
+
+const atgriešana =
+  parametruParaugaDarbība
+    .ķermenis[0]
+
+if (
+  atgriešana?.veids !==
+    "Atgriešana"
+) {
+  throw new Error(
+    "Diapazona regresijas priekšraksts nav atgriešana"
+  )
+}
+
+pārbaudiDiapazonu(
+  atgriešana.diapazons,
+  {
+    sākums: {
+      rinda: 5,
+      kolonna: 3,
+      nobīde: 65
+    },
+    beigas: {
+      rinda: 5,
+      kolonna: 16,
+      nobīde: 78
+    }
+  },
+  "Atgriešana"
+)
 
 if (
   parametruParaugaDarbība

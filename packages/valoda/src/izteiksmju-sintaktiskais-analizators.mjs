@@ -1,3 +1,7 @@
+import {
+  izveidoDiapazonu
+} from "./pirmkoda-diapazons.mjs"
+
 const PRIORITĀTES = new Map([
   ["||", 1],
   ["??", 2],
@@ -174,7 +178,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
       return {
         veids: "Identifikators",
         nosaukums: leksiskaisElements.vērtība,
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements
+          )
       }
     }
 

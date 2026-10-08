@@ -159,20 +159,29 @@ Konstruktora, gettera un minimālas klases metodes ķermeņi ir strukturēti ar 
 
 Raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
-AST mezgliem vēl nav vienota sākuma/beigu pirmkoda diapazona kontrakta.
+AST diapazona minimālais kontrakts ir ieviests kā pusatvērts `[sākums, beigas)` intervāls ar `rinda`, `kolonna` un `nobīde`.
+
+Pirmie diapazoni ir `Identifikators`, `Parametrs` un `Atgriešana` mezgliem. Esošais `rinda` lauks pārejas laikā saglabāts.
 
 ## Nākamais izstrādes bloks
 
 **Pirmkoda diapazona informācija AST mezgliem.**
 
-Mērķis:
+Pirmā iterācija ir pabeigta:
 
-1. definēt minimālo diapazona formu AST v1 ar kanonisku latviešu rakstību
-2. saglabāt `sākums`, `beigas` un `nobīde` konsekventā formā
-3. sākt ar reprezentatīviem deklarāciju, priekšrakstu un izteiksmju mezgliem
-4. nepazaudēt pašreizējo `rinda` informāciju pārejas laikā
-5. pievienot regresijas pārbaudes
-6. palaist pilno `corepack pnpm run check`
+1. definēts `diapazons.sākums / diapazons.beigas` kontrakts
+2. `rinda` un `kolonna` ir 1-bāzētas
+3. `nobīde` ir 0-bāzēta
+4. saglabāts esošais `rinda` lauks
+5. pārklāti `Identifikators`, `Parametrs` un `Atgriešana`
+6. pievienotas regresijas pārbaudes
+
+Nākamais apakšsolis:
+
+- paplašināt diapazonus uz saliktām izteiksmēm
+- pievienot diapazonus augšējā līmeņa deklarācijām
+- pievienot diapazonus klases AST mezgliem
+- pēc pietiekama pārklājuma atzīmēt ROADMAP pirmkoda diapazonu uzdevumu kā pabeigtu
 
 Pēc tam:
 
