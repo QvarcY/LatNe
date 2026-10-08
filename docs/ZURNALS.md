@@ -1830,3 +1830,63 @@ Līdz ar AST nosaukumu arī LatNe paša leksiskajā analizatorā un regresijas p
 
 Citi AST nosaukumi šajā solī netiek mainīti.
 
+---
+
+## 2026-10-08 — J0040 — AST v1 pirmie lauku lēmumi
+
+**Tips:** AST / kontrakts
+**Statuss:** pabeigts
+
+Pēc visu 40 pašreizējo AST mezglu tipu lauku inventarizācijas apstiprināti pirmie divi AST v1 lauku kontrakta lēmumi.
+
+`rinda` ir pārejas lauks. Tas pagaidām paliek saderībai, bet stabilajā AST v1 publiskajā kontraktā atrašanās vietu nosaka `diapazons`.
+
+Par pārejas / iekšējiem laukiem ārpus stabilā AST v1 publiskā kontrakta apstiprināti:
+
+- `ķermeņaLeksiskieElementi`
+- `ķermeņaLeksiskoElementuSkaits`
+- `parametruLeksiskoElementuSkaits`
+
+Šajā solī šie lauki netiek dzēsti no parsera. Tiek fiksēts tikai to kontrakta statuss.
+
+Nākamais neatrisinātais AST v1 jautājums ir vienota `null`, `""`, `[]` un neesoša lauka semantika.
+
+---
+
+## 2026-10-08 — J0041 — AST v1 tukšuma semantika
+
+**Tips:** AST / kontrakts
+**Statuss:** pabeigts
+
+Apstiprināta vienota AST v1 semantika neesošām un tukšām vērtībām.
+
+- kolekcijas lauks vienmēr eksistē un tukšā stāvoklī ir `[]`
+- izvēles viena vērtība vienmēr eksistē un neesamības gadījumā ir `null`
+- `""` netiek izmantota kā neesošas vērtības marķieris
+- diskriminētu variantu lauki pastāv tikai tajā variantā, kuram tie pieder
+- `Nosacījums.citādi` saglabā atšķirību starp `null`, `[]` un satura masīvu
+
+No šī lēmuma izriet, ka pašreizējie `Darbība.atgriezesTips: ""` un `Metode.atgriezesTips: ""` pirms AST v1 kontrakta pabeigšanas būs jāsaskaņo uz `null`, ja atgriezes tips nav norādīts.
+
+Šajā solī parsera AST forma vēl netiek mainīta; fiksēts kontrakta lēmums.
+
+Nākamais darbs ir precīzi nofiksēt `KārtasCikls`, `Nosacījums.citādi` un `Mēģinājums.ķer` formas.
+
+---
+
+## 2026-10-08 — J0042 — KārtasCikls atbalsta abas kam formas
+
+**Tips:** AST / sintaktiskā analīze / kontrakts
+**Statuss:** lēmums apstiprināts
+
+Apstiprināts, ka `KārtasCikls` AST v1 jāatbalsta abas `kam` konstrukcijas:
+
+- secīga iterācija pa kolekciju
+- klasiska trīsdaļīga skaitītāja cikla galvene
+
+Pašreizējais `variants: "vispārīgs"` nav uzskatāms par stabilu AST v1 formu, jo tas galveni analizē kā vienu izteiksmi un nepiedāvā pilnvērtīgu trīsdaļīgas galvenes struktūru.
+
+Tāpēc skaitītāja cikla parseris jāpabeidz pirms AST v1 iesaldēšanas.
+
+Šajā solī jauni AST lauku nosaukumi netiek ieviesti. Precīzie skaitītāja cikla lauki jāapstiprina projekta autoram pirms koda maiņas.
+

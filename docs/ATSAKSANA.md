@@ -169,14 +169,21 @@ Pirmkoda diapazoni ir ieviesti visiem 40 pašreizējiem AST mezglu tipiem. Regre
 
 Pirmkoda diapazonu ROADMAP uzdevums ir pabeigts.
 
-Nākamais solis:
+Pašreizējais stāvoklis:
 
-- inventarizēt visu 40 AST mezglu tipu laukus
-- katram laukam noteikt statusu: obligāts, izvēles vai pārejas
-- izlemt `rinda` lauka turpmāko statusu blakus `diapazons`
-- izlemt `ķermeņaLeksiskieElementi` pārejas lauku turpmāko statusu
-- nofiksēt vienotu nulles un tukšu kolekciju semantiku
-- pēc tam publicēt pirmo `spec/ast-v1.md`
+- visu 40 AST mezglu tipu faktiskie lauki ir inventarizēti
+- `rinda` apstiprināts kā pārejas lauks; stabilā atrašanās vietas informācija ir `diapazons`
+- `ķermeņaLeksiskieElementi`, `ķermeņaLeksiskoElementuSkaits` un `parametruLeksiskoElementuSkaits` apstiprināti kā pārejas / iekšēji lauki
+- kolekcijas tukšā stāvoklī lieto `[]`
+- izvēles viena vērtība neesamības gadījumā lieto `null`
+- `""` nav neesošas vērtības marķieris
+- diskriminētu variantu cita varianta lauki objektā neeksistē
+- `Nosacījums.citādi` saglabā `null` / `[]` / satura masīva semantiku
+- pašreizējais `Darbība.atgriezesTips: ""` un `Metode.atgriezesTips: ""` vēl jāsaskaņo ar apstiprināto `null` noteikumu
+- `KārtasCikls` AST v1 jāatbalsta gan kolekcijas cikls, gan klasiska trīsdaļīga skaitītāja cikla galvene; pašreizējais `vispārīgs` starpstāvoklis pirms AST v1 jānomaina ar pilnvērtīgu parseri
+- pirms ieviešanas jāapstiprina skaitītāja cikla AST lauku nosaukumi
+- nākamie pārējie lēmumi: `Nosacījums.citādi` forma `citādi ja` gadījumā un `Mēģinājums.ķer`
+- pēc pārējo lauku lēmumu pabeigšanas jāpublicē pirmais `spec/ast-v1.md`
 
 Pēc tam:
 
