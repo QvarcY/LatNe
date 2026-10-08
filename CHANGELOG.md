@@ -8,6 +8,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- `Darbība.atgriezesTips` un `Metode.atgriezesTips` neesošai vērtībai tagad izmanto `null`, nevis tukšu virkni
 - `KārtasCikls` papildināts ar strukturētu `variants: "skaitītājs"` galveni un laukiem `sākums`, `nosacījums`, `solis`
 - noņemts nepabeigtais `KārtasCikls` `variants: "vispārīgs"` starpstāvoklis
 - AST `VeidnesInterpolācija` pārsaukta par apstiprināto `VeidnesAizpildījums`

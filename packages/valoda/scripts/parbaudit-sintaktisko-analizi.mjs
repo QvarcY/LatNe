@@ -504,6 +504,59 @@ if (
   )
 }
 
+const darbībaBezAtgriezesTipaAst =
+  analizēSintaksi(
+    analizēLeksiski(
+      `darbība bezTipa() {
+  atkļūdo
+}`,
+      vārdnīca
+    )
+  )
+
+const darbībaBezAtgriezesTipa =
+  darbībaBezAtgriezesTipaAst
+    .elementi[0]
+
+if (
+  darbībaBezAtgriezesTipa?.veids !==
+    "Darbība" ||
+  darbībaBezAtgriezesTipa.atgriezesTips !==
+    null
+) {
+  throw new Error(
+    "Darbība bez atgriezes tipa neizmanto null"
+  )
+}
+
+const metodeBezAtgriezesTipaAst =
+  analizēSintaksi(
+    analizēLeksiski(
+      `klase BezTipa {
+  darbība dari() {
+    atkļūdo
+  }
+}`,
+      vārdnīca
+    )
+  )
+
+const metodeBezAtgriezesTipa =
+  metodeBezAtgriezesTipaAst
+    .elementi[0]
+    ?.metodes?.[0]
+
+if (
+  metodeBezAtgriezesTipa?.veids !==
+    "Metode" ||
+  metodeBezAtgriezesTipa.atgriezesTips !==
+    null
+) {
+  throw new Error(
+    "Metode bez atgriezes tipa neizmanto null"
+  )
+}
+
 const imports =
   ast.elementi.find(
     mezgls =>

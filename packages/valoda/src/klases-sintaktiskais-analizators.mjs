@@ -336,7 +336,9 @@ export function analizēKlasesĶermeni(
             "metodes"
           ),
         atgriezesTips:
-          atgriezesTips.join(""),
+          atgriezesTips.length > 0
+            ? atgriezesTips.join("")
+            : null,
         ķermenis:
           typeof priekšrakstuAnalizators ===
             "function"

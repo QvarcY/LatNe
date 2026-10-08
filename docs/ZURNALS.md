@@ -1924,3 +1924,23 @@ Iepriekšējais `variants: "vispārīgs"` starpstāvoklis ir noņemts. Galvenei,
 
 Regresijas pārbaudes sedz gan kolekcijas `KārtasCikls`, gan skaitītāja `KārtasCikls`, abu variantu lauku nošķīrumu un nepilnīgas skaitītāja galvenes noraidīšanu.
 
+---
+
+## 2026-10-08 — J0044 — Neesošs atgriezes tips ir null
+
+**Tips:** AST / kontrakts / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Ieviests iepriekš apstiprinātais AST v1 noteikums, ka izvēles viena vērtība neesamības gadījumā ir `null`, nevis tukša virkne.
+
+Mainīti divi pašreizējie izvēles lauki:
+
+- `Darbība.atgriezesTips`
+- `Metode.atgriezesTips`
+
+Ja atgriezes tips nav norādīts, abi tagad ir `null`. Ja tips ir norādīts, vērtība joprojām ir virkne.
+
+`Iegūšana.atgriezesTips` netiek mainīts, jo iegūšanas deklarācijai atgriezes tips pašreizējā sintaksē ir obligāts.
+
+Regresijas pārbaudes sedz gan `Darbība`, gan `Metode` bez norādīta atgriezes tipa un pieprasa `null`.
+

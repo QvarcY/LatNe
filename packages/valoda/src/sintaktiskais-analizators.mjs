@@ -1015,7 +1015,9 @@ export function analizēSintaksi(leksiskieElementi) {
       parametruLeksiskoElementuSkaits:
         parametri.length,
       atgriezesTips:
-        atgriezesTips.join(""),
+        atgriezesTips.length > 0
+          ? atgriezesTips.join("")
+          : null,
       ķermeņaLeksiskieElementi:
         saturs.length,
       ķermenis:
