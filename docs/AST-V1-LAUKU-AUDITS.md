@@ -43,7 +43,7 @@ Visiem šīs tabulas mezgliem, izņemot `Programma`, papildus ir `rinda` un `dia
 |---|---|---|---|
 | `Mainīgais` | `deklarācija`, `nosaukums`, `tips`, `vērtība` | `tips: null`, ja nav tipa; `vērtība: null`, ja nav sākuma vērtības | `deklarācija` pašlaik glabā avota identitāti `const` / `let` / `var` |
 | `Nosacījums` | `nosacījums`, `ķermenis`, `citādi` | `ķermenis: []`, ja tukšs; `citādi: null`, ja nav `citādi`; tukšs `citādi {}` dod `[]` | `citādi ja` pašlaik tiek glabāts kā viena `Nosacījums` mezgla masīvs |
-| `KārtasCikls` | kopīgi: `variants`, `ķermenis`; kolekcijas variantam: `deklarācija`, `mainīgais`, `kolekcija`; skaitītāja variantam: `sākums`, `nosacījums`, `solis` | varianta specifiskie lauki netiek izveidoti kā `null`; tie vienkārši nav otra varianta objektā | Varianti ir `"of"` un `"skaitītājs"` |
+| `KārtasCikls` | kopīgi: `variants`, `ķermenis`; kolekcijas variantam: `deklarācija`, `mainīgais`, `kolekcija`; skaitītāja variantam: `sākums`, `nosacījums`, `solis` | varianta specifiskie lauki netiek izveidoti kā `null`; tie vienkārši nav otra varianta objektā | Varianti ir `"kolekcija"` un `"skaitītājs"` |
 | `Atgriešana` | `vērtība` | `vērtība: null`, ja nav atgriežamās izteiksmes | — |
 | `Metiens` | `vērtība` | parseris sagaida izteiksmi | — |
 | `Mēģinājums` | `mēģina`, `ķer`, `beigas` | `mēģina: []`; `ķer: null`, ja nav `ķer`; `beigas: null`, ja nav `beigās` | `ķer` ir iekšējs objekts ar `parametrs` un `ķermenis`, nevis atsevišķs AST mezgls |
@@ -56,7 +56,7 @@ Visiem 10 priekšrakstu mezgliem papildus ir `rinda` un `diapazons`.
 
 ### `KārtasCikls` faktiskās formas
 
-`variants: "of"`:
+`variants: "kolekcija"`:
 
 ```text
 veids
@@ -90,7 +90,7 @@ Ja `ķer` pastāv, tas pašlaik ir:
 
 ```text
 {
-  parametrs: string | null,
+  parametrs: teksts | null,
   ķermenis: Priekšraksts[]
 }
 ```
@@ -117,7 +117,7 @@ Ja `ķer` pastāv, tas pašlaik ir:
 | `Izsaukums` | `izsaucamais`, `argumenti` | `argumenti: []`, ja argumentu nav | — |
 | `Gaidīšana` | `izteiksme` | — | — |
 | `Jauns` | `konstruktors`, `argumenti` | `argumenti: []`, ja iekavu/argumentu nav | — |
-| `PirmsIzteiksme` | `operators`, `izteiksme` | — | Tekstuālais `veids` operators AST pašlaik tiek glabāts kā `"typeof"` |
+| `PirmsIzteiksme` | `operators`, `izteiksme` | — | LatNe `veids` operators AST tiek glabāts semantiski kā `"veids"` |
 | `BināraIzteiksme` | `operators`, `kreisā`, `labā` | — | — |
 | `PiešķiršanasIzteiksme` | `operators`, `mērķis`, `vērtība` | — | — |
 
@@ -151,11 +151,13 @@ Regresijas AST diapazonu audits apzināti neiet iekšā `ķermeņaLeksiskieEleme
 Pašreiz daži AST lauki glabā nevis LatNe rakstību, bet terminoloģijas reģistra avota identitāti:
 
 - `Mainīgais.deklarācija`: `"const"`, `"let"`, `"var"`;
-- `KārtasCikls.deklarācija`: `"const"`, `"let"`, `"var"`;
-- `KārtasCikls.variants`: viens no pašreizējiem variantiem ir `"of"`;
-- `PirmsIzteiksme.operators`: LatNe `veids` gadījumā pašlaik ir `"typeof"`.
+- `KārtasCikls.deklarācija`: `"const"`, `"let"`, `"var"`.
 
-Šajā auditā šīs vērtības netiek mainītas. Pirms AST v1 iesaldēšanas jāizlemj, vai šī ir apzināta AST v1 semantika.
+`KārtasCikls.variants` kolekcijas forma vairs neizmanto avota identitāti `"of"`; AST semantiskā vērtība ir `"kolekcija"`.
+
+`PirmsIzteiksme.operators` LatNe `veids` gadījumā vairs neizmanto avota identitāti `"typeof"`; AST semantiskā vērtība ir `"veids"`.
+
+Neatrisināts paliek tikai deklarāciju `"const"` / `"let"` / `"var"` semantiskais attēlojums AST v1.
 
 ## Apstiprinātie AST v1 lauku lēmumi
 
@@ -191,11 +193,23 @@ Apstiprināti šādi AST v1 noteikumi:
 
 `Iegūšana.atgriezesTips` paliek obligāts un parserī nedrīkst būt tukšs.
 
+### Latviskas un semantiskas AST vērtības
+
+AST v1 publiskajā kontraktā terminoloģijas reģistra avota identitāte netiek izmantota kā publiska AST vērtība, ja LatNe semantikai jau ir apstiprināts latvisks nosaukums.
+
+Apstiprināts un ieviests:
+
+- `KārtasCikls.variants: "kolekcija"` iepriekšējā `"of"` vietā;
+- `PirmsIzteiksme.operators: "veids"` iepriekšējā `"typeof"` vietā;
+- AST specifikācijas tipa pierakstā izmanto `teksts`, nevis TypeScript `string`.
+
+Leksiskais un sintaktiskais analizators drīkst iekšēji turpināt izmantot terminoloģijas reģistra `source` identitāti konstrukciju atpazīšanai. Šī iekšējā identitāte nav AST v1 publiskā semantika.
+
 ## Apstiprinātais KārtasCikls tvērums
 
 `KārtasCikls` AST v1 atbalsta abas LatNe `kam` formas:
 
-- secīgu iešanu pa kolekciju ar `variants: "of"`;
+- secīgu iešanu pa kolekciju ar `variants: "kolekcija"`;
 - klasisku trīsdaļīgu skaitītāja cikla galveni ar `variants: "skaitītājs"`.
 
 Skaitītāja cikla apstiprinātie lauki ir `sākums`, `nosacījums` un `solis`. Parseris sadala galveni trīs augšējā līmeņa daļās, `sākums` analizē kā vienu `Mainīgais` deklarāciju, bet `nosacījums` un `solis` analizē ar pilno izteiksmju analizatoru.
@@ -208,7 +222,7 @@ Pēc faktiskā lauku audita vēl jāpieņem lēmumi par:
 
 1. `Nosacījums.citādi` precīzo satura formu `citādi ja` gadījumā; `null` / `[]` / satura masīva semantika jau ir apstiprināta;
 2. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
-3. avota identitātes vērtības `const`, `let`, `var`, `of`, `typeof` AST laukos;
+3. deklarāciju semantiskās vērtības pašreizējo `const`, `let`, `var` vietā;
 4. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
 
 Tikai pēc šo punktu apstiprināšanas drīkst pabeigt visu lauku statusu kā **obligāts**, **izvēles** vai **pārejas** un pēc tam virzīties uz `spec/ast-v1.md`.
