@@ -1971,3 +1971,26 @@ Pievienota regresijas pārbaude `veids vērtība`, kas pieprasa `PirmsIzteiksme.
 
 Neatrisināts paliek deklarāciju `const` / `let` / `var` semantiskais attēlojums AST v1. Tas jāizlemj atsevišķi, nevis mehāniski pārtulkojot avota atslēgvārdus.
 
+---
+
+## 2026-10-08 — J0046 — Deklarāciju semantiskās AST vērtības
+
+**Tips:** AST / terminoloģija / kontrakts / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Apstiprinātas un ieviestas deklarāciju publiskās AST v1 vērtības:
+
+```text
+const → "konstante"
+let   → "mainīgais"
+var   → "funkcijasMainīgais"
+```
+
+Kartējums tiek izmantots gan `Mainīgais.deklarācija`, gan kolekcijas `KārtasCikls.deklarācija`.
+
+`funkcijasMainīgais` apzināti netiek sapludināts ar `mainīgais`, jo `var` ir atšķirīga funkcijas tvēruma semantika. Parseris šo avota formu turpina atbalstīt saderībai, bet jaunā LatNe kodā to nav ieteicams izmantot.
+
+Leksiskais un sintaktiskais analizators drīkst iekšēji izmantot `const`, `let` un `var` kā terminoloģijas reģistra `source` identitātes. Publiskajā AST tās vairs netiek izvadītas deklarācijas laukā.
+
+Regresijas pārbaudes sedz visas trīs deklarāciju formas. Skaitītāja `KārtasCikls` ar `lai` pieprasa `sākums.deklarācija: "mainīgais"`, bet kolekcijas cikls ar `nemainīgs` pieprasa `deklarācija: "konstante"`.
+

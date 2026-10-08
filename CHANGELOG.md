@@ -8,6 +8,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- `Mainīgais.deklarācija` un `KārtasCikls.deklarācija` izmanto semantiskās vērtības `"konstante"`, `"mainīgais"` un `"funkcijasMainīgais"` avota `const`, `let` un `var` vietā
 - `KārtasCikls` kolekcijas variants AST izmanto semantisko `"kolekcija"`, nevis avota identitāti `"of"`
 - `PirmsIzteiksme.operators` LatNe `veids` operatoram izmanto semantisko `"veids"`, nevis `"typeof"`
 - AST specifikācijas tipa pierakstā `string`, `boolean` un `Number` aizstāti ar LatNe `teksts`, `loģisks` un `skaitlis`

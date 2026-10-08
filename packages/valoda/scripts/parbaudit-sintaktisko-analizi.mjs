@@ -318,6 +318,48 @@ function gaidāmaisDeklarācijasDiapazons(
   }
 }
 
+const deklarācijuSemantikasParaugi = [
+  [
+    "nemainīgs vērtība = 1",
+    "konstante"
+  ],
+  [
+    "lai vērtība = 1",
+    "mainīgais"
+  ],
+  [
+    "mainīgs vērtība = 1",
+    "funkcijasMainīgais"
+  ]
+]
+
+for (
+  const [
+    avots,
+    gaidītāDeklarācija
+  ] of deklarācijuSemantikasParaugi
+) {
+  const mezgli =
+    analizēPriekšrakstus(
+      analizēLeksiski(
+        avots,
+        vārdnīca
+      )
+    )
+
+  if (
+    mezgli.length !== 1 ||
+    mezgli[0]?.veids !==
+      "Mainīgais" ||
+    mezgli[0].deklarācija !==
+      gaidītāDeklarācija
+  ) {
+    throw new Error(
+      `Mainīgais.deklarācija neatbilst semantikai: ${avots}`
+    )
+  }
+}
+
 const skaitītājaCiklaAvots =
   `kam (lai i = 0; i < 10; i += 1) {
   atkļūdo
@@ -350,7 +392,7 @@ if (
   skaitītājaCikls.sākums?.veids !==
     "Mainīgais" ||
   skaitītājaCikls.sākums.deklarācija !==
-    "let" ||
+    "mainīgais" ||
   skaitītājaCikls.sākums.nosaukums !==
     "i" ||
   skaitītājaCikls.sākums.vērtība?.veids !==
@@ -451,7 +493,7 @@ if (
     "KārtasCikls" ||
   kolekcijasCikls.variants !== "kolekcija" ||
   kolekcijasCikls.deklarācija !==
-    "const" ||
+    "konstante" ||
   kolekcijasCikls.mainīgais !==
     "ieraksts" ||
   kolekcijasCikls.kolekcija?.veids !==
