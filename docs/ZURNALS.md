@@ -1673,3 +1673,34 @@ Nākamais engineering solis:
 
 **klases iekšējo AST mezglu pirmkoda diapazoni**.
 
+---
+
+## 2026-10-08 — J0035 — Klases iekšējo mezglu pirmkoda diapazoni
+
+**Tips:** sintaktiskā analīze / AST / diagnostikas pamats
+**Statuss:** pabeigts
+
+Pirmkoda diapazonu kontrakts paplašināts uz četriem klases iekšējiem AST mezgliem:
+
+- `KlasesLauks`
+- `Konstruktors`
+- `Iegūšana`
+- `Metode`
+
+Robežas:
+
+- `KlasesLauks` sākas pie pirmā pieejamības vai `nemaināms` modifikatora un beidzas aiz tipa; ja deklarācijā ir `;`, tas ietilpst diapazonā
+- `Konstruktors` sākas pie pirmā modifikatora vai `konstruktors` un beidzas aiz ķermeņa aizverošās `}`
+- `Iegūšana` sākas pie pirmā modifikatora vai `ņem` un beidzas aiz ķermeņa aizverošās `}`
+- `Metode` sākas pie pirmā modifikatora vai `darbība` un beidzas aiz ķermeņa aizverošās `}`
+
+Esošais `rinda` lauks nav mainīts.
+
+Regresijas pārbaudes sedz visus četrus kanoniskā `Lietotājs` klases laukus, konstruktoru un iegūšanu, kā arī atsevišķo klases metodes regresijas paraugu ar `atvērts` modifikatoru.
+
+ROADMAP pirmkoda diapazonu uzdevums vēl paliek atvērts.
+
+Nākamais apakšsolis:
+
+**atlikušo AST mezglu diapazonu audits un pārklājuma pabeigšana izteiksmēm un priekšrakstiem**.
+
