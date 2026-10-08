@@ -209,6 +209,15 @@ Trešā iterācija pārklāj visas pašreizējās augšējā līmeņa deklarāci
 
 Esošais mezgla `rinda` lauks joprojām saglabā iepriekšējo semantiku un netiek pārbīdīts uz modifikatora rindu.
 
+Ceturtā iterācija pārklāj klases iekšējos mezglus:
+
+- `KlasesLauks` — no pirmā pieejamības vai `nemaināms` modifikatora līdz tipa beigām, ieskaitot `;`, ja tas ir rakstīts
+- `Konstruktors` — no pirmā modifikatora vai `konstruktors` līdz ķermeņa aizverošajai `}`
+- `Iegūšana` — no pirmā modifikatora vai `ņem` līdz ķermeņa aizverošajai `}`
+- `Metode` — no pirmā modifikatora vai `darbība` līdz ķermeņa aizverošajai `}`
+
+Arī šiem mezgliem `rinda` saglabā iepriekšējo semantiku, bet `diapazons.sākums` ietver deklarācijas modifikatorus.
+
 Šī joprojām ir pamata infrastruktūra, ne pilns AST v1 diapazonu pārklājums.
 
 ## Klases slānis
