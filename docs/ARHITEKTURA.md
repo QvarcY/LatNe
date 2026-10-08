@@ -197,6 +197,18 @@ Otrā iterācija paplašina to uz saliktām izteiksmēm:
 
 Salikto izteiksmju diapazoni tiek veidoti no parsera patērēto leksisko elementu robežām, lai tie nosegtu visu sintaktisko konstrukciju arī tad, ja kādam bērna mezglam diapazons vēl nav ieviests.
 
+Trešā iterācija pārklāj visas pašreizējās augšējā līmeņa deklarācijas:
+
+- `Imports` — no `importē` līdz avota teksta literāļa beigām
+- `Saskarsme` — no deklarācijas sākuma līdz aizverošajai `}`
+- `Uzskaitījums` — no deklarācijas sākuma līdz aizverošajai `}`
+- `Klase` — no deklarācijas sākuma līdz klases aizverošajai `}`
+- `Darbība` — no deklarācijas sākuma līdz darbības ķermeņa aizverošajai `}`
+
+`Klase` un `Darbība` diapazons sākas pie pirmā deklarācijas modifikatora, ja tāds ir. Tādēļ, piemēram, `eksportē asinhroni darbība ...` diapazons ietver gan `eksportē`, gan `asinhroni`.
+
+Esošais mezgla `rinda` lauks joprojām saglabā iepriekšējo semantiku un netiek pārbīdīts uz modifikatora rindu.
+
 Šī joprojām ir pamata infrastruktūra, ne pilns AST v1 diapazonu pārklājums.
 
 ## Klases slānis
