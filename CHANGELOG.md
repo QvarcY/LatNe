@@ -18,6 +18,11 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - diapazoni paplašināti uz saliktām izteiksmēm: `Īpašība`, `Izsaukums`, `BināraIzteiksme` un `PiešķiršanasIzteiksme`
 - diapazoni pievienoti augšējā līmeņa deklarācijām: `Imports`, `Saskarsme`, `Uzskaitījums`, `Klase` un `Darbība`
 - diapazoni pievienoti klases iekšējiem mezgliem: `KlasesLauks`, `Konstruktors`, `Iegūšana` un `Metode`
+- pabeigts pirmkoda diapazonu pārklājums visiem 40 pašreizējiem AST mezglu tipiem
+- atlikušajiem izteiksmju mezgliem pievienoti diapazoni, tostarp `Masīvs`, `Veidne`, `Grupa`, `Gaidīšana`, `Jauns` un `UnāraIzteiksme`
+- atlikušajiem priekšrakstu mezgliem pievienoti diapazoni, tostarp `Mainīgais`, `Nosacījums`, `KamCikls`, `Mēģinājums`, `Metiens` un vienkāršie vadības priekšraksti
+- `Programma` saknei definēts arī tukša avota nulles garuma diapazons
+- pievienots pilns AST diapazonu audits, kas pārbauda visu zināmo mezglu tipu pārklājumu un bērnu robežas
 - pievienotas pirmkoda diapazonu regresijas pārbaudes, tostarp veidnes interpolācijas absolūtajai nobīdei, salikto izteiksmju, pilnu deklarāciju un klases iekšējo mezglu robežām
 - normalizēti LatNe leksiskā analizatora, sintaktiskā analizatora, leksisko elementu un AST latviskie identifikatori uz pareizu rakstību ar diakritiskajām zīmēm
 - publiskie parsera eksporti pārdēvēti uz `izveidoVārdnīcu`, `analizēLeksiski`, `analizēIzteiksmi`, `analizēPriekšrakstus`, `analizēSintaksi`, `analizēKlasesĶermeni` un `analizēParametrus`
