@@ -107,10 +107,10 @@ Pirmais `.lat` paraugs:
 - 4 klases lauki
 - 2 konstruktora parametri
 - 4 konstruktora priekšraksti
-- 1 getteris
-- 1 gettera priekšraksts
-- 4 kanoniskā gettera veidnes AST daļas
-- 2 kanoniskā gettera interpolācijas
+- 1 iegūšana
+- 1 iegūšanas priekšraksts
+- 4 kanoniskās iegūšanas veidnes AST daļas
+- 2 kanoniskās iegūšanas interpolācijas
 
 Sintaktiskais analizators strukturēti saprot arī:
 
@@ -118,7 +118,7 @@ Sintaktiskais analizators strukturēti saprot arī:
 - `nemaināms` lauku informāciju un tipus
 - konstruktora deklarāciju un parametrus
 - konstruktora ķermeņa priekšrakstus
-- getter deklarāciju, atgriezes tipu un ķermeni
+- iegūšanas deklarāciju, atgriezes tipu un ķermeni
 - minimālu klases metodes deklarāciju
 - metodes pieejamību
 - metodes tipētos parametrus
@@ -140,7 +140,7 @@ Tehniskie checkpointi:
 - `8195515` — strukturēts klases ķermeņa AST
 - `1d73f5d` — strukturēts piešķiršanas AST
 - `5e5e741` — strukturēts konstruktora ķermeņa AST
-- `6bf5ace` — strukturēts gettera ķermeņa AST
+- `6bf5ace` — strukturēts iegūšanas ķermeņa AST
 - `91356b6` — minimāls klases metodes AST
 - `fe4ab65` — strukturēts darbības parametru AST
 - `c617074` — strukturēts veidņu interpolāciju AST
@@ -155,9 +155,9 @@ Konstruktors, klases metode un augšējā līmeņa `Darbība` izmanto kopīgu pa
 
 Veidņu literāļi tiek sadalīti `VeidnesTeksts` un `VeidnesInterpolācija` mezglos. Interpolācijas tiek analizētas ar pilno izteiksmju parseri.
 
-Konstruktora, gettera un minimālas klases metodes ķermeņi ir strukturēti ar kopīgo priekšrakstu analizatoru.
+Konstruktora, iegūšanas un minimālas klases metodes ķermeņi ir strukturēti ar kopīgo priekšrakstu analizatoru.
 
-Raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
+Neapstrādātie ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
 AST diapazona minimālais kontrakts ir ieviests kā pusatvērts `[sākums, beigas)` intervāls ar `rinda`, `kolonna` un `nobīde`.
 
@@ -199,7 +199,7 @@ piešķiršanas AST — pabeigts
 ↓
 konstruktora ķermeņa AST — pabeigts
 ↓
-getter un metožu minimums — pabeigts
+iegūšanas un metožu minimums — pabeigts
 ↓
 funkciju parametru AST — pabeigts
 ↓
