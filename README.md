@@ -149,9 +149,11 @@ Veidņu interpolācijas izmanto pilno izteiksmju AST, bet veidnes `pieraksts` v�
 
 Konstruktora, iegūšanas un klases metodes neapstrādātie ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
-**Nākamais konkrētais uzdevums ir pirmkoda diapazona informācija AST mezgliem.**
+Pirmkoda diapazoni tagad ir ieviesti visiem pašreizējiem AST mezglu tipiem un pārklāti ar regresijas auditu.
 
-Pēc tam tiks definēti AST mezglu obligātie un izvēles lauki, publicēts pirmais `spec/ast-v1.md` un stabilizēts AST v1 kontrakts.
+**Nākamais konkrētais uzdevums ir definēt AST mezglu obligātos un izvēles laukus.**
+
+Pēc tam tiks publicēts pirmais `spec/ast-v1.md`, pievienotas AST v1 paraugu pārbaudes un stabilizēts AST v1 kontrakts.
 
 ## Galvenais tuvākais mērķis
 
