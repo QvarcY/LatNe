@@ -203,7 +203,7 @@ export function analizēIzteiksmi(leksiskieElementi) {
         vērtība: Number(
           leksiskaisElements.vērtība.replaceAll("_", "")
         ),
-        raw: leksiskaisElements.vērtība,
+        pieraksts: leksiskaisElements.vērtība,
         rinda: leksiskaisElements.rinda
       }
     }
@@ -215,7 +215,7 @@ export function analizēIzteiksmi(leksiskieElementi) {
         veids: "Teksts",
         vērtība:
           leksiskaisElements.vērtība.slice(1, -1),
-        raw: leksiskaisElements.vērtība,
+        pieraksts: leksiskaisElements.vērtība,
         rinda: leksiskaisElements.rinda
       }
     }
@@ -268,7 +268,7 @@ export function analizēIzteiksmi(leksiskieElementi) {
       return {
         veids: "Veidne",
         daļas,
-        raw: leksiskaisElements.vērtība,
+        pieraksts: leksiskaisElements.vērtība,
         rinda: leksiskaisElements.rinda
       }
     }
