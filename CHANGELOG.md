@@ -8,6 +8,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- `Mēģinājums.ķer` AST v1 nostiprināts kā iekšējs `null | { parametrs, ķermenis }` objekts bez sava `veids`, `rinda` un `diapazons`
 - `Nosacījums.citādi` AST v1 nostiprināts kā `null | Priekšraksts[]`; `citādi ja` tiek attēlots kā iegults `Nosacījums` mezgls `citādi` masīvā
 - `Mainīgais.deklarācija` un `KārtasCikls.deklarācija` izmanto semantiskās vērtības `"konstante"`, `"mainīgais"` un `"funkcijasMainīgais"` avota `const`, `let` un `var` vietā
 - `KārtasCikls` kolekcijas variants AST izmanto semantisko `"kolekcija"`, nevis avota identitāti `"of"`

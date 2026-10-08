@@ -112,18 +112,20 @@ citādi: [
 
 Garāka `citādi ja` ķēde veidojas rekursīvi pēc tā paša principa. Šī forma ir apstiprināta kā stabilā AST v1 semantika.
 
-### `Mēģinājums.ķer` faktiskā forma
+### `Mēģinājums.ķer` stabilā forma
 
-Ja `ķer` pastāv, tas pašlaik ir:
+`Mēģinājums.ķer` AST v1 tips ir:
 
 ```text
-{
+null | {
   parametrs: teksts | null,
   ķermenis: Priekšraksts[]
 }
 ```
 
-Šim objektam pašlaik nav `veids`, `rinda` vai `diapazons`.
+`null` nozīmē, ka `ķer` bloka nav. Ja `ķer` pastāv, tas ir strukturēts `Mēģinājums` iekšējais objekts, nevis patstāvīgs AST mezgls.
+
+Šim objektam nav `veids`, `rinda` vai `diapazons`. Tukšam parametram tiek izmantots `parametrs: null`, bet tukšam `ķer` ķermenim — `ķermenis: []`.
 
 ## Izteiksmes un veidnes
 
@@ -252,7 +254,6 @@ Iepriekšējais `variants: "vispārīgs"` starpstāvoklis vairs netiek veidots.
 
 Pēc faktiskā lauku audita vēl jāpieņem lēmumi par:
 
-1. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
-2. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
+1. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
 
 Tikai pēc šo punktu apstiprināšanas drīkst pabeigt visu lauku statusu kā **obligāts**, **izvēles** vai **pārejas** un pēc tam virzīties uz `spec/ast-v1.md`.

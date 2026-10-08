@@ -318,6 +318,93 @@ function gaidāmaisDeklarācijasDiapazons(
   }
 }
 
+const mēģinājumsBezĶer =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      `mēģini {
+  atkļūdo
+} beigās {
+  atkļūdo
+}`,
+      vārdnīca
+    )
+  )[0]
+
+if (
+  mēģinājumsBezĶer?.veids !==
+    "Mēģinājums" ||
+  mēģinājumsBezĶer.ķer !== null ||
+  !Array.isArray(
+    mēģinājumsBezĶer.beigas
+  ) ||
+  mēģinājumsBezĶer.beigas
+    .length !== 1
+) {
+  throw new Error(
+    "Mēģinājums bez ķer neveido gaidīto AST"
+  )
+}
+
+const mēģinājumsArĶer =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      `mēģini {
+  atkļūdo
+} ķer (kļūda) {
+  atkļūdo
+}`,
+      vārdnīca
+    )
+  )[0]
+
+if (
+  mēģinājumsArĶer?.veids !==
+    "Mēģinājums" ||
+  !mēģinājumsArĶer.ķer ||
+  mēģinājumsArĶer.ķer.parametrs !==
+    "kļūda" ||
+  !Array.isArray(
+    mēģinājumsArĶer.ķer.ķermenis
+  ) ||
+  mēģinājumsArĶer.ķer.ķermenis
+    .length !== 1 ||
+  mēģinājumsArĶer.ķer.ķermenis[0]
+    ?.veids !== "Atkļūdošana" ||
+  "veids" in mēģinājumsArĶer.ķer ||
+  "rinda" in mēģinājumsArĶer.ķer ||
+  "diapazons" in mēģinājumsArĶer.ķer
+) {
+  throw new Error(
+    "Mēģinājums.ķer nav gaidītais iekšējais objekts"
+  )
+}
+
+const mēģinājumsArTukšuĶer =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      `mēģini {
+  atkļūdo
+} ķer () {
+}`,
+      vārdnīca
+    )
+  )[0]
+
+if (
+  !mēģinājumsArTukšuĶer?.ķer ||
+  mēģinājumsArTukšuĶer.ķer.parametrs !==
+    null ||
+  !Array.isArray(
+    mēģinājumsArTukšuĶer.ķer.ķermenis
+  ) ||
+  mēģinājumsArTukšuĶer.ķer.ķermenis
+    .length !== 0
+) {
+  throw new Error(
+    "Tukšs Mēģinājums.ķer neatbilst gaidītajam AST"
+  )
+}
+
 const nosacījumsBezCitādi =
   analizēPriekšrakstus(
     analizēLeksiski(
