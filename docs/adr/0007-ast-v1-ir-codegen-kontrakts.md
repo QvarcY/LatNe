@@ -12,7 +12,7 @@ Nākamajos posmos AST kļūs ievērojami plašāks:
 - klases ķermenis
 - piešķiršanas izteiksmes
 - pilnāki parametri
-- veidņu interpolācijas
+- veidņu aizpildījumi
 - source spans
 - LatNe API semantika
 
