@@ -795,8 +795,8 @@ export function analizēSintaksi(leksiskieElementi) {
         klasesĶermenis.lauki,
       konstruktors:
         klasesĶermenis.konstruktors,
-      getteri:
-        klasesĶermenis.getteri,
+      iegūšanas:
+        klasesĶermenis.iegūšanas,
       metodes:
         klasesĶermenis.metodes,
       rinda: sākums.rinda,

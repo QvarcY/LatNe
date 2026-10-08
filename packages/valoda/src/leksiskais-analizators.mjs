@@ -94,17 +94,17 @@ export function analizēLeksiski(teksts, vārdnīca) {
   }
 
   const analizēVeidnesDaļas = (
-    raw,
+    pieraksts,
     sākums
   ) => {
     const gravis =
       String.fromCharCode(96)
 
     const aizvērta =
-      raw.endsWith(gravis)
+      pieraksts.endsWith(gravis)
 
     const saturs =
-      raw.slice(
+      pieraksts.slice(
         1,
         aizvērta ? -1 : undefined
       )

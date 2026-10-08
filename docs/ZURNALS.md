@@ -45,8 +45,8 @@ Repozitorijs vēl nepastāv. Ir fiksēta LatNe identitāte, `.lat` paplašināju
 
 ### Apzināti vēl nav darīts
 
-- Nav implementēts tokenizeris.
-- Nav implementēts parseris.
+- Nav ieviests leksiskais analizators.
+- Nav ieviests sintaktiskais analizators.
 - Nav fiksēta pirmā atslēgvārdu kopa.
 - Nav radīts izpildāms `.lat` kods.
 - Nav sākts web slānis.
@@ -417,7 +417,7 @@ Vārdu kalve no pārlūkošanas rīka kļuva par praktisku terminoloģijas darba
 
 ## 2026-10-01 — J0010 — Pirmais LatNe tokenizators
 
-**Tips:** valoda / tokenizeris
+**Tips:** valoda / leksiskā analīze
 **Statuss:** pabeigts
 
 ### Mērķis
@@ -436,7 +436,7 @@ Pēc cilvēka vadītas pārskatīšanas visi 84 termini tika apstiprināti.
 - `packages/valoda/src/tokenizer.mjs`
 - `packages/valoda/scripts/tokenize-example.mjs`
 - Unicode identifikatoru atbalsts
-- teksta, skaitļu, operatoru un pieturzīmju tokeni
+- teksta, skaitļu, operatoru un pieturzīmju leksiskie elementi
 - komentāru izlaišana
 - LatNe terminu atpazīšana no kanoniskā terminoloģijas reģistra
 - tokenā saglabāta termina kanoniskā identitāte
@@ -446,7 +446,7 @@ Pēc cilvēka vadītas pārskatīšanas visi 84 termini tika apstiprināti.
 Pirmais `.lat` paraugs:
 
 - apstiprināti termini: 84
-- tokeni: 196
+- leksiskie elementi: 196
 - nezināmi simboli: 0
 
 Piemēri:
@@ -463,7 +463,7 @@ LatNe pirmo reizi spēj apstrādāt savu `.lat` avota failu.
 
 Darbojošā ķēde:
 
-`.lat → tokeni`
+`.lat → leksiskie elementi`
 
 Commit:
 
@@ -471,32 +471,32 @@ Commit:
 
 ### Nākamais solis
 
-Izveidot minimālo parseri un pirmo LatNe AST.
+Izveidot minimālo sintaktisko analizatoru un pirmo LatNe AST.
 
 Mērķa ķēde:
 
-`.lat → tokeni → AST`
+`.lat → leksiskie elementi → AST`
 
 ---
 
-## 2026-10-01 — J0011 — Pirmais LatNe parseris
+## 2026-10-01 — J0011 — Pirmais LatNe sintaktiskais analizators
 
-**Tips:** valoda / parseris / AST
+**Tips:** valoda / sintaktiskā analīze / AST
 **Statuss:** pabeigts
 
 ### Mērķis
 
-Izveidot pirmo parsera posmu, kas no LatNe tokenu plūsmas izveido strukturētu programmas AST.
+Izveidot pirmo sintaktiskā analizatora posmu, kas no LatNe leksisko elementu plūsmas izveido strukturētu programmas AST.
 
 ### Sākuma stāvoklis
 
 Darbojās pirmā apstrādes ķēde:
 
-`.lat → tokeni`
+`.lat → leksiskie elementi`
 
 Pirmais sintakses paraugs deva:
 
-- 196 tokenus
+- 196 leksiskos elementus
 - 0 nezināmu simbolu
 
 ### Izveidots
@@ -504,7 +504,7 @@ Pirmais sintakses paraugs deva:
 - `packages/valoda/src/parser.mjs`
 - `packages/valoda/scripts/parse-example.mjs`
 
-Parseris pirmajā versijā atpazīst:
+Sintaktiskais analizators pirmajā versijā atpazīst:
 
 - importu
 - saskarsmi
@@ -517,7 +517,7 @@ Parseris pirmajā versijā atpazīst:
 
 ### Arhitektūras lēmums
 
-Parseris nebalstās uz konkrēto latvisko termina tekstu.
+Sintaktiskais analizators nebalstās uz konkrēto latvisko termina tekstu.
 
 Tokenizators katram LatNe terminam saglabā kanonisko `source` identitāti.
 
@@ -529,15 +529,15 @@ Piemēram:
 - `klase` → `class`
 - `darbība` → `function`
 
-Parseris strādā ar šo kanonisko identitāti.
+Sintaktiskais analizators strādā ar šo kanonisko identitāti.
 
-Tas ļauj mainīt LatNe termina rakstību, nepārrakstot parsera gramatikas loģiku.
+Tas ļauj mainīt LatNe termina rakstību, nepārrakstot sintaktiskā analizatora gramatikas loģiku.
 
 ### Pārbaude
 
 Pirmais `.lat` fails:
 
-- tokeni: 196
+- leksiskie elementi: 196
 - AST mezgli: 5
 
 AST augšējais līmenis:
@@ -558,19 +558,19 @@ Darbība `ielādēLietotājus` korekti atpazīta kā:
 
 Klases un darbību ķermeņi šajā posmā vēl netiek pilnībā parsēti.
 
-Tie tiek saglabāti kā tokenu kopas.
+Tie tiek saglabāti kā leksisko elementu kopas.
 
-Tas ir apzināts pirmā parsera posma ierobežojums.
+Tas ir apzināts pirmā sintaktiskā analizatora posma ierobežojums.
 
 ### Rezultāts
 
 LatNe pirmo reizi darbojas ķēde:
 
-`.lat → tokeni → AST`
+`.lat → leksiskie elementi → AST`
 
 ### Nākamais solis
 
-Paplašināt parseri ar pirmajām iekšējām konstrukcijām:
+Paplašināt sintaktisko analizatoru ar pirmajām iekšējām konstrukcijām:
 
 - mainīgo deklarācijām
 - nosacījumiem
@@ -580,18 +580,18 @@ Paplašināt parseri ar pirmajām iekšējām konstrukcijām:
 
 ---
 
-## 2026-10-01 — J0012 — Darbības ķermeņa parseris
+## 2026-10-01 — J0012 — Darbības ķermeņa sintaktiskais analizators
 
-**Tips:** valoda / parseris / AST
+**Tips:** valoda / sintaktiskā analīze / AST
 **Statuss:** pabeigts
 
 ### Mērķis
 
-Paplašināt pirmo LatNe parseri tā, lai darbības ķermenis vairs nebūtu tikai tokenu kopa.
+Paplašināt pirmo LatNe sintaktisko analizatoru tā, lai darbības ķermenis vairs nebūtu tikai leksisko elementu kopa.
 
 ### Izveidots
 
-Parseris strukturēti atpazīst:
+Sintaktiskais analizators strukturēti atpazīst:
 
 - `const`, `let` un `var` deklarācijas
 - `if`
@@ -638,7 +638,7 @@ tiek atpazīta kā strukturēts cikls:
 
 Darbības `ielādēLietotājus` augšējā līmenī ir viens `Mēģinājums` mezgls.
 
-Tā `mēģini` daļā parseris atpazīst:
+Tā `mēģini` daļā sintaktiskais analizators atpazīst:
 
 - `nemainīgs dati`
 - `lai lietotāji`
@@ -663,7 +663,7 @@ Tā `mēģini` daļā parseris atpazīst:
 
 Izteiksmes vēl netiek parsētas savā AST.
 
-Tās tiek saglabātas kā tokenu secības teksts.
+Tās tiek saglabātas kā leksisko elementu secības teksts.
 
 Piemēri:
 
@@ -675,11 +675,11 @@ Piemēri:
 
 ### Rezultāta ķēde
 
-`.lat → tokeni → deklarāciju AST → statement AST`
+`.lat → leksiskie elementi → deklarāciju AST → priekšrakstu AST`
 
 ### Nākamais solis
 
-Izveidot minimālo izteiksmju parseri.
+Izveidot minimālo izteiksmju sintaktisko analizatoru.
 
 Pirmajā versijā tam jāatpazīst:
 
@@ -693,14 +693,14 @@ Pirmajā versijā tam jāatpazīst:
 
 ---
 
-## 2026-10-01 — J0013 — Pirmais izteiksmju parseris
+## 2026-10-01 — J0013 — Pirmais izteiksmju sintaktiskais analizators
 
-**Tips:** valoda / parseris / AST
+**Tips:** valoda / sintaktiskā analīze / AST
 **Statuss:** pabeigts
 
 ### Mērķis
 
-Pārvērst līdzšinējās izteiksmju tokenu virknes strukturētos AST mezglos.
+Pārvērst līdzšinējās izteiksmju leksisko elementu virknes strukturētos AST mezglos.
 
 ### Izveidots
 
@@ -774,9 +774,9 @@ tiek parsēts kā tukšs `Masīvs`.
 
 ### Arhitektūra
 
-Izteiksmju parseris ir atdalīts no galvenā statement un deklarāciju parsera.
+Izteiksmju sintaktiskais analizators ir atdalīts no galvenā priekšrakstu un deklarāciju sintaktiskā analizatora.
 
-Tas novērš viena monolīta parsera faila veidošanos un ļauj izteiksmju gramatiku attīstīt neatkarīgi.
+Tas novērš viena monolīta sintaktiskā analizatora faila veidošanos un ļauj izteiksmju gramatiku attīstīt neatkarīgi.
 
 ### Pašreizējais ierobežojums
 
@@ -788,11 +788,11 @@ Nav vēl ieviestas visas iespējamās piešķiršanas, loģikas un valodas konst
 
 ### Rezultāta ķēde
 
-`.lat → tokeni → deklarāciju AST → statement AST → izteiksmju AST`
+`.lat → leksiskie elementi → deklarāciju AST → priekšrakstu AST → izteiksmju AST`
 
 ### Nākamais solis
 
-Paplašināt parseri ar nākamo sintakses kopu un pēc tam sagatavot pirmo koda ģenerēšanas posmu.
+Paplašināt sintaktisko analizatoru ar nākamo sintakses kopu un pēc tam sagatavot pirmo koda ģenerēšanas posmu.
 
 ---
 
@@ -820,10 +820,10 @@ GitHub `main` tajā brīdī bija sešus commitus aiz aktīvā zara un nebija nov
 ### Valodas stāvoklis
 
 - 84 apstiprināti termini
-- 196 tokeni pirmajā `.lat` paraugā
+- 196 leksiskie elementi pirmajā `.lat` paraugā
 - 0 nezināmu simbolu
 - augšējā līmeņa AST
-- statement AST
+- priekšrakstu AST
 - izteiksmju AST
 - atsevišķs expression parser modulis
 
@@ -845,8 +845,8 @@ Aktualizēti:
 
 Pievienoti ADR:
 
-- 0004 — parseris izmanto kanonisko termina identitāti
-- 0005 — izteiksmju parseris ir atsevišķs modulis
+- 0004 — sintaktiskais analizators izmanto kanonisko termina identitāti
+- 0005 — izteiksmju sintaktiskais analizators ir atsevišķs modulis
 - 0006 — API terminoloģija ir atsevišķs semantisks slānis
 
 ### Nākamais konkrētais uzdevums
@@ -860,9 +860,9 @@ Pirmajā iterācijā strukturēt:
 - `nemaināms`
 - tipus
 - konstruktoru un tā parametrus
-- getteri un atgriezes tipu
+- iegūšanu un atgriezes tipu
 
-Konstruktora un gettera ķermeņus vēl drīkst saglabāt kā tokenu kopas.
+Konstruktora un iegūšanas ķermeņus vēl drīkst saglabāt kā leksisko elementu kopas.
 
 ### Apzināti atlikts
 
@@ -985,7 +985,7 @@ Valodas kodols jau spēja:
 
 - tokenizēt `.lat`
 - veidot deklarāciju AST
-- veidot statement AST
+- veidot priekšrakstu AST
 - veidot izteiksmju AST
 
 ### Ceļa kartes audits
@@ -1012,14 +1012,14 @@ Procents rāda pabeigto daļu no pašreiz definētās ceļa kartes, nevis absol�
 
 ### Kvalitātes sliedes
 
-Pirms nākamās lielās parsera paplašināšanas ieplānots:
+Pirms nākamās lielās sintaktiskā analizatora paplašināšanas ieplānots:
 
 - Node.js runtime kontrakts
 - clean install pārbaude
 - GitHub Actions CI
 - terminoloģijas pārbaude CI
 - tokenizera pārbaude CI
-- parsera pārbaude CI
+- sintaktiskā analizatora pārbaude CI
 - Vārdu kalves check/build CI
 - regresijas fixture sistēma
 
@@ -1029,7 +1029,7 @@ Pievienots ADR 0007:
 
 `AST v1 ir koda ģeneratora kontrakts`
 
-Tas nosaka, ka codegen nedrīkst balstīties uz parsera nejaušām pagaidu struktūrām.
+Tas nosaka, ka koda ģenerēšana nedrīkst balstīties uz sintaktiskā analizatora nejaušām pagaidu struktūrām.
 
 ### Dokumentācijas sinhronizācija
 
@@ -1073,7 +1073,7 @@ GitHub Pages v2:
 - atspoguļo visas deviņas publiskās izpildes fāzes
 - kā nākamo engineering darbu rāda reproducējamu vidi un kvalitātes sliedes
 - klases AST saglabā kā nākamo valodas darbu pēc kvalitātes posma
-- atspoguļo AST v1 pirms codegen
+- atspoguļo AST v1 pirms koda ģenerēšanas
 - pievieno "Mācies ar LatNe" virzienu
 - pievieno "Būvē ar LatNe" virzienu
 - saglabā vizuālu atšķirību starp jau strādājošu un tikai plānotu funkcionalitāti
@@ -1210,7 +1210,7 @@ CI pārbauda:
 - clean install ar frozen lockfile
 - terminoloģijas reģistru
 - tokenizeri
-- parseri
+- sintaktisko analizatoru
 - Vārdu kalves TypeScript check
 - Vārdu kalves production build
 
@@ -1258,10 +1258,10 @@ Nākamais engineering uzdevums:
 
 ## 2026-10-07 — J0022 — Klases ķermeņa AST v1
 
-**Tips:** parseris / AST
+**Tips:** sintaktiskā analīze / AST
 **Statuss:** pabeigts
 
-Klases `Lietotājs` ķermenis vairs nav tikai neapstrādāta tokenu kopa.
+Klases `Lietotājs` ķermenis vairs nav tikai neapstrādāta leksisko elementu kopa.
 
 Ieviests:
 
@@ -1271,17 +1271,17 @@ Ieviests:
 - lauku tipi
 - `Konstruktors` mezgls
 - konstruktora parametri
-- `Getteris` mezgls
-- gettera atgriezes tips
+- `Iegūšana` mezgls
+- iegūšanas atgriezes tips
 
 Kanoniskajā paraugā tiek iegūti:
 
 - 6 klases ķermeņa mezgli
 - 4 lauki
 - 2 konstruktora parametri
-- 1 getteris
+- 1 iegūšana
 
-Konstruktora un gettera ķermeņi šajā checkpointā apzināti vēl palika kā neapstrādātas leksisko elementu kopas.
+Konstruktora un iegūšanas ķermeņi šajā checkpointā apzināti vēl palika kā neapstrādātas leksisko elementu kopas.
 
 Checkpoint:
 
@@ -1291,7 +1291,7 @@ Checkpoint:
 
 ## 2026-10-07 — J0023 — Piešķiršanas izteiksmju AST
 
-**Tips:** parseris / AST / regresijas pārbaudes
+**Tips:** sintaktiskā analīze / AST / regresijas pārbaudes
 **Statuss:** pabeigts
 
 Izteiksmju sintaktiskais analizators papildināts ar strukturētu `PiešķiršanasIzteiksme` mezglu.
@@ -1328,7 +1328,7 @@ Nākamais engineering uzdevums:
 
 ## 2026-10-07 — J0024 — Konstruktora ķermeņa priekšrakstu AST
 
-**Tips:** parseris / AST
+**Tips:** sintaktiskā analīze / AST
 **Statuss:** pabeigts
 
 Konstruktora ķermenis savienots ar esošo priekšrakstu analizatora infrastruktūru.
@@ -1337,7 +1337,7 @@ Kanoniskajā `Lietotājs` konstruktorā tagad tiek iegūti četri strukturēti `
 
 Iepriekšējā piešķiršanas izteiksmju regresijas pārbaude vairs nepārlasa neapstrādātos leksiskos elementus pa rindām, bet pārbauda īsto `Konstruktors.ķermenis` AST ceļu.
 
-Raw ķermeņa leksiskie elementi pagaidām saglabāti kā pārejas lauks.
+Neapstrādātie ķermeņa leksiskie elementi pagaidām saglabāti kā pārejas lauks.
 
 Checkpoint:
 
@@ -1345,18 +1345,18 @@ Checkpoint:
 
 ---
 
-## 2026-10-07 — J0025 — Gettera ķermeņa AST
+## 2026-10-07 — J0025 — Iegūšanas ķermeņa AST
 
-**Tips:** parseris / AST
+**Tips:** sintaktiskā analīze / AST
 **Statuss:** pabeigts
 
-Gettera ķermenis savienots ar to pašu priekšrakstu analizatora infrastruktūru.
+Iegūšanas ķermenis savienots ar to pašu priekšrakstu analizatora infrastruktūru.
 
-Kanoniskā gettera `apraksts` ķermenis tagad satur vienu strukturētu `Atgriešana` priekšrakstu.
+Kanoniskās iegūšanas `apraksts` ķermenis tagad satur vienu strukturētu `Atgriešana` priekšrakstu.
 
 Atgriešanas vērtība šajā posmā paliek `Veidne` mezgls. Veidņu interpolāciju strukturēšana apzināti atlikta uz atsevišķu AST v1 soli.
 
-Raw gettera ķermeņa elementi pagaidām saglabāti kā pārejas lauks.
+Neapstrādātie iegūšanas ķermeņa elementi pagaidām saglabāti kā pārejas lauks.
 
 Checkpoint:
 
@@ -1366,7 +1366,7 @@ Checkpoint:
 
 ## 2026-10-07 — J0026 — Minimāls klases metodes AST
 
-**Tips:** parseris / AST / regresijas pārbaudes
+**Tips:** sintaktiskā analīze / AST / regresijas pārbaudes
 **Statuss:** pabeigts
 
 Klases parserim pievienots pirmais `Metode` mezgls.
@@ -1378,7 +1378,7 @@ Minimālais metodes AST satur:
 - tipētus parametrus
 - izvēles atgriezes tipu
 - strukturētu ķermeni
-- pārejas raw ķermeņa elementus
+- pārejas neapstrādātos ķermeņa elementus
 
 Metodes ķermenis izmanto esošo priekšrakstu analizatoru.
 
@@ -1392,7 +1392,7 @@ klase MetodesParaugs {
 }
 ```
 
-Kanoniskais `examples/pamata-paraugs.lat` netika mainīts, tāpēc tā 196 leksisko elementu un 5 augšējā līmeņa mezglu baseline saglabājas.
+Kanoniskais `examples/pamata-paraugs.lat` netika mainīts, tāpēc tā 196 leksisko elementu un 5 augšējā līmeņa mezglu atskaites stāvoklis saglabājas.
 
 Checkpoint:
 
@@ -1406,7 +1406,7 @@ Nākamais engineering uzdevums:
 
 ## 2026-10-07 — J0027 — Darbības parametru AST
 
-**Tips:** parseris / AST / refaktorēšana
+**Tips:** sintaktiskā analīze / AST / refaktorēšana
 **Statuss:** pabeigts
 
 Augšējā līmeņa `Darbība` deklarācijām pievienots strukturēts `parametri` masīvs.
@@ -1433,10 +1433,10 @@ Checkpoint:
 
 ## 2026-10-07 — J0028 — Veidņu interpolāciju AST
 
-**Tips:** lexer / parseris / AST / regresijas pārbaudes
+**Tips:** leksiskā analīze / sintaktiskā analīze / AST / regresijas pārbaudes
 **Statuss:** pabeigts
 
-`veidne` leksiskais elements saglabā vienu ārējo tokenu, bet tagad satur strukturētas daļas.
+`veidne` leksiskais elements saglabā vienu ārējo leksisko elementu, bet tagad satur strukturētas daļas.
 
 Izteiksmju AST izmanto:
 
@@ -1445,14 +1445,14 @@ Izteiksmju AST izmanto:
 
 Interpolācijas saturs tiek atkārtoti leksiski analizēts ar LatNe terminoloģijas vārdnīcu un nodots pilnajam izteiksmju parserim.
 
-Kanoniskā gettera veidne satur 4 AST daļas un 2 interpolācijas.
+Kanoniskās iegūšanas veidne satur 4 AST daļas un 2 interpolācijas.
 
 Papildu regresijas pārbaudes sedz:
 
 - bināru izteiksmi `${vērtība + 1}`
 - escapotu `\${...}` marķieri
 
-Kanoniskais lexer baseline saglabājas 196 leksiskie elementi.
+Kanoniskais leksiskās analīzes atskaites stāvoklis saglabājas 196 leksiskie elementi.
 
 Checkpoint:
 
@@ -1484,12 +1484,12 @@ Nākamais engineering uzdevums:
 
 ## 2026-10-08 — J0030 — Latviešu identifikatoru normalizācijas recovery
 
-**Tips:** parseris / AST / kvalitāte / tehniskais parāds
+**Tips:** sintaktiskā analīze / AST / kvalitāte / tehniskais parāds
 **Statuss:** pabeigts
 
 Pirms pirmkoda diapazonu AST darba tika apturēta turpmāka implementācija, jo jaunajam kontraktam bija izmantotas transliterētas formas `sakums` un `nobide`.
 
-Paplašināts audits atklāja, ka tā pati problēma jau pastāv esošajā lexer/parser/AST kodolā.
+Paplašināts audits atklāja, ka tā pati problēma jau pastāv esošajā leksiskās analīzes / sintaktiskās analīzes / AST kodolā.
 
 Audita sākuma rezultāts:
 
@@ -1498,8 +1498,8 @@ Audita sākuma rezultāts:
 
 Normalizēti:
 
-- lexer un parsera publiskie eksporti
-- tokenu publiskie lauki
+- leksiskā un sintaktiskā analizatora publiskie eksporti
+- leksisko elementu publiskie lauki
 - AST publiskie lauki
 - saistītie iekšējie latviskie identifikatori
 - sintakses un regresijas pārbaudes
@@ -1525,7 +1525,7 @@ Pēc normalizācijas:
 - otrajā neatkarīgajā auditā izlabots arī `mēģinaLeksiskieElementi` un quality-gate skripta paša transliterētie iekšējie identifikatori
 - identifikatoru guards pārbauda arī pats savu izpildāmo kodu
 - terminoloģija: 84/84 approved
-- kanoniskais lexer baseline: 196
+- kanoniskais leksiskās analīzes atskaites stāvoklis: 196
 - nezināmi leksiskie elementi: 0
 - augšējā līmeņa AST mezgli: 5
 - klases ķermeņa mezgli: 6
@@ -1542,7 +1542,7 @@ Nākamais engineering uzdevums paliek:
 
 ## 2026-10-08 — J0031 — Pirmkoda diapazonu AST bāze
 
-**Tips:** lexer / parseris / AST / diagnostikas pamats
+**Tips:** leksiskā analīze / sintaktiskā analīze / AST / diagnostikas pamats
 **Statuss:** pabeigts
 
 Definēts vienots pirmkoda diapazona kontrakts:
@@ -1585,7 +1585,7 @@ ROADMAP pirmkoda diapazonu uzdevums vēl nav atzīmēts kā pabeigts. Nākamais 
 
 ## 2026-10-08 — J0032 — Salikto izteiksmju pirmkoda diapazoni
 
-**Tips:** parseris / AST / diagnostikas pamats
+**Tips:** sintaktiskā analīze / AST / diagnostikas pamats
 **Statuss:** pabeigts
 
 Pirmkoda diapazonu kontrakts paplašināts uz četriem salikto izteiksmju mezgliem:
@@ -1602,7 +1602,7 @@ Diapazoni sedz visu konkrētās konstrukcijas avota fragmentu:
 - binārā izteiksme — no kreisās puses sākuma līdz labās puses beigām
 - piešķiršana — no mērķa sākuma līdz pilnas vērtības beigām
 
-Parseris robežas veido no patērētajiem leksiskajiem elementiem, nevis pieprasa, lai visiem bērnu mezgliem jau būtu diapazons. Tas ļauj diapazonu pārklājumu paplašināt pakāpeniski.
+Sintaktiskais analizators robežas veido no patērētajiem leksiskajiem elementiem, nevis pieprasa, lai visiem bērnu mezgliem jau būtu diapazons. Tas ļauj diapazonu pārklājumu paplašināt pakāpeniski.
 
 Regresijas pārbaudes sedz atsevišķu īpašības piekļuvi, izsaukumu ar argumentiem, bināru izteiksmi un piešķiršanu, kuras labā puse pati ir bināra izteiksme.
 
@@ -1614,7 +1614,7 @@ Nākamais apakšsolis:
 
 ## 2026-10-08 — J0033 — Augšējā līmeņa deklarāciju pirmkoda diapazoni
 
-**Tips:** parseris / AST / diagnostikas pamats
+**Tips:** sintaktiskā analīze / AST / diagnostikas pamats
 **Statuss:** pabeigts
 
 Pirmkoda diapazonu kontrakts paplašināts uz visām piecām pašreiz atbalstītajām augšējā līmeņa deklarācijām:
@@ -1641,4 +1641,35 @@ ROADMAP pirmkoda diapazonu uzdevums vēl paliek atvērts.
 Nākamais apakšsolis:
 
 **klases iekšējo AST mezglu diapazoni**.
+
+---
+
+## 2026-10-08 — J0034 — Terminoloģijas recovery #2
+
+**Tips:** AST / terminoloģija / kvalitāte
+**Statuss:** pabeigts
+
+Pirms klases iekšējo mezglu pirmkoda diapazonu darba iztīrīti divi LatNe-owned anglicismi.
+
+Kanoniskās pārejas:
+
+```text
+Getteris  → Iegūšana
+getteri   → iegūšanas
+raw       → pieraksts
+```
+
+LatNe sintakses termins `ņem` nemainās.
+
+`pieraksts` glabā sākotnējo literāļa vai veidnes pirmkoda pierakstu, piemēram, `1_000` vai pilnu veidnes tekstu.
+
+Neapstrādāti ķermeņa leksiskie elementi dokumentācijā turpmāk tiek saukti tieši par neapstrādātiem leksiskajiem elementiem, nevis `raw`.
+
+Identifikatoru kvalitātes pārbaude tagad aiztur arī `getter` un `raw` atgriešanos LatNe kodolā un testos.
+
+Terminoloģijas politikā nostiprināts princips: ja jēdzienu precīzi var nosaukt ar vienu skaidru latviešu vārdu, tam dod priekšroku pār mākslīgi veidotu salikteni.
+
+Nākamais engineering solis:
+
+**klases iekšējo AST mezglu pirmkoda diapazoni**.
 

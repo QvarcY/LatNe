@@ -40,7 +40,7 @@ Valodas kodols:
 - strukturēts klases ķermeņa AST
 - strukturētas piešķiršanas izteiksmes
 - strukturēts konstruktora ķermeņa AST
-- strukturēts gettera ķermeņa AST
+- strukturēts iegūšanas ķermeņa AST
 - minimāls klases metodes AST
 - strukturēti augšējā līmeņa `Darbība` parametri
 - vienots `Parametrs` AST konstruktoram, metodei un darbībai
@@ -95,7 +95,7 @@ Pašreizējais AST saprot:
 - pieejamības modifikatorus
 - `nemaināms` lauku informāciju
 - konstruktora deklarāciju un parametrus
-- getter deklarāciju, atgriezes tipu un ķermeni
+- iegūšanas deklarāciju, atgriezes tipu un ķermeni
 - konstruktora ķermeņa priekšrakstus
 - klases metodes deklarāciju
 - klases metodes pieejamību
@@ -118,9 +118,9 @@ Rezultāts:
 - strukturēts darbības ķermenis
 - strukturētas izteiksmes
 - 4 strukturēti konstruktora priekšraksti
-- 1 strukturēts gettera priekšraksts
-- 4 strukturētas kanoniskā gettera veidnes daļas
-- 2 strukturētas kanoniskā gettera interpolācijas
+- 1 strukturēts iegūšanas priekšraksts
+- 4 strukturētas kanoniskās iegūšanas veidnes daļas
+- 2 strukturētas kanoniskās iegūšanas interpolācijas
 
 ## Aktuālie ierobežojumi
 
@@ -131,11 +131,11 @@ Veidņu literāļi tagad satur:
 - `VeidnesTeksts`
 - `VeidnesInterpolācija`
 - pilnu interpolācijas izteiksmes AST
-- sākotnējo `raw` veidnes vērtību
+- sākotnējo `pieraksts` veidnes vērtību
 
 Regresijas pārbaudes sedz arī bināru izteiksmi interpolācijā un escapotu `\${...}` marķieri.
 
-Konstruktora, gettera un metodes raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
+Konstruktora, iegūšanas un metodes neapstrādātie ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
 Nav vēl:
 
@@ -214,7 +214,7 @@ kvalitātes sliedes
 → klases AST ✓
 → piešķiršanas AST ✓
 → konstruktora ķermeņa AST ✓
-→ getter un metožu minimums ✓
+→ iegūšanas un metožu minimums ✓
 → funkciju parametru AST ✓
 → veidņu interpolācijas ✓
 → pirmkoda diapazoni ← pašreizējais darbs

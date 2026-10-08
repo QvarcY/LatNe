@@ -63,9 +63,9 @@ Tas kļuva par pirmo kanoniskajā terminoloģijas reģistrā apstiprināto LatNe
 
 Vienas dienas laikā LatNe pārgāja no terminoloģijas projekta uz pirmo reāli strādājošo valodas apstrādes ķēdi.
 
-Visi 84 sintakses kandidāti tika cilvēka vadīti izskatīti un apstiprināti. Pēc tam pirmais `.lat` paraugs tika izlaists caur LatNe tokenizatoru, kas izveidoja 196 tokenus bez neviena nezināma simbola.
+Visi 84 sintakses kandidāti tika cilvēka vadīti izskatīti un apstiprināti. Pēc tam pirmais `.lat` paraugs tika izlaists caur LatNe leksisko analizatoru, kas izveidoja 196 leksiskos elementus bez neviena nezināma simbola.
 
-Tam sekoja pirmais parseris. Sākumā tas saprata tikai programmas augšējo struktūru — importu, saskarsmi, uzskaitījumu, klasi un darbību. Pēc tam darbības ķermenis tika sadalīts mainīgajos, nosacījumos, ciklos, atgriešanā un kļūdu apstrādē.
+Tam sekoja pirmais sintaktiskais analizators. Sākumā tas saprata tikai programmas augšējo struktūru — importu, saskarsmi, uzskaitījumu, klasi un darbību. Pēc tam darbības ķermenis tika sadalīts mainīgajos, nosacījumos, ciklos, atgriešanā un kļūdu apstrādē.
 
 Nākamajā solī izteiksmes pārstāja būt tikai tokenu teksts.
 
@@ -101,7 +101,7 @@ Sākotnējā ceļa karte bija veidota, lai pēc iespējas ātrāk pierādītu ga
 
 Nākamajā pārskatā kļuva skaidrs, ka ceļš no darbojoša prototipa līdz kvalitatīvai programmēšanas valodai ietver daudz vairāk nekā parsera funkcijas vien.
 
-Ceļa kartē tika pievienotas reproducējamas vides prasības, CI, regresijas fixtures, AST v1 kontrakts, diagnostikas arhitektūra, pirmais pilnais codegen ceļš, bilingvāla dokumentācija un Education MVP.
+Ceļa kartē tika pievienotas reproducējamas vides prasības, CI, regresijas paraugi, AST v1 kontrakts, diagnostikas arhitektūra, pirmais pilnais koda ģenerēšanas ceļš, bilingvāla dokumentācija un Education MVP.
 
 Tāpēc publiskais progresa rādītājs samazinājās no iepriekšējā prototipa plāna procenta.
 

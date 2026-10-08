@@ -71,7 +71,10 @@ const aizliegtieIdentifikatori = [
   "parkapumi",
   "relativais",
   "unikals",
-  "parkapums"
+  "parkapums",
+  "getteris",
+  "getteri",
+  "raw"
 ]
 
 const aizliegtieFragmenti = [
@@ -104,7 +107,10 @@ const aizliegtieFragmenti = [
   "paplasin",
   "savac",
   "unikal",
-  "rezultat"
+  "rezultat",
+  "getter",
+  "Getter",
+  "raw"
 ]
 
 function savācFailus(
@@ -249,7 +255,7 @@ const unikāls = [
 
 if (unikāls.length > 0) {
   console.error(
-    "Atrasti transliterēti LatNe identifikatori:"
+    "Atrasti nekanoniski LatNe identifikatori vai fragmenti:"
   )
 
   for (

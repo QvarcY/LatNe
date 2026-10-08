@@ -136,7 +136,7 @@ Jau strukturēts:
 - `nemaināms` lauki un to tipi;
 - konstruktora deklarācija un parametri;
 - konstruktora ķermeņa priekšraksti;
-- getter deklarācija, atgriezes tips un ķermenis;
+- iegūšanas deklarācija, atgriezes tips un ķermenis;
 - minimāls klases metodes AST;
 - metodes pieejamība, tipēti parametri, atgriezes tips un ķermenis;
 - piešķiršanas izteiksmes;
@@ -145,9 +145,9 @@ Jau strukturēts:
 
 Konstruktors, klases metode un augšējā līmeņa `Darbība` tagad izmanto vienu kopīgu parametru analizatoru.
 
-Veidņu interpolācijas izmanto pilno izteiksmju AST, bet veidnes `raw` vērtība tiek saglabāta saderībai un diagnostikai.
+Veidņu interpolācijas izmanto pilno izteiksmju AST, bet veidnes `pieraksts` vērtība tiek saglabāta saderībai un diagnostikai.
 
-Konstruktora, gettera un klases metodes raw ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
+Konstruktora, iegūšanas un klases metodes neapstrādātie ķermeņa leksiskie elementi pagaidām tiek saglabāti kā pārejas lauki.
 
 **Nākamais konkrētais uzdevums ir pirmkoda diapazona informācija AST mezgliem.**
 

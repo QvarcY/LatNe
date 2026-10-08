@@ -110,13 +110,13 @@ Drošības pārbaude apturēja patch pirms bojāta `parser.mjs` saglabāšanas.
 
 **Novērojums:** AST v1 sagatavošanas laikā tika pamanīts, ka jaunajam pirmkoda diapazona kontraktam bija piedāvātas formas `sakums` un `nobide` pareizo `sākums` un `nobīde` vietā.
 
-**Audits:** pārbaudot esošo lexer/parser/AST kodolu, tika atrasti 327 kritiski transliterētu identifikatoru lietojumi 25 formām.
+**Audits:** pārbaudot esošo leksiskās analīzes / sintaktiskās analīzes / AST kodolu, tika atrasti 327 kritiski transliterētu identifikatoru lietojumi 25 formām.
 
 **Iemesls:** iepriekšējos parsera attīstības soļos JavaScript identifikatori tika rakstīti bez latviešu diakritiskajām zīmēm, lai gan LatNe projektam nebija tehniska iemesla šo ierobežojumu ieviest.
 
 **Sekas:** ja AST v1 tiktu stabilizēts šādā formā, transliterētie lauku un API nosaukumi kļūtu par ilgtermiņa saderības parādu.
 
-**Labojums:** normalizēti lexer/parser eksporti, tokenu un AST lauki, kā arī saistītie iekšējie identifikatori. Repo-wide pārbaude pēc labojuma neatrod vecos publiskos transliterētos identifikatorus.
+**Labojums:** normalizēti leksiskā un sintaktiskā analizatora eksporti, leksisko elementu un AST lauki, kā arī saistītie iekšējie identifikatori. Repo-wide pārbaude pēc labojuma neatrod vecos publiskos transliterētos identifikatorus.
 
 **Aizsardzība:** pilnajai kvalitātes ķēdei pievienota `check:identifikatori` pārbaude, kas rekursīvi pārbauda LatNe valodas kodolu un testus.
 

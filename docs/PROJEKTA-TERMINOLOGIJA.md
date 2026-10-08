@@ -1,7 +1,7 @@
 # LatNe projekta terminoloģija
 
 **Statuss:** kanoniska
-**Atjaunots:** 2026-10-02
+**Atjaunots:** 2026-10-08
 
 Šis dokuments nosaka LatNe projekta iekšējo tehnisko terminoloģiju.
 
@@ -13,6 +13,8 @@ Tas nav tas pats, kas programmēšanas valodas atslēgvārdu reģistrs
 To, ko LatNe pats nosauc un kontrolē, nosauc latviski.
 
 Ārējo sistēmu obligātie nosaukumi un starptautiski tehniskie īpašvārdi netiek mākslīgi tulkoti.
+
+Ja jēdzienu var precīzi nosaukt ar vienu skaidru latviešu vārdu, priekšroka dodama tam, nevis mākslīgi veidotam saliktenim.
 
 ## Kanoniskie termini
 
@@ -41,6 +43,8 @@ To, ko LatNe pats nosauc un kontrolē, nosauc latviski.
 | quality checks / quality rails | kvalitātes pārbaudes |
 | clean install | tīra atkarību instalācija |
 | raw tokens | neapstrādāti leksiskie elementi |
+| raw value / raw literal | pieraksts |
+| getter / accessor | iegūšana |
 | milestone | atskaites punkts |
 
 ## AST
@@ -87,5 +91,9 @@ Piemēri:
 `tokeni` → `leksiskieElementi`
 
 `tests/fixtures` → `tests/paraugi`
+
+`raw` → `pieraksts`
+
+`Getteris` → `Iegūšana`
 
 Šīs pārejas tiek veiktas kontrolētā refaktorā ar pilnu CI pārbaudi.

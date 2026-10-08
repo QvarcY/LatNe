@@ -21,7 +21,7 @@ export function analizēKlasesĶermeni(
   const ķermenis = []
   const lauki = []
   let konstruktors = null
-  const getteri = []
+  const iegūšanas = []
   const metodes = []
 
   const esošais = () =>
@@ -193,7 +193,7 @@ export function analizēKlasesĶermeni(
 
       if (nemaināms) {
         sintaksesKļūda(
-          'Modifikators "readonly" nav derīgs getterim',
+          'Modifikators "readonly" nav derīgs iegūšanai',
           sākums
         )
       }
@@ -206,7 +206,7 @@ export function analizēKlasesĶermeni(
 
       if (parametri.length > 0) {
         sintaksesKļūda(
-          "Getterim nedrīkst būt parametri",
+          "Iegūšanai nedrīkst būt parametri",
           parametri[0]
         )
       }
@@ -226,16 +226,16 @@ export function analizēKlasesĶermeni(
 
       if (atgriezesTips.length === 0) {
         sintaksesKļūda(
-          "Gaidīts gettera atgriezes tips",
+          "Gaidīts iegūšanas atgriezes tips",
           esošais()
         )
       }
 
-      const getteraĶermenis =
+      const saturs =
         nolasītGrupu("{", "}")
 
-      const getteris = {
-        veids: "Getteris",
+      const iegūšana = {
+        veids: "Iegūšana",
         nosaukums: nosaukums.vērtība,
         pieejamība,
         atgriezesTips:
@@ -244,16 +244,16 @@ export function analizēKlasesĶermeni(
           typeof priekšrakstuAnalizators ===
             "function"
             ? priekšrakstuAnalizators(
-                getteraĶermenis
+                saturs
               )
             : null,
         ķermeņaLeksiskieElementi:
-          getteraĶermenis,
+          saturs,
         rinda: sākums.rinda
       }
 
-      getteri.push(getteris)
-      ķermenis.push(getteris)
+      iegūšanas.push(iegūšana)
+      ķermenis.push(iegūšana)
 
       continue
     }
@@ -366,7 +366,7 @@ export function analizēKlasesĶermeni(
     ķermenis,
     lauki,
     konstruktors,
-    getteri,
+    iegūšanas,
     metodes
   }
 }
