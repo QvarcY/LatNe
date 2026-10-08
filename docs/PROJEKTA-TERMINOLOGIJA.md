@@ -98,6 +98,8 @@ Piemēri:
 
 `UnāraIzteiksme` → `PirmsIzteiksme`
 
+`VeidnesInterpolācija` → `VeidnesAizpildījums`
+
 ## Apstiprinātie AST nosaukumi
 
 Skaidri apstiprināti:
@@ -113,6 +115,7 @@ Skaidri apstiprināti:
 - `BināraIzteiksme`
 - `PiešķiršanasIzteiksme`
 - `VeidnesTeksts`
+- `VeidnesAizpildījums`
 - `KārtasCikls`
 
 `ApstākļaCikls` ir apstiprinātais nosaukums nākotnes `kamēr` AST mezglam. Tas vēl nav ieviests sintaktiskajā analizatorā.
