@@ -18,7 +18,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - diapazoni paplašināti uz saliktām izteiksmēm: `Īpašība`, `Izsaukums`, `BināraIzteiksme` un `PiešķiršanasIzteiksme`
 - diapazoni pievienoti augšējā līmeņa deklarācijām: `Imports`, `Saskarsme`, `Uzskaitījums`, `Klase` un `Darbība`
 - pievienotas pirmkoda diapazonu regresijas pārbaudes, tostarp veidnes interpolācijas absolūtajai nobīdei, salikto izteiksmju un pilnu deklarāciju robežām
-- normalizēti LatNe lexer, parsera, tokenu un AST latviskie identifikatori uz pareizu rakstību ar diakritiskajām zīmēm
+- normalizēti LatNe leksiskā analizatora, sintaktiskā analizatora, leksisko elementu un AST latviskie identifikatori uz pareizu rakstību ar diakritiskajām zīmēm
 - publiskie parsera eksporti pārdēvēti uz `izveidoVārdnīcu`, `analizēLeksiski`, `analizēIzteiksmi`, `analizēPriekšrakstus`, `analizēSintaksi`, `analizēKlasesĶermeni` un `analizēParametrus`
 - tokenu un AST lauki, tostarp `vērtība`, `daļas`, `deklarācija`, `mainīgais`, `nosacījums`, `ķermenis`, `pieejamība`, `nemaināms`, `kreisā`, `labā` un `mērķis`, nostiprināti ar pareizu latviešu ortogrāfiju
 - pievienota pastāvīga `check:identifikatori` kvalitātes pārbaude pret transliterētu LatNe identifikatoru atgriešanos
