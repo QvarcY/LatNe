@@ -754,19 +754,19 @@ for (
 
 const gaidītieLaukuDiapazoni = [
   [
-    "  atvērts nemaināms vārds: teksts",
+    "atvērts nemaināms vārds: teksts",
     "\n  atvērts vecums: skaitlis"
   ],
   [
-    "  atvērts vecums: skaitlis",
+    "atvērts vecums: skaitlis",
     "\n  aizsargāts aktīvs: loģisks"
   ],
   [
-    "  aizsargāts aktīvs: loģisks",
+    "aizsargāts aktīvs: loģisks",
     "\n  privāts loma: Loma"
   ],
   [
-    "  privāts loma: Loma",
+    "privāts loma: Loma",
     "\n\n  konstruktors("
   ]
 ]
@@ -803,7 +803,7 @@ pārbaudiDiapazonu(
   klase.konstruktors.diapazons,
   gaidāmaisDeklarācijasDiapazons(
     teksts,
-    "  konstruktors(",
+    "konstruktors(",
     "\n\n  ņem apraksts"
   ),
   "Konstruktors"
@@ -929,7 +929,7 @@ pārbaudiDiapazonu(
   iegūšana.diapazons,
   gaidāmaisDeklarācijasDiapazons(
     teksts,
-    "  ņem apraksts",
+    "ņem apraksts",
     "\n}"
   ),
   "Iegūšana"
@@ -1222,7 +1222,7 @@ pārbaudiDiapazonu(
   metode.diapazons,
   gaidāmaisDeklarācijasDiapazons(
     metodesParaugaTeksts,
-    "  atvērts darbība sveic",
+    "atvērts darbība sveic",
     "\n}"
   ),
   "Metode"
