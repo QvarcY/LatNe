@@ -29,7 +29,7 @@ Visiem 40 pašreizējiem AST mezglu tipiem ir:
 | `Uzskaitījums` | `nosaukums`, `vērtības` | `vērtības: []`, ja nav identifikatoru | Vērtības pašlaik ir virkņu masīvs |
 | `Klase` | `nosaukums`, `eksportēta`, `ķermeņaLeksiskoElementuSkaits`, `ķermenis`, `lauki`, `konstruktors`, `iegūšanas`, `metodes` | kolekcijas ir masīvi; `konstruktors: null`, ja tā nav | `ķermenis` satur klases lauku/konstruktora/iegūšanas/metodes mezglus |
 | `Darbība` | `nosaukums`, `eksportēta`, `asinhrona`, `parametri`, `parametruLeksiskoElementuSkaits`, `atgriezesTips`, `ķermeņaLeksiskieElementi`, `ķermenis` | `parametri: []`; `atgriezesTips: null`, ja tips nav norādīts; `ķermenis: []`, ja tukšs | `ķermeņaLeksiskieElementi` šeit ir skaitlis, nevis leksisko elementu masīvs |
-| `KlasesLauks` | `nosaukums`, `pieejamība`, `nemaināms`, `tips` | `pieejamība: null`, ja nav modifikatora; `nemaināms` ir boolean; `tips` parserī nedrīkst būt tukšs | — |
+| `KlasesLauks` | `nosaukums`, `pieejamība`, `nemaināms`, `tips` | `pieejamība: null`, ja nav modifikatora; `nemaināms` ir `loģisks`; `tips` parserī nedrīkst būt tukšs | — |
 | `Konstruktors` | `pieejamība`, `parametri`, `ķermenis`, `ķermeņaLeksiskieElementi` | `pieejamība: null`; `parametri: []`; `ķermenis` var būt `null`, ja klases analizators izsaukts bez priekšrakstu analizatora | `ķermeņaLeksiskieElementi` ir pilns leksisko elementu masīvs |
 | `Iegūšana` | `nosaukums`, `pieejamība`, `atgriezesTips`, `ķermenis`, `ķermeņaLeksiskieElementi` | `pieejamība: null`; `atgriezesTips` parserī nedrīkst būt tukšs; `ķermenis` var būt `null` standalone klases analizatorā | `ķermeņaLeksiskieElementi` ir pilns leksisko elementu masīvs |
 | `Metode` | `nosaukums`, `pieejamība`, `parametri`, `atgriezesTips`, `ķermenis`, `ķermeņaLeksiskieElementi` | `pieejamība: null`; `parametri: []`; `atgriezesTips: null`, ja nav norādīts; `ķermenis` var būt `null` standalone klases analizatorā | `ķermeņaLeksiskieElementi` ir pilns leksisko elementu masīvs |
@@ -102,13 +102,13 @@ Ja `ķer` pastāv, tas pašlaik ir:
 | Mezgls | Pašreizējie semantiskie lauki | Pašreizējā tukšuma / nulles uzvedība | Piezīme |
 |---|---|---|---|
 | `Identifikators` | `nosaukums` | — | — |
-| `Skaitlis` | `vērtība`, `pieraksts` | — | `vērtība` ir Number; `pieraksts` saglabā sākotnējo skaitļa rakstību |
+| `Skaitlis` | `vērtība`, `pieraksts` | — | `vērtība` ir `skaitlis`; `pieraksts` saglabā sākotnējo skaitļa rakstību |
 | `Teksts` | `vērtība`, `pieraksts` | — | `vērtība` ir bez ārējām pēdiņām; `pieraksts` saglabā pilno literāli |
 | `Veidne` | `daļas`, `pieraksts` | `daļas: []`, ja leksiskajam elementam nav strukturētu daļu | `daļas` satur `VeidnesTeksts` un `VeidnesAizpildījums` mezglus |
 | `VeidnesTeksts` | `vērtība` | — | — |
 | `VeidnesAizpildījums` | `izteiksme` | — | `${...}` iekšējā izteiksme ir pilns izteiksmes AST |
 | `Nekas` | nav papildu semantisko lauku | — | — |
-| `Loģisks` | `vērtība` | — | boolean |
+| `Loģisks` | `vērtība` | — | `loģisks` |
 | `Nenoteikts` | nav papildu semantisko lauku | — | — |
 | `Šis` | nav papildu semantisko lauku | — | — |
 | `Masīvs` | `elementi` | `elementi: []` tukšam masīvam | — |
@@ -129,7 +129,7 @@ Pašreizējais kods nav pilnīgi vienots, bet tam jau ir vairāki skaidri modeļ
 
 - neesoša viena semantiska vērtība bieži tiek glabāta kā `null`: `Mainīgais.tips`, `Mainīgais.vērtība`, `Nosacījums.citādi`, `Klase.konstruktors`, `Mēģinājums.ķer`, `Mēģinājums.beigas`, `pieejamība`;
 - kolekcijas parasti pastāv vienmēr un tukšā stāvoklī ir `[]`;
-- izvēles atgriezes tips `Darbība` un `Metode` mezglā pašlaik ir `""`, nevis `null`;
+- izvēles atgriezes tips `Darbība` un `Metode` mezglā pašlaik ir `null`;
 - `Iegūšana.atgriezesTips`, `Parametrs.tips` un `KlasesLauks.tips` parserī nedrīkst būt tukši;
 - `KārtasCikls` varianta lauki ir nosacīti **neesoši**, nevis klātesoši ar `null`;
 - `Nosacījums.citādi` izmanto `null`, `[]` un masīvu ar vienu `Nosacījums` mezglu trim dažādām situācijām.
@@ -201,7 +201,7 @@ Apstiprināts un ieviests:
 
 - `KārtasCikls.variants: "kolekcija"` iepriekšējā `"of"` vietā;
 - `PirmsIzteiksme.operators: "veids"` iepriekšējā `"typeof"` vietā;
-- AST specifikācijas tipa pierakstā izmanto `teksts`, nevis TypeScript `string`.
+- AST specifikācijas tipa pierakstā izmanto LatNe tipus, piemēram `teksts`, `loģisks` un `skaitlis`, nevis TypeScript / JavaScript `string`, `boolean` un `Number`.
 
 Leksiskais un sintaktiskais analizators drīkst iekšēji turpināt izmantot terminoloģijas reģistra `source` identitāti konstrukciju atpazīšanai. Šī iekšējā identitāte nav AST v1 publiskā semantika.
 
