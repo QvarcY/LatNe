@@ -11,7 +11,8 @@ import {
 } from "./parametru-sintaktiskais-analizators.mjs"
 
 import {
-  izveidoDiapazonu
+  izveidoDiapazonu,
+  izveidoTukšuDiapazonu
 } from "./pirmkoda-diapazons.mjs"
 
 function sintaksesKļūda(ziņa, leksiskaisElements) {
@@ -250,6 +251,12 @@ export function analizēPriekšrakstus(leksiskieElementi) {
       )
     }
 
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ] ??
+      nosaukums
+
     return {
       veids: "Mainīgais",
       deklarācija: sākums.avots,
@@ -262,7 +269,12 @@ export function analizēPriekšrakstus(leksiskieElementi) {
         izteiksme.length > 0
           ? analizēIzteiksmesAst(izteiksme)
           : null,
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          beigas
+        )
     }
   }
 
@@ -301,6 +313,17 @@ export function analizēPriekšrakstus(leksiskieElementi) {
       }
     }
 
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ]
+
+    mezgls.diapazons =
+      izveidoDiapazonu(
+        sākums,
+        beigas
+      )
+
     return mezgls
   }
 
@@ -312,12 +335,22 @@ export function analizēPriekšrakstus(leksiskieElementi) {
     const ķermenis =
       nolasītGrupu("{", "}")
 
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ]
+
     return {
       veids: "KamCikls",
       ...analizēKamGalveni(galvene),
       ķermenis:
         analizēPriekšrakstus(ķermenis),
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          beigas
+        )
     }
   }
 
@@ -352,11 +385,22 @@ export function analizēPriekšrakstus(leksiskieElementi) {
     const izteiksme =
       nolasītIzteiksmi(sākums.rinda)
 
+    const beigas =
+      izteiksme[
+        izteiksme.length - 1
+      ] ??
+      sākums
+
     return {
       veids: "Metiens",
       vērtība:
         analizēIzteiksmesAst(izteiksme),
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          beigas
+        )
     }
   }
 
@@ -408,6 +452,17 @@ export function analizēPriekšrakstus(leksiskieElementi) {
         analizēPriekšrakstus(ķermenis)
     }
 
+    const beigas =
+      leksiskieElementi[
+        indekss - 1
+      ]
+
+    mezgls.diapazons =
+      izveidoDiapazonu(
+        sākums,
+        beigas
+      )
+
     return mezgls
   }
 
@@ -419,7 +474,11 @@ export function analizēPriekšrakstus(leksiskieElementi) {
 
     return {
       veids,
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums
+        )
     }
   }
 
@@ -436,11 +495,21 @@ export function analizēPriekšrakstus(leksiskieElementi) {
       )
     }
 
+    const beigas =
+      izteiksme[
+        izteiksme.length - 1
+      ]
+
     return {
       veids: "Izteiksme",
       izteiksme:
         analizēIzteiksmesAst(izteiksme),
-      rinda: sākums.rinda
+      rinda: sākums.rinda,
+      diapazons:
+        izveidoDiapazonu(
+          sākums,
+          beigas
+        )
     }
   }
 
@@ -953,6 +1022,15 @@ export function analizēSintaksi(leksiskieElementi) {
 
   return {
     veids: "Programma",
-    elementi
+    elementi,
+    diapazons:
+      leksiskieElementi.length > 0
+        ? izveidoDiapazonu(
+            leksiskieElementi[0],
+            leksiskieElementi[
+              leksiskieElementi.length - 1
+            ]
+          )
+        : izveidoTukšuDiapazonu()
   }
 }

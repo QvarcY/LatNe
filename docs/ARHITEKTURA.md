@@ -218,7 +218,42 @@ Ceturtā iterācija pārklāj klases iekšējos mezglus:
 
 Arī šiem mezgliem `rinda` saglabā iepriekšējo semantiku, bet `diapazons.sākums` ietver deklarācijas modifikatorus.
 
-Šī joprojām ir pamata infrastruktūra, ne pilns AST v1 diapazonu pārklājums.
+Piektā iterācija pabeidz atlikušos izteiksmju un priekšrakstu mezglus.
+
+Izteiksmēs papildus pārklāti:
+
+- `Masīvs`
+- `Skaitlis`
+- `Teksts`
+- `Veidne`
+- `VeidnesTeksts`
+- `VeidnesInterpolācija`
+- `Nekas`
+- `Loģisks`
+- `Nenoteikts`
+- `Šis`
+- `Grupa`
+- `Gaidīšana`
+- `Jauns`
+- `UnāraIzteiksme`
+
+Priekšrakstos papildus pārklāti:
+
+- `Mainīgais`
+- `Nosacījums`
+- `KamCikls`
+- `Metiens`
+- `Mēģinājums`
+- `Turpināšana`
+- `Pārtraukšana`
+- `Atkļūdošana`
+- `Izteiksme`
+
+`Programma` saknei arī vienmēr ir diapazons. Tukšam avotam tas ir nulles garuma `1:1 / nobīde 0` diapazons.
+
+Pašreizējais audits aptver visus 40 zināmos AST mezglu tipus. Regresijas pārbaude pieprasa derīgu diapazonu katram no tiem un pārbauda bērna mezgla diapazona iekļaušanos vecāka mezgla robežās.
+
+Pirmkoda diapazonu pārklājums pašreizējam AST v1 kandidātam ir pabeigts.
 
 ## Klases slānis
 

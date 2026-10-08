@@ -2,7 +2,7 @@
 
 **Atjaunots:** 2026-10-08
 **Pašreizējais valodas stāvoklis:** strukturēts AST līdz vienotam parametru kontraktam un veidņu interpolācijām
-**Nākamā izstrādes fāze:** 1 — pirmkoda diapazoni AST mezgliem
+**Nākamā izstrādes fāze:** 1 — AST v1 lauku kontrakts
 
 ## Pašreizējā robeža
 
@@ -50,7 +50,10 @@ Valodas kodols:
 - pirmie AST diapazoni ieviesti `Identifikators`, `Parametrs` un `Atgriešana` mezgliem
 - salikto izteiksmju diapazoni ieviesti `Īpašība`, `Izsaukums`, `BināraIzteiksme` un `PiešķiršanasIzteiksme` mezgliem
 - augšējā līmeņa deklarāciju diapazoni ieviesti `Imports`, `Saskarsme`, `Uzskaitījums`, `Klase` un `Darbība` mezgliem
-- normalizēta LatNe-owned lexer, parsera, tokenu un AST identifikatoru rakstība ar pilnām latviešu diakritiskajām zīmēm
+- klases iekšējo mezglu diapazoni ieviesti `KlasesLauks`, `Konstruktors`, `Iegūšana` un `Metode` mezgliem
+- pabeigts visu 40 pašreizējo AST mezglu tipu pirmkoda diapazonu pārklājums
+- regresijas audits pārbauda katra zināmā AST mezgla `diapazons` esamību un bērnu robežas
+- normalizēta LatNe leksiskā analizatora, sintaktiskā analizatora, leksisko elementu un AST identifikatoru rakstība ar pilnām latviešu diakritiskajām zīmēm
 - ieviests pastāvīgs transliterētu LatNe identifikatoru quality gate
 
 Publiskā infrastruktūra:
@@ -141,7 +144,6 @@ Nav vēl:
 
 - noklusējuma parametru vērtību AST
 - plašāka klases metožu modifikatoru atbalsta, piemēram, `async` un `static`
-- pilna pirmkoda diapazonu pārklājuma visiem AST mezgliem
 - definēta AST mezglu obligāto un izvēles lauku specifikācija
 - stabilas AST v1 specifikācijas
 - LatNe API semantiskās translācijas
@@ -176,43 +178,19 @@ Tas ietver:
 
 ## Nākamais valodas uzdevums
 
-**Pirmkoda diapazona informācija AST mezgliem.**
+**AST mezglu obligāto un izvēles lauku kontrakts.**
 
-Minimālais diapazona kontrakts tagad ir definēts un nostiprināts ar regresijas pārbaudēm.
+Pirmkoda diapazonu darbs ir pabeigts visiem pašreizējiem AST mezglu tipiem.
 
-Pirmā iterācija pārklāja trīs reprezentatīvus mezglus:
+Audits aptver:
 
-- `Identifikators`
-- `Parametrs`
-- `Atgriešana`
+- 11 programmas, deklarāciju, klases un parametru mezglu tipus
+- 10 priekšrakstu mezglu tipus
+- 19 izteiksmju un veidņu mezglu tipus
 
-Otrā iterācija pārklāj saliktās izteiksmes:
+Katram zināmajam AST mezglam regresijas pārbaude pieprasa derīgu `diapazons` struktūru un pārbauda, ka bērna mezgla diapazons neiziet ārpus vecāka mezgla robežām. Tukšai `Programma` saknei tiek lietots nulles garuma diapazons `1:1 / nobīde 0`.
 
-- `Īpašība`
-- `Izsaukums`
-- `BināraIzteiksme`
-- `PiešķiršanasIzteiksme`
-
-Trešā iterācija pārklāj augšējā līmeņa deklarācijas:
-
-- `Imports`
-- `Saskarsme`
-- `Uzskaitījums`
-- `Klase`
-- `Darbība`
-
-Ceturtā iterācija pārklāj klases iekšējos mezglus:
-
-- `KlasesLauks`
-- `Konstruktors`
-- `Iegūšana`
-- `Metode`
-
-Kontrakts izmanto pusatvērtu `[sākums, beigas)` intervālu, 1-bāzētu `rinda` un `kolonna`, kā arī 0-bāzētu `nobīde`.
-
-Nākamajā apakšsolī jāveic atlikušā AST diapazonu pārklājuma audits un jāpaplašina diapazoni uz tiem izteiksmju un priekšrakstu mezgliem, kuri vēl nav pārklāti. ROADMAP uzdevums paliek nepabeigts, līdz pārklājums ir pietiekams AST v1 stabilizācijai.
-
-Jaunie AST lauki joprojām jāveido tikai ar pilnu latviešu rakstību.
+Nākamajā solī jāfiksē, kuri lauki katram AST mezgla tipam ir obligāti, kuri izvēles un kuri ir pārejas lauki. Īpaši jāizlemj `rinda` pārejas lauka un `ķermeņaLeksiskieElementi` turpmākais statuss pirms `spec/ast-v1.md` publicēšanas.
 
 ## Ceļš līdz pirmajai palaišanai
 
@@ -224,8 +202,8 @@ kvalitātes sliedes
 → iegūšanas un metožu minimums ✓
 → funkciju parametru AST ✓
 → veidņu interpolācijas ✓
-→ pirmkoda diapazoni ← pašreizējais darbs
-→ AST v1 lauku kontrakts
+→ pirmkoda diapazoni ✓
+→ AST v1 lauku kontrakts ← pašreizējais darbs
 → AST v1 specifikācija
 → API minimums
 → semantiskās transformācijas

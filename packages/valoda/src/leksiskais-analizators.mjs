@@ -157,6 +157,11 @@ export function analizēLeksiski(teksts, vārdnīca) {
             tekstaSākums
           )
 
+        const beiguPozīcija =
+          pozīcijaSaturaOffsetam(
+            beigas
+          )
+
         daļas.push({
           veids: "teksts",
           vērtība:
@@ -164,7 +169,15 @@ export function analizēLeksiski(teksts, vārdnīca) {
               tekstaSākums,
               beigas
             ),
-          ...pozīcija
+          ...pozīcija,
+          diapazons: {
+            sākums: {
+              ...pozīcija
+            },
+            beigas: {
+              ...beiguPozīcija
+            }
+          }
         })
       }
 
@@ -320,11 +333,29 @@ export function analizēLeksiski(teksts, vārdnīca) {
           }
         )
 
+      const interpolācijasSākums =
+        pozīcijaSaturaOffsetam(
+          indekss
+        )
+
+      const interpolācijasBeigas =
+        pozīcijaSaturaOffsetam(
+          beigas
+        )
+
       daļas.push({
         veids: "interpolācija",
         leksiskieElementi:
           interpolācijasElementi,
-        ...izteiksmesPozīcija
+        ...izteiksmesPozīcija,
+        diapazons: {
+          sākums: {
+            ...interpolācijasSākums
+          },
+          beigas: {
+            ...interpolācijasBeigas
+          }
+        }
       })
 
       indekss = beigas

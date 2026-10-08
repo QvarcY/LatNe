@@ -68,7 +68,7 @@ Windows pārbaudi pievienot tad, kad pamatķēde ir stabila un sākas CLI izplat
 - [x] Strukturēt getter un metožu ķermeņu minimumu
 - [x] Paplašināt funkciju parametru AST
 - [x] Parsēt veidņu literāļu interpolācijas
-- [ ] Pievienot pirmkoda diapazona informāciju AST mezgliem
+- [x] Pievienot pirmkoda diapazona informāciju AST mezgliem
 - [ ] Definēt AST mezglu obligātos un izvēles laukus
 - [ ] Publicēt pirmo `spec/ast-v1.md`
 - [ ] Pievienot AST v1 paraugu pārbaudes

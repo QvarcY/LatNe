@@ -1704,3 +1704,62 @@ Nākamais apakšsolis:
 
 **atlikušo AST mezglu diapazonu audits un pārklājuma pabeigšana izteiksmēm un priekšrakstiem**.
 
+---
+
+## 2026-10-08 — J0036 — Pilns AST pirmkoda diapazonu audits
+
+**Tips:** sintaktiskā analīze / AST / kvalitāte
+**Statuss:** pabeigts
+
+Veikts pilns pašreizējo AST mezglu tipu audits pēc klases iekšējo mezglu diapazonu ieviešanas.
+
+Auditā atrastie vēl nepārklātie izteiksmju mezgli:
+
+- `Masīvs`
+- `Skaitlis`
+- `Teksts`
+- `Veidne`
+- `VeidnesTeksts`
+- `VeidnesInterpolācija`
+- `Nekas`
+- `Loģisks`
+- `Nenoteikts`
+- `Šis`
+- `Grupa`
+- `Gaidīšana`
+- `Jauns`
+- `UnāraIzteiksme`
+
+Auditā atrastie vēl nepārklātie priekšrakstu mezgli:
+
+- `Mainīgais`
+- `Nosacījums`
+- `KamCikls`
+- `Metiens`
+- `Mēģinājums`
+- `Turpināšana`
+- `Pārtraukšana`
+- `Atkļūdošana`
+- `Izteiksme`
+
+Visiem šiem mezgliem pievienots pusatvērts `[sākums, beigas)` pirmkoda diapazons.
+
+Papildus:
+
+- `Programma` saknei vienmēr ir diapazons
+- tukšai programmai tas ir nulles garuma `1:1 / nobīde 0` diapazons
+- veidnes teksta daļām un interpolācijām lexerī saglabāti precīzi apakšdiapazoni
+- regresijas pārbaude uztur visu 40 pašreizējo AST mezglu tipu kopu
+- audits izgāžas, ja kādam zināmajam AST mezglam nav derīga `diapazons`
+- audits pārbauda, ka bērna AST diapazons neiziet ārpus vecāka AST diapazona
+
+Mērķētie izteiksmju paraugi sedz literāļus, masīvu, grupu, īpašību, izsaukumu, `gaidi`, `jauns`, unāro, bināro un piešķiršanas izteiksmi. Atsevišķs priekšraksta paraugs sedz `Pārtraukšana`.
+
+Pilnais CI pēc ieviešanas ir zaļš.
+
+ROADMAP uzdevums **Pievienot pirmkoda diapazona informāciju AST mezgliem** ir pabeigts.
+
+Nākamais valodas darbs:
+
+**definēt AST mezglu obligātos un izvēles laukus**.
+

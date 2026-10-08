@@ -137,12 +137,18 @@ export function analizēIzteiksmi(leksiskieElementi) {
     const elementi = []
 
     if (irVērtība("]")) {
-      paņem()
+      const beigas =
+        paņem()
 
       return {
         veids: "Masīvs",
         elementi,
-        rinda: sākums.rinda
+        rinda: sākums.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            sākums,
+            beigas
+          )
       }
     }
 
@@ -156,12 +162,18 @@ export function analizēIzteiksmi(leksiskieElementi) {
         continue
       }
 
-      gaidiVērtību("]")
+      const beigas =
+        gaidiVērtību("]")
 
       return {
         veids: "Masīvs",
         elementi,
-        rinda: sākums.rinda
+        rinda: sākums.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            sākums,
+            beigas
+          )
       }
     }
 
@@ -204,7 +216,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
           leksiskaisElements.vērtība.replaceAll("_", "")
         ),
         pieraksts: leksiskaisElements.vērtība,
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements
+          )
       }
     }
 
@@ -216,7 +232,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
         vērtība:
           leksiskaisElements.vērtība.slice(1, -1),
         pieraksts: leksiskaisElements.vērtība,
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements
+          )
       }
     }
 
@@ -237,7 +257,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
                       "VeidnesTeksts",
                     vērtība:
                       daļa.vērtība,
-                    rinda: daļa.rinda
+                    rinda: daļa.rinda,
+                    diapazons:
+                      izveidoDiapazonu(
+                        daļa
+                      )
                   }
                 }
 
@@ -253,7 +277,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
                         daļa
                           .leksiskieElementi
                       ),
-                    rinda: daļa.rinda
+                    rinda: daļa.rinda,
+                    diapazons:
+                      izveidoDiapazonu(
+                        daļa
+                      )
                   }
                 }
 
@@ -269,7 +297,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
         veids: "Veidne",
         daļas,
         pieraksts: leksiskaisElements.vērtība,
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements
+          )
       }
     }
 
@@ -278,7 +310,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
 
       return {
         veids: "Nekas",
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements
+          )
       }
     }
 
@@ -292,7 +328,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
         veids: "Loģisks",
         vērtība:
           leksiskaisElements.avots === "true",
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements
+          )
       }
     }
 
@@ -301,7 +341,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
 
       return {
         veids: "Nenoteikts",
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements
+          )
       }
     }
 
@@ -310,7 +354,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
 
       return {
         veids: "Šis",
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements
+          )
       }
     }
 
@@ -324,12 +372,18 @@ export function analizēIzteiksmi(leksiskieElementi) {
       const izteiksme =
         analizēPiešķiršanu()
 
-      gaidiVērtību(")")
+      const beigas =
+        gaidiVērtību(")")
 
       return {
         veids: "Grupa",
         izteiksme,
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements,
+            beigas
+          )
       }
     }
 
@@ -428,10 +482,23 @@ export function analizēIzteiksmi(leksiskieElementi) {
     if (irAvots("await")) {
       paņem()
 
+      const izteiksme =
+        analizēVienību()
+
+      const beigas =
+        leksiskieElementi[
+          indekss - 1
+        ]
+
       return {
         veids: "Gaidīšana",
-        izteiksme: analizēVienību(),
-        rinda: leksiskaisElements.rinda
+        izteiksme,
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements,
+            beigas
+          )
       }
     }
 
@@ -447,6 +514,11 @@ export function analizēIzteiksmi(leksiskieElementi) {
           konstruktoraSākumaIndekss
         )
 
+      const beigas =
+        leksiskieElementi[
+          indekss - 1
+        ]
+
       if (sakne.veids === "Izsaukums") {
         return {
           veids: "Jauns",
@@ -454,7 +526,12 @@ export function analizēIzteiksmi(leksiskieElementi) {
             sakne.izsaucamais,
           argumenti:
             sakne.argumenti,
-          rinda: leksiskaisElements.rinda
+          rinda: leksiskaisElements.rinda,
+          diapazons:
+            izveidoDiapazonu(
+              leksiskaisElements,
+              beigas
+            )
         }
       }
 
@@ -462,7 +539,12 @@ export function analizēIzteiksmi(leksiskieElementi) {
         veids: "Jauns",
         konstruktors: sakne,
         argumenti: [],
-        rinda: leksiskaisElements.rinda
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements,
+            beigas
+          )
       }
     }
 
@@ -477,22 +559,48 @@ export function analizēIzteiksmi(leksiskieElementi) {
     ) {
       paņem()
 
+      const izteiksme =
+        analizēVienību()
+
+      const beigas =
+        leksiskieElementi[
+          indekss - 1
+        ]
+
       return {
         veids: "UnāraIzteiksme",
         operators: leksiskaisElements.vērtība,
-        izteiksme: analizēVienību(),
-        rinda: leksiskaisElements.rinda
+        izteiksme,
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements,
+            beigas
+          )
       }
     }
 
     if (irAvots("typeof")) {
       paņem()
 
+      const izteiksme =
+        analizēVienību()
+
+      const beigas =
+        leksiskieElementi[
+          indekss - 1
+        ]
+
       return {
         veids: "UnāraIzteiksme",
         operators: "typeof",
-        izteiksme: analizēVienību(),
-        rinda: leksiskaisElements.rinda
+        izteiksme,
+        rinda: leksiskaisElements.rinda,
+        diapazons:
+          izveidoDiapazonu(
+            leksiskaisElements,
+            beigas
+          )
       }
     }
 

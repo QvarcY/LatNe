@@ -47,3 +47,20 @@ export function izveidoDiapazonu(
       )
   }
 }
+
+export function izveidoTukšuDiapazonu() {
+  const pozīcija = {
+    rinda: 1,
+    kolonna: 1,
+    nobīde: 0
+  }
+
+  return {
+    sākums: {
+      ...pozīcija
+    },
+    beigas: {
+      ...pozīcija
+    }
+  }
+}
