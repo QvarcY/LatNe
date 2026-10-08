@@ -593,7 +593,7 @@ export function analizēIzteiksmi(leksiskieElementi) {
 
       return {
         veids: "PirmsIzteiksme",
-        operators: "typeof",
+        operators: "veids",
         izteiksme,
         rinda: leksiskaisElements.rinda,
         diapazons:
