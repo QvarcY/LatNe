@@ -860,9 +860,9 @@ Pirmajā iterācijā strukturēt:
 - `nemaināms`
 - tipus
 - konstruktoru un tā parametrus
-- getteri un atgriezes tipu
+- iegūšanu un atgriezes tipu
 
-Konstruktora un gettera ķermeņus vēl drīkst saglabāt kā tokenu kopas.
+Konstruktora un iegūšanas ķermeņus vēl drīkst saglabāt kā tokenu kopas.
 
 ### Apzināti atlikts
 
@@ -1271,17 +1271,17 @@ Ieviests:
 - lauku tipi
 - `Konstruktors` mezgls
 - konstruktora parametri
-- `Getteris` mezgls
-- gettera atgriezes tips
+- `Iegūšana` mezgls
+- iegūšanas atgriezes tips
 
 Kanoniskajā paraugā tiek iegūti:
 
 - 6 klases ķermeņa mezgli
 - 4 lauki
 - 2 konstruktora parametri
-- 1 getteris
+- 1 iegūšana
 
-Konstruktora un gettera ķermeņi šajā checkpointā apzināti vēl palika kā neapstrādātas leksisko elementu kopas.
+Konstruktora un iegūšanas ķermeņi šajā checkpointā apzināti vēl palika kā neapstrādātas leksisko elementu kopas.
 
 Checkpoint:
 
@@ -1337,7 +1337,7 @@ Kanoniskajā `Lietotājs` konstruktorā tagad tiek iegūti četri strukturēti `
 
 Iepriekšējā piešķiršanas izteiksmju regresijas pārbaude vairs nepārlasa neapstrādātos leksiskos elementus pa rindām, bet pārbauda īsto `Konstruktors.ķermenis` AST ceļu.
 
-Raw ķermeņa leksiskie elementi pagaidām saglabāti kā pārejas lauks.
+Neapstrādātie ķermeņa leksiskie elementi pagaidām saglabāti kā pārejas lauks.
 
 Checkpoint:
 
@@ -1345,18 +1345,18 @@ Checkpoint:
 
 ---
 
-## 2026-10-07 — J0025 — Gettera ķermeņa AST
+## 2026-10-07 — J0025 — Iegūšanas ķermeņa AST
 
 **Tips:** parseris / AST
 **Statuss:** pabeigts
 
-Gettera ķermenis savienots ar to pašu priekšrakstu analizatora infrastruktūru.
+Iegūšanas ķermenis savienots ar to pašu priekšrakstu analizatora infrastruktūru.
 
-Kanoniskā gettera `apraksts` ķermenis tagad satur vienu strukturētu `Atgriešana` priekšrakstu.
+Kanoniskās iegūšanas `apraksts` ķermenis tagad satur vienu strukturētu `Atgriešana` priekšrakstu.
 
 Atgriešanas vērtība šajā posmā paliek `Veidne` mezgls. Veidņu interpolāciju strukturēšana apzināti atlikta uz atsevišķu AST v1 soli.
 
-Raw gettera ķermeņa elementi pagaidām saglabāti kā pārejas lauks.
+Neapstrādātie iegūšanas ķermeņa elementi pagaidām saglabāti kā pārejas lauks.
 
 Checkpoint:
 
@@ -1378,7 +1378,7 @@ Minimālais metodes AST satur:
 - tipētus parametrus
 - izvēles atgriezes tipu
 - strukturētu ķermeni
-- pārejas raw ķermeņa elementus
+- pārejas neapstrādātos ķermeņa elementus
 
 Metodes ķermenis izmanto esošo priekšrakstu analizatoru.
 
@@ -1445,7 +1445,7 @@ Izteiksmju AST izmanto:
 
 Interpolācijas saturs tiek atkārtoti leksiski analizēts ar LatNe terminoloģijas vārdnīcu un nodots pilnajam izteiksmju parserim.
 
-Kanoniskā gettera veidne satur 4 AST daļas un 2 interpolācijas.
+Kanoniskās iegūšanas veidne satur 4 AST daļas un 2 interpolācijas.
 
 Papildu regresijas pārbaudes sedz:
 
@@ -1641,4 +1641,35 @@ ROADMAP pirmkoda diapazonu uzdevums vēl paliek atvērts.
 Nākamais apakšsolis:
 
 **klases iekšējo AST mezglu diapazoni**.
+
+---
+
+## 2026-10-08 — J0034 — Terminoloģijas recovery #2
+
+**Tips:** AST / terminoloģija / kvalitāte
+**Statuss:** pabeigts
+
+Pirms klases iekšējo mezglu pirmkoda diapazonu darba iztīrīti divi LatNe-owned anglicismi.
+
+Kanoniskās pārejas:
+
+```text
+Getteris  → Iegūšana
+getteri   → iegūšanas
+raw       → pieraksts
+```
+
+LatNe sintakses termins `ņem` nemainās.
+
+`pieraksts` glabā sākotnējo literāļa vai veidnes pirmkoda pierakstu, piemēram, `1_000` vai pilnu veidnes tekstu.
+
+Neapstrādāti ķermeņa leksiskie elementi dokumentācijā turpmāk tiek saukti tieši par neapstrādātiem leksiskajiem elementiem, nevis `raw`.
+
+Identifikatoru kvalitātes pārbaude tagad aiztur arī `getter` un `raw` atgriešanos LatNe kodolā un testos.
+
+Terminoloģijas politikā nostiprināts princips: ja jēdzienu precīzi var nosaukt ar vienu skaidru latviešu vārdu, tam dod priekšroku pār mākslīgi veidotu salikteni.
+
+Nākamais engineering solis:
+
+**klases iekšējo AST mezglu pirmkoda diapazoni**.
 
