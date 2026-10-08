@@ -174,7 +174,13 @@ Pašreizējais stāvoklis:
 - visu 40 AST mezglu tipu faktiskie lauki ir inventarizēti
 - `rinda` apstiprināts kā pārejas lauks; stabilā atrašanās vietas informācija ir `diapazons`
 - `ķermeņaLeksiskieElementi`, `ķermeņaLeksiskoElementuSkaits` un `parametruLeksiskoElementuSkaits` apstiprināti kā pārejas / iekšēji lauki
-- nākamais lēmums ir vienota `null`, `""`, `[]` un neesoša lauka semantika
+- kolekcijas tukšā stāvoklī lieto `[]`
+- izvēles viena vērtība neesamības gadījumā lieto `null`
+- `""` nav neesošas vērtības marķieris
+- diskriminētu variantu cita varianta lauki objektā neeksistē
+- `Nosacījums.citādi` saglabā `null` / `[]` / satura masīva semantiku
+- pašreizējais `Darbība.atgriezesTips: ""` un `Metode.atgriezesTips: ""` vēl jāsaskaņo ar apstiprināto `null` noteikumu
+- nākamie lēmumi: `KārtasCikls` precīzā forma, `Nosacījums.citādi` forma `citādi ja` gadījumā un `Mēģinājums.ķer`
 - pēc pārējo lauku lēmumu pabeigšanas jāpublicē pirmais `spec/ast-v1.md`
 
 Pēc tam:
