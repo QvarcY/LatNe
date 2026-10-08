@@ -1872,3 +1872,21 @@ No šī lēmuma izriet, ka pašreizējie `Darbība.atgriezesTips: ""` un `Metode
 
 Nākamais darbs ir precīzi nofiksēt `KārtasCikls`, `Nosacījums.citādi` un `Mēģinājums.ķer` formas.
 
+---
+
+## 2026-10-08 — J0042 — KārtasCikls atbalsta abas kam formas
+
+**Tips:** AST / sintaktiskā analīze / kontrakts
+**Statuss:** lēmums apstiprināts
+
+Apstiprināts, ka `KārtasCikls` AST v1 jāatbalsta abas `kam` konstrukcijas:
+
+- secīga iterācija pa kolekciju
+- klasiska trīsdaļīga skaitītāja cikla galvene
+
+Pašreizējais `variants: "vispārīgs"` nav uzskatāms par stabilu AST v1 formu, jo tas galveni analizē kā vienu izteiksmi un nepiedāvā pilnvērtīgu trīsdaļīgas galvenes struktūru.
+
+Tāpēc skaitītāja cikla parseris jāpabeidz pirms AST v1 iesaldēšanas.
+
+Šajā solī jauni AST lauku nosaukumi netiek ieviesti. Precīzie skaitītāja cikla lauki jāapstiprina projekta autoram pirms koda maiņas.
+
