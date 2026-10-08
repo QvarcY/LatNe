@@ -184,7 +184,7 @@ Pašreizējais stāvoklis:
 - kolekcijas variantam ir semantiska AST vērtība `variants: "kolekcija"`, nevis avota identitāte `"of"`
 - skaitītāja variantam ir `variants: "skaitītājs"` un apstiprinātie lauki `sākums`, `nosacījums`, `solis`
 - `PirmsIzteiksme.operators` LatNe `veids` operatoram ir semantiskā vērtība `"veids"`, nevis `"typeof"`
-- AST specifikācijas tipa pierakstā lietojam `teksts`, nevis TypeScript `string`
+- AST specifikācijas tipa pierakstā lietojam LatNe `teksts`, `loģisks` un `skaitlis`, nevis `string`, `boolean` un `Number`
 - iepriekšējais `variants: "vispārīgs"` starpstāvoklis ir noņemts
 - regresijas pārbaudes sedz abus `KārtasCikls` variantus, nepilnīgas skaitītāja galvenes noraidīšanu un `veids` operatora AST semantiku
 - nākamie lēmumi: `Nosacījums.citādi`, `Mēģinājums.ķer`, deklarāciju `const` / `let` / `var` semantiskās vērtības un `Imports.avots` forma
