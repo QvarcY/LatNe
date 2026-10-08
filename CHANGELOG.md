@@ -8,6 +8,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- AST `VeidnesInterpolācija` pārsaukta par apstiprināto `VeidnesAizpildījums`
 - AST `KamCikls` pārsaukts par apstiprināto `KārtasCikls`
 - `PiešķiršanasIzteiksme` apstiprināts kā kanoniskais AST nosaukums
 - `ApstākļaCikls` rezervēts nākotnes `kamēr` AST mezglam
@@ -27,7 +28,7 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - atlikušajiem priekšrakstu mezgliem pievienoti diapazoni, tostarp `Mainīgais`, `Nosacījums`, `KārtasCikls`, `Mēģinājums`, `Metiens` un vienkāršie vadības priekšraksti
 - `Programma` saknei definēts arī tukša avota nulles garuma diapazons
 - pievienots pilns AST diapazonu audits, kas pārbauda visu zināmo mezglu tipu pārklājumu un bērnu robežas
-- pievienotas pirmkoda diapazonu regresijas pārbaudes, tostarp veidnes interpolācijas absolūtajai nobīdei, salikto izteiksmju, pilnu deklarāciju un klases iekšējo mezglu robežām
+- pievienotas pirmkoda diapazonu regresijas pārbaudes, tostarp veidnes aizpildījuma absolūtajai nobīdei, salikto izteiksmju, pilnu deklarāciju un klases iekšējo mezglu robežām
 - normalizēti LatNe leksiskā analizatora, sintaktiskā analizatora, leksisko elementu un AST latviskie identifikatori uz pareizu rakstību ar diakritiskajām zīmēm
 - publiskie parsera eksporti pārdēvēti uz `izveidoVārdnīcu`, `analizēLeksiski`, `analizēIzteiksmi`, `analizēPriekšrakstus`, `analizēSintaksi`, `analizēKlasesĶermeni` un `analizēParametrus`
 - tokenu un AST lauki, tostarp `vērtība`, `daļas`, `deklarācija`, `mainīgais`, `nosacījums`, `ķermenis`, `pieejamība`, `nemaināms`, `kreisā`, `labā` un `mērķis`, nostiprināti ar pareizu latviešu ortogrāfiju
@@ -50,9 +51,9 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 - pievienota klases metodes regresijas pārbaude, nemainot kanonisko pirmo `.lat` paraugu
 - augšējā līmeņa `Darbība` parametri strukturēti kā `Parametrs` AST mezgli
 - konstruktoram, klases metodei un darbībai ieviests kopīgs parametru analizators
-- veidņu literāļiem pievienotas strukturētas `VeidnesTeksts` un `VeidnesInterpolācija` daļas
-- veidņu interpolācijas izmanto pilno izteiksmju AST
-- pievienotas regresijas pārbaudes saliktai interpolācijas izteiksmei un escapotam interpolācijas marķierim
+- veidņu literāļiem pievienotas strukturētas `VeidnesTeksts` un `VeidnesAizpildījums` daļas
+- veidņu aizpildījumi izmanto pilno izteiksmju AST
+- pievienotas regresijas pārbaudes saliktai aizpildījuma izteiksmei un escapotam aizpildījuma marķierim
 - README un GitHub Pages pievienots jaunais LatNe logotips
 
 #### 2026-10-02
