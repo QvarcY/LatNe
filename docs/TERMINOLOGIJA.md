@@ -59,7 +59,7 @@ Piemēri:
 - `sākums`, nevis `sakums`
 - `nobīde`, nevis `nobide`
 
-Šis princips attiecas uz lexer/parser API, tokenu kontraktu, AST laukiem un LatNe iekšējiem latviskajiem identifikatoriem.
+Šis princips attiecas uz leksiskā un sintaktiskā analizatora API, leksisko elementu kontraktu, AST laukiem un LatNe iekšējiem latviskajiem identifikatoriem.
 
 Ārēju formātu, trešo pušu API, URL, pakotņu ekosistēmu un citu tehniski noteiktu nosaukumu transliterācija vai angļu forma netiek automātiski pārdēvēta bez atsevišķa lēmuma.
 
