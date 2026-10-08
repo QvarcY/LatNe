@@ -1944,3 +1944,30 @@ Ja atgriezes tips nav norādīts, abi tagad ir `null`. Ja tips ir norādīts, v�
 
 Regresijas pārbaudes sedz gan `Darbība`, gan `Metode` bez norādīta atgriezes tipa un pieprasa `null`.
 
+---
+
+## 2026-10-08 — J0045 — Latviskas un semantiskas AST vērtības
+
+**Tips:** AST / terminoloģija / kontrakts / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Apstiprināts princips, ka AST v1 publiskais kontrakts neizvada terminoloģijas reģistra JavaScript avota identitāti, ja LatNe semantikai jau ir apstiprināts latvisks nosaukums.
+
+Ieviestas pārejas:
+
+```text
+KārtasCikls.variants
+"of" → "kolekcija"
+
+PirmsIzteiksme.operators
+"typeof" → "veids"
+```
+
+Parseris konstrukciju atpazīšanai joprojām drīkst iekšēji izmantot terminoloģijas reģistra `source` identitātes `of` un `typeof`. Tās vairs netiek izlaistas publiskajā AST šajos laukos.
+
+AST specifikācijas tipa pierakstā TypeScript `string` vietā turpmāk lieto LatNe `teksts`. Piemēram, `Mēģinājums.ķer.parametrs` dokumentēts kā `teksts | null`.
+
+Pievienota regresijas pārbaude `veids vērtība`, kas pieprasa `PirmsIzteiksme.operators: "veids"`. Kolekcijas `KārtasCikls` regressijas pārbaude tagad pieprasa `variants: "kolekcija"`.
+
+Neatrisināts paliek deklarāciju `const` / `let` / `var` semantiskais attēlojums AST v1. Tas jāizlemj atsevišķi, nevis mehāniski pārtulkojot avota atslēgvārdus.
+
