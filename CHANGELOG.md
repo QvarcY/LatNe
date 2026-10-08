@@ -8,6 +8,8 @@ Detalizētais projekta ceļš atrodas `docs/HRONIKA.md` un `docs/ZURNALS.md`.
 
 ### Added
 #### 2026-10-08
+- `KārtasCikls` papildināts ar strukturētu `variants: "skaitītājs"` galveni un laukiem `sākums`, `nosacījums`, `solis`
+- noņemts nepabeigtais `KārtasCikls` `variants: "vispārīgs"` starpstāvoklis
 - AST `VeidnesInterpolācija` pārsaukta par apstiprināto `VeidnesAizpildījums`
 - AST `KamCikls` pārsaukts par apstiprināto `KārtasCikls`
 - `PiešķiršanasIzteiksme` apstiprināts kā kanoniskais AST nosaukums

@@ -49,10 +49,96 @@ function analizēKamGalveni(leksiskieElementi) {
     }
   }
 
+  const daļas = [[]]
+
+  let iekavas = 0
+  let kvadrātiekavas = 0
+  let figūriekavas = 0
+
+  for (
+    const leksiskaisElements
+    of leksiskieElementi
+  ) {
+    const dziļums =
+      iekavas +
+      kvadrātiekavas +
+      figūriekavas
+
+    if (
+      leksiskaisElements.vērtība === ";" &&
+      dziļums === 0
+    ) {
+      daļas.push([])
+      continue
+    }
+
+    daļas[daļas.length - 1].push(
+      leksiskaisElements
+    )
+
+    if (leksiskaisElements.vērtība === "(") {
+      iekavas++
+    }
+    else if (leksiskaisElements.vērtība === ")") {
+      iekavas--
+    }
+    else if (leksiskaisElements.vērtība === "[") {
+      kvadrātiekavas++
+    }
+    else if (leksiskaisElements.vērtība === "]") {
+      kvadrātiekavas--
+    }
+    else if (leksiskaisElements.vērtība === "{") {
+      figūriekavas++
+    }
+    else if (leksiskaisElements.vērtība === "}") {
+      figūriekavas--
+    }
+  }
+
+  if (
+    daļas.length !== 3 ||
+    daļas.some(daļa => daļa.length === 0)
+  ) {
+    sintaksesKļūda(
+      "Kārtas cikla skaitītāja galvenei nepieciešamas trīs daļas",
+      leksiskieElementi[0] ?? null
+    )
+  }
+
+  const [
+    sākumaElementi,
+    nosacījumaElementi,
+    soļaElementi
+  ] = daļas
+
+  const sākumaMezgli =
+    analizēPriekšrakstus(
+      sākumaElementi
+    )
+
+  if (
+    sākumaMezgli.length !== 1 ||
+    sākumaMezgli[0].veids !==
+      "Mainīgais"
+  ) {
+    sintaksesKļūda(
+      "Kārtas cikla sākumam jābūt mainīgā deklarācijai",
+      sākumaElementi[0] ?? null
+    )
+  }
+
   return {
-    variants: "vispārīgs",
-    izteiksme:
-      analizēIzteiksmesAst(leksiskieElementi)
+    variants: "skaitītājs",
+    sākums: sākumaMezgli[0],
+    nosacījums:
+      analizēIzteiksmesAst(
+        nosacījumaElementi
+      ),
+    solis:
+      analizēIzteiksmesAst(
+        soļaElementi
+      )
   }
 }
 

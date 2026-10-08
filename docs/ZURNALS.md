@@ -1890,3 +1890,37 @@ Tāpēc skaitītāja cikla parseris jāpabeidz pirms AST v1 iesaldēšanas.
 
 Šajā solī jauni AST lauku nosaukumi netiek ieviesti. Precīzie skaitītāja cikla lauki jāapstiprina projekta autoram pirms koda maiņas.
 
+---
+
+## 2026-10-08 — J0043 — KārtasCikls skaitītāja parseris
+
+**Tips:** AST / sintaktiskā analīze / regresijas pārbaudes
+**Statuss:** pabeigts
+
+Ieviesta apstiprinātā klasiskā trīsdaļīgā `kam` skaitītāja galvene.
+
+Piemērs:
+
+```lat
+kam (lai i = 0; i < 10; i += 1) {
+  atkļūdo
+}
+```
+
+AST izmanto:
+
+```text
+veids: KārtasCikls
+variants: "skaitītājs"
+sākums: Mainīgais
+nosacījums: izteiksmes AST
+solis: izteiksmes AST
+ķermenis: Priekšraksts[]
+```
+
+`sākums`, `nosacījums`, `solis` un varianta vērtība `"skaitītājs"` ir projekta autora apstiprināti.
+
+Iepriekšējais `variants: "vispārīgs"` starpstāvoklis ir noņemts. Galvenei, kas nav kolekcijas forma, tagad nepieciešamas tieši trīs augšējā līmeņa daļas, un `sākums` tiek prasīts kā viena `Mainīgais` deklarācija.
+
+Regresijas pārbaudes sedz gan kolekcijas `KārtasCikls`, gan skaitītāja `KārtasCikls`, abu variantu lauku nošķīrumu un nepilnīgas skaitītāja galvenes noraidīšanu.
+

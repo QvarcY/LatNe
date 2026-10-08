@@ -43,7 +43,7 @@ Visiem šīs tabulas mezgliem, izņemot `Programma`, papildus ir `rinda` un `dia
 |---|---|---|---|
 | `Mainīgais` | `deklarācija`, `nosaukums`, `tips`, `vērtība` | `tips: null`, ja nav tipa; `vērtība: null`, ja nav sākuma vērtības | `deklarācija` pašlaik glabā avota identitāti `const` / `let` / `var` |
 | `Nosacījums` | `nosacījums`, `ķermenis`, `citādi` | `ķermenis: []`, ja tukšs; `citādi: null`, ja nav `citādi`; tukšs `citādi {}` dod `[]` | `citādi ja` pašlaik tiek glabāts kā viena `Nosacījums` mezgla masīvs |
-| `KārtasCikls` | kopīgi: `variants`, `ķermenis`; atkarībā no varianta: `deklarācija`, `mainīgais`, `kolekcija` **vai** `izteiksme` | varianta specifiskie lauki netiek izveidoti kā `null`; tie vienkārši nav otrā varianta objektā | Pašreizējie varianti ir `"of"` un `"vispārīgs"` |
+| `KārtasCikls` | kopīgi: `variants`, `ķermenis`; kolekcijas variantam: `deklarācija`, `mainīgais`, `kolekcija`; skaitītāja variantam: `sākums`, `nosacījums`, `solis` | varianta specifiskie lauki netiek izveidoti kā `null`; tie vienkārši nav otra varianta objektā | Varianti ir `"of"` un `"skaitītājs"` |
 | `Atgriešana` | `vērtība` | `vērtība: null`, ja nav atgriežamās izteiksmes | — |
 | `Metiens` | `vērtība` | parseris sagaida izteiksmi | — |
 | `Mēģinājums` | `mēģina`, `ķer`, `beigas` | `mēģina: []`; `ķer: null`, ja nav `ķer`; `beigas: null`, ja nav `beigās` | `ķer` ir iekšējs objekts ar `parametrs` un `ķermenis`, nevis atsevišķs AST mezgls |
@@ -69,16 +69,20 @@ rinda
 diapazons
 ```
 
-`variants: "vispārīgs"`:
+`variants: "skaitītājs"`:
 
 ```text
 veids
 variants
-izteiksme
+sākums
+nosacījums
+solis
 ķermenis
 rinda
 diapazons
 ```
+
+Skaitītāja variantā `sākums` ir `Mainīgais` mezgls, `nosacījums` ir izteiksmes AST un `solis` ir izteiksmes AST. Pašreizējā regresijas pārbaude sedz `solis` kā `PiešķiršanasIzteiksme` ar `+=`.
 
 ### `Mēģinājums.ķer` faktiskā forma
 
@@ -189,25 +193,22 @@ No šiem noteikumiem izriet, ka pašreizējie `Darbība.atgriezesTips: ""` un `M
 
 ## Apstiprinātais KārtasCikls tvērums
 
-`KārtasCikls` AST v1 ir jāatbalsta abas LatNe `kam` formas:
+`KārtasCikls` AST v1 atbalsta abas LatNe `kam` formas:
 
-- secīga iešana pa kolekciju;
-- klasiska trīsdaļīga skaitītāja cikla galvene.
+- secīgu iešanu pa kolekciju ar `variants: "of"`;
+- klasisku trīsdaļīgu skaitītāja cikla galveni ar `variants: "skaitītājs"`.
 
-Pašreizējais `variants: "vispārīgs"` vēl nav stabils AST v1 kontrakts. Tas šobrīd visu galveni mēģina analizēt kā vienu izteiksmi un tādēļ nav pietiekams pilnvērtīgai `sākums; nosacījums; solis` formai.
+Skaitītāja cikla apstiprinātie lauki ir `sākums`, `nosacījums` un `solis`. Parseris sadala galveni trīs augšējā līmeņa daļās, `sākums` analizē kā vienu `Mainīgais` deklarāciju, bet `nosacījums` un `solis` analizē ar pilno izteiksmju analizatoru.
 
-Pirms AST v1 iesaldēšanas skaitītāja cikla parseris ir jāpabeidz un jāpapildina ar regresijas pārbaudēm.
-
-Šajā dokumentācijas solī netiek ieviesti jauni AST lauku nosaukumi. Skaitītāja cikla precīzie lauki vispirms jāapstiprina projekta autoram.
+Iepriekšējais `variants: "vispārīgs"` starpstāvoklis vairs netiek veidots.
 
 ## Atlikušie jautājumi AST v1 kontraktam
 
 Pēc faktiskā lauku audita vēl jāpieņem lēmumi par:
 
-1. `KārtasCikls` abu variantu precīzo obligāto lauku formu un skaitītāja cikla lauku nosaukumiem;
-2. `Nosacījums.citādi` precīzo satura formu `citādi ja` gadījumā; `null` / `[]` / satura masīva semantika jau ir apstiprināta;
-3. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
-4. avota identitātes vērtības `const`, `let`, `var`, `of`, `typeof` AST laukos;
-5. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
+1. `Nosacījums.citādi` precīzo satura formu `citādi ja` gadījumā; `null` / `[]` / satura masīva semantika jau ir apstiprināta;
+2. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
+3. avota identitātes vērtības `const`, `let`, `var`, `of`, `typeof` AST laukos;
+4. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
 
 Tikai pēc šo punktu apstiprināšanas drīkst pabeigt visu lauku statusu kā **obligāts**, **izvēles** vai **pārejas** un pēc tam virzīties uz `spec/ast-v1.md`.

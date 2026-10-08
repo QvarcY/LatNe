@@ -318,6 +318,192 @@ function gaidāmaisDeklarācijasDiapazons(
   }
 }
 
+const skaitītājaCiklaAvots =
+  `kam (lai i = 0; i < 10; i += 1) {
+  atkļūdo
+}`
+
+const skaitītājaCiklaAst =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      skaitītājaCiklaAvots,
+      vārdnīca
+    )
+  )
+
+const skaitītājaCikls =
+  skaitītājaCiklaAst[0]
+
+if (
+  skaitītājaCiklaAst.length !== 1 ||
+  skaitītājaCikls?.veids !==
+    "KārtasCikls" ||
+  skaitītājaCikls.variants !==
+    "skaitītājs"
+) {
+  throw new Error(
+    "Skaitītāja KārtasCikls neveido gaidīto AST"
+  )
+}
+
+if (
+  skaitītājaCikls.sākums?.veids !==
+    "Mainīgais" ||
+  skaitītājaCikls.sākums.deklarācija !==
+    "let" ||
+  skaitītājaCikls.sākums.nosaukums !==
+    "i" ||
+  skaitītājaCikls.sākums.vērtība?.veids !==
+    "Skaitlis" ||
+  skaitītājaCikls.sākums.vērtība.vērtība !==
+    0
+) {
+  throw new Error(
+    "Skaitītāja KārtasCikls sākums neatbilst gaidītajam AST"
+  )
+}
+
+if (
+  skaitītājaCikls.nosacījums?.veids !==
+    "BināraIzteiksme" ||
+  skaitītājaCikls.nosacījums.operators !==
+    "<" ||
+  skaitītājaCikls.nosacījums.kreisā?.veids !==
+    "Identifikators" ||
+  skaitītājaCikls.nosacījums.kreisā.nosaukums !==
+    "i" ||
+  skaitītājaCikls.nosacījums.labā?.veids !==
+    "Skaitlis" ||
+  skaitītājaCikls.nosacījums.labā.vērtība !==
+    10
+) {
+  throw new Error(
+    "Skaitītāja KārtasCikls nosacījums neatbilst gaidītajam AST"
+  )
+}
+
+if (
+  skaitītājaCikls.solis?.veids !==
+    "PiešķiršanasIzteiksme" ||
+  skaitītājaCikls.solis.operators !==
+    "+=" ||
+  skaitītājaCikls.solis.mērķis?.veids !==
+    "Identifikators" ||
+  skaitītājaCikls.solis.mērķis.nosaukums !==
+    "i" ||
+  skaitītājaCikls.solis.vērtība?.veids !==
+    "Skaitlis" ||
+  skaitītājaCikls.solis.vērtība.vērtība !==
+    1
+) {
+  throw new Error(
+    "Skaitītāja KārtasCikls solis neatbilst gaidītajam AST"
+  )
+}
+
+if (
+  !Array.isArray(
+    skaitītājaCikls.ķermenis
+  ) ||
+  skaitītājaCikls.ķermenis.length !== 1 ||
+  skaitītājaCikls.ķermenis[0].veids !==
+    "Atkļūdošana"
+) {
+  throw new Error(
+    "Skaitītāja KārtasCikls ķermenis neatbilst gaidītajam AST"
+  )
+}
+
+for (
+  const lauks of [
+    "deklarācija",
+    "mainīgais",
+    "kolekcija",
+    "izteiksme"
+  ]
+) {
+  if (lauks in skaitītājaCikls) {
+    throw new Error(
+      `Skaitītāja KārtasCikls satur cita varianta lauku: ${lauks}`
+    )
+  }
+}
+
+const kolekcijasCiklaAvots =
+  `kam (nemainīgs ieraksts ar dati) {
+  atkļūdo
+}`
+
+const kolekcijasCiklaAst =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      kolekcijasCiklaAvots,
+      vārdnīca
+    )
+  )
+
+const kolekcijasCikls =
+  kolekcijasCiklaAst[0]
+
+if (
+  kolekcijasCiklaAst.length !== 1 ||
+  kolekcijasCikls?.veids !==
+    "KārtasCikls" ||
+  kolekcijasCikls.variants !== "of" ||
+  kolekcijasCikls.deklarācija !==
+    "const" ||
+  kolekcijasCikls.mainīgais !==
+    "ieraksts" ||
+  kolekcijasCikls.kolekcija?.veids !==
+    "Identifikators" ||
+  kolekcijasCikls.kolekcija.nosaukums !==
+    "dati"
+) {
+  throw new Error(
+    "Kolekcijas KārtasCikls neveido gaidīto AST"
+  )
+}
+
+for (
+  const lauks of [
+    "sākums",
+    "nosacījums",
+    "solis"
+  ]
+) {
+  if (lauks in kolekcijasCikls) {
+    throw new Error(
+      `Kolekcijas KārtasCikls satur skaitītāja lauku: ${lauks}`
+    )
+  }
+}
+
+let nepilnīgaSkaitītājaGalveneNoraidīta =
+  false
+
+try {
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      `kam (i < 10) {
+  atkļūdo
+}`,
+      vārdnīca
+    )
+  )
+}
+catch (kļūda) {
+  nepilnīgaSkaitītājaGalveneNoraidīta =
+    kļūda instanceof SyntaxError
+}
+
+if (
+  !nepilnīgaSkaitītājaGalveneNoraidīta
+) {
+  throw new Error(
+    "Nepilnīga skaitītāja cikla galvene netika noraidīta"
+  )
+}
+
 const imports =
   ast.elementi.find(
     mezgls =>
@@ -1635,6 +1821,16 @@ pārbaudiAstDiapazonus(
 
 pārbaudiAstDiapazonus(
   metodesParaugaAst,
+  auditētieAstVeidi
+)
+
+pārbaudiAstDiapazonus(
+  skaitītājaCiklaAst,
+  auditētieAstVeidi
+)
+
+pārbaudiAstDiapazonus(
+  kolekcijasCiklaAst,
   auditētieAstVeidi
 )
 
