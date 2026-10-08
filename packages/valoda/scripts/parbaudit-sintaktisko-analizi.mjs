@@ -7,6 +7,7 @@ import {
 } from "../src/leksiskais-analizators.mjs"
 
 import {
+  analizēPriekšrakstus,
   analizēSintaksi
 } from "../src/sintaktiskais-analizators.mjs"
 
@@ -80,6 +81,163 @@ function pārbaudiDiapazonu(
   ) {
     throw new Error(
       `${konteksts} diapazons neatbilst gaidītajam: ${JSON.stringify(diapazons)}`
+    )
+  }
+}
+
+const zināmieAstVeidi =
+  new Set([
+    "Programma",
+    "Imports",
+    "Saskarsme",
+    "Uzskaitījums",
+    "Klase",
+    "Darbība",
+    "KlasesLauks",
+    "Konstruktors",
+    "Iegūšana",
+    "Metode",
+    "Parametrs",
+    "Mainīgais",
+    "Nosacījums",
+    "KamCikls",
+    "Atgriešana",
+    "Metiens",
+    "Mēģinājums",
+    "Turpināšana",
+    "Pārtraukšana",
+    "Atkļūdošana",
+    "Izteiksme",
+    "Identifikators",
+    "Skaitlis",
+    "Teksts",
+    "Veidne",
+    "VeidnesTeksts",
+    "VeidnesInterpolācija",
+    "Nekas",
+    "Loģisks",
+    "Nenoteikts",
+    "Šis",
+    "Masīvs",
+    "Grupa",
+    "Īpašība",
+    "Izsaukums",
+    "Gaidīšana",
+    "Jauns",
+    "UnāraIzteiksme",
+    "BināraIzteiksme",
+    "PiešķiršanasIzteiksme"
+  ])
+
+function pārbaudiAstDiapazonus(
+  vērtība,
+  atrastieVeidi,
+  vecākaDiapazons = null
+) {
+  if (Array.isArray(vērtība)) {
+    for (const elements of vērtība) {
+      pārbaudiAstDiapazonus(
+        elements,
+        atrastieVeidi,
+        vecākaDiapazons
+      )
+    }
+
+    return
+  }
+
+  if (
+    !vērtība ||
+    typeof vērtība !== "object"
+  ) {
+    return
+  }
+
+  let šīMezglaDiapazons =
+    vecākaDiapazons
+
+  if (
+    typeof vērtība.veids === "string" &&
+    zināmieAstVeidi.has(
+      vērtība.veids
+    )
+  ) {
+    const diapazons =
+      vērtība.diapazons
+
+    if (
+      !diapazons ||
+      !Number.isInteger(
+        diapazons.sākums?.rinda
+      ) ||
+      !Number.isInteger(
+        diapazons.sākums?.kolonna
+      ) ||
+      !Number.isInteger(
+        diapazons.sākums?.nobīde
+      ) ||
+      !Number.isInteger(
+        diapazons.beigas?.rinda
+      ) ||
+      !Number.isInteger(
+        diapazons.beigas?.kolonna
+      ) ||
+      !Number.isInteger(
+        diapazons.beigas?.nobīde
+      ) ||
+      diapazons.sākums.rinda < 1 ||
+      diapazons.sākums.kolonna < 1 ||
+      diapazons.sākums.nobīde < 0 ||
+      diapazons.beigas.rinda < 1 ||
+      diapazons.beigas.kolonna < 1 ||
+      diapazons.beigas.nobīde <
+        diapazons.sākums.nobīde
+    ) {
+      throw new Error(
+        `AST mezglam ${vērtība.veids} nav derīga pirmkoda diapazona`
+      )
+    }
+
+    if (
+      vecākaDiapazons &&
+      (
+        diapazons.sākums.nobīde <
+          vecākaDiapazons.sākums.nobīde ||
+        diapazons.beigas.nobīde >
+          vecākaDiapazons.beigas.nobīde
+      )
+    ) {
+      throw new Error(
+        `AST mezgla ${vērtība.veids} diapazons iziet ārpus vecāka mezgla robežām`
+      )
+    }
+
+    atrastieVeidi.add(
+      vērtība.veids
+    )
+
+    šīMezglaDiapazons =
+      diapazons
+  }
+
+  for (
+    const [
+      atslēga,
+      bērns
+    ] of Object.entries(vērtība)
+  ) {
+    if (
+      atslēga === "diapazons" ||
+      atslēga ===
+        "ķermeņaLeksiskieElementi"
+    ) {
+      continue
+    }
+
+    pārbaudiAstDiapazonus(
+      bērns,
+      atrastieVeidi,
+      šīMezglaDiapazons
     )
   }
 }
@@ -1443,6 +1601,171 @@ catch (kļūda) {
 if (!nederīgsMērķisNoraidīts) {
   throw new Error(
     "Nederīgs piešķiršanas mērķis netika noraidīts"
+  )
+}
+
+const izteiksmjuDiapazonaParaugi = [
+  "vērtība",
+  "1_000",
+  "\"teksts\"",
+  "`A ${vērtība}`",
+  "nekas",
+  "patiess",
+  "nenoteikts",
+  "šis",
+  "[]",
+  "(vērtība)",
+  "vērtība.nosaukums",
+  "sveic()",
+  "gaidi sveic()",
+  "jauns Lietotājs()",
+  "-vērtība",
+  "veids vērtība",
+  "vērtība + 1",
+  "vērtība = 1"
+]
+
+const auditētieAstVeidi =
+  new Set()
+
+pārbaudiAstDiapazonus(
+  ast,
+  auditētieAstVeidi
+)
+
+pārbaudiAstDiapazonus(
+  metodesParaugaAst,
+  auditētieAstVeidi
+)
+
+for (
+  const avots
+  of izteiksmjuDiapazonaParaugi
+) {
+  const izteiksmesAst =
+    analizēIzteiksmesAst(
+      analizēLeksiski(
+        avots,
+        vārdnīca
+      )
+    )
+
+  pārbaudiDiapazonu(
+    izteiksmesAst.diapazons,
+    {
+      sākums:
+        pozīcijaNobīdei(
+          avots,
+          0
+        ),
+      beigas:
+        pozīcijaNobīdei(
+          avots,
+          avots.length
+        )
+    },
+    `Izteiksmes paraugs: ${avots}`
+  )
+
+  pārbaudiAstDiapazonus(
+    izteiksmesAst,
+    auditētieAstVeidi
+  )
+}
+
+const pārtraukšanasAvots =
+  "beidz"
+
+const pārtraukšanasAst =
+  analizēPriekšrakstus(
+    analizēLeksiski(
+      pārtraukšanasAvots,
+      vārdnīca
+    )
+  )
+
+if (
+  pārtraukšanasAst.length !== 1 ||
+  pārtraukšanasAst[0].veids !==
+    "Pārtraukšana"
+) {
+  throw new Error(
+    "Pārtraukšanas diapazona paraugs neveido gaidīto AST"
+  )
+}
+
+pārbaudiDiapazonu(
+  pārtraukšanasAst[0].diapazons,
+  {
+    sākums:
+      pozīcijaNobīdei(
+        pārtraukšanasAvots,
+        0
+      ),
+    beigas:
+      pozīcijaNobīdei(
+        pārtraukšanasAvots,
+        pārtraukšanasAvots.length
+      )
+  },
+  "Pārtraukšana"
+)
+
+pārbaudiAstDiapazonus(
+  pārtraukšanasAst,
+  auditētieAstVeidi
+)
+
+const tukšaProgramma =
+  analizēSintaksi([])
+
+pārbaudiDiapazonu(
+  tukšaProgramma.diapazons,
+  {
+    sākums: {
+      rinda: 1,
+      kolonna: 1,
+      nobīde: 0
+    },
+    beigas: {
+      rinda: 1,
+      kolonna: 1,
+      nobīde: 0
+    }
+  },
+  "Tukša Programma"
+)
+
+pārbaudiDiapazonu(
+  ast.diapazons,
+  {
+    sākums:
+      pozīcijaNobīdei(
+        teksts,
+        0
+      ),
+    beigas:
+      pozīcijaNobīdei(
+        teksts,
+        teksts.trimEnd().length
+      )
+  },
+  "Programma"
+)
+
+const trūkstošieAstVeidi = [
+  ...zināmieAstVeidi
+].filter(
+  veids =>
+    !auditētieAstVeidi.has(
+      veids
+    )
+)
+
+if (trūkstošieAstVeidi.length > 0) {
+  throw new Error(
+    "AST diapazonu audits nav pārklājis mezglus: " +
+    trūkstošieAstVeidi.join(", ")
   )
 }
 
