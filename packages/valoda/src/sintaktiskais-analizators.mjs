@@ -39,7 +39,7 @@ function analizēKamGalveni(leksiskieElementi) {
     leksiskieElementi[2].avots === "of"
   ) {
     return {
-      variants: "of",
+      variants: "kolekcija",
       deklarācija: leksiskieElementi[0].avots,
       mainīgais: leksiskieElementi[1].vērtība,
       kolekcija:
