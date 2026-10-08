@@ -241,7 +241,7 @@ Priekšrakstos papildus pārklāti:
 
 - `Mainīgais`
 - `Nosacījums`
-- `KamCikls`
+- `KārtasCikls`
 - `Metiens`
 - `Mēģinājums`
 - `Turpināšana`
