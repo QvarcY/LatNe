@@ -173,15 +173,28 @@ Tas pagaidām paliek pašreizējā AST saderības dēļ, bet nav stabilās AST v
 
 Tie pagaidām netiek dzēsti, kamēr nav pārbaudīts, ka neviens pārejas tests vai iekšējais solis uz tiem nebalstās.
 
+### Nulles, tukšuma un neesošu lauku semantika
+
+Apstiprināti šādi AST v1 noteikumi:
+
+1. **Kolekcijas lauks vienmēr eksistē.** Ja elementu nav, vērtība ir `[]`.
+2. **Izvēles viena vērtība vienmēr eksistē.** Ja vērtības nav, lauks ir `null`.
+3. **Tukša virkne `""` neapzīmē neesošu vērtību.** Tā ir derīga tikai tad, ja tukša virkne pati ir semantiska vērtība, piemēram `Teksts.vērtība`.
+4. **Diskriminētu variantu lauki netiek piepildīti ar `null`.** Ja mezgla forma ir noteikta ar diskriminatoru, konkrētā varianta lauki ir obligāti, bet cita varianta lauki objektā neeksistē.
+5. **`Nosacījums.citādi` saglabā pašreizējo trīsstāvokļu nozīmi:** `null` nozīmē, ka `citādi` nav; `[]` nozīmē tukšu `citādi {}`; netukšs masīvs satur `citādi` ķermeņa AST.
+
+No šiem noteikumiem izriet, ka pašreizējie `Darbība.atgriezesTips: ""` un `Metode.atgriezesTips: ""` neatbilst apstiprinātajai AST v1 semantikai. Pirms kontrakta pabeigšanas tie jāsaskaņo ar izvēles vienas vērtības noteikumu, izmantojot `null`, ja atgriezes tips nav norādīts.
+
+Šajā auditā parsera uzvedība vēl netiek mainīta.
+
 ## Atlikušie jautājumi AST v1 kontraktam
 
 Pēc faktiskā lauku audita vēl jāpieņem lēmumi par:
 
-1. vienotu `null`, `""`, `[]` un neesoša lauka semantiku;
-2. `KārtasCikls` variantu lauku kontraktu;
-3. `Nosacījums.citādi` formu, īpaši `citādi ja` gadījumu;
-4. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
-5. avota identitātes vērtības `const`, `let`, `var`, `of`, `typeof` AST laukos;
-6. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
+1. `KārtasCikls` abu variantu precīzo obligāto lauku formu; varianta lauku neesamības princips jau ir apstiprināts;
+2. `Nosacījums.citādi` precīzo satura formu `citādi ja` gadījumā; `null` / `[]` / satura masīva semantika jau ir apstiprināta;
+3. `Mēģinājums.ķer` statusu — parasts iekšējs objekts vai patstāvīga strukturēta AST daļa;
+4. avota identitātes vērtības `const`, `let`, `var`, `of`, `typeof` AST laukos;
+5. `Imports.avots` formu pretstatā `Teksts.vērtība` / `Teksts.pieraksts`.
 
 Tikai pēc šo punktu apstiprināšanas drīkst pabeigt visu lauku statusu kā **obligāts**, **izvēles** vai **pārejas** un pēc tam virzīties uz `spec/ast-v1.md`.
