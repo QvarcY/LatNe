@@ -140,7 +140,7 @@ AST v1 definē:
 - izvēles laukus
 - pirmkoda diapazona informāciju
 - kanonisko termina identitāti, kur tā nepieciešama
-- robežu starp strukturētu AST un pagaidu raw tokeniem
+- robežu starp strukturētu AST un pagaidu neapstrādātiem leksiskajiem elementiem
 
 Koda ģeneratoram jāstrādā ar dokumentētu AST kontraktu, nevis sintaktiskā analizatora nejaušām iekšējām detaļām.
 
@@ -223,8 +223,8 @@ Pirmajā iterācijā jāstrukturē:
 - modifikatori
 - konstruktors
 - konstruktora parametri
-- getteris
-- getter atgriezes tips
+- iegūšana
+- iegūšanas atgriezes tips
 
 Pilna metožu ķermeņu parsēšana nav pirmās iterācijas prasība.
 
