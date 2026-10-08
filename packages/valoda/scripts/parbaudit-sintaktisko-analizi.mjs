@@ -124,7 +124,7 @@ const zināmieAstVeidi =
     "Izsaukums",
     "Gaidīšana",
     "Jauns",
-    "UnāraIzteiksme",
+    "PirmsIzteiksme",
     "BināraIzteiksme",
     "PiešķiršanasIzteiksme"
   ])

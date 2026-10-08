@@ -235,7 +235,7 @@ Izteiksmēs papildus pārklāti:
 - `Grupa`
 - `Gaidīšana`
 - `Jauns`
-- `UnāraIzteiksme`
+- `PirmsIzteiksme`
 
 Priekšrakstos papildus pārklāti:
 
