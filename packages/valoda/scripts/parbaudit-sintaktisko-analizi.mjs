@@ -449,7 +449,7 @@ if (
   kolekcijasCiklaAst.length !== 1 ||
   kolekcijasCikls?.veids !==
     "KārtasCikls" ||
-  kolekcijasCikls.variants !== "of" ||
+  kolekcijasCikls.variants !== "kolekcija" ||
   kolekcijasCikls.deklarācija !==
     "const" ||
   kolekcijasCikls.mainīgais !==
@@ -501,6 +501,29 @@ if (
 ) {
   throw new Error(
     "Nepilnīga skaitītāja cikla galvene netika noraidīta"
+  )
+}
+
+const veidaOperatoraAst =
+  analizēIzteiksmesAst(
+    analizēLeksiski(
+      "veids vērtība",
+      vārdnīca
+    )
+  )
+
+if (
+  veidaOperatoraAst?.veids !==
+    "PirmsIzteiksme" ||
+  veidaOperatoraAst.operators !==
+    "veids" ||
+  veidaOperatoraAst.izteiksme?.veids !==
+    "Identifikators" ||
+  veidaOperatoraAst.izteiksme.nosaukums !==
+    "vērtība"
+) {
+  throw new Error(
+    "veids operators neveido latvisku AST semantiku"
   )
 }
 
